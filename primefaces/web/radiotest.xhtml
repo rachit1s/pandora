@@ -1,0 +1,22 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form>
+	<h:outputLabel value="Select Student From Radio" />
+	<p:selectOneRadio id="selectStudentRadio" immediate="true"
+		value="#{radioBean.selectedId}" valueChangeListener="#{radioBean.onChange}" >
+	<p:ajax event="change" listener="#{radioBean.radioChangeHandler}"/>
+		<f:selectItems id="studentRadioList" value="#{radioBean.studentList}" />
+	</p:selectOneRadio>
+
+	<h:outputLabel value="Select Student From List" />
+	<p:selectOneMenu id="selectStudentDropDown" immediate="true"
+		value="#{radioBean.selectedId}" valueChangeListener="#{radioBean.onChange}">
+	<p:ajax />
+		<f:selectItems id="studentDropDownList" value="#{radioBean.studentList}" />
+	</p:selectOneMenu>
+	</h:form>
+</div>

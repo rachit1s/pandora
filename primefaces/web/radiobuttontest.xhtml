@@ -1,0 +1,24 @@
+
+<div xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<p:selectOneRadio id="customRadio" value="2"
+		layout="custom">
+		<f:selectItem itemLabel="Option 1" itemValue="1" />
+		<f:selectItem itemLabel="Option 2" itemValue="2" />
+		<f:selectItem itemLabel="Option 3" itemValue="3" />
+	</p:selectOneRadio>
+	<h:panelGrid columns="3">
+		<p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+		<h:outputLabel for="opt1" value="Option 1" />
+		<p:spinner />
+		<p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+		<h:outputLabel for="opt2" value="Option 2" />
+		<p:inputText />
+		<p:radioButton id="opt3" for="customRadio" itemIndex="2" />
+		<h:outputLabel for="opt3" value="Option 3" />
+		<p:calendar />
+	</h:panelGrid>
+</div>	

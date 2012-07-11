@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<p:dialog id="addBARoleDialog" header="Add BA Role" resizable="true"
+		modal="true" dynamic="true"
+		widgetVar="addBARoleDialog">
+		<h:form>
+			<h:outputLabel for="addBARole-RoleName" value="RoleName: *" />
+			<p:inputText id="addBARole-RoleName" value="" required="true"
+				label="RoleNameLabel">
+			</p:inputText>
+			<p:commandButton id="addBARole-saveButton" ajax="true" title="Save"
+				value="Save" immediate="true" type="button">
+			</p:commandButton>
+		</h:form>
+	</p:dialog>
+	<p:button id="showButton" value="ShowDialog"
+		onclick="addBARoleDialog.show()" />
+</h:body>
+</html>

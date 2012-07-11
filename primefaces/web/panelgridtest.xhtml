@@ -1,0 +1,30 @@
+<div xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+		<h:panelGrid columns="3" border="1" rules="all"
+			title="This is panelGroup demo">
+			<f:facet name="header">
+				<h:outputText value="Submit Detail" />
+			</f:facet>
+			<h:inputText />
+			<h:inputText />
+			<h:inputText />
+			<h:inputText />
+			<h:inputText />
+			<h:inputText />
+			<h:inputText />
+			<h:inputText />
+			<f:facet name="footer">
+				<h:panelGroup>
+					<h:outputText value="Leave Comment Here :" />
+					<h:inputText />
+					<h:outputText value="Submit" />
+					<h:commandButton value="SUBMIT" />
+				</h:panelGroup>
+			</f:facet>
+		</h:panelGrid>
+	</h:form>
+</div>

@@ -1,0 +1,31 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:form id="form">
+
+		<h:panelGrid columns="3">
+			<h:outputText value="Keyup: " />
+
+			<p:inputText id="counter">
+				<p:ajax event="keyup" update="out"
+					listener="#{counterBean.increment}" />
+			</p:inputText>
+			
+			<h:outputText id="out" value="#{counterBean.count}" />
+			<p:separator />
+			
+			<p:button id="testButton" value="ClickMe">
+				<p:ajax event="click" update="clickOut" listener="#{counterBean.clickButtonHandler}" />
+			</p:button>
+
+
+			<h:outputText id="clickOut" value="#{counterBean.clickCount}" />
+			
+		</h:panelGrid>
+
+	</h:form>
+
+</div>

@@ -1,4 +1,4 @@
-#include "includelibs.h"
+#include "../cpplib/includelibs.h"
 
 void allPrimes( long lastNumber )
 {

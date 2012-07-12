@@ -1,6 +1,7 @@
 package com.nattubaba.problems;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class BigPrime 
 {
@@ -23,6 +24,11 @@ public class BigPrime
 		}
 		
 		return true;
+	}
+	
+	public static void allPrimes(BigInteger bi)
+	{
+		ArrayList<Boolean>  bools = new ArrayList<Boolean>();
 	}
 	
 	public static void main(String argv[])

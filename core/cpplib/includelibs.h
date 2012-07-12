@@ -6,4 +6,5 @@
 #include "cpputils.h"
 #include<stdlib.h>
 #include<math.h>
+#include<string.h>
 #endif

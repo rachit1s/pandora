@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 public class JdoUtils 
 {
 	public static final Logger logger = Logger.getLogger("learnjdo");
+	
+	// TODO :closing the pmf 
 	public static PersistenceManagerFactory getPMF()
 	{
 		PersistenceManagerFactory pmf = null;

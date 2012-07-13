@@ -1,25 +1,22 @@
 package com.nattubaba.learn.jdo.entities;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 @PersistenceCapable
 public class City 
 {
+	@Persistent( primaryKey="true", valueStrategy=IdGeneratorStrategy.INCREMENT	)
+	private long id;
+	
 	private String name;
 	private String pin;
-	private Country country;
 	
-	public City(String name, String pin, Country country) {
+	public City(String name, String pin) {
 		super();
 		this.name = name;
 		this.pin = pin;
-		this.country = country;
-	}
-	public Country getCountry() {
-		return country;
-	}
-	public void setCountry(Country country) {
-		this.country = country;
 	}
 	public String getName() {
 		return name;
@@ -41,7 +38,6 @@ public class City
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((pin == null) ? 0 : pin.hashCode());
 		return result;
 	}
@@ -54,11 +50,6 @@ public class City
 		if (getClass() != obj.getClass())
 			return false;
 		City other = (City) obj;
-		if (country == null) {
-			if (other.country != null)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
 		if (pin == null) {
 			if (other.pin != null)
 				return false;
@@ -68,7 +59,7 @@ public class City
 	}
 	@Override
 	public String toString() {
-		return "City [name=" + name + ", pin=" + pin + ", country=" + country
+		return "City [name=" + name + ", pin=" + pin 
 				+ "]";
 	}
 }

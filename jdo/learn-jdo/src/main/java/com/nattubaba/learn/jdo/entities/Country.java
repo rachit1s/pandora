@@ -1,22 +1,50 @@
 package com.nattubaba.learn.jdo.entities;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 
+import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Element;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Join;
+import javax.jdo.annotations.Key;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PersistenceModifier;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.Value;
 
 @PersistenceCapable
 public class Country
 {
+	@Persistent(primaryKey="true", valueStrategy=IdGeneratorStrategy.INCREMENT)
+	private long id;
+	
 	private String name;
 	private String countryCode;
 	
-	private Collection<City> cities;
+	@Persistent(persistenceModifier=PersistenceModifier.PERSISTENT,  defaultFetchGroup="true" )
+	@Key(types=java.lang.String.class)
+	@Value(types=java.lang.String.class)
+	@Join(table="properties_countries", column="countryId")
+	private HashMap<String, String> properties;
 	
+	@Persistent(persistenceModifier=PersistenceModifier.PERSISTENT,  defaultFetchGroup="true")
+	@Join(table="countries_cities", column="countryKiId")
+	@Element(column="countrya_citiya")
+	private Collection<City> cities;
+
 	public Collection<City> getCities() {
 		return cities;
 	}
 	public void setCities(Collection<City> cities) {
 		this.cities = cities;
+	}
+	public HashMap<String, String> getProperties() {
+		return properties;
+	}
+	public void setProperties(HashMap<String, String> properties) {
+		this.properties = properties;
 	}
 	public String getName() {
 		return name;
@@ -34,6 +62,7 @@ public class Country
 		super();
 		this.name = name;
 		this.countryCode = countryCode;
+		this.cities = new HashSet<City>();
 	}
 	public Country() {
 		super();

@@ -49,7 +49,7 @@ public class TestingBook
 		try
 		{ 
 			Country country = new Country("India", "91");
-			City city = new City("Bangalore", "590026", country);
+			City city = new City("Bangalore", "590026");
 			Address address = new Address("Flat-404", "Kalpavriksha Appartments", "Tavarekere", city, country);
 			Date date = null;
 			try {
@@ -83,7 +83,7 @@ public class TestingBook
 		try
 		{ 
 			Country country = new Country("India", "91");
-			City city = new City("Bangalore", "590026", country);
+			City city = new City("Bangalore", "590026");
 			Address address = new Address("Flat-404", "Kalpavriksha Appartments", "Tavarekere", city, country);
 			Date date = null;
 			try {
@@ -129,7 +129,7 @@ public class TestingBook
 		try
 		{ 
 			Country country = new Country("India", "91");
-			City city = new City("Bangalore", "590026", country);
+			City city = new City("Bangalore", "590026");
 			Address address = new Address("Flat-404", "Kalpavriksha Appartments", "Tavarekere", city, country);
 			Date date = null;
 			try {

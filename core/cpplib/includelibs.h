@@ -4,7 +4,8 @@
 
 #include <iostream>
 #include "cpputils.h"
-#include<stdlib.h>
-#include<math.h>
-#include<string.h>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
+#include <ctime>
 #endif

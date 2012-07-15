@@ -3,9 +3,12 @@
 #define __INCLUDE_UTILS_H__
 
 #include <iostream>
-#include "cpputils.h"
 #include <cstdlib>
 #include <cmath>
 #include <cstring>
 #include <ctime>
+#include <sstream>
+
+#include "cpputils.h"
+
 #endif

@@ -1,0 +1,671 @@
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+775  [main] INFO  DataNucleus.JDO  - Exception thrown
+Required table missing : "`BOOK`" in Catalog "" Schema "". DataNucleus requires this table to perform its persistence operations. Either your MetaData is incorrect, or you need to enable "datanucleus.autoCreateTables"
+org.datanucleus.store.rdbms.exceptions.MissingTableException: Required table missing : "`BOOK`" in Catalog "" Schema "". DataNucleus requires this table to perform its persistence operations. Either your MetaData is incorrect, or you need to enable "datanucleus.autoCreateTables"
+	at org.datanucleus.store.rdbms.table.AbstractTable.exists(AbstractTable.java:486)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.performTablesValidation(RDBMSStoreManager.java:2576)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.addClassTablesAndValidate(RDBMSStoreManager.java:2388)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.run(RDBMSStoreManager.java:2031)
+	at org.datanucleus.store.rdbms.AbstractSchemaTransaction.execute(AbstractSchemaTransaction.java:113)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.addClasses(RDBMSStoreManager.java:836)
+	at org.datanucleus.store.AbstractStoreManager.addClass(AbstractStoreManager.java:1156)
+	at org.datanucleus.store.mapped.MappedStoreManager.getDatastoreClass(MappedStoreManager.java:383)
+	at org.datanucleus.store.rdbms.RDBMSPersistenceHandler.insertObject(RDBMSPersistenceHandler.java:126)
+	at org.datanucleus.state.JDOStateManager.internalMakePersistent(JDOStateManager.java:2377)
+	at org.datanucleus.state.JDOStateManager.makePersistent(JDOStateManager.java:2353)
+	at org.datanucleus.ObjectManagerImpl.persistObjectInternal(ObjectManagerImpl.java:1883)
+	at org.datanucleus.ObjectManagerImpl.persistObjectWork(ObjectManagerImpl.java:1732)
+	at org.datanucleus.ObjectManagerImpl.persistObject(ObjectManagerImpl.java:1591)
+	at org.datanucleus.api.jdo.JDOPersistenceManager.jdoMakePersistent(JDOPersistenceManager.java:730)
+	at org.datanucleus.api.jdo.JDOPersistenceManager.makePersistent(JDOPersistenceManager.java:755)
+	at com.nattubaba.learn.jdo.test.TestingBook.testNonPersistent(TestingBook.java:19)
+	at com.nattubaba.learn.jdo.test.TestingBook.main(TestingBook.java:31)
+777  [main] ERROR learnjdo  - javax.jdo.JDODataStoreException: Required table missing : "`BOOK`" in Catalog "" Schema "". DataNucleus requires this table to perform its persistence operations. Either your MetaData is incorrect, or you need to enable "datanucleus.autoCreateTables"
+NestedThrowables:
+org.datanucleus.store.rdbms.exceptions.MissingTableException: Required table missing : "`BOOK`" in Catalog "" Schema "". DataNucleus requires this table to perform its persistence operations. Either your MetaData is incorrect, or you need to enable "datanucleus.autoCreateTables"
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1072 [main] INFO  learnjdo  - Saved Book : com.nattubaba.learn.jdo.entities.Book@1f
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+537  [main] ERROR learnjdo  - org.datanucleus.api.jdo.exceptions.ClassNotPersistenceCapableException: The class "com.nattubaba.learn.jdo.entities.Book" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+NestedThrowables:
+org.datanucleus.exceptions.ClassNotPersistableException: The class "com.nattubaba.learn.jdo.entities.Book" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+771  [main] INFO  learnjdo  - Saved Book : Book [name=Book1, author=com.nattubaba.learn.jdo.entities.Author@552c8fa8, publication=com.nattubaba.learn.jdo.entities.Publication@608b8a47, ISBN=null]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+817  [main] INFO  learnjdo  - Saved Book : Book [name=Book1, author=com.nattubaba.learn.jdo.entities.Author@67dacccc, publication=com.nattubaba.learn.jdo.entities.Publication@4dbb9a58, ISBN=null]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+707  [main] INFO  DataNucleus.JDO  - Exception thrown
+Field com.nattubaba.learn.jdo.entities.Book.ISBN is null, but is mandatory as its described in the jdo metadata
+org.datanucleus.exceptions.NucleusUserException: Field com.nattubaba.learn.jdo.entities.Book.ISBN is null, but is mandatory as its described in the jdo metadata
+	at org.datanucleus.store.rdbms.fieldmanager.ParameterSetter.storeStringField(ParameterSetter.java:156)
+	at org.datanucleus.state.AbstractStateManager.providedStringField(AbstractStateManager.java:1433)
+	at com.nattubaba.learn.jdo.entities.Book.jdoProvideField(Book.java)
+	at com.nattubaba.learn.jdo.entities.Book.jdoProvideFields(Book.java)
+	at org.datanucleus.state.AbstractStateManager.provideFields(AbstractStateManager.java:1515)
+	at org.datanucleus.store.rdbms.request.InsertRequest.execute(InsertRequest.java:291)
+	at org.datanucleus.store.rdbms.RDBMSPersistenceHandler.insertTable(RDBMSPersistenceHandler.java:166)
+	at org.datanucleus.store.rdbms.RDBMSPersistenceHandler.insertObject(RDBMSPersistenceHandler.java:142)
+	at org.datanucleus.state.JDOStateManager.internalMakePersistent(JDOStateManager.java:2377)
+	at org.datanucleus.state.JDOStateManager.makePersistent(JDOStateManager.java:2353)
+	at org.datanucleus.ObjectManagerImpl.persistObjectInternal(ObjectManagerImpl.java:1883)
+	at org.datanucleus.ObjectManagerImpl.persistObjectWork(ObjectManagerImpl.java:1732)
+	at org.datanucleus.ObjectManagerImpl.persistObject(ObjectManagerImpl.java:1591)
+	at org.datanucleus.api.jdo.JDOPersistenceManager.jdoMakePersistent(JDOPersistenceManager.java:730)
+	at org.datanucleus.api.jdo.JDOPersistenceManager.makePersistent(JDOPersistenceManager.java:755)
+	at com.nattubaba.learn.jdo.test.TestingBook.testNonPersistent(TestingBook.java:19)
+	at com.nattubaba.learn.jdo.test.TestingBook.main(TestingBook.java:31)
+709  [main] ERROR learnjdo  - javax.jdo.JDOUserException: Field com.nattubaba.learn.jdo.entities.Book.ISBN is null, but is mandatory as its described in the jdo metadata
+NestedThrowables:
+org.datanucleus.exceptions.NucleusUserException: Field com.nattubaba.learn.jdo.entities.Book.ISBN is null, but is mandatory as its described in the jdo metadata
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+763  [main] INFO  DataNucleus.JDO  - Exception thrown
+Field com.nattubaba.learn.jdo.entities.Book.ISBN is null, but is mandatory as its described in the jdo metadata
+org.datanucleus.exceptions.NucleusUserException: Field com.nattubaba.learn.jdo.entities.Book.ISBN is null, but is mandatory as its described in the jdo metadata
+	at org.datanucleus.store.rdbms.fieldmanager.ParameterSetter.storeStringField(ParameterSetter.java:156)
+	at org.datanucleus.state.AbstractStateManager.providedStringField(AbstractStateManager.java:1433)
+	at com.nattubaba.learn.jdo.entities.Book.jdoProvideField(Book.java)
+	at com.nattubaba.learn.jdo.entities.Book.jdoProvideFields(Book.java)
+	at org.datanucleus.state.AbstractStateManager.provideFields(AbstractStateManager.java:1515)
+	at org.datanucleus.store.rdbms.request.InsertRequest.execute(InsertRequest.java:291)
+	at org.datanucleus.store.rdbms.RDBMSPersistenceHandler.insertTable(RDBMSPersistenceHandler.java:166)
+	at org.datanucleus.store.rdbms.RDBMSPersistenceHandler.insertObject(RDBMSPersistenceHandler.java:142)
+	at org.datanucleus.state.JDOStateManager.internalMakePersistent(JDOStateManager.java:2377)
+	at org.datanucleus.state.JDOStateManager.makePersistent(JDOStateManager.java:2353)
+	at org.datanucleus.ObjectManagerImpl.persistObjectInternal(ObjectManagerImpl.java:1883)
+	at org.datanucleus.ObjectManagerImpl.persistObjectWork(ObjectManagerImpl.java:1732)
+	at org.datanucleus.ObjectManagerImpl.persistObject(ObjectManagerImpl.java:1591)
+	at org.datanucleus.api.jdo.JDOPersistenceManager.jdoMakePersistent(JDOPersistenceManager.java:730)
+	at org.datanucleus.api.jdo.JDOPersistenceManager.makePersistent(JDOPersistenceManager.java:755)
+	at com.nattubaba.learn.jdo.test.TestingBook.testNonPersistent(TestingBook.java:19)
+	at com.nattubaba.learn.jdo.test.TestingBook.main(TestingBook.java:31)
+765  [main] ERROR learnjdo  - javax.jdo.JDOUserException: Field com.nattubaba.learn.jdo.entities.Book.ISBN is null, but is mandatory as its described in the jdo metadata
+NestedThrowables:
+org.datanucleus.exceptions.NucleusUserException: Field com.nattubaba.learn.jdo.entities.Book.ISBN is null, but is mandatory as its described in the jdo metadata
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+807  [main] INFO  learnjdo  - Saved Book : Book [name=Book1, author=Author [name=null, DOB=null, email=null, books=null, address=null], publication=com.nattubaba.learn.jdo.entities.Publication@102f729e, ISBN=7a60546f-19c1-4bae-b558-6c1a06e68219]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+571  [main] ERROR learnjdo  - org.datanucleus.api.jdo.exceptions.ClassNotPersistenceCapableException: The class "com.nattubaba.learn.jdo.entities.Book" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+NestedThrowables:
+org.datanucleus.exceptions.ClassNotPersistableException: The class "com.nattubaba.learn.jdo.entities.Book" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+3370 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Thu Jan 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, books=[], address=Address [houseNo=404, appartmentName=kalpa, streetName=tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=87a59cb9-06b2-4575-a754-49d52a189ac9]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+1    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1052 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Thu Jan 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, books=[], address=Address [houseNo=404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=7ac652df-6585-4018-8695-d73d36ebad23]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1057 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Thu Jan 03 00:07:00 IST 1985, email=nitiraj.rathore@gmail.com, books=[], address=Address [houseNo=404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=8d757d16-6bde-44f5-863a-86708aff0489]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1042 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, books=[], address=Address [houseNo=404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=8e1fea89-645f-416f-98f7-4644a3dac8dd]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+1    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+562  [main] ERROR learnjdo  - org.datanucleus.api.jdo.exceptions.ClassNotPersistenceCapableException: The class "com.nattubaba.learn.jdo.entities.Book" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+NestedThrowables:
+org.datanucleus.exceptions.ClassNotPersistableException: The class "com.nattubaba.learn.jdo.entities.Book" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+3887 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, books=[], address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=2a15babb-e985-462a-b121-cd84ec53ca03]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+5411 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, books=[], address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=e23aba4a-2ad2-4ac9-b18c-1d62476bf075]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+1    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1271 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan-2, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, books=[], address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=21589ee5-5670-40d1-8a67-58afb94da6a7]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+716  [main] ERROR learnjdo  - org.datanucleus.api.jdo.exceptions.ClassNotPersistenceCapableException: The class "com.nattubaba.learn.jdo.entities.Book" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+NestedThrowables:
+org.datanucleus.exceptions.ClassNotPersistableException: The class "com.nattubaba.learn.jdo.entities.Book" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1231 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan-2, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=c669ca2e-3be8-4ec8-8468-a68df5952b13]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+993  [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT FROM com.nattubaba.learn.jdo.entities.Author" since the connection used is closing
+1081 [main] INFO  learnjdo  - Author : Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]]:: Books : [Book [name=Samasya Ka Samadhan-2, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=c669ca2e-3be8-4ec8-8468-a68df5952b13]]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+817  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+818  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+818  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+819  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1142 [main] WARN  DataNucleus.Query  - Query for candidates of com.nattubaba.learn.jdo.entities.Author and subclasses resulted in no possible candidates
+Persistent class "com.nattubaba.learn.jdo.entities.Author" has no table in the database, but the operation requires it. Please check the specification of the MetaData for this class.
+org.datanucleus.store.exceptions.NoTableManagedException: Persistent class "com.nattubaba.learn.jdo.entities.Author" has no table in the database, but the operation requires it. Please check the specification of the MetaData for this class.
+	at org.datanucleus.store.mapped.MappedStoreManager.getDatastoreClass(MappedStoreManager.java:398)
+	at org.datanucleus.store.rdbms.query.RDBMSQueryUtils.getStatementForCandidates(RDBMSQueryUtils.java:410)
+	at org.datanucleus.store.rdbms.query.JDOQLQuery.compileQueryFull(JDOQLQuery.java:864)
+	at org.datanucleus.store.rdbms.query.JDOQLQuery.compileInternal(JDOQLQuery.java:343)
+	at org.datanucleus.store.query.Query.executeQuery(Query.java:1747)
+	at org.datanucleus.store.query.Query.executeWithArray(Query.java:1666)
+	at org.datanucleus.api.jdo.JDOQuery.execute(JDOQuery.java:243)
+	at com.nattubaba.learn.jdo.daos.AuthorDAO.getAuthorByName(AuthorDAO.java:23)
+	at com.nattubaba.learn.jdo.test.TestingBook.testPersistent(TestingBook.java:62)
+	at com.nattubaba.learn.jdo.test.TestingBook.main(TestingBook.java:95)
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+702  [main] ERROR learnjdo  - org.datanucleus.api.jdo.exceptions.ClassNotPersistenceCapableException: The class "com.nattubaba.learn.jdo.entities.Book" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+NestedThrowables:
+org.datanucleus.exceptions.ClassNotPersistableException: The class "com.nattubaba.learn.jdo.entities.Book" is not persistable. This means that it either hasnt been enhanced, or that the enhanced version of the file is not in the CLASSPATH (or is hidden by an unenhanced version), or the Meta-Data/annotations for the class are not found.
+807  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+807  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+808  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+808  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+5292 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=b87f1254-66cb-4322-8f98-a22c34e5863e]
+5383 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+5383 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+5384 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+5384 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+5938 [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT FROM com.nattubaba.learn.jdo.entities.Author" since the connection used is closing
+5981 [main] INFO  learnjdo  - Author : Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]]:: Books : [Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=b87f1254-66cb-4322-8f98-a22c34e5863e]]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+824  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+825  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+825  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+826  [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1622 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=null], publication=Publication [name=Nattubaba Pub.], ISBN=9083f785-0086-4630-bdf1-ba913a1edfc5]
+1701 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+1702 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+1702 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+1703 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+2013 [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT FROM com.nattubaba.learn.jdo.entities.Author" since the connection used is closing
+2059 [main] INFO  learnjdo  - Author : Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]]:: Books : [Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=b87f1254-66cb-4322-8f98-a22c34e5863e]]
+2071 [main] INFO  learnjdo  - Author : Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=null]:: Books : [Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=null], publication=Publication [name=Nattubaba Pub.], ISBN=9083f785-0086-4630-bdf1-ba913a1edfc5]]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+5823 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=956468dc-7cfe-47d4-b4ad-f34a6c0b2859]
+5937 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+5938 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+5939 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+5939 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+6364 [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT FROM com.nattubaba.learn.jdo.entities.Author WHERE name == authorName PARAMETERS String authorName" since the connection used is closing
+6582 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=8b9cd797-8452-4e6a-a4aa-b8da875bcddd]
+6583 [main] ERROR learnjdo  - org.datanucleus.api.jdo.exceptions.TransactionNotActiveException: Transaction is not active. You either need to define a transaction around this, or run your PersistenceManagerFactory with 'NontransactionalRead' and 'NontransactionalWrite' set to 'true'
+FailedObject:org.datanucleus.exceptions.TransactionNotActiveException: Transaction is not active. You either need to define a transaction around this, or run your PersistenceManagerFactory with 'NontransactionalRead' and 'NontransactionalWrite' set to 'true'
+6664 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+6665 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+6665 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+6666 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+6964 [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT FROM com.nattubaba.learn.jdo.entities.Author" since the connection used is closing
+7009 [main] INFO  learnjdo  - Author : Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]]:: Books : [Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=8b9cd797-8452-4e6a-a4aa-b8da875bcddd],Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=956468dc-7cfe-47d4-b4ad-f34a6c0b2859]]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+6231 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=c5e7f98c-e518-427d-8c92-043cd5613a62]
+6338 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+6338 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+6339 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+6339 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+6806 [main] INFO  learnjdo  - Saved Book : Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=3ce20b86-a2cc-47d3-aad7-2d6cbef927c2]
+6943 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+6943 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+6943 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+6944 [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+7282 [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT FROM com.nattubaba.learn.jdo.entities.Author" since the connection used is closing
+7329 [main] INFO  learnjdo  - Author : Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]]:: Books : [Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=c5e7f98c-e518-427d-8c92-043cd5613a62],Book [name=Samasya Ka Samadhan, author=Author [name=nitiraj singh rathore, DOB=Wed Jul 03 00:00:00 IST 1985, email=nitiraj.rathore@gmail.com, address=Address [houseNo=Flat-404, appartmentName=Kalpavriksha Appartments, streetName=Tavarekere, city=City [name=Bangalore, pin=590026, country=Country [name=India, countryCode=91]], country=Country [name=India, countryCode=91]]], publication=Publication [name=Nattubaba Pub.], ISBN=3ce20b86-a2cc-47d3-aad7-2d6cbef927c2]]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+561  [main] INFO  learnjdo  - [javax.jdo.option.DatastoreIdentity, javax.jdo.option.mapping.JoinedTablePerConcreteClass, javax.jdo.option.mapping.JoinedTablePerClass, javax.jdo.option.LinkedList, javax.jdo.option.Stack, javax.jdo.option.TransactionIsolationLevel.serializable, javax.jdo.option.mapping.HeterogeneousInterfaceType, javax.jdo.option.SortedMap, javax.jdo.option.DatastoreTimeout, javax.jdo.query.SQL, javax.jdo.option.QueryCancel, javax.jdo.option.TransactionIsolationLevel.read-uncommitted, javax.jdo.option.HashMap, javax.jdo.option.RetainValues, javax.jdo.option.Vector, javax.jdo.option.ApplicationIdentity, javax.jdo.option.NontransactionalWrite, javax.jdo.option.TransactionIsolationLevel.read-committed, javax.jdo.option.TransactionIsolationLevel.repeatable-read, javax.jdo.option.version.DateTime, javax.jdo.option.List, javax.jdo.option.NullCollection, javax.jdo.option.Map, javax.jdo.option.Array, javax.jdo.query.JDOQL, javax.jdo.option.Hashtable, javax.jdo.option.NonDurableIdentity, javax.jdo.option.Optimistic, javax.jdo.option.BinaryCompatibility, javax.jdo.option.SortedSet, javax.jdo.option.GetDataStoreConnection, javax.jdo.option.GetJDBCConnection, javax.jdo.option.NontransactionalRead, javax.jdo.option.TreeMap, javax.jdo.option.UnconstrainedQueryVariables, javax.jdo.option.mapping.HeterogeneousObjectType, javax.jdo.option.PreDirtyEvent, javax.jdo.option.mapping.NonJoinedTablePerConcreteClass, javax.jdo.option.ArrayList, javax.jdo.option.TreeSet, javax.jdo.option.TransientTransactional]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+15   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+20   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+27   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1132 [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT FROM com.nattubaba.learn.jdo.entities.Country" since the connection used is closing
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+5    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+8    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+16359 [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT FROM com.nattubaba.learn.jdo.entities.Country" since the connection used is closing
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+5    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+9    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+13   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+6    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+9    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+7742 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - country : Country [name=India, countryCode=91]
+8641 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - country : Country [name=one, countryCode=1]
+9631 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - country : Country [name=two, countryCode=2]
+10639 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - country : Country [name=one, countryCode=1]
+11409 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - country : Country [name=two, countryCode=2]
+12219 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - country : Country [name=one, countryCode=1]
+13058 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - country : Country [name=two, countryCode=2]
+13797 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - country : Country [name=one, countryCode=1]
+14589 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - country : Country [name=two, countryCode=2]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+7    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+10   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+14314 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=India, countryCode=91]
+15556 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+16207 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+16811 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+17371 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+17909 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+18459 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+18972 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+19601 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+20302 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+20948 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+1    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+4762 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=India, countryCode=91]
+4762 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+4763 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+4763 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+4763 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+4763 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+4763 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+4763 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+4764 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+4764 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+4764 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+4764 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+4764 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+18275 [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT FROM com.nattubaba.learn.jdo.entities.Country WHERE name == cName PARAMETERS String cName" since the connection used is closing
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1048 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=India, countryCode=91]
+1048 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1048 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1048 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1048 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1048 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1048 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1049 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1049 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1049 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1049 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1049 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1049 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1049 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1049 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+15228 [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT FROM com.nattubaba.learn.jdo.entities.Country WHERE name == cName PARAMETERS String cName" since the connection used is closing
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=India, countryCode=91]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1083 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1083 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1083 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1083 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+8706 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - India-Country : Country [name=India, countryCode=91]
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1098 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=India, countryCode=91]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1099 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1100 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1100 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1100 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1100 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1100 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1100 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+4820 [main] INFO  DataNucleus.JDO  - Exception thrown
+The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+org.datanucleus.store.query.QueryNotUniqueException: The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+	at org.datanucleus.store.query.Query.executeQuery(Query.java:1825)
+	at org.datanucleus.store.query.Query.executeWithArray(Query.java:1666)
+	at org.datanucleus.api.jdo.JDOQuery.execute(JDOQuery.java:243)
+	at com.nattubaba.learn.jdo.test.TestQuery.main(TestQuery.java:78)
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1080 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=India, countryCode=91]
+1080 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1081 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1082 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+10244 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - India-Country : Country [name=India, countryCode=91]
+18654 [main] INFO  DataNucleus.JDO  - Exception thrown
+The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+org.datanucleus.store.query.QueryNotUniqueException: The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+	at org.datanucleus.store.query.Query.executeQuery(Query.java:1825)
+	at org.datanucleus.store.query.Query.executeWithArray(Query.java:1666)
+	at org.datanucleus.api.jdo.JDOQuery.execute(JDOQuery.java:243)
+	at com.nattubaba.learn.jdo.test.TestQuery.main(TestQuery.java:102)
+32946 [main] ERROR com.nattubaba.learn.jdo.test.TestQuery  - javax.jdo.JDOUserException: The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+NestedThrowables:
+org.datanucleus.store.query.QueryNotUniqueException: The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+40357 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - India-Country : null
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+6    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1070 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=India, countryCode=91]
+1070 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1070 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1071 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1072 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1072 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1072 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1072 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1072 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+5211 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - India-Country : Country [name=India, countryCode=91]
+5218 [main] INFO  DataNucleus.JDO  - Exception thrown
+The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+org.datanucleus.store.query.QueryNotUniqueException: The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+	at org.datanucleus.store.query.Query.executeQuery(Query.java:1825)
+	at org.datanucleus.store.query.Query.executeWithArray(Query.java:1666)
+	at org.datanucleus.api.jdo.JDOQuery.execute(JDOQuery.java:243)
+	at com.nattubaba.learn.jdo.test.TestQuery.main(TestQuery.java:103)
+5222 [main] ERROR com.nattubaba.learn.jdo.test.TestQuery  - javax.jdo.JDOUserException: The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+NestedThrowables:
+org.datanucleus.store.query.QueryNotUniqueException: The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+13904 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - abc-Country : null
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1153 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=India, countryCode=91]
+1153 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1153 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1153 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1153 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1153 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1153 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1153 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1154 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1155 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1155 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1155 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=one, countryCode=1]
+1155 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - my-country : Country [name=two, countryCode=2]
+1175 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - India-Country : Country [name=India, countryCode=91]
+1187 [main] INFO  DataNucleus.JDO  - Exception thrown
+The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+org.datanucleus.store.query.QueryNotUniqueException: The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+	at org.datanucleus.store.query.Query.executeQuery(Query.java:1825)
+	at org.datanucleus.store.query.Query.executeWithArray(Query.java:1666)
+	at org.datanucleus.api.jdo.JDOQuery.execute(JDOQuery.java:243)
+	at com.nattubaba.learn.jdo.test.TestQuery.main(TestQuery.java:103)
+1193 [main] ERROR com.nattubaba.learn.jdo.test.TestQuery  - javax.jdo.JDOUserException: The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+NestedThrowables:
+org.datanucleus.store.query.QueryNotUniqueException: The query returned more than one instance BUT either unique is set to true or only aggregates are to be returned, so should have returned one result maximum
+5519 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - abc-Country : null
+14020 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - size of collectoin : 0
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+5    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1942 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - India-Country : null
+1946 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - one-Country : null
+1949 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - abc-Country : null
+14763 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - size of collectoin : 0
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+6    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+987  [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - India-Country : null
+992  [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - one-Country : null
+994  [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - abc-Country : null
+8283 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - size of collectoin : 0
+14243 [main] INFO  com.nattubaba.learn.jdo.test.TestQuery  - size of collectoin : 0
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+17   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+18   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+19   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+863  [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - india = Country [name=India, countryCode=ind]
+925  [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - India-Props : {No. of State=28, No. of UT=7}
+1058 [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - india = Country [name=India, countryCode=ind]
+1061 [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - India-Props : {No. of State=28, No. of UT=7, population=1200000000}
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1547 [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - india = Country [name=India, countryCode=ind]
+1548 [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - India-Props : {No. of State=28, No. of UT=7}
+1700 [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - india = Country [name=India, countryCode=ind]
+1701 [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - India-Props : {No. of State=28, No. of UT=7, population=1200000000}
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+1    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1029 [main] INFO  DataNucleus.Query  - Reading in results for query "SELECT UNIQUE FROM com.nattubaba.learn.jdo.entities.Country WHERE name == givenName PARAMETERS String givenName" since the connection used is closing
+1053 [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - india : Country [name=India, countryCode=ind]
+1086 [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - India-Props : {No. of State=28, population=1200000000, No. of UT=7}
+1189 [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - india : Country [name=India, countryCode=ind]
+1190 [main] INFO  com.nattubaba.learn.jdo.test.TestProperties  - India-Props : {Boys=700000000, Girls=500000000}
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+1    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+4    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+2334 [main] ERROR DataNucleus.Datastore  - An exception was thrown while adding/validating class(es) : Can't create table 'learnjdo.#sql-4fd_d7' (errno: 150)
+java.sql.SQLException: Can't create table 'learnjdo.#sql-4fd_d7' (errno: 150)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1073)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4096)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4028)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2490)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2651)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2677)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2627)
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:841)
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:681)
+	at org.datanucleus.store.rdbms.datasource.dbcp.DelegatingStatement.execute(DelegatingStatement.java:264)
+	at org.datanucleus.store.rdbms.datasource.dbcp.DelegatingStatement.execute(DelegatingStatement.java:264)
+	at org.datanucleus.store.rdbms.table.AbstractTable.executeDdlStatement(AbstractTable.java:761)
+	at org.datanucleus.store.rdbms.table.TableImpl.createForeignKeys(TableImpl.java:529)
+	at org.datanucleus.store.rdbms.table.TableImpl.createConstraints(TableImpl.java:425)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.performTablesValidation(RDBMSStoreManager.java:2655)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.addClassTablesAndValidate(RDBMSStoreManager.java:2388)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.run(RDBMSStoreManager.java:2031)
+	at org.datanucleus.store.rdbms.AbstractSchemaTransaction.execute(AbstractSchemaTransaction.java:113)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.addClasses(RDBMSStoreManager.java:836)
+	at org.datanucleus.store.AbstractStoreManager.addClass(AbstractStoreManager.java:1156)
+	at org.datanucleus.store.mapped.MappedStoreManager.getDatastoreClass(MappedStoreManager.java:383)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.getPropertiesForGenerator(RDBMSStoreManager.java:1276)
+	at org.datanucleus.store.AbstractStoreManager.getStrategyValue(AbstractStoreManager.java:1566)
+	at org.datanucleus.state.JDOStateManager.populateStrategyFields(JDOStateManager.java:690)
+	at org.datanucleus.state.JDOStateManager.initialiseForPersistentNew(JDOStateManager.java:362)
+	at org.datanucleus.state.ObjectProviderFactory.newForPersistentNew(ObjectProviderFactory.java:162)
+	at org.datanucleus.ObjectManagerImpl.persistObjectInternal(ObjectManagerImpl.java:1882)
+	at org.datanucleus.ObjectManagerImpl.persistObjectWork(ObjectManagerImpl.java:1732)
+	at org.datanucleus.ObjectManagerImpl.persistObject(ObjectManagerImpl.java:1591)
+	at org.datanucleus.api.jdo.JDOPersistenceManager.jdoMakePersistent(JDOPersistenceManager.java:730)
+	at org.datanucleus.api.jdo.JDOPersistenceManager.makePersistent(JDOPersistenceManager.java:755)
+	at com.nattubaba.learn.jdo.test.Test1NRelation.insertCountryCities(Test1NRelation.java:49)
+	at com.nattubaba.learn.jdo.test.Test1NRelation.main(Test1NRelation.java:26)
+
+2335 [main] ERROR DataNucleus.Datastore  - An exception was thrown while adding/validating class(es) : Can't create table 'learnjdo.#sql-4fd_d7' (errno: 150)
+java.sql.SQLException: Can't create table 'learnjdo.#sql-4fd_d7' (errno: 150)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1073)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4096)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4028)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2490)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2651)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2677)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2627)
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:841)
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:681)
+	at org.datanucleus.store.rdbms.datasource.dbcp.DelegatingStatement.execute(DelegatingStatement.java:264)
+	at org.datanucleus.store.rdbms.datasource.dbcp.DelegatingStatement.execute(DelegatingStatement.java:264)
+	at org.datanucleus.store.rdbms.table.AbstractTable.executeDdlStatement(AbstractTable.java:761)
+	at org.datanucleus.store.rdbms.table.TableImpl.createForeignKeys(TableImpl.java:529)
+	at org.datanucleus.store.rdbms.table.TableImpl.createConstraints(TableImpl.java:425)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.performTablesValidation(RDBMSStoreManager.java:2655)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.addClassTablesAndValidate(RDBMSStoreManager.java:2388)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.run(RDBMSStoreManager.java:2031)
+	at org.datanucleus.store.rdbms.AbstractSchemaTransaction.execute(AbstractSchemaTransaction.java:113)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.addClasses(RDBMSStoreManager.java:836)
+	at org.datanucleus.store.AbstractStoreManager.addClass(AbstractStoreManager.java:1156)
+	at org.datanucleus.store.mapped.MappedStoreManager.getDatastoreClass(MappedStoreManager.java:383)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.getPropertiesForGenerator(RDBMSStoreManager.java:1276)
+	at org.datanucleus.store.AbstractStoreManager.getStrategyValue(AbstractStoreManager.java:1566)
+	at org.datanucleus.state.JDOStateManager.populateStrategyFields(JDOStateManager.java:690)
+	at org.datanucleus.state.JDOStateManager.initialiseForPersistentNew(JDOStateManager.java:362)
+	at org.datanucleus.state.ObjectProviderFactory.newForPersistentNew(ObjectProviderFactory.java:162)
+	at org.datanucleus.ObjectManagerImpl.persistObjectInternal(ObjectManagerImpl.java:1882)
+	at org.datanucleus.ObjectManagerImpl.persistObjectWork(ObjectManagerImpl.java:1732)
+	at org.datanucleus.ObjectManagerImpl.persistObject(ObjectManagerImpl.java:1591)
+	at org.datanucleus.api.jdo.JDOPersistenceManager.jdoMakePersistent(JDOPersistenceManager.java:730)
+	at org.datanucleus.api.jdo.JDOPersistenceManager.makePersistent(JDOPersistenceManager.java:755)
+	at com.nattubaba.learn.jdo.test.Test1NRelation.insertCountryCities(Test1NRelation.java:49)
+	at com.nattubaba.learn.jdo.test.Test1NRelation.main(Test1NRelation.java:26)
+
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+1    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH

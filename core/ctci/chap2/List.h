@@ -1,6 +1,6 @@
 #ifndef __LIST_H_
 #define __LIST_H_
-#include "Node.h"
+#include "../../cpplib/Node.h"
 
 template<typename T>
 class List;

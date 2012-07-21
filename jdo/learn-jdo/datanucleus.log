@@ -506,3 +506,159 @@
 16:02:08,851 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/nitiraj/work/pandora_repo/pandora/jdo/learn-jdo/target/classes/com/nattubaba/learn/jdo/entities/Country.class" with enhanced definition
 16:02:08,857 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/nitiraj/work/pandora_repo/pandora/jdo/learn-jdo/target/classes/com/nattubaba/learn/jdo/entities/Publication.class" with enhanced definition
 16:02:08,857 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=277 ms, enhance=111 ms, total=388 ms. Consult the log for full details
+12:23:35,679 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:23:36,340 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:23:36,478 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:23:36,479 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:23:36,480 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:23:36,481 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:23:36,904 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/nitiraj/work/pandora_repo/pandora/jdo/learn-jdo/target/classes/com/nattubaba/learn/jdo/entities/Address.class" with enhanced definition
+12:23:36,916 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/nitiraj/work/pandora_repo/pandora/jdo/learn-jdo/target/classes/com/nattubaba/learn/jdo/entities/Author.class" with enhanced definition
+12:23:36,929 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/nitiraj/work/pandora_repo/pandora/jdo/learn-jdo/target/classes/com/nattubaba/learn/jdo/entities/Book.class" with enhanced definition
+12:23:36,940 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/nitiraj/work/pandora_repo/pandora/jdo/learn-jdo/target/classes/com/nattubaba/learn/jdo/entities/City.class" with enhanced definition
+12:23:36,958 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/nitiraj/work/pandora_repo/pandora/jdo/learn-jdo/target/classes/com/nattubaba/learn/jdo/entities/Country.class" with enhanced definition
+12:23:36,967 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/nitiraj/work/pandora_repo/pandora/jdo/learn-jdo/target/classes/com/nattubaba/learn/jdo/entities/Publication.class" with enhanced definition
+12:23:36,968 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=420 ms, enhance=201 ms, total=621 ms. Consult the log for full details
+12:25:57,219 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:25:57,660 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:25:57,769 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:25:57,771 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:25:57,772 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:25:57,773 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:25:58,102 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:25:58,105 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:25:58,107 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:25:58,109 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:25:58,111 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:25:58,115 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:25:58,116 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=390 ms, enhance=58 ms, total=448 ms. Consult the log for full details
+12:26:40,441 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:26:40,730 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:26:40,794 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:26:40,795 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:26:40,796 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:26:40,797 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:26:41,055 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:26:41,058 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:26:41,060 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:26:41,062 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:26:41,063 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:26:41,066 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:26:41,067 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=284 ms, enhance=46 ms, total=330 ms. Consult the log for full details
+12:27:12,709 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:27:12,983 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:27:13,045 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:27:13,046 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:27:13,047 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:27:13,047 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:27:13,294 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:27:13,297 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:27:13,298 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:27:13,299 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:27:13,300 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:27:13,303 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:27:13,303 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=274 ms, enhance=41 ms, total=315 ms. Consult the log for full details
+12:27:44,895 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:27:45,172 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:27:45,236 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:27:45,237 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:27:45,237 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:27:45,238 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:27:45,511 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:27:45,514 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:27:45,515 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:27:45,516 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:27:45,518 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:27:45,521 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:27:45,521 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=295 ms, enhance=48 ms, total=343 ms. Consult the log for full details
+12:28:29,195 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:28:29,476 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:28:29,539 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:28:29,539 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:28:29,540 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:28:29,541 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:28:29,783 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:28:29,785 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:28:29,787 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:28:29,788 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:28:29,789 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:28:29,792 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:28:29,792 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=269 ms, enhance=42 ms, total=311 ms. Consult the log for full details
+12:29:25,427 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:29:25,728 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:29:25,800 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:29:25,801 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:29:25,802 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:29:25,803 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:29:26,099 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:29:26,103 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:29:26,104 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:29:26,106 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:29:26,108 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:29:26,111 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:29:26,111 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=326 ms, enhance=50 ms, total=376 ms. Consult the log for full details
+12:29:30,192 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:29:30,433 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:29:30,495 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:29:30,496 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:29:30,496 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:29:30,497 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:29:30,769 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:29:30,771 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:29:30,773 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:29:30,774 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:29:30,775 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:29:30,778 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:29:30,779 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=296 ms, enhance=44 ms, total=340 ms. Consult the log for full details
+12:29:40,793 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:29:41,092 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:29:41,158 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:29:41,159 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:29:41,160 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:29:41,160 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:29:41,508 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:29:41,512 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:29:41,514 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:29:41,517 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:29:41,521 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:29:41,524 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:29:41,524 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=352 ms, enhance=74 ms, total=426 ms. Consult the log for full details
+12:30:01,235 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:30:01,493 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:30:01,568 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:30:01,569 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:30:01,570 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:30:01,571 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:30:01,836 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:30:01,838 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:30:01,839 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:30:01,840 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:30:01,842 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:30:01,844 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:30:01,845 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=305 ms, enhance=40 ms, total=345 ms. Consult the log for full details
+12:30:17,475 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:30:17,744 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:30:17,810 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:30:17,811 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:30:17,812 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:30:17,813 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:30:18,090 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:30:18,093 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:30:18,094 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:30:18,095 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:30:18,096 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:30:18,099 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:30:18,100 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=305 ms, enhance=44 ms, total=349 ms. Consult the log for full details
+12:30:46,202 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+12:30:46,455 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.1.0.m1) : Enhancement of classes
+12:30:46,520 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+12:30:46,521 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:30:46,521 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+12:30:46,522 (main) INFO  [DataNucleus.Persistence] - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+12:30:46,800 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Address" is already enhanced.
+12:30:46,803 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Author" is already enhanced.
+12:30:46,804 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Book" is already enhanced.
+12:30:46,805 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.City" is already enhanced.
+12:30:46,807 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Country" is already enhanced.
+12:30:46,810 (main) INFO  [DataNucleus.Enhancer] - Class "com.nattubaba.learn.jdo.entities.Publication" is already enhanced.
+12:30:46,810 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 6 classes. Timings : input=313 ms, enhance=38 ms, total=351 ms. Consult the log for full details

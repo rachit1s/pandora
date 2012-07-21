@@ -1,6 +1,6 @@
 #ifndef __NODE_H
 #define __NODE_H
-#include "../../cpplib/includelibs.h"
+#include "includelibs.h"
 
 template <typename T>
 class Node;

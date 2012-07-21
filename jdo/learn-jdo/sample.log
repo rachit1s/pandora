@@ -669,3 +669,7 @@ java.sql.SQLException: Can't create table 'learnjdo.#sql-4fd_d7' (errno: 150)
 2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
 2    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
 3    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH
+0    [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDate<->java.lang.String ignored since java type not present in CLASSPATH
+24   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.String ignored since java type not present in CLASSPATH
+24   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalTime<->java.lang.Long ignored since java type not present in CLASSPATH
+25   [main] INFO  DataNucleus.Persistence  - TypeConverter for javax.time.calendar.LocalDateTime<->java.lang.String ignored since java type not present in CLASSPATH

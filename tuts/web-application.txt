@@ -1,0 +1,7 @@
+http://www.tutorialspoint.com/http/what_is_http.htm
+http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
+
+Static : apache web server : 
+Dynamic : tomcat : 
+
+web UI tools : YUI, jQuery, JSF, GWT

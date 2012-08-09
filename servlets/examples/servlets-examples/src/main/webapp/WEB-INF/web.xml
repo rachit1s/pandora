@@ -1,0 +1,31 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<display-name>Archetype Created Web Application</display-name>
+	
+	<servlet>
+		<servlet-name>SingleThread</servlet-name>
+		<servlet-class>com.nattubaba.servlets.examples.SingleThreadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SingleThread</servlet-name>
+		<url-pattern>/single/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>normal</servlet-name>
+		<servlet-class>com.nattubaba.servlets.examples.NormalServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>normal</servlet-name>
+		<url-pattern>/normal/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>guestbook</servlet-name>
+	<servlet-class>com.nattubaba.servlets.examples.GuestBook</servlet-class>
+	</servlet>
+</web-app>

@@ -76,7 +76,7 @@ public class TodosResource {
 		}
 		TodoDao.instance.getModel().put(id, todo);
 		
-		servletResponse.sendRedirect("../create_todo.html");
+		servletResponse.sendRedirect("/create_todo.html");
 	}
 	
 	

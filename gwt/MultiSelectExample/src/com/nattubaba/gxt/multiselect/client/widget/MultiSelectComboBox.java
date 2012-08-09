@@ -12,7 +12,12 @@ import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.form.TriggerField;
 import com.extjs.gxt.ui.client.widget.layout.FillLayout;
 import com.google.gwt.user.client.Element;
-
+/**
+ * copied from http://bhat86.blogspot.in/2012/02/gxt-comobobox-with-multi-select-feature.html
+ * @author Nitiraj Singh Rathore ( nitiraj.r@tbitsglobal.com )
+ *
+ * @param <D>
+ */
 public class MultiSelectComboBox<D extends ModelData> extends
 		TriggerField<String> {
 

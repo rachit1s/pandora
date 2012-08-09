@@ -39,7 +39,7 @@ public class MultiSelectComboBox extends ComboBox<MultiSelectModelData>{
 		
 		this.setDisplayField(MultiSelectModelData.NAME);
 		
-		this.setTemplate(getTemplateString(MultiSelectModelData.NAME, MultiSelectModelData.NAME));
+		this.setTemplate(getTemplateString(MultiSelectModelData.NAME));
 		
 		this.setTriggerAction(TriggerAction.ALL);
 		this.setMinChars(1);
@@ -65,10 +65,10 @@ public class MultiSelectComboBox extends ComboBox<MultiSelectModelData>{
 	
 	@Override
 	public String getRawValue() {
-		String rawValue =  super.getRawValue();
+		String rawValue =  super.getRawValue().trim();
 		int index = rawValue.lastIndexOf(',');
-		if( index != -1)
-			rawValue = rawValue.substring(0,index).trim();
+		if( index != -1 && index == rawValue.length() -1)
+			rawValue = rawValue.substring(0,index);
 		return rawValue;
 	}
 	
@@ -127,10 +127,10 @@ public class MultiSelectComboBox extends ComboBox<MultiSelectModelData>{
 			suspendedStringValue = value;
 	}
 	
-	private native String getTemplateString(String displayName, String email) /*-{ 
+	private native String getTemplateString(String displayName) /*-{ 
 		return  [ 
 		'<tpl for=".">', 
-		'<div class="x-combo-list-item">{', displayName, '}<{', email, '}></div>', 
+		'<div class="x-combo-list-item">{', displayName, '}</div>', 
 		'</tpl>' 
 		].join(""); 
 	}-*/;

@@ -82,7 +82,7 @@ public class GWTMultiSelect implements EntryPoint {
 
 	private native String getTemplateString(String displayName, String name) /*-{
 		return [ '<tpl for=".">', '<div class="x-combo-list-item">{',
-				displayName, '}<{', name, '}></div>', '</tpl>' ].join("");
+				displayName, '}</div>', '</tpl>' ].join("");
 	}-*/;
 
 }

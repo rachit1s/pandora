@@ -1,0 +1,56 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:form id="form">
+
+    <p:dataTable var="car" value="#{tableBean.lazyModel}" paginator="true" rows="10"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{tableBean.selectedCar}" id="carTable" lazy="true">
+
+        <p:ajax event="rowSelect" listener="#{tableBean.onRowSelect}" update=":form:display" oncomplete="carDialog.show()" />
+
+        <p:column headerText="Model" sortBy="#{car.model}" filterBy="#{car.model}">
+            <h:outputText value="#{car.model}" />
+        </p:column>
+
+        <p:column headerText="Year" sortBy="#{car.year}" filterBy="#{car.year}">
+            <h:outputText value="#{car.year}" />
+        </p:column>
+
+        <p:column headerText="Manufacturer" sortBy="#{car.manufacturer}" filterBy="#{car.manufacturer}">
+            <h:outputText value="#{car.manufacturer}" />
+        </p:column>
+
+        <p:column headerText="Color" sortBy="#{car.color}" filterBy="#{car.color}">
+            <h:outputText value="#{car.color}" />
+        </p:column>
+    </p:dataTable>
+
+    <p:dialog header="Car Detail" widgetVar="carDialog" resizable="false"
+              showEffect="explode" hideEffect="explode">
+
+        <h:panelGrid id="display" columns="2" cellpadding="4">
+
+            <f:facet name="header">
+                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>
+            </f:facet>
+
+            <h:outputText value="Model:" />
+            <h:outputText value="#{tableBean.selectedCar.model}" style="font-weight:bold"/>
+
+            <h:outputText value="Year:" />
+            <h:outputText value="#{tableBean.selectedCar.year}" style="font-weight:bold"/>
+
+            <h:outputText value="Manufacturer:" />
+            <h:outputText value="#{tableBean.selectedCar.manufacturer}" style="font-weight:bold"/>
+
+            <h:outputText value="Color:" />
+            <h:outputText value="#{tableBean.selectedCar.color}" style="font-weight:bold"/>
+        </h:panelGrid>
+    </p:dialog>
+
+</h:form>
+</div>
+                    

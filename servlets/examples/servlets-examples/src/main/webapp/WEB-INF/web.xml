@@ -1,13 +1,21 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE web-app
+PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+"http://java.sun.com/j2ee/dtds/web-app_2.2.dtd">
 
 <web-app>
+
 	<display-name>Archetype Created Web Application</display-name>
-	
+
+	<mime-mapping>
+		<extension>java</extension>
+		<mime-type>text/plain</mime-type>
+	</mime-mapping>
 	<servlet>
 		<servlet-name>SingleThread</servlet-name>
-		<servlet-class>com.nattubaba.servlets.examples.SingleThreadServlet</servlet-class>
+		<servlet-class>com.nattubaba.servlets.examples.SingleThreadServlet
+		</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SingleThread</servlet-name>
@@ -16,16 +24,124 @@
 
 	<servlet>
 		<servlet-name>normal</servlet-name>
-		<servlet-class>com.nattubaba.servlets.examples.NormalServlet</servlet-class>
+		<servlet-class>com.nattubaba.servlets.examples.NormalServlet
+		</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>normal</servlet-name>
 		<url-pattern>/normal/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
-	<servlet-name>guestbook</servlet-name>
-	<servlet-class>com.nattubaba.servlets.examples.GuestBook</servlet-class>
+		<servlet-name>guestbook</servlet-name>
+		<servlet-class>com.nattubaba.servlets.examples.GuestBook
+		</servlet-class>
 	</servlet>
+
+	<servlet>
+		<servlet-class>com.nattubaba.servlets.examples.ServerSnoop
+		</servlet-class>
+		<servlet-name>server-info</servlet-name>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>server-info</servlet-name>
+		<url-pattern>/server-info/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-class>com.nattubaba.servlets.examples.VersionSnoop
+		</servlet-class>
+		<servlet-name>version-info</servlet-name>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>version-info</servlet-name>
+		<url-pattern>/version-info/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>restricted-info</servlet-name>
+		<servlet-class>com.nattubaba.servlets.examples.ExportRestriction
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>restricted-info</servlet-name>
+		<url-pattern>/restricted-info/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-class>com.nattubaba.servlets.examples.PersonalizedWelcome
+		</servlet-class>
+		<servlet-name>welcome-user</servlet-name>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>welcome-user</servlet-name>
+		<url-pattern>/welcome-user/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-class>com.nattubaba.servlets.examples.ParameterSnoop
+		</servlet-class>
+		<servlet-name>parameters</servlet-name>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>parameters</servlet-name>
+		<url-pattern>/parameters/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-class>com.nattubaba.servlets.examples.FileLocation
+		</servlet-class>
+		<servlet-name>file-location</servlet-name>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>file-location</servlet-name>
+		<url-pattern>/file-location/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-class>com.nattubaba.servlets.examples.ViewFile
+		</servlet-class>
+		<servlet-name>view-file</servlet-name>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>view-file</servlet-name>
+		<url-pattern>/vf/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-class>com.nattubaba.servlets.examples.GetFile</servlet-class>
+		<servlet-name>get-file</servlet-name>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>get-file</servlet-name>
+		<url-pattern>/get-file/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-class>com.nattubaba.servlets.examples.Uploader</servlet-class>
+		<servlet-name>uploader</servlet-name>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>uploader</servlet-name>
+		<url-pattern>/uploader/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-class>com.nattubaba.servlets.examples.UploadServlet</servlet-class>
+		<servlet-name>uploadServlet</servlet-name>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>uploadServlet</servlet-name>
+		<url-pattern>/uploadServlet/*</url-pattern>
+	</servlet-mapping>
 </web-app>

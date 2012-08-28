@@ -4,7 +4,9 @@ import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
 import com.oreilly.servlet.CacheHttpServlet;
+
 
 public class Guestbook extends CacheHttpServlet {
 	private Vector entries = new Vector(); // User entry list

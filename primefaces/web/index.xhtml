@@ -8,20 +8,29 @@
 <h:head>
 </h:head>
 <h:body>
-	<!-- ui:insert name="editor">
-            <ui:include src="ajaxtest.xhtml"/>
-        </ui:insert -->
 
-	<ui:insert name="radiotest">
-		<ui:include src="radiotest.xhtml" />
+	<ui:insert name="datatable_pagination">
+		<ui:include src="datatable_pagination.xhtml" />
 	</ui:insert>
 
-	<!-- ui:insert name="panelgridtest">
-            <ui:include src="radiobuttontest.xhtml"/>
-        </ui:insert-->
+	<ui:remove>
+		<ui:insert name="editor">
+			<ui:include src="ajaxtest.xhtml" />
+		</ui:insert>
 
-	<!--  ui:insert name="panelgridtest">
-            <ui:include src="dialogtest.xhtml"/>
-        </ui:insert -->
+		<ui:insert name="radiotest">
+			<ui:include src="radiotest.xhtml" />
+		</ui:insert>
+
+
+		<ui:insert name="panelgridtest">
+			<ui:include src="radiobuttontest.xhtml" />
+		</ui:insert>
+
+		<ui:insert name="panelgridtest">
+			<ui:include src="dialogtest.xhtml" />
+		</ui:insert>
+
+	</ui:remove>
 </h:body>
 </html>

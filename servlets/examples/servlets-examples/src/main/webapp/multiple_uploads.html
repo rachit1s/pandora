@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Multiple File Uploader</title>
+</head>
+<body>
+	<!-- IMPORTANT:  FORM's enctype must be "multipart/form-data" -->
+	<form method="post" action="uploadServlet"
+		enctype="multipart/form-data">
+		<input name="filesToUpload[]" id="filesToUpload" type="file"
+			multiple="" />
+		<input type="submit" value="Upload Now" /> 
+	</form>
+</body>
+</html>

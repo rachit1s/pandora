@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.tbitsglobal.ddc.Hello;
 import com.tbitsglobal.ddc.common.DocumentNumberSet;
 import com.tbitsglobal.ddc.common.DocumentSet;
 
@@ -25,13 +26,14 @@ public class DDCRestService {
 		return  new DocumentNumberSet();
 	}
 	
-	@Path("/hello")
+	@Path("/hello-main")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public static String getHelloMessage( @QueryParam("name") String name )
+	public static String getHelloMessage()
 	{
-		return "Hello " + name;
+		Hello.main(null);
+		return "done";
 	}
 
 }

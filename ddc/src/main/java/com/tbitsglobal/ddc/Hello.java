@@ -77,11 +77,22 @@ public class Hello {
 //			String imagePath = "C:\\Users\\Rahu\\Downloads\\fwdfilesattached\\title3.png";
 			String imagePath = "D:\\drawing1.png";
 			document.AddImageFile( imagePath, null, null );
+			IDocumentStructure docStruct = document.getDocumentStructure();
+			int docSecCount = docStruct.getDocumentSectionsCount();
+			for( int i = 0 ; i < docSecCount ; i++ )
+			{
+				IDocumentSection docSec = docStruct.getDocumentSection(i);
+				
+				IDocumentStream mainTextStream = docSec.getMainTextStream();
+				
+				printDocument(mainTextStream);
+				
+			}
 
 			// Process document
 			displayMessage( "Process..." );
 			document.Process( null, null, null );
-			System.out.println(document.getPlainText().getText());
+			System.out.println("Extracted Text : " + document.getPlainText().getText());
 
 			// Save results
 			displayMessage( "Saving results..." );
@@ -100,6 +111,45 @@ public class Hello {
 			// Close document
 			document.Close();
 		}
+	}
+
+	private void printDocument(IDocumentStream docStream) {
+		IDocumentElement currElement = docStream.getFirstElement();
+		int i = 0 ; 
+		while( currElement != null )
+		{
+			DocumentElementTypeEnum t = currElement.getType() ;
+			String ts = getTypeString(t);
+			print(i++ + ". Element : " + ts);
+			
+			currElement = docStream.getNextElement(currElement);
+		}
+	}
+
+	private void print(String string) {
+		System.out.println(string);
+	}
+
+	private String getTypeString(DocumentElementTypeEnum type) 
+	{
+		if( type == DocumentElementTypeEnum.DET_Barcode)
+		{
+			return "BarCode"; 
+		}
+		else if ( type == DocumentElementTypeEnum.DET_Paragraph )
+		{
+			return "Paragraph";
+		}
+		else if ( type == DocumentElementTypeEnum.DET_Picture )
+		{
+			return "Picture";
+		}
+		else if ( type == DocumentElementTypeEnum.DET_Table )
+		{
+			return "Table";
+		}
+		else
+			return "UnknowType";
 	}
 
 	private void unloadEngine() {

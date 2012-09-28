@@ -77,6 +77,11 @@ public class Hello {
 //			String imagePath = "C:\\Users\\Rahu\\Downloads\\fwdfilesattached\\title3.png";
 			String imagePath = "D:\\drawing1.png";
 			document.AddImageFile( imagePath, null, null );
+
+			// Process document
+			displayMessage( "Process..." );
+			document.Process( null, null, null );
+			
 			IDocumentStructure docStruct = document.getDocumentStructure();
 			int docSecCount = docStruct.getDocumentSectionsCount();
 			for( int i = 0 ; i < docSecCount ; i++ )
@@ -88,10 +93,7 @@ public class Hello {
 				printDocument(mainTextStream);
 				
 			}
-
-			// Process document
-			displayMessage( "Process..." );
-			document.Process( null, null, null );
+			
 			System.out.println("Extracted Text : " + document.getPlainText().getText());
 
 			// Save results

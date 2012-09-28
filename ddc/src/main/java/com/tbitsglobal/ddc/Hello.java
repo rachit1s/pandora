@@ -49,7 +49,8 @@ public class Hello {
 			// Process sample image
 			processImage();
 		} catch( Exception ex ) {
-			displayMessage( ex.getMessage() );
+			ex.printStackTrace();
+//			displayMessage( ex.getMessage() );
 		}
 	}
 
@@ -88,9 +89,14 @@ public class Hello {
 			{
 				IDocumentSection docSec = docStruct.getDocumentSection(i);
 				
-				IDocumentStream mainTextStream = docSec.getMainTextStream();
+//				IDocumentStream mainTextStream = docSec.getMainTextStream();
 				
-				printDocument(mainTextStream);
+				int docStreams = docSec.getDocumentStreamsCount();
+				for( int j = 0 ; j < docStreams ; j++ )
+				{
+					IDocumentStream mainTextStream = docSec.getDocumentStream(j); 
+					printDocument(mainTextStream);
+				}
 				
 			}
 			
@@ -109,6 +115,8 @@ public class Hello {
 
 			String pdfExportPath = SamplesConfig.GetSamplesFolder() + "\\SampleImages\\Demo1.pdf";
 			document.Export( pdfExportPath, FileExportFormatEnum.FEF_PDF, pdfParams );
+		}catch( Exception e ){
+			e.printStackTrace();
 		} finally {
 			// Close document
 			document.Close();

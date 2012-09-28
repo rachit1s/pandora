@@ -132,8 +132,36 @@ public class Hello {
 			String ts = getTypeString(t);
 			print(i++ + ". Element : " + ts);
 			
+			handleElement(currElement);
+			
 			currElement = docStream.getNextElement(currElement);
 		}
+	}
+
+	private void handleElement(IDocumentElement currElement) 
+	{
+		DocumentElementTypeEnum type = currElement.getType() ;
+		if( type == DocumentElementTypeEnum.DET_Barcode)
+		{
+			print("Cannot handle Barcode");
+		}
+		else if ( type == DocumentElementTypeEnum.DET_Paragraph )
+		{
+			print("Cannot handle Paragraph");
+		}
+		else if ( type == DocumentElementTypeEnum.DET_Picture )
+		{
+			ITextPicture pic = currElement.GetAsPicture();
+			IFRPage page = pic.getPage();
+			IPlainText text = page.getPlainText();
+			print("text of pic : " + text.getText());
+		}
+		else if ( type == DocumentElementTypeEnum.DET_Table )
+		{
+			print("Cannot handle table");
+		}
+		else
+			print("cannot handle unknow type");
 	}
 
 	private void print(String string) {

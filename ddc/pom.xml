@@ -286,6 +286,7 @@
 				<version>2.0-beta-1</version>
 				<configuration>
 					<server>myserver</server>
+					<url>http://abbyy.server:8080/manager/html</url>
 					<update>true</update>
 				</configuration>
 			</plugin>

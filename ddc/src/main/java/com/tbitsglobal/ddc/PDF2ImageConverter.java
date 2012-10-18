@@ -21,7 +21,7 @@ public class PDF2ImageConverter {
 	
 	
 	public static List<File> getImage (File file) {
-		StringBuilder builder = new StringBuilder();
+//		StringBuilder builder = new StringBuilder();
 		List<File> tempFiles = new ArrayList<File>();
 		try {
 			PDFDocument document = new PDFDocument();

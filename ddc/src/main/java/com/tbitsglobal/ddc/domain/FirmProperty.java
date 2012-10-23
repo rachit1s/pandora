@@ -2,23 +2,34 @@ package com.tbitsglobal.ddc.domain;
 
 public class FirmProperty 
 {
+	// non null
 	private long id;
-	
+	// non null
 	private String loggingBAName;
+	// may be null
 	private String emailPattern;
+	// may be null
 	private String docControlUserLogin;
-	private Integer number1AlgoId;
+	
+	// may be null
+	private Long number1AlgoId;
+	// may be null
 	private String number1Field;
-	private Integer number2AlgoId;
+	// may be null
+	private Long number2AlgoId;
+	// may be null
 	private String number2Field;
-	private Integer number3AlgoId;
+	// may be null
+	private Long number3AlgoId;
+	// may be null
 	private String number3Field;
-	private Integer dtnKeywordsId;
+	// non null
+	private Long dtnKeywordsId;
 	
 	public FirmProperty(long id, String loggingBAName, String emailPattern,
-			String docControlUserLogin, Integer number1AlgoId,
-			String number1Field, Integer number2AlgoId, String number2Field,
-			Integer number3AlgoId, String number3Field, Integer dtnKeywordId) {
+			String docControlUserLogin, Long number1AlgoId,
+			String number1Field, Long number2AlgoId, String number2Field,
+			Long number3AlgoId, String number3Field, Long dtnKeywordsId) {
 		super();
 		this.id = id;
 		this.loggingBAName = loggingBAName;
@@ -30,16 +41,16 @@ public class FirmProperty
 		this.number2Field = number2Field;
 		this.number3AlgoId = number3AlgoId;
 		this.number3Field = number3Field;
-		this.dtnKeywordsId = dtnKeywordId;
+		this.dtnKeywordsId = dtnKeywordsId;
 	}
 
 	
-	public Integer getDtnKeywordsId() {
+	public Long getDtnKeywordsId() {
 		return dtnKeywordsId;
 	}
 
 
-	public void setDtnKeywordsId(Integer dtnKeywordsId) {
+	public void setDtnKeywordsId(Long dtnKeywordsId) {
 		this.dtnKeywordsId = dtnKeywordsId;
 	}
 
@@ -70,10 +81,10 @@ public class FirmProperty
 	public void setDocControlUserLogin(String docControlUserLogin) {
 		this.docControlUserLogin = docControlUserLogin;
 	}
-	public Integer getNumber1AlgoId() {
+	public Long getNumber1AlgoId() {
 		return number1AlgoId;
 	}
-	public void setNumber1AlgoId(Integer number1AlgoId) {
+	public void setNumber1AlgoId(Long number1AlgoId) {
 		this.number1AlgoId = number1AlgoId;
 	}
 	public String getNumber1Field() {
@@ -82,10 +93,10 @@ public class FirmProperty
 	public void setNumber1Field(String number1Field) {
 		this.number1Field = number1Field;
 	}
-	public Integer getNumber2AlgoId() {
+	public Long getNumber2AlgoId() {
 		return number2AlgoId;
 	}
-	public void setNumber2AlgoId(Integer number2AlgoId) {
+	public void setNumber2AlgoId(Long number2AlgoId) {
 		this.number2AlgoId = number2AlgoId;
 	}
 	public String getNumber2Field() {
@@ -94,10 +105,10 @@ public class FirmProperty
 	public void setNumber2Field(String number2Field) {
 		this.number2Field = number2Field;
 	}
-	public Integer getNumber3AlgoId() {
+	public Long getNumber3AlgoId() {
 		return number3AlgoId;
 	}
-	public void setNumber3AlgoId(Integer number3AlgoId) {
+	public void setNumber3AlgoId(Long number3AlgoId) {
 		this.number3AlgoId = number3AlgoId;
 	}
 	public String getNumber3Field() {

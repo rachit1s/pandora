@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -19,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.util.PDFTextStripper;
 
+import transbit.tbits.common.DatabaseException;
 import transbit.tbits.domain.RequestDataType;
 
 import com.abbyy.FREngine.IEngine;
@@ -30,6 +32,8 @@ import com.tbitsglobal.ddc.common.DocumentNumberSet;
 import com.tbitsglobal.ddc.common.DocumentSet;
 import com.tbitsglobal.ddc.dao.FirmPropertyDao;
 import com.tbitsglobal.ddc.domain.FirmProperty;
+import com.tbitsglobal.ddc.exception.FailedToFindObject;
+import com.tbitsglobal.ddc.test.FolderProcessor;
 
 @Path("/ddc-service")
 public class DDCRestService {
@@ -45,32 +49,52 @@ public class DDCRestService {
 	 *  	2.1.1 
 	 * 2. get the dtn request for the
 	 * @param files
-	 * @return null if no dtn file was found else returns the request corresponding to the dtn file
+	 * @return returns the request corresponding to the dtn file
+	 * @throws DDCException 
+	 * @throws FailedToFindObject 
 	 */
-//	public static ArrayList<RequestDataType> findDTNs(ArrayList<File> files,String email)
-//	{
-//		// get the firm
-//		FirmProperty fp = FirmPropertyDao.getInstance().findFirmPropertyByEmailId(email);
-//		String sysPrefix = fp.getLoggingBAName();
-//		
-//		HashMap<File, String> texts = DDCHelper.extractPDFText(files);
-//		
-//		// get dtn file
-//		File file = DDCHelper.getDTNFile(texts,fp);
-//		
-//		if( file == null)
-//		{
-//			logger.info("No DTN file found.");
-//			return null;
-//		}
-//		
-//		String firstNumber, secondNumber, thirdNumber;
-//		// find first number
-//		if( fp.getNumber1Field() != null && null != fp.getNumber1AlgoId())
-//		{
-//			firstNumber = DDCHelper.getNumber(file,fp.getNumber1AlgoId());
-//		}
-//	}
+	public static List<RequestDataType> findDTNs(ArrayList<File> files,String email) throws DDCException, FailedToFindObject
+	{
+		// get the firm
+		FirmProperty fp = FirmPropertyDao.getInstance().findFirmPropertyByEmailId(email);
+		String sysPrefix = fp.getLoggingBAName();
+		
+		HashMap<File, String> texts = DDCHelper.extractPDFText(files);
+		
+		// get dtn file
+		File file = DDCHelper.getDTNFile(texts,fp);
+		
+		if( file == null)
+		{
+			logger.info("No DTN file found.");
+			throw new DDCException("No DTN file found.");
+		}
+		
+		String firstNumber = null, secondNumber = null, thirdNumber = null;
+		// find first number
+		if( fp.getNumber1Field() != null && null != fp.getNumber1AlgoId())
+		{
+			firstNumber = DDCHelper.getNumber(file,texts.get(file),fp.getNumber1AlgoId());
+		}
+		
+		if( fp.getNumber2Field() != null && null != fp.getNumber2AlgoId())
+		{
+			secondNumber = DDCHelper.getNumber(file,texts.get(file),fp.getNumber2AlgoId());
+		}
+		
+		if( fp.getNumber3Field() != null && null != fp.getNumber3AlgoId())
+		{
+			thirdNumber = DDCHelper.getNumber(file,texts.get(file),fp.getNumber3AlgoId());
+		}
+		
+		HashMap<String,String> searchParams = new HashMap<String,String>(3);
+		searchParams.put(fp.getNumber1Field(), firstNumber);
+		searchParams.put(fp.getNumber2Field(), secondNumber);
+		searchParams.put(fp.getNumber3Field(), thirdNumber);
+		
+		List<RequestDataType> dtns = DDCHelper.findSearchResults(sysPrefix,searchParams);
+		return dtns;
+	}
 
 
 	public static void pdfToTextFileUsingPDFBox(ArrayList<File>files) throws IOException

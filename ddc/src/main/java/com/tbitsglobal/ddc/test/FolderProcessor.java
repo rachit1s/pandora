@@ -1,4 +1,4 @@
-package com.tbitsglobal.ddc.rest;
+package com.tbitsglobal.ddc.test;
 
 import java.io.File;
 

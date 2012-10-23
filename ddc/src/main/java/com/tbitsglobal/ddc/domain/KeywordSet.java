@@ -1,35 +1,42 @@
 package com.tbitsglobal.ddc.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class KeywordSet 
 {
-	private Integer id;
+	private Long id;
 	
 	/**
 	 * These are the key words which if found would be used to identify 
 	 */
-	private ArrayList<String> keyWords;
+	private List<String> keyWords;
 
-	public KeywordSet(Integer id, ArrayList<String> keyWords) {
+	public KeywordSet(Long id, List<String> keyWords) {
 		super();
 		this.id = id;
 		this.keyWords = keyWords;
 	}
 
-	public Integer getId() {
+	public KeywordSet() {
+		super();
+		this.keyWords = new ArrayList<String>();
+	}
+
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public ArrayList<String> getKeyWords() {
+	public List<String> getKeyWords() {
 		return keyWords;
 	}
 
-	public void setKeyWords(ArrayList<String> keyWords) {
+	public void setKeyWords(List<String> keyWords) {
 		this.keyWords = keyWords;
 	}
 

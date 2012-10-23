@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class RegexTestPatternMatcher {
 	public static final String EXAMPLE_TEST = "This is my small example string which I'm going to use for pattern matching.";
 
-	public static void main(String[] args) {
+	public static void main1(String[] args) {
 		Pattern pattern = Pattern.compile("\\w+");
 		// In case you would like to ignore case sensitivity you could use this
 		// statement
@@ -22,5 +22,15 @@ public class RegexTestPatternMatcher {
 		Pattern replace = Pattern.compile("\\s+");
 		Matcher matcher2 = replace.matcher(EXAMPLE_TEST);
 		System.out.println(matcher2.replaceAll("\t"));
+	}
+	
+	public static void main(String[] args) {
+		Pattern pattern = Pattern.compile("nitiraj\\s+([-A-Za-z0-9]+)");
+		Matcher matcher = pattern.matcher("nitiraj -sin-gh rathore");
+		if( matcher.find() )
+		{
+			System.out.println(matcher.group(1));
+		}
+		else System.out.println("did not match anything.");
 	}
 }

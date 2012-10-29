@@ -64,11 +64,6 @@ public class SearchAlgo
 		this.pattern = pattern;
 	}
 	@Override
-	public String toString() {
-		return "SearchAlgo [id=" + id + ", searchType=" + searchType
-				+ ", searchWhat=" + searchWhat + ", pattern=" + pattern + "]";
-	}
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -87,5 +82,15 @@ public class SearchAlgo
 		if (id != other.id)
 			return false;
 		return true;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "SearchAlgo [id=" + id + ", searchType=" + searchType
+				+ ", searchWhat=" + searchWhat + ", pattern=" + pattern
+				+ ", firstKeyword=" + firstKeyword + ", secondKeyword="
+				+ secondKeyword + "]";
 	}
 }

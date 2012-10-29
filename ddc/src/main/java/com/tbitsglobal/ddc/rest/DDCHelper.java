@@ -56,20 +56,20 @@ public class DDCHelper {
 	
 	public static int incrAndGetNext(Connection con, String corrCat ) throws CorrException
 	{
-		System.out.println("generating corr. no. for : " + corrCat );
+		System.out.println("generating Next number for : " + corrCat );
 		try {	
 			CallableStatement stmt = con.prepareCall("stp_getAndIncrMaxId ?");
 			stmt.setString(1, corrCat );
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				int id = rs.getInt("max_id");
-				System.out.println("Returning the next corr. no. = " + id );
+				System.out.println("Returning the next no. = " + id );
 				return id;
 			} else {
-				throw new CorrException("Cannot generate the next correspondence number");
+				throw new CorrException("Cannot generate the next number");
 			}
 		} catch (SQLException e) {
-			throw new CorrException("Cannot generate the next correspondence number");
+			throw new CorrException("Cannot generate the next number");
 		}		
 	}
 	
@@ -91,7 +91,7 @@ public class DDCHelper {
 		{
 			// check for each file if the text contains the keywords given in fp
 			String content = texts.get(file);
-			boolean found = false;
+			boolean found = true;
 			for( String string : ks.getKeyWords())
 			{
 				if( !content.contains(string) )

@@ -108,11 +108,18 @@ keywords varchar(255))
 			Statement s = con.createStatement();
 			int count = s.executeUpdate(sb.toString());
 			logger.debug(count + " rows inserted into " + TableName);
+			con.commit();
+			
 			ks.setId(nextNumber);
 			return ks;
 		}
 		catch(Exception e)
 		{
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				logger.error(e1);
+			}
 			logger.error(e);
 			throw new FailedToInsert(e);
 		}

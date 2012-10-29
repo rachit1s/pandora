@@ -14,6 +14,7 @@ import transbit.tbits.common.DataSourcePool;
 import com.tbitsglobal.ddc.dao.exception.FailedToInsert;
 import com.tbitsglobal.ddc.dao.exception.FailedToUpdate;
 import com.tbitsglobal.ddc.domain.FirmProperty;
+import com.tbitsglobal.ddc.domain.FirmPropertyBuilder;
 import com.tbitsglobal.ddc.exception.FailedToDelete;
 import com.tbitsglobal.ddc.exception.FailedToFindObject;
 import com.tbitsglobal.ddc.rest.DDCHelper;
@@ -22,11 +23,6 @@ import static com.tbitsglobal.ddc.rest.DDCHelper.*;
 public class FirmPropertyDao 
 {
 	private static final Logger logger = Logger.getLogger(FirmPropertyDao.class);
-	private static FirmProperty fp;
-	static
-	{
-		fp = new FirmProperty(0, "BA1", "@gmail.com", "crazy.nattu@gmail.com", 1L, "number1Field", 2L, "number2Field", 3L," number3Field", 1L);
-	}
 	private static FirmPropertyDao fpDao = new FirmPropertyDao();;
 	
 	// no need of synch etc.. 
@@ -35,38 +31,41 @@ public class FirmPropertyDao
 		return fpDao;
 	}
 
-	/*
- CREATE TABLE nitiraj_test.dbo.firm_property
-(id bigint IDENTITY (1,1) NOT NULL,
-logging_ba_name varchar(25) NOT NULL,
-email_pattern varchar(255) NOT NULL,
-doc_controller_user_login varchar(255) NOT NULL,
-number1_algo_id bigint,
-number1_field varchar(255),
-number2_algo_id bigint,
-number2_field varchar(255),
-number3_algo_id bigint,
-number3_field varchar(255),
-dtn_keywords_id bigint,
-PRIMARY KEY (id))
-	 */
+	private static final String TableName = "firm_property";
+	private static final String Id = "id";
+	private static final String LoggingBAName = "loggingBaName";
+	private static final String DocControllerUserLogin = "docControllerUserLogin";
+	private static final String EmailPattern                      = "emailPattern";
+	private static final String DocControlUserLogin              = "docControlUserLogin";
+	private static final String ExpectedDTNFileName              = "expectedDTNFileName";
+	private static final String FromFieldAlgoId                  = "fromFieldAlgoId"; 
+	private static final String ToFieldAlgoId                    = "toFieldAlgoId";
+	private static final String DtnNumberAlgoId                  = "dtnNumberAlgoId";
+	private static final String OwnerDocumentNumberAlgoId        = "ownerDocumentNumberAlgoId";
+	private static final String ContractorDocumentNumberAlgoId   = "contractorDocumentNumberAlgoId";
+	private static final String VendorDocumentNumberAlgoId       = "vendorDocumentNumberAlgoId";
+	private static final String RevisionAlgoId                   = "revisionAlgoId";
+	private static final String SubmissionOrDecisionCodeAlgoId   = "submissionOrDecisionCodeAlgoId";
+	private static final String DtnDateTimeInDTNNoteAlgoId       = "dtnDateTimeInDTNNoteAlgoId";
+	private static final String ProjectCodeAlgoId                = "projectCodeAlgoId";
+	private static final String SubmissionCodeAlgoId             = "submissionCodeAlgoId";
+	private static final String ExpectedTypeOfTransaction        = "expectedTypeOfTransaction";
+	private static final String PrimaryRecordSearchFieldID       = "primaryRecordSearchFieldID";
+	private static final String OwnerDocumentNumberFieldID       = "ownerDocumentNumberFieldID";
+	private static final String ContractorDocumentNumberFieldID  = "contractorDocumentNumberFieldID";
+	private static final String VendorDocumentNumberFieldID      = "vendorDocumentNumberFieldID";
+	private static final String RevisionFieldID                  = "revisionFieldID";
+	private static final String ReceivedFileUpdateFieldID        = "receivedFileUpdateFieldID";
+	private static final String DecisionFieldID                  = "decisionFieldID";
+	private static final String DtnDateTimeAsPerTBits            = "dtnDateTimeAsPerTBits";
+	private static final String DtnProcessId                    = "dtnProcessId";
+	private static final String DtnKeywordsId                      = "dtnKeywordsId";
+
 	/**
 	 * will search for email id pattern in the firm
 	 * @param emailId
 	 * @return
 	 */
-	private static final String TableName = "firm_property";
-	private static final String Id = "id";
-	private static final String LoggingBAName = "logging_ba_name";
-	private static final String EmailPattern = "email_pattern";
-	private static final String DocControllerUserLogin = "doc_controller_user_login";
-	private static final String Number1AlgoId = "number1_algo_id";
-	private static final String Number2AlgoId = "number2_algo_id";
-	private static final String Number3AlgoId = "number3_algo_id";
-	private static final String Number1Field = "number1_field";
-	private static final String Number2Field = "number2_field";
-	private static final String Number3Field = "number3_field";
-	private static final String DtnKeywordsId = "dtn_keywords_id";
 	
 	private static final String Search_By_EmailId_Pattern = new StringBuffer().append("select * from ").append(TableName)
 							.append(" where ").append(EmailPattern).append( " = ?").toString();
@@ -123,23 +122,92 @@ PRIMARY KEY (id))
  		String loggingBAName       =rs.getString(LoggingBAName);
  		String emailPattern        =rs.getString(EmailPattern);
  		String docControlUserLogin =rs.getString(DocControllerUserLogin);
- 		Long number1AlgoId      =rs.getLong(Number1AlgoId);
- 		String number1Field        =rs.getString(Number1Field);
- 		Long number2AlgoId      =rs.getLong(Number2AlgoId);
- 		String number2Field        =rs.getString(Number2Field);
- 		Long number3AlgoId      =rs.getLong(Number3AlgoId);
- 		String number3Field        =rs.getString(Number3Field);
- 		Long dtnKeywordsId      =rs.getLong(DtnKeywordsId);
- 		
- 		return new FirmProperty(id, loggingBAName, emailPattern, docControlUserLogin, number1AlgoId, number1Field, number2AlgoId, number2Field, number3AlgoId, number3Field, dtnKeywordsId);
+ 		String expectedDTNFileName             = rs.getString(ExpectedDTNFileName            );
+ 		String fromFieldAlgoId                 = rs.getString(FromFieldAlgoId                );
+ 		String toFieldAlgoId                   = rs.getString(ToFieldAlgoId                  );
+ 		String dtnNumberAlgoId                 = rs.getString(DtnNumberAlgoId                );
+ 		String ownerDocumentNumberAlgoId       = rs.getString(OwnerDocumentNumberAlgoId      );
+ 		String contractorDocumentNumberAlgoId  = rs.getString(ContractorDocumentNumberAlgoId );
+ 		String vendorDocumentNumberAlgoId      = rs.getString(VendorDocumentNumberAlgoId     );
+ 		String revisionAlgoId                  = rs.getString(RevisionAlgoId                 );
+ 		String submissionOrDecisionCodeAlgoId  = rs.getString(SubmissionOrDecisionCodeAlgoId );
+ 		String dtnDateTimeInDTNNoteAlgoId      = rs.getString(DtnDateTimeInDTNNoteAlgoId     );
+ 		String projectCodeAlgoId               = rs.getString(ProjectCodeAlgoId              );
+ 		String submissionCodeAlgoId            = rs.getString(SubmissionCodeAlgoId           );
+ 		String expectedTypeOfTransaction       = rs.getString(ExpectedTypeOfTransaction      );
+ 		String primaryRecordSearchFieldID      = rs.getString(PrimaryRecordSearchFieldID     );
+ 		String ownerDocumentNumberFieldID      = rs.getString(OwnerDocumentNumberFieldID     );
+ 		String contractorDocumentNumberFieldID = rs.getString(ContractorDocumentNumberFieldID);
+ 		String vendorDocumentNumberFieldID     = rs.getString(VendorDocumentNumberFieldID    );
+ 		String revisionFieldID                 = rs.getString(RevisionFieldID                );
+ 		String receivedFileUpdateFieldID       = rs.getString(ReceivedFileUpdateFieldID      );
+ 		String decisionFieldID                 = rs.getString(DecisionFieldID                );
+ 		String dtnDateTimeAsPerTBits           = rs.getString(DtnDateTimeAsPerTBits          );
+ 		  Long dtnProcessId                    = rs.getLong(DtnProcessId                   );
+ 		  Long dtnKeywordsId                   = rs.getLong(DtnKeywordsId                  );
+
+ 		return new FirmPropertyBuilder().setId(id).setContractorDocumentNumberAlgoId(contractorDocumentNumberAlgoId).setContractorDocumentNumberFieldID(contractorDocumentNumberFieldID)
+ 				.setDecisionFieldID(decisionFieldID).setDocControlUserLogin(docControlUserLogin).setDtnDateTimeAsPerTBits(dtnDateTimeAsPerTBits).setDtnDateTimeInDTNNoteAlgoId(dtnDateTimeInDTNNoteAlgoId)
+ 				.setDtnKeywordsId(dtnKeywordsId).setDtnNumberAlgoId(dtnNumberAlgoId).setDtnProcessId(dtnProcessId).setEmailPattern(emailPattern).setExpectedDTNFileName(expectedDTNFileName)
+ 				.setExpectedTypeOfTransaction(expectedTypeOfTransaction).setFromFieldAlgoId(fromFieldAlgoId).setOwnerDocumentNumberAlgoId(ownerDocumentNumberAlgoId).setOwnerDocumentNumberFieldID(ownerDocumentNumberFieldID)
+ 				.setPrimaryRecordSearchFieldID(primaryRecordSearchFieldID).setProjectCodeAlgoId(projectCodeAlgoId).setReceivedFileUpdateFieldID(receivedFileUpdateFieldID).setRevisionAlgoId(revisionAlgoId)
+ 				.setRevisionFieldID(revisionFieldID).setSubmissionCodeAlgoId(submissionCodeAlgoId).setSubmissionOrDecisionCodeAlgoId(submissionOrDecisionCodeAlgoId).setVendorDocumentNumberAlgoId(vendorDocumentNumberAlgoId)
+ 				.setVendorDocumentNumberFieldID(vendorDocumentNumberFieldID).build();
 	}
 
-	private static final String InsertSQL = "insert into " + TableName + " values(?,?,?,?,?,?,?,?,?,?) ";
-	private static final String UpdateSQL = "update " + TableName + " set " + LoggingBAName + "=?," +
-		
-			EmailPattern + "=?," + DocControllerUserLogin + "=?," + Number1AlgoId + "=?," + Number1Field + "=?," +
-			Number2AlgoId +	"=?," + Number2Field + "=?," + Number3AlgoId + "=?," + Number3Field + "=?," + DtnKeywordsId + "=?" +
-					" where " + Id + "=?";
+	private static final String InsertSQL = "insert into " + TableName + "emailPattern,"                   
+			+ "docControlUserLogin,"            
+			+ "expectedDTNFileName,"            
+			+ "fromFieldAlgoId,"                
+			+ "toFieldAlgoId,"                  
+			+ "dtnNumberAlgoId,"                
+			+ "ownerDocumentNumberAlgoId,"      
+			+ "contractorDocumentNumberAlgoId," 
+			+ "vendorDocumentNumberAlgoId,"     
+			+ "revisionAlgoId,"                 
+			+ "submissionOrDecisionCodeAlgoId," 
+			+ "dtnDateTimeInDTNNoteAlgoId,"     
+			+ "projectCodeAlgoId,"              
+			+ "submissionCodeAlgoId,"           
+			+ "expectedTypeOfTransaction,"      
+			+ "primaryRecordSearchFieldID,"     
+			+ "ownerDocumentNumberFieldID,"     
+			+ "contractorDocumentNumberFieldID,"
+			+ "vendorDocumentNumberFieldID,"    
+			+ "revisionFieldID,"                
+			+ "receivedFileUpdateFieldID,"      
+			+ "decisionFieldID,"                
+			+ "dtnDateTimeAsPerTBits,"          
+			+ "dtnProcessId,"                   
+			+ "dtnKeywordsId,"                  
+ + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+	private static final String UpdateSQL = "update " + TableName + " set " 
+			+ EmailPattern + "=?,"                   
+			+ DocControlUserLogin + "=?,"            
+			+ ExpectedDTNFileName + "=?,"            
+			+ FromFieldAlgoId + "=?,"                
+			+ ToFieldAlgoId + "=?,"                  
+			+ DtnNumberAlgoId + "=?,"                
+			+ OwnerDocumentNumberAlgoId + "=?,"      
+			+ ContractorDocumentNumberAlgoId + "=?," 
+			+ VendorDocumentNumberAlgoId + "=?,"     
+			+ RevisionAlgoId + "=?,"                 
+			+ SubmissionOrDecisionCodeAlgoId + "=?," 
+			+ DtnDateTimeInDTNNoteAlgoId + "=?,"     
+			+ ProjectCodeAlgoId + "=?,"              
+			+ SubmissionCodeAlgoId + "=?,"           
+			+ ExpectedTypeOfTransaction + "=?,"      
+			+ PrimaryRecordSearchFieldID + "=?,"     
+			+ OwnerDocumentNumberFieldID + "=?,"     
+			+ ContractorDocumentNumberFieldID + "=?,"
+			+ VendorDocumentNumberFieldID + "=?,"    
+			+ RevisionFieldID + "=?,"                
+			+ ReceivedFileUpdateFieldID + "=?,"      
+			+ DecisionFieldID + "=?,"                
+			+ DtnDateTimeAsPerTBits + "=?,"          
+			+ DtnProcessId + "=?,"                   
+			+ DtnKeywordsId + "=?"                  
+			+ " where " + Id + "=?";
 	private static final String DeleteSQL = "delete from " + TableName + " where " + Id + "=?";
 	private static final String GetAllSQL = "select * from " + TableName;
 	private static final String GetByIdSQL = "select * from " + TableName + " where " + Id+  "=?";

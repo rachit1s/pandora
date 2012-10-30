@@ -1,4 +1,5 @@
-package com.tbitsglobal.ddc;
+import static com.googlecode.javacv.cpp.opencv_core.cvReleaseMemStorage;
+
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,64 +9,77 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
 import com.googlecode.javacv.cpp.opencv_core.CvRect;
 
 
 public class OptionDetector {
 	
-	public static final String IMG = "/home/rahul/files/tilted.png";
+//	public static final String IMG = "/home/rahul/files/tilted.png";
+//	
+//	public static final String IMG1 = "/home/rahul/files/final.png";
 	
-	public static final String IMG1 = "/home/rahul/files/final.png";
-	
-	public static void getOption(){
-		Date startTime = new Date();
-		Point p = SubImageLocator.surf();
+	public static int getOption(String IMG, String STAMP, List<CvRect> rect){
 		
-		List<CvRect> rect = Ex6ShapeDescriptors.extractShapes();
-		List<Integer> pixels = new ArrayList<Integer>();
+		Point p = SubImageLocator.surf(IMG, STAMP);
+		
+		
+//		List<Integer> pixels = new ArrayList<Integer>();
 		int option = 0;
 		int maxOption = 0;
+		BufferedImage img = null;
 		try{
 			File f1 = new File(IMG);
-			BufferedImage img = ImageIO.read(f1);
+			img = ImageIO.read(f1);
 			int maxCount = 0;
 			for(CvRect rect0 : rect){
 				option++;
 				int count = 0;
-				for(int i=0;i<rect0.height();i++){
-					for(int j=0;j<rect0.width();j++){
+				for(int i=0;i<rect0.width();i++){
+					for(int j=0;j<rect0.height();j++){
 						if(!PixelReader.isPixelWhite(img,(int)p.getY()+rect0.y()+j,(int)p.getX()+rect0.x()+i)){
-							if(PixelReader.grayColor != img.getRGB((int)p.getX()+rect0.x()+i, (int)p.getY()+rect0.y()+j) ){
+//							if(PixelReader.grayColor != img.getRGB((int)p.getX()+rect0.x()+i, (int)p.getY()+rect0.y()+j) ){
 								count++;
-							}
+//							}
 						}
 					}
 				}
 				
 				if(maxCount < count){
+//					System.out.println("no:"+count);
 					maxCount = count;
 					maxOption = option;
 				}
-				System.out.println(count);
-				pixels.add(count);
+//				System.out.println(count);
+//				pixels.add(count);
 			}
 			
-			System.out.println("option:"+maxOption);
-			Date endTime = new Date();
+//			System.out.println("option:"+maxOption);
 			
 			
-			System.out.println("Time:"+(endTime.getTime() - startTime.getTime()));
+			
+//			System.out.println("Time:"+(endTime.getTime() - startTime.getTime()));
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		finally{
+			if(img != null){
+				img.flush();
+				img = null;
+				System.gc();
+			}
+			
+		}
+		return maxOption;
 	}
 	
-	public static void getOptionInTiltedImage(){
+	public static void getOptionInTiltedImage(String IMG, String STAMP){
 		Date startTime = new Date();
-		Point p = SubImageLocator.surf();
+		Point p = SubImageLocator.surf(IMG,STAMP);
+		CvMemStorage storage = CvMemStorage.create();
 		
-		List<CvRect> rect = Ex6ShapeDescriptors.extractShapes();
+		List<CvRect> rect = FindRectangles.findRectangles(STAMP,storage);
 		List<Integer> pixels = new ArrayList<Integer>();
 		int option = 0;
 		int maxOption = 0;
@@ -122,6 +136,7 @@ public class OptionDetector {
 			Date endTime = new Date();
 			
 			System.out.println("Time:"+(endTime.getTime() - startTime.getTime()));
+			cvReleaseMemStorage(storage);
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -129,7 +144,11 @@ public class OptionDetector {
 	}
 	
 	public static void main(String[] args) {
-		getOptionInTiltedImage();
+		String IMG = "D:\\DTN Zipped File\\DTN Zipped File\\600MP_DTN\\FMG-EXT-600-7335\\14-3-600MP0053-02012-DR-ME-0005_A_21.pdf";
+
+		String STAMP = "D:\\AECOM.png";
+
+//		System.out.println(getOption(IMG,STAMP));
 	}
 
 }

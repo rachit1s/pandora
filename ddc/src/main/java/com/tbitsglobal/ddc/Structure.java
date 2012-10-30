@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 // � ABBYY. 2011.
 // SAMPLES code is property of ABBYY, exclusive rights are reserved. 
 //
@@ -111,7 +110,7 @@ public class Structure {
 		// IFRDocument document =
 		// engine.CreateFRDocumentFromImage("C:\\Users\\Rahu\\Downloads\\fwdfilesattached\\title2.jpg",mode);
 		IFRDocument document = engine.CreateFRDocumentFromImage(
-				"D:\\file3.pdf", mode);
+				"D:\\DTN Zipped File\\DTN Zipped File\\600MP_DTN\\FMG-EXT-600-7335\\16-2-600MP0053-02012-DR-ME-0017_A_2.pdf", mode);
 		// IFRDocument document =
 		// engine.CreateFRDocumentFromImage("D:\\ABC.png",mode);
 

@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 /*
  * Copyright (c) 2011-2012 Jarek Sacha. All Rights Reserved.
  *

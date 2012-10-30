@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 
 public class DocumentsData {
 		private String docNo1;
@@ -58,7 +57,7 @@ public class DocumentsData {
 		}
 		
 		public void print(){
-			System.out.println("document:"+docNo1+","+docNo2+","+rev+","+cat);
+			System.out.println("document:"+docNo1+","+docNo2+","+docNo3+","+rev+","+cat);
 		}
 		
 		public boolean equals(Object data){

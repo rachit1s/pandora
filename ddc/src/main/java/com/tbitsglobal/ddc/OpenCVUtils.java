@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 import java.io.File;
 import java.io.IOException;
 

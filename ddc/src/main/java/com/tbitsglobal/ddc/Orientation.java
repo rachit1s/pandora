@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;

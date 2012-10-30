@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 /*
  * Copyright (c) 2011-2012 Jarek Sacha. All Rights Reserved.
  *
@@ -18,8 +17,8 @@ public class Ex3Sharpen {
 
 	// Read input image
 
-	public static final String STAMP = "/tmp/files/newStamp.png";
-
+//	public static final String STAMP = "/tmp/files/newStamp.png";
+	public static final String STAMP = "D:\\DTN Zipped File\\DTN Zipped File\\600MP_DTN\\FMG-EXT-600-7335\\16-2-600MP0053-02012-DR-ME-0017_A_20.png";
 	public static IplImage sharp(IplImage image) {
 //		IplImage image = OpenCVUtils.loadAndShowOrExit(new File(STAMP),
 //				CV_LOAD_IMAGE_COLOR);
@@ -41,10 +40,14 @@ public class Ex3Sharpen {
 				BORDER_DEFAULT);
 
 		// Display
-//		OpenCVUtils.show(dest, "Sharpened");
+		OpenCVUtils.show(dest, "Sharpened");
 		return dest;
 	}
 	public static void main(String[] args) {
-//		sharp();
+//	1
+		IplImage image = OpenCVUtils.loadAndShowOrExit(new File(STAMP),
+				CV_LOAD_IMAGE_COLOR);
+
+		sharp(image);
 	}
 }

@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 import javax.swing.JFrame;
 import com.googlecode.javacpp.Pointer;
 import com.googlecode.javacv.*;

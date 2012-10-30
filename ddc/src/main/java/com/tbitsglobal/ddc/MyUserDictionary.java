@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 
 import com.abbyy.FREngine.Engine;
 import com.abbyy.FREngine.IBaseLanguage;
@@ -124,9 +123,9 @@ public class MyUserDictionary {
 		// Create user dictionary description and add it to the collection
 		IUserDictionaryDescription userDic = engine.CreateUserDictionaryDesc();//CreateUserDictionaryDesc();
 		//userDic.setFileName(dictionaryFile);
-//		IDictionaryDescription description = (IUserDictionaryDescription)userDic;
+		DictionaryDescription description = (UserDictionaryDescription)userDic;
 		
-//		pDictionaryDescriptions.Add(userDic);
+		pDictionaryDescriptions.Add(userDic);
 		
 		return pTextLanguage;
 	}

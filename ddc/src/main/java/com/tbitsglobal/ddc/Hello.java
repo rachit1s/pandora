@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 // � ABBYY. 2011.
 // SAMPLES code is property of ABBYY, exclusive rights are reserved. 
 //
@@ -49,8 +48,7 @@ public class Hello {
 			// Process sample image
 			processImage();
 		} catch( Exception ex ) {
-			ex.printStackTrace();
-//			displayMessage( ex.getMessage() );
+			displayMessage( ex.getMessage() );
 		}
 	}
 
@@ -82,25 +80,7 @@ public class Hello {
 			// Process document
 			displayMessage( "Process..." );
 			document.Process( null, null, null );
-			
-			IDocumentStructure docStruct = document.getDocumentStructure();
-			int docSecCount = docStruct.getDocumentSectionsCount();
-			for( int i = 0 ; i < docSecCount ; i++ )
-			{
-				IDocumentSection docSec = docStruct.getDocumentSection(i);
-				
-//				IDocumentStream mainTextStream = docSec.getMainTextStream();
-				
-				int docStreams = docSec.getDocumentStreamsCount();
-				for( int j = 0 ; j < docStreams ; j++ )
-				{
-					IDocumentStream mainTextStream = docSec.getDocumentStream(j); 
-					printDocument(mainTextStream);
-				}
-				
-			}
-			
-			System.out.println("Extracted Text : " + document.getPlainText().getText());
+			System.out.println(document.getPlainText().getText());
 
 			// Save results
 			displayMessage( "Saving results..." );
@@ -115,79 +95,10 @@ public class Hello {
 
 			String pdfExportPath = SamplesConfig.GetSamplesFolder() + "\\SampleImages\\Demo1.pdf";
 			document.Export( pdfExportPath, FileExportFormatEnum.FEF_PDF, pdfParams );
-		}catch( Exception e ){
-			e.printStackTrace();
 		} finally {
 			// Close document
 			document.Close();
 		}
-	}
-
-	private void printDocument(IDocumentStream docStream) {
-		IDocumentElement currElement = docStream.getFirstElement();
-		int i = 0 ; 
-		while( currElement != null )
-		{
-			DocumentElementTypeEnum t = currElement.getType() ;
-			String ts = getTypeString(t);
-			print(i++ + ". Element : " + ts);
-			
-			handleElement(currElement);
-			
-			currElement = docStream.getNextElement(currElement);
-		}
-	}
-
-	private void handleElement(IDocumentElement currElement) 
-	{
-		DocumentElementTypeEnum type = currElement.getType() ;
-		if( type == DocumentElementTypeEnum.DET_Barcode)
-		{
-			print("Cannot handle Barcode");
-		}
-		else if ( type == DocumentElementTypeEnum.DET_Paragraph )
-		{
-			print("Cannot handle Paragraph");
-		}
-		else if ( type == DocumentElementTypeEnum.DET_Picture )
-		{
-			ITextPicture pic = currElement.GetAsPicture();
-			IFRPage page = pic.getPage();
-			IPlainText text = page.getPlainText();
-			print("text of pic : " + text.getText());
-		}
-		else if ( type == DocumentElementTypeEnum.DET_Table )
-		{
-			print("Cannot handle table");
-		}
-		else
-			print("cannot handle unknow type");
-	}
-
-	private void print(String string) {
-		System.out.println(string);
-	}
-
-	private String getTypeString(DocumentElementTypeEnum type) 
-	{
-		if( type == DocumentElementTypeEnum.DET_Barcode)
-		{
-			return "BarCode"; 
-		}
-		else if ( type == DocumentElementTypeEnum.DET_Paragraph )
-		{
-			return "Paragraph";
-		}
-		else if ( type == DocumentElementTypeEnum.DET_Picture )
-		{
-			return "Picture";
-		}
-		else if ( type == DocumentElementTypeEnum.DET_Table )
-		{
-			return "Table";
-		}
-		else
-			return "UnknowType";
 	}
 
 	private void unloadEngine() {

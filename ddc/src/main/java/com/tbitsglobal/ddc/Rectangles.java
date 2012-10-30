@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 //import java.awt.Point;
 //import java.awt.image.BufferedImage;
 //import java.util.List;

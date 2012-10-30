@@ -1,18 +1,13 @@
-package com.tbitsglobal.ddc;
 
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.imageio.ImageIO;
-
-
-
-
 
 import net.sf.ghost4j.document.PDFDocument;
 import net.sf.ghost4j.renderer.SimpleRenderer;
@@ -20,11 +15,14 @@ import net.sf.ghost4j.renderer.SimpleRenderer;
 public class PDF2ImageConverter {
 	
 	
-	public static List<File> getImage (File file) {
-		StringBuilder builder = new StringBuilder();
-		List<File> tempFiles = new ArrayList<File>();
+	public static File getImage (File file) {
+		
+		
+		PDFDocument document = new PDFDocument();
+		List<Image> images = null;
+		File tempFile = null;
 		try {
-			PDFDocument document = new PDFDocument();
+			
 			document.load(file);
 			
 			SimpleRenderer renderer = new SimpleRenderer();
@@ -32,31 +30,57 @@ public class PDF2ImageConverter {
 			// set resolution (in DPI)
 			renderer.setResolution(300);
 
-			List<Image> images = renderer.render(document);
+			images = renderer.render(document,0,0);
+			
 
-			for (int i = 0; i < images.size(); i++) {
-				File tempFile = new File(file.getAbsolutePath().substring(0,file.getAbsolutePath().lastIndexOf('.'))+i+".png");
+			
+				tempFile = new File(file.getAbsolutePath().substring(0,file.getAbsolutePath().lastIndexOf('.'))+"0.png");
 				tempFile.createNewFile();
-				tempFiles.add(tempFile);
-				ImageIO.write((RenderedImage) images.get(i), "png", tempFile);
+		
+				ImageIO.write((RenderedImage) images.get(0), "png", tempFile);
+				
+				
 //				builder.append(ImageTextExtracter.extractText(
 //						tempFile));
 //				builder.append(" ");
-			}
+				
+			
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
 			
+			if (document != null) {
+				
+				document = null;
+				
+				
+				
+			}
+			if(images != null){
+				for(Image i:images){
+					
+					
+					i.flush();
+					
+					
+				}
+				images.clear();
+			}
+			
+			images = null;
+			System.gc();
 		}
 		
-		return tempFiles;
+		return tempFile;
 	}
 
 	public static void main(String[] args) {
 		PDF2ImageConverter conv = new PDF2ImageConverter();
-		List<File> files = conv.getImage(new File(
-				"D:\\Downloads\\rahul_files_dc\\rahul_files_dc\\FMG-EXT-600-9167\\600MP0053-02012-DR-ME-0041_B_2.pdf"));
+		File files = conv.getImage(new File(
+				"D:\\DTN Zipped File\\DTN Zipped File\\600MP_DTN\\FMG-EXT-600-7335\\16-2-600MP0053-02012-DR-ME-0017_A_2.pdf"));
 		//System.out.println(build.toString());
 	}
 

@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 // ( C ) 2011 ABBYY Software. All rights reserved.
 //Auto-generated config-file for FineReader Engine Java samples
 

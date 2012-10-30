@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 import java.io.File;
 
 import com.abbyy.FREngine.BlockTypeEnum;
@@ -43,26 +42,29 @@ public class FindText {
 			// 4733,3274
 			// 4791,3344
 
-			int dLeft = 1259;
-			int dTop = 3122;
-			int dRight = 1675;
-			int dBottom = 3168;
+	
 			
-			int dLeft1 = 1259;
-			int dTop1 = 3176;
-			int dRight1 = 1675;
-			int dBottom1 = 3218;
+			int dLeft = 1247;
+			int dTop = 3153;
+			int dRight = 1628;
+			int dBottom = 3192;
+			
+			int dLeft1 = 1244;
+			int dTop1 = 3201;
+			int dRight1 = 1616;
+			int dBottom1 = 3243;
 			
 
-			int dLeft2 = 3850;
-			int dTop2 = 3257;
-			int dRight2 = 4411;
-			int dBottom2 = 3336;
+			int dLeft2 = 3819;
+			int dTop2 = 3284;
+			int dRight2 = 4381;
+			int dBottom2 = 3353;
 			
-			int rLeft = 4652;
-			int rTop = 3261;
-			int rRight = 4741;
-			int rBottom = 3341;
+			int rLeft = 4621;
+			int rTop = 3284;
+			int rRight = 4706;
+			int rBottom = 3357;
+			
 			
 			
 
@@ -98,31 +100,52 @@ public class FindText {
 			// 4791,3344
 
 			
-			int dLeft = 1259;
-			int dTop = 3122;
-			int dRight = 1675;
-			int dBottom = 3168;
+//			int dLeft = 1259;
+//			int dTop = 3122;
+//			int dRight = 1675;
+//			int dBottom = 3168;
+//			
+//			int dLeft1 = 1259;
+//			int dTop1 = 3176;
+//			int dRight1 = 1675;
+//			int dBottom1 = 3218;
+//			
+//
+//			int dLeft2 = 3850;
+//			int dTop2 = 3257;
+//			int dRight2 = 4411;
+//			int dBottom2 = 3336;
+//			
+//			int rLeft = 4652;
+//			int rTop = 3261;
+//			int rRight = 4741;
+//			int rBottom = 3341;
 			
-			int dLeft1 = 1259;
-			int dTop1 = 3176;
-			int dRight1 = 1675;
-			int dBottom1 = 3218;
+			int dLeft = 1247;
+			int dTop = 3153;
+			int dRight = 1628;
+			int dBottom = 3192;
+			
+			int dLeft1 = 1244;
+			int dTop1 = 3201;
+			int dRight1 = 1616;
+			int dBottom1 = 3243;
 			
 
-			int dLeft2 = 3850;
-			int dTop2 = 3257;
-			int dRight2 = 4411;
-			int dBottom2 = 3336;
+			int dLeft2 = 3819;
+			int dTop2 = 3284;
+			int dRight2 = 4381;
+			int dBottom2 = 3353;
 			
-			int rLeft = 4652;
-			int rTop = 3261;
-			int rRight = 4741;
-			int rBottom = 3341;
+			int rLeft = 4621;
+			int rTop = 3284;
+			int rRight = 4706;
+			int rBottom = 3357;
 			
 			FindText application = new FindText();
 			//CLBJ1542D010014_2_AF1.png
 			// file37c976a6-3250-4fb5-b1b2-3daad1e62017.png
-			data = application.Run(new File("D:\\Downloads\\rahul_files_dc\\rahul_files_dc\\FMG-EXT-600-9167\\600MP0053-02012-DR-ME-0041_B_20.png"), dLeft, dTop, dRight, dBottom,dLeft1, dTop1, dRight1, dBottom1, dLeft2, dTop2, dRight2, dBottom2,rLeft,
+			data = application.Run(new File("D:\\DTN Zipped File\\DTN Zipped File\\600MP_DTN\\FMG-EXT-600-7335\\14-3-600MP0053-02012-DR-ME-0005_A_21.pdf"), dLeft, dTop, dRight, dBottom,dLeft1, dTop1, dRight1, dBottom1, dLeft2, dTop2, dRight2, dBottom2,rLeft,
 					rTop, rRight, rBottom);
 			data.print();
 		} catch (Exception ex) {
@@ -160,8 +183,8 @@ public class FindText {
 			int dBottom, int dLeft1, int dTop1, int dRight1, int dBottom1, int dLeft2, int dTop2, int dRight2, int dBottom2,int rLeft, int rTop, int rRight, int rBottom) {
 		DocumentsData data = new DocumentsData();
 		IPrepareImageMode mode = engine.CreatePrepareImageMode();
-		mode.setCorrectSkewByHorizontalText(true);
-		mode.setUseFastBinarization(true);
+		//mode.setCorrectSkewByHorizontalText(true);
+		//mode.setUseFastBinarization(true);
 		
 
 		// IFRDocument document =

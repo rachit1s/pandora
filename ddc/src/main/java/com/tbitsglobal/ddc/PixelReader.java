@@ -1,4 +1,3 @@
-package com.tbitsglobal.ddc;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -16,7 +15,7 @@ public class PixelReader {
 
 	public static final String IMG = "/home/rahul/files/file_12cdb342-764b-4a2b-b7be-94508d2095ad.png";
 
-	public static int threshold = 245;
+	public static int threshold = 239;
 	
 	public static int grayColor = 0xE0E0E0;
 
@@ -154,17 +153,29 @@ public class PixelReader {
 	}
 
 	public static boolean isPixelWhite(BufferedImage img, int y, int x) {
+		int rgb[] = null;
+		try{
 		int argb = img.getRGB(x, y);
 
-		int rgb[] = new int[] { (argb >> 16) & 0xff, // red
+		rgb = new int[] { (argb >> 16) & 0xff, // red
 				(argb >> 8) & 0xff, // green
 				(argb) & 0xff // blue
 		};
 
 		for (int i = 0; i < rgb.length; i++) {
+//			System.out.println(rgb[i]);
 			if (rgb[i] < threshold) {
 				return false;
 			}
+		}
+		}catch(Exception e){
+			System.out.println("Problems with x,y:"+x+","+y +" for image with dimensions:"+img.getWidth()+"*"+img.getHeight());
+			e.printStackTrace();
+		}
+		finally{
+			
+			rgb = null;
+			
 		}
 
 		// System.out.println("rgb: " + rgb[0] + " " + rgb[1] + " " + rgb[2]);

@@ -1,18 +1,15 @@
-package com.tbitsglobal.ddc;
 
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
 import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.HttpHeaders;
 import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.pdf.PDFParser;
 import org.apache.tika.sax.BodyContentHandler;
@@ -38,23 +35,20 @@ public class FileContentExtracter {
 		String content = null;
 		TikaConfig tc = TikaConfig.getDefaultConfig();
 
-		PDFParser parser = new PDFParser(); // Should auto-detect!
+		AutoDetectParser parser = new AutoDetectParser(); // Should auto-detect!
 		ContentHandler handler = new BodyContentHandler(-1);
 		ParseContext context = new ParseContext();
 		Metadata metadata = new Metadata();
 		InputStream stream = null;
+		String[] names = null;
 		try {
 			stream = new FileInputStream(file);
 			
 			parser.parse(stream, handler, metadata, context);
 			content = handler.toString();
-			String[] names = metadata.names();
+			 names = metadata.names();
 
-//			System.out.println("content:"+content.trim().length());
-			for (String name : names) {
-//				System.out.println("metadata name:"+name+", value="+metadata.get(name));
-			//	content = content.concat(metadata.get(name)).concat(" ");
-			}
+//			
 
 		} catch (Exception e) {
 			logger.debug("Error extracting File content of" + file + ":" + e);
@@ -64,6 +58,12 @@ public class FileContentExtracter {
 				if (stream != null) {
 					stream.close();
 				}
+				if(names != null){
+				for(int i=0;i<names.length;i++){
+					metadata.remove(names[i]);
+				}
+				}
+			
 			} catch (Exception e) {
 				logger.debug("Error closing file input stream:" + e);
 			}
@@ -86,10 +86,13 @@ public class FileContentExtracter {
 	public static void extractText(String src) throws IOException {
 		
 		PdfReader pdf = new PdfReader(src);  //doc is just a byte[]
+		
 		int pageCount = pdf.getNumberOfPages();
 		for (int i = 1; i <= pageCount; i++) {
 		    PdfTextExtractor pdfTextExtractor = new PdfTextExtractor(pdf);
+		 
 		    String pageText = pdfTextExtractor.getTextFromPage(i);
+		    
 		    System.out.println(pageText);
 		}
 //        PrintWriter out = new PrintWriter(new FileOutputStream(dest));
@@ -149,7 +152,7 @@ public class FileContentExtracter {
 		try {
 			
 
-			 File f = new File("D:\\Downloads\\rahul_files_dc\\rahul_files_dc\\FMG-EXT-600-9167\\FMG-EXT-600-9167TransmittalReport.pdf");
+			 File f = new File("D:\\Downloads\\rahul_files_dc\\rahul_files_dc\\FMG-EXT-600-9170\\FMG-EXT-600-9170TransmittalReport.pdf");
 			
 			FileContentExtracter.extractText(f.getAbsolutePath());
 //			

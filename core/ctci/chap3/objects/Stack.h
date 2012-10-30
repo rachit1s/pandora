@@ -63,7 +63,7 @@ class Stack
   // puts the element on the top of the stack
   Stack& push( T data ) 
   {
-    Node<T>* nNode = new Node<T>(data);
+//    Node<T>* nNode = new Node<T>(data);
     Node<T>* oldHead = head;
     head = new Node<T>(data) ;
    

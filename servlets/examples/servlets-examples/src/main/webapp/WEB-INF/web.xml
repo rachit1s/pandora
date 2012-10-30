@@ -144,4 +144,14 @@ PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
 		<servlet-name>uploadServlet</servlet-name>
 		<url-pattern>/uploadServlet/*</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-class>com.nattubaba.servlets.examples.SessionTimer</servlet-class>
+		<servlet-name>servlet-timer</servlet-name>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>servlet-timer</servlet-name>
+		<url-pattern>/servlet-timer/*</url-pattern>
+	</servlet-mapping>
 </web-app>

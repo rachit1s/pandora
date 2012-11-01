@@ -9,6 +9,8 @@ A. I did not understand the meaning of tag. But the below solution uses a node w
 
 #include<iostream>
 #include<list>
+#include<string>
+#include<sstream>
 
 using namespace std;
 
@@ -167,13 +169,49 @@ void printList(Node<char>* root)
     printList(*iter);
   }
 }
+
+void createString(Node<char>* root,stringstream& ss)
+{
+//    ss << root->getData();
+    list<Node<char>*>::const_iterator iter = root->getChildren().begin();
+    bool first = true;
+    for( ; iter != root->getChildren().end(); iter++)
+    {
+      if( true == first ) 
+      {
+        ss << "(" << (*iter)->getData();
+        first = false;
+      }
+      else
+      {
+        ss << "," << (*iter)->getData();
+      }
+
+      createString((*iter),ss);
+    }
+
+    if( false == first )
+    {
+      ss << ")";
+    }
+}
+void createString(Node<char>* root,string& outputString)
+{
+    stringstream ss;
+    createString(root,ss);
+
+    outputString = ss.str();
+}
 int main()
 {
-
   Node<char>* root = new Node<char>(' ');
   toBeDeleted.push_back(root);
   const char* str = "(A(B(E(K,L),F),C(G),D(H(M),I,J)))";
   createList(str,root);
   printList(root);
+  string output;
+  createString(root,output);
+
+  cout << "String = " << output << endl ;
   return 0;
 }

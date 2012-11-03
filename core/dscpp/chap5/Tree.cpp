@@ -91,6 +91,11 @@ class Tree
       this->visited = false;
     }
 
+    ~Tree()
+    {
+      cout << "deleting " << this->getData() << endl;
+    }
+
     Tree * getRightTree() const
     {
       return rightTree;
@@ -131,7 +136,7 @@ class Tree
       return visited;
     }
 
-
+// All these function do not need to be friend function.
     friend void inorder<>(const Tree<T>* tree);
     friend void inorder<>(const Tree<T>* tree, void(*visit)(const T& data));
 

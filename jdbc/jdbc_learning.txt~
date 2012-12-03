@@ -1,0 +1,13 @@
+JDBC tasks
+1. create connection using DriverManager
+2. create connection using JNDI
+3. using connection pooling, distributed transactions, and disconnected rowsets.
+4. program using BatchUpdate
+5. test the holdability of mssql and mysql
+
+Questions
+1. which databases can be accessed through JDBC
+2. what is datasource ? what is difference between datasource and database
+3. what is ODBC ?
+4. what are other relational DBMS
+

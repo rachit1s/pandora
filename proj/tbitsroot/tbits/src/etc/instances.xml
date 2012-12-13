@@ -1,0 +1,9 @@
+<TBitsInstances>
+    <Instance 
+    location="hyd" 
+    server="${build.transbit.database.server}" 
+    name="${build.transbit.database.server}"
+    isPrimary="true"
+    />        
+        
+</TBitsInstances>

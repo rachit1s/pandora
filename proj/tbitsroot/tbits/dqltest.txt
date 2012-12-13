@@ -1,0 +1,78 @@
+NOT (has:logger)
+ [ request, request, 0, C_AND, [>0] ]
+ [ ( ] C_NOT
+ [ has, has, 1, C_AND, [logger] ]
+ [)]
+
+****
+
+NOT (NOT(has:logger))
+ [ request, request, 0, C_AND, [>0] ]
+ [ ( ]C_NOT
+ [ has, has, 1, C_NOT, [logger] ]
+ [ ) ]
+
+****
+ 
+NOT (NOT has:logger) 
+ [ request, request, 0, C_AND, [>0] ]
+ [ ( ]C_NOT
+ [ has, has, 1, C_NOT, [logger] ]
+ [ ) ]
+
+****
+
+assign:(test1,test2)  NOT (category:(class))
+ [ assign, assign, 0, C_AND, [test1, test2] ]
+ [ ( ]C_NOT
+ [ category, category, 1, C_AND, [class] ]
+ [ ) ]
+
+****
+assign:(test1,test2)  OR NOT (NOT(category:(class))
+ [ assign, assign, 0, C_AND, [test1, test2] ]
+ [ ( ]C_OR_NOT
+ [ category, category, 1, C_NOT, [class] ]
+ [ ) ]
+
+****
+
+assign:(test1,test2) AND NOT (NOT(category:(class))
+ [ assign, assign, 0, C_AND, [test1, test2] ]
+ [ ( ]C_AND_NOT
+ [ category, category, 1, C_NOT, [class] ]
+ [ ) ]
+
+****
+
+assign:(test1,test2) or NOT (NOT(has:logger))
+ [ assign, assign, 0, C_AND, [test1, test2] ]
+ [ ( ]C_OR_NOT
+ [ has, has, 1, C_NOT, [logger] ]
+ [ ) ]
+
+****
+
+assign:(test1) AND (NOT (NOT (category:class)))
+ [ assign, assign, 0, C_AND, [test1] ]
+ [ ( ]C_AND
+ [ ( ]C_NOT
+ [ ( ]C_NOT
+ [ category, category, 3, C_AND, [class] ]
+ [ ) ]
+ [ ) ]
+ [ ) ]
+
+****
+
+assign:(test1)  (NOT (NOT (category:class)))
+ [ assign, assign, 0, C_AND, [test1] ]
+ [ ( ]C_AND
+ [ ( ]C_NOT
+ [ ( ]C_NOT
+ [ category, category, 3, C_AND, [class] ]
+ [ ) ]
+ [ ) ]
+ [ ) ]
+
+****

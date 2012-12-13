@@ -1,0 +1,56 @@
+<html>
+	<head>
+	<STYLE type="text/css" media="screen"><%=css%></STYLE>
+	</head>
+<body> 
+	<div class="bn dm">
+            <table cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td align="left" nowrap>
+							<span style="margin: 0ex 1ex 0.5ex 1ex" class="b sx cw"> Inline Update Command Error Notification</span>
+                         </td>
+                        <td align="center" width="100%" nowrap valign="middle">
+                            <div style="margin: 0ex 1ex 0.5ex 1ex">
+                                <span id="">
+                                    
+                                </span>
+                            </div>
+                        </td>
+                        <td align="right" noWrap><div class="cw" style="margin: 0ex 1ex 0.5ex 1ex"><span><a class="l sx b cw" href="<%=path%>search/<%=sysPrefix%>/my-requests" target="my_requests"><%=captions.all.my_requests%></a></span>&nbsp;&nbsp;&nbsp;
+                            <span>
+                                <a class="l sx b cw" href="<%=nearestPath%>web/tbits-help.htm#EmailInterface" target="_blank">
+                                    Help</a></span>&nbsp;&nbsp;&nbsp;
+                          </div>
+                      </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       
+        <div class="h hsbb bhs">
+           <div style="padding:8px 5px 12px 12px;">
+				<span class="sx b"><%=introLine%></span>
+				<br>
+				<br> 
+				<span class="sx b">The IUCs specified for this update are:</span>
+				<span class="dvm ff sf ww"><br><br><%=allEucs%>
+				</span>
+				<br>
+				<span class="sx b">Failed IUCs:</span>
+				<span class="dvm ff sf ww">
+				<UL>
+				<%=failedEucs%>
+				</UL>
+				</span>
+				<span class="dvm ff sf ww">To use IUCs, you should be aware of the defined descriptors for the business		
+				area, absolute and relative notation for IUCs, minimal matching, and the 
+				use of a list type field value in place of a descriptor and value; see the TBits 
+				<a class="l cb" href="<%=nearestPath%>web/tbits-help.htm#InlineUpdateCommands">Help</a> for details.&nbsp;To 
+				see a list of defined descriptors and some examples of minimal matching, 
+				<a class="l cb" href="<%=nearestPath%>search-util/<%=sysPrefix%>?descriptorsHelp=true&sysPrefix=<%=sysPrefix%>">click here</a>. 
+				</span>
+		 </div>
+		</div>
+	</body>
+</html>

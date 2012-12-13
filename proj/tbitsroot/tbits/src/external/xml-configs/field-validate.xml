@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<FieldValidate>
+    <Type primary="MainCat" dependent="subcategory">
+        <Primary name="X" clause="INCLUDE">
+            <Dependent name="X1" />
+            <Dependent name="X2" />
+        </Primary>
+        <Primary name="Y" clause="EXCLUDE">
+            <Dependent name="Y1" />
+            <Dependent name="Y2" />
+        </Primary>
+    </Type>
+</FieldValidate>
+
+<!--
+DepRole : 1 = PRIMARY, 2 = DEPENDENT
+DepLevel { FIELD_DEPENDENCY, APP_DEPENDENCY; }
+DepType { GENERATE, VALIDATE, SYNCHRONIZE; }
+-->

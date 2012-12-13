@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<AppSynchronize resource="ConfirmTypeGetter">
+	<PrimaryColumn list="name,display_name" />
+	<PrimaryAttr list="id,name" />
+
+	<Sync column="name" attr="id" />
+	<Sync column="display_name" attr="name" />
+
+	<Async column="is_final" value="true" />
+</AppSynchronize>
+

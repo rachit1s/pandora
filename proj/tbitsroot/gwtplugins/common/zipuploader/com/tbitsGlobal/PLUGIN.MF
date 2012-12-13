@@ -1,0 +1,7 @@
+Author:Rohit
+Name:com.tbitsglobal.zipuploader
+Description:Zip Uploader  Module
+Version: 1.1
+Depends: 
+Activator:
+

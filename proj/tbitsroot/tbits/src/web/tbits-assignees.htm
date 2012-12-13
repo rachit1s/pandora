@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+	<title>
+			<%=BusinessArea%> : Assignees </title>
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<link rel="stylesheet" type="text/css" media="screen" href="<%=nearestPath%>web/css/tbits.css" />
+		<SCRIPT language="javascript" src="<%=nearestPath%>web/scripts/messages.js"></SCRIPT>
+		<SCRIPT language="javascript" src="<%=nearestPath%>web/scripts/assignees.js"></SCRIPT>
+		<SCRIPT language="javascript" src="<%=nearestPath%>web/scripts/common.js"></SCRIPT>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+		<script language="javascript">
+			YAHOO.namespace("transbit.tbits");
+			YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+		</script>
+		<script>
+			var isExplorer = (document.all) ? true : false;
+		    if(isExplorer == false)
+		    {
+		       obj = this.opener; 
+		    }
+		</script>
+	</head>
+	<body class="dialog">
+		<CENTER>
+			<TABLE id="Table1" height="385" cellSpacing="0" cellPadding="0" width="600" border="0">
+				<TR>
+					<TD width="20" height="20"></TD>
+					<TD width="250" height="20" class="sx">Type a Name or Select from the list:
+					</TD>
+					<TD width="60" height="20"></TD>
+					<TD width="250" height="20"></TD>
+					<TD width="20" height="20"></TD>
+				</TR>
+				<TR>
+					<TD width="20" height="20"></TD>
+					<TD width="250" height="20"><INPUT id="login" onkeyup="javascript:onKeyUpLogin(event)" style="WIDTH: 250px" tabIndex="1"
+							type="text" size="20" name="login" class="sx">
+					</TD>
+					<TD width="60" height="20"></TD>
+					<%=userFilter%>
+					<TD width="20" height="20"></TD>
+				</TR>
+				<TR>
+					<TD width="20" height="20"></TD>
+					<TD width="250" height="20" class="sx">Existing:</TD>
+					<TD width="60" height="20"></TD>
+					<TD width="250" height="20" class="sx">Selected:</TD>
+					<TD width="20" height="20"></TD>
+				</TR>
+				<TR>
+					<TD width="20" height="312"></TD>
+					<TD width="250" height="312"><SELECT id="sLeft" onkeydown="return onKeyDownLeft()" ondblclick="javascript:toRight(document.all.sLeft, document.all.sRight)"
+							style="MARGIN-BOTTOM: -8px; WIDTH: 250px; HEIGHT: 100%" tabIndex="2" multiple size="2" name="sLeft" class="sx"><%=assigneeList%></SELECT>
+					</TD>
+					<TD vAlign="middle" align="center" width="60" height="312"><INPUT class="move-to-btn" id="right" style="WIDTH: 50px; HEIGHT: 22px" onclick="javascript:toRight(document.all.sLeft, document.all.sRight)"
+							tabIndex="3" type="button" value=" " name="right"> <INPUT class="remove-btn" id="left" style="MARGIN-TOP: 4px; WIDTH: 50px; HEIGHT: 22px"
+							onclick="javascript:removeFromList(document.all.sRight)" tabIndex="4" type="button" value=" " name="left">
+					</TD>
+					<TD width="250" height="312"><SELECT id="sRight" ondblclick="javascript:removeFromList(document.all.sRight)" style="MARGIN-BOTTOM: -8px; WIDTH: 250px; HEIGHT: 100%"
+							tabIndex="5" multiple size="2" name="sRight" class="sx"><%=existingAssignee%></SELECT>
+					</TD>
+					<TD width="20" height="312"></TD>
+				</TR>
+				<TR>
+					<TD width="20" height="30"></TD>
+					<TD width="250" height="30"></TD>
+					<TD width="60" height="30"></TD>
+					<TD width="400" height="30"><INPUT class="cmd-btn sx" id="Button1" style="WIDTH: 123px" onclick="assign(document.getElementById('sRight'))"
+							tabIndex="6" type="button" value="  Assign  " name="btnAssign"> <INPUT class="cmd-btn sx" id="Button2" style="WIDTH: 123px" onclick="javascript:onClickCancel()"
+							tabIndex="7" type="button" value="  Cancel  " name="btnCancel">
+					</TD>
+					<TD width="20" height="30"></TD>
+				</TR>
+			</TABLE>
+		</CENTER>
+	</body>
+</html>

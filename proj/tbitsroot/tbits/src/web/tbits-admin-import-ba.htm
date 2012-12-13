@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+<title>Import Business Area</title>
+<style type="text/css">
+<!--
+.style2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 16px;
+}
+-->
+</style>
+<script type="text/javascript">
+	function importBA(){
+		executeHttpRequest("POST","<%=nearestPath%>exportbusinessarea?ba=<%=sysPrefix%>&actionType=import",false);
+	}
+
+	function isBANameExists (inputVal){
+		var rtVal = isExists("baNameList", inputVal);
+		if (rtVal == "")		
+			return;		
+		else
+			alert ("Business Area with name: " + rtVal + " already exists.");
+	}
+	function isBAPrefixExists (inputVal){
+		var rtVal1 = isExists("sysPrefixList", inputVal);
+		if (rtVal1 == "")		
+			return;		
+		else
+			alert ("Business Area with sysPrefix: " + rtVal1 + " already exists.");
+	}
+	function isEmailIdExists (inputVal){
+		var rtVal2 = isExists("emailList", inputVal);
+		if (rtVal2 == "")
+			return;		
+		else
+			alert ("Business Area with email: " + rtVal2 + " already exists.");
+	}
+
+	function isExists(inputId, curValue){
+		var val = document.getElementById(inputId).value;		
+		var list = val.split(",");
+		for (i=0; i < list.length; i++)
+		{
+			if (list[i] == curValue)
+			{				
+				return curValue;
+			}			
+		}
+		return "";
+	}
+</script>
+</head>
+
+<body bgcolor="E6F4FD">
+	<div>
+		<input type="hidden" id="baNameList" name="baNameList" value="<%=baNameList%>" /> 
+		<input type="hidden" id="sysPrefixList" name="sysPrefixList" value="<%=sysPrefixList%>" />
+		<input type="hidden" id="emailList" name="emailList" value="<%=emailList%>" />
+	</div>
+	<p class="style2">Import Business Area...</p>
+	<div style="width:80%; border:0.2ex solid #06056B">
+		<form id="selectBATemplate" enctype="multipart/form-data" method="post" action= "<%=nearestPath%>exportbusinessarea?ba=<%=sysPrefix%>&actionType=import" style="width:inherit">
+			<p>
+				Business Area Name :<br>
+				<input type="text" name="sysName" size="40" onBlur = "javascript:isBANameExists(this.value)">
+			</p>			
+			<p>
+				Business Area Prefix :<br>
+				<input type="text" name="sysPrefix" size="40" onBlur = "javascript:isBAPrefixExists(this.value)">
+			</p>
+			<p>
+				Business Area Email :<br>
+				<input type="text" name="sysEmail" size="40" onBlur = "javascript:isEmailIdExists(this.value)">
+			</p>
+			<p>			
+				Please specify a file to be imported:<br>
+				<input type="file" name="import-file" size="40" >
+			</p>
+			<div>
+			    <input type="submit" value="Import">
+		    </div>
+			<p>Click &#39;Browse.&#39; Select the file containing data in the template 
+			format. <br>
+			Click &#39;Import.&#39; This will upload the data and create business area. This may take some time.<br>
+			
+		</form>
+	</div>
+</body>
+</html>

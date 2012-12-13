@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Rule id="1">
+	<expressions>
+		<expression id="1">
+			<name>subject</name> 
+			<op>IN</op> 
+			<value>Hi1</value> 
+		</expression>
+		<expression id="2">
+			<name>description</name> 
+			<op>EQ</op> 
+			<value>MD1</value> 
+		</expression>
+	</expressions>
+	<actions>
+	<action>
+		<name>send_sms</name> 
+		<op>SET</op> 
+		<value>false</value> 
+	</action>
+	<action>
+		<name>sms_log</name> 
+		<op>APPEND</op> 
+		<value>request_id</value> 
+	</action>
+	</actions>
+</Rule>
+<!--
+And in db,
+Table: post_process_rules
+rule_id | sys_id | user_id | priority | enabled | description
+
+-->

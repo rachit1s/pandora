@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+	</head>
+	<body>
+		<DIV class="container">
+			<DIV class="header"><BIG>Reports:</BIG> <B>
+					<%=sysPrefix%>
+					:
+					<%=date%>
+					- Business Area Report.</B> <A class=header-link href="<%=homeLink%>" target=_blank>
+					Transbit <%=captions.all.camel_case_request%> System</A>
+			</DIV>
+			<B><B>Total number of <%=captions.all.requests%> worked on:</B>
+				<%=reqCount%>
+			</B>
+			<BR>
+			<BR>
+			<TABLE id="Table1" cellSpacing="2">
+				<COLGROUP>
+					<COL width="80">
+					<COL width="120">
+					<COL width="240">
+					<COL width="120">
+					<COL width="170">
+					<COL width="170">
+					<COL width="170">
+					<COL width="170">
+					<COL width="240">
+					<COL width="120">
+					<COL width="220">
+				</COLGROUP>
+				<TR>
+					<TD class="chart-title">Request ID.</TD>
+					<TD class="chart-title">Logger</TD>
+					<TD class="chart-title">Logged On</TD>
+					<TD class="chart-title">Assignee</TD>
+					<TD class="chart-title">Severity</TD>
+					<TD class="chart-title">Status</TD>
+					<TD class="chart-title">Category</TD>
+					<TD class="chart-title">Type</TD>
+					<TD class="chart-title">Last Updated
+					</TD>
+					<TD class="chart-title">Last Updated By</TD>
+					<TD class="chart-title">Subject
+					</TD>
+				</TR>
+				<%=reportData%>
+			</TABLE>
+		</DIV>
+	</body>
+</html>

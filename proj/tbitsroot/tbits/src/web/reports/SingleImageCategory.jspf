@@ -1,0 +1,92 @@
+<%-- the static segment can be included to JSP using the <%@include ...%> directive, e.g:
+    <%@include file="/WEB-INF/jspf/header.jspf" %>
+
+    J2EE1.4 also enables to specify header or footer segments for multiple pages in web.xml file.
+    Use the <include-prelude> or <include-coda> elements in <jsp-config> section, e.g.:
+    <jsp-config>
+      <jsp-property-group>
+        <url-pattern>*.jsp</url-pattern>
+        <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
+      </jsp-property-group>
+    </jsp-config>
+--%>
+
+<%-- any content can be specified here e.g.: --%>
+    <%
+                                String firstField = Field.lookupBySystemIdAndFieldName( ba.getSystemId(),request.getParameter("firstVariant")).getDisplayName();
+                                String secondVariant = Field.lookupBySystemIdAndFieldName( ba.getSystemId(),request.getParameter("secondVariant")).getDisplayName();
+               %> 
+            <table align="center" width="100%" class="results">
+            <thead>
+                <tr>
+                    <th>Statistics for all <%=firstField%></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>        
+                        <table border="1" class='results' width="100%">
+                            <thead>
+                              
+                                <tr class='header'>
+                                    <th class='results-title'><%=firstField%></th>
+                                    <th class='results-title'><%=secondVariant%></th>
+                                    <th class='results-title'>Total Records</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%  ReportHelper myReportHelper = new ReportHelper(requests ,request.getParameter("firstVariant"), request.getParameter("secondVariant"), ba.getSystemId()) ;
+                            ArrayList<String> firstVariantValues =myReportHelper.getFirstVariantValues();
+                            ArrayList<String> secondVariantValues=myReportHelper.getSecondVariantValues() ;
+                            for(String firstVariant : firstVariantValues) {
+                                for(String secondVriant : secondVariantValues) {
+                                    Integer noOfMatches = myReportHelper.getCategoryChartData().get(firstVariant).get(secondVriant);
+                                    if(noOfMatches!= null){
+                        %>
+                        <tr>
+                            <td>
+                                <%=firstVariant %>
+                            </td>
+                            <td>
+                                <%=secondVriant %>               
+                            </td>
+                            <td>
+                                <%=noOfMatches%>
+                            </td>
+                        </tr>  
+                        <%
+                            }
+                            }
+                            }
+                        %>      
+                            </tbody>
+                        </table>           
+                    </td>
+                </tr>
+                <tr>
+                    <td>    
+                                <cewolf:chart 
+                                id="line" 
+                                title="Statistics" 
+                                type='<%= request.getParameter("chartType")%>' 
+                                xaxislabel='<%=secondVariant%>'
+                                yaxislabel="Number of Requests">
+                                <cewolf:data>
+                                    <jsp:useBean   id="staticalDataCategory" class="transbit.tbits.dataProducer.StaticalDataProducer"/>
+                                    <%
+                                        //transbit.tbits.dataProducer.StaticalDataProducer staticalDataCategory = new  transbit.tbits.dataProducer.StaticalDataProducer();
+                                        staticalDataCategory.generateData(myReportHelper , "category");
+                                        //<%=("\"staticalDataProducers["+imageNuumber+"]\"")staticalData.generateData(new ReportHelper(requests ,request.getParameter("firstVariant"), ba.getSystemId()) , "pie");
+                                    %>
+                                    <cewolf:producer  id="staticalDataCategory" />
+                                </cewolf:data>
+                            </cewolf:chart>
+                            <cewolf:img chartid="line" renderer="/cewolf" width="400" height="300">  
+                                    <cewolf:map tooltipgeneratorid="staticalDataCategory"/>
+                            </cewolf:img>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        

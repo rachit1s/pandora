@@ -1,0 +1,2 @@
+rm -rf dist/build/logs/*
+rm -rf dist/tomcat/logs/*

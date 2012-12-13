@@ -1,0 +1,78 @@
+<userInput>
+	<panel order="0">
+		<field type="rule" variable="SERIALKEY">
+			<spec txt="Serial Key: " layout="O:25:25" set="" resultFormat="displayFormat" />
+			<validator class="com.izforge.izpack.util.RegularExpressionValidator"
+				txt="Invalid serial key. Please contact info@tbitsglobal.com.">
+				<param name="pattern"
+					value="TBLT2010FHJS0ALADFSW7HSDL|TBDEV2010JOK0LS3AD1V14BIO|tbitsglobal.com" />
+			</validator>
+		</field>
+	</panel>
+	<panel order="1">
+		<field type="title" align="Left" txt="Database Connection Parameters"
+			bold="true" size="2" />
+		<field type="staticText" align="left"
+			txt="The following information are needed for making the connection with the database."
+			 />
+		<field type="staticText" align="left"
+			txt="Careful   These fields are case sensitive !" />
+		<field type="divider" align="center" />
+		<field type="rule" variable="DB_SERVER_NAME">
+			<description align="left" txt="" />
+			<spec txt="Enter Database server name  " layout="O:15:U" 
+				size="15" set="0:$HOST_NAME" />
+		</field>
+
+		<!--field type="divider" align="center"/-->
+		<!--
+			field type="text" variable="DB_PORT"> <spec txt="Port Number "
+			id="text.label" size="15" set="1433"/> </field
+		-->
+		<!--field type="divider" align="center"/-->
+		<field type="text" variable="DB_NAME">
+			<description align="left" txt="" />
+			<spec txt="Database name  " size="15" set="tbits" />
+		</field>
+		<field type="divider" align="center" />
+		<field type="text" variable="DB_USERNAME">
+			<description align="left"
+				txt="User name with which tbits will connect to the database." />
+			<spec txt="User name for the Database  " size="15"
+				set="sa" />
+		</field>
+		<field type="text" variable="DB_PASSWORD">
+			<description align="left" txt="" />
+			<spec txt="User password for the Database  "
+				size="15" set="" />
+		</field>
+		<field type="check" align="left" variable="skip.db.validation">
+          <spec txt=" Skip Validation (not recommended)" size="20" true="true" false="false" set="false"/>
+        </field>
+	</panel>
+
+	<panel order="2">
+		<field type="title" align="Left" txt="tBits General Configuration"
+			bold="true" size="2" />
+		<field type="staticText" align="left"
+			txt="Please specify the details required for the tBits Server." />
+		
+		<field type="divider" align="center" />
+
+		<!--
+			field type="text" variable="TBITS_SERVER_PORT"> <description
+			align="left" txt="The port at which the tbits server should run."
+			id="description4.text"/> <spec txt="tBits Server Port "
+			id="text.label" size="15" set="80"/> </field
+		-->
+		<field type="rule" variable="TBITS_SERVER_PORT">
+			<description align="left"
+				txt="The port at which the tbits server should run."/>
+			<spec txt="tBits Server Port  " layout="N:6:U"
+				set="0:80:com.izforge.izpack.util.PortProcessor" resultFormat="displayFormat" />
+			<validator class="com.izforge.izpack.util.PortValidator"
+				txt="The specified port is not free as someother application is already running on this port. Please specify another port.">
+			</validator>
+		</field>
+	</panel>
+</userInput>

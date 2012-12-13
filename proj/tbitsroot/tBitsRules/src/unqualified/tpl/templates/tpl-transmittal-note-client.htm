@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <style type="text/css">
+	/*margin and padding on body element
+	  can introduce errors in determining
+	  element position and are not recommended;
+	  we turn them off as a foundation for YUI
+	  CSS treatments. */
+	body {
+		margin:0;
+		padding:0;
+	}
+	</style>
+
+  <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js" ></script>   
+  <script type="text/javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+  <script type="text/javascript" src="<%=nearestPath%>web/scripts/search.js"></script> 
+  
+  <script type="text/javascript">
+ 	YAHOO.namespace("transbit.tbits");
+	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";	 
+  	var request = <%=tableData%>;
+	var tableData = eval (request);	
+	
+/*
+ * Returns date in the format, "MMM dd, YYYY". Ex: June 1, 2008
+ */
+
+	function displayDate()
+	{
+		var d= new Date();
+		month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+		return month[d.getMonth()]+" "+d.getDate()+", "+d.getFullYear();			
+	}	
+	
+	function fillRefTable()
+	{
+		try {						
+		var currentDate = displayDate();
+		var tbodyElem = document.getElementById("refTableBody");
+		var trElem, tdElem, txtNode;
+		
+		trElem = tbodyElem.insertRow(tbodyElem.rows.length);
+		trElem.className = "tr0";
+   
+		tdElem = trElem.insertCell(trElem.cells.length);
+		tdElem.className = "cl0";
+		tdElem.id = "refNo";
+		tdElem.style.display = "none";
+	   
+		tdElem = trElem.insertCell(trElem.cells.length);
+		tdElem.className = "cl1";
+		txtNode = document.createTextNode(currentDate);	   	 	
+		tdElem.appendChild(txtNode);		
+		}catch (e){
+			alert(e);
+		}
+	}
+		
+	function finalTable()
+	{   		
+		var actions = getValue ("actionList").split (",");
+		var copies = getValue ("copiesList").split (",");
+		
+		var tbodyElem = document.getElementById("finalTbody");
+		var trElem, tdElem, txtNode;
+		var serialNo = 0;
+			
+		for (var j = 0; j < tableData.length; j++) {		
+		trElem = tbodyElem.insertRow(tbodyElem.rows.length);
+		trElem.className = "tr" + (j%2);
+	   
+	    serialNo = serialNo + 1;
+		tdElem = trElem.insertCell(trElem.cells.length);
+		tdElem.className = "col0";
+		txtNode = document.createTextNode(serialNo);
+		tdElem.appendChild(txtNode);
+		   
+		tdElem = trElem.insertCell(trElem.cells.length);
+		tdElem.className = "col1";
+		txtNode = document.createTextNode(tableData[j].doc_no);
+		tdElem.appendChild(txtNode);
+		
+		tdElem = trElem.insertCell(trElem.cells.length);
+		tdElem.className = "col2";
+		txtNode = document.createTextNode(tableData[j].rev_no);
+		tdElem.appendChild(txtNode);
+	
+		tdElem = trElem.insertCell(trElem.cells.length);
+		tdElem.className = "col3";
+		txtNode = document.createTextNode(tableData[j].desp);
+		tdElem.appendChild(txtNode);
+				   
+		tdElem = trElem.insertCell(trElem.cells.length);
+		tdElem.className = "col4";
+		txtNode = document.createTextNode(actions[j]);	
+		tdElem.appendChild(txtNode);
+		  
+		tdElem = trElem.insertCell(trElem.cells.length);
+		tdElem.className = "col5";
+		txtNode = document.createTextNode(copies[j]);	
+		tdElem.appendChild(txtNode);
+		}
+    }		
+	
+	/*** 
+	 ***Functions to create the url string to log request
+	***/
+	/*
+	function transMailParam(){
+		var param = "?ba=<%=sysPrefix%>"+
+					"&requestList=<%=requestList%>"+
+					"&To=" + getValue("To") +
+					"&Cc=" + getValue("Cc");
+		return param;
+	}
+		
+	function sendTransMail(){
+		var resp=executeHttpRequest ("GET","<%=nearestPath%>transmittalmail"+transMailParam(),false);
+	}		
+	*/
+
+	function hideDiv()
+	{
+		document.getElementById("done").style.display='none';		
+	}
+	
+	function showDiv(value)
+	{			
+		//var elem = document.getElementById("done");
+		//elem.appendChild (document.createTextNode("Transmittal finished." + "Ref: " + value));
+		//elem.style.display = 'inline';
+		alert ("Transmittal finished. \n" + "Ref: " + value);
+		document.getElementById("print-button").style.display='inline';
+	}
+	
+	function logRequest()
+	{
+		document.getElementById ("create-button").disabled = true;
+		var result = eval ("(" + executeHttpRequest("POST","<%=nearestPath%>transmittal" + createUrl(),false) + ")");					
+		if (result.success == "true")
+		{				
+			var elem = document.getElementById ("refNo");
+			var txtNode = document.createTextNode("Ref: " + result.value);
+			elem.appendChild (txtNode);
+			elem.style.display = "inline";	
+			document.getElementById("text-controls").style.display = 'none';
+			document.getElementById("create-button").style.display='none';
+			showDiv(result.value);		
+		}
+		else
+		{
+			alert (result.value);
+			/*
+			var elem = document.getElementById("done")
+			elem.appendChild (document.createTextNode(result.value));
+			elem.style.display='inline';
+			*/
+		}
+	}
+	
+	function printPage()
+	{	
+		hideDiv();
+		document.getElementById ("print-button").style.display = 'none';
+		document.getElementById ("cancel-button").style.display = 'none';
+		window.print();
+		//document.getElementById ("print-button").style.display = 'none';
+		//document.getElementById ("cancel-button").style.display = 'inline';
+	}
+	
+	function createUrl()
+	{
+		var logNo = tableData[0].doc_no.split("-");
+		var url = "?ba=<%=sysPrefix%>"+
+				  "&to=<%=to%>"+
+				  "&requestList=<%=requestList%>" +
+				  "&logNo=" +logNo[1]+"/"+"DOC"+"/"+								  
+				  "&docList=" + getDocList()+
+				  "&revList=" + getRevList()+
+				  //"&despList=" + getDespList() +
+				  "&actionList=<%=actionList%>" +
+				  "&copiesList=<%=copiesList%>"+
+				  "&attachmentList=<%=attachmentList%>"+
+				  "&emailTo=" + getValue("EmailTo") +
+				  "&emailCc=" + getValue("EmailCc")+
+				  "&dispDate=" + displayDate();	
+		return url;		  
+	}
+		
+	function getDocList()
+	{
+		var list = '';
+   		for (var i = 0; i <tableData.length; i++){
+   			if (i==0)
+   	   			list = tableData[i].doc_no;
+			else 
+				list = list + ","+ tableData[i].doc_no;
+		}
+		return list;		
+	}
+	
+	function getRevList()
+	{
+		var list = '';
+   		for (var i = 0; i <tableData.length; i++){
+   			if (i==0)
+   	   			list = tableData[i].rev_no;
+			else 
+				list = list + ","+ tableData[i].rev_no;
+		}
+		return list;		
+	}
+
+	function getDespList()
+	{
+		var list = '';
+   		for (var i = 0; i <tableData.length; i++){
+   			if (i==0)
+   	   			list = tableData[i].desp;
+			else 
+				list = list + ","+ tableData[i].desp;
+		}
+		return list;		
+	}
+ </script> 
+ </head> 
+
+ <body onload="fillRefTable();finalTable();">	    
+ 	<div>	 
+		<div> 
+			<input type="hidden" id="actionList" name="actionList" value="<%=actionList%>" />	
+			<input type="hidden" id="copiesList" name="copiesList" value="<%=copiesList%>" />
+			<input type="hidden" id="attachmentList" name="attachmentList" value="<%=attachmentList%>" />
+			<input type="hidden" id="to" name="to" value="<%=to%>" />
+			<input type="hidden" id="baTrn" name="baTrn" value="trn" />
+			<input type="hidden" id="baCopy" name="baCopy" value="vspsms2copy" />
+	
+			<div id ="transmit" style="display:inline">	
+				<br />	
+				<br />				
+				<div align = "middle" > 
+					<p style="font-weight:bold;text-align:center"> DRAWINGS/DOCUMENTS TRANSMITTAL NOTE</p>
+				</div>
+				<div id="tContent">
+					<div class="tableWrapper">
+						<style type="text/css">
+							table {width:100%}
+							.tableWrapper {text-align:left}					
+							.cl0 {width:60%;text-align:left}
+							.cl1 {width:40%;text-align:right}															
+						</style>
+						<table id="refTable" style="width: 818px; height: 26px;">		        		
+							<tbody id="refTableBody">		        		
+							</tbody>
+						</table>
+					</div>
+					<div style="font-weight:bold;">
+						<br>M.N. Dastur &amp; Company (P) Ltd.,
+						<br>P-17 Mission Row Extn,
+						<br>Kolkata-700013  
+					</div>      			        		
+					<p><span style= "font-weight:bold">Kind Attn: </span><span>Mr. Sankar Datta / Mr. Sanjib Mukhopadhyay.</span></p>
+					<p><span style= "font-weight:bold">Sub : </span><span>WATER SYSTEM FACILITIES-SMS-2</span></p>
+					<p><span style= "font-weight:bold">Ref : </span><span>LOA No. VSP/CONT./EXPN./330/2007-08/1436 & 1437 dated 10/03/2008</span></p>		        		
+					<p>Enclosed please find the following Data Sheets (DS)/Drawings/Documents as listed below for your action.</p>
+				
+					<div class="selected">					
+						<table id="outer" style="border:solid 1px #000000; width:100%; border-collapse: collapse; width:95%" align="center">		 
+							<tr><td> 				  
+								<div class="tableWrapper">
+									<style type="text/css">
+										table {width:100%}
+										.tableWrapper {text-align:left}
+										.tr0 {background-color:#FFFFFF; font-size:14px; font-weight: normal; font-family:"Times New Roman", Times, serif}
+										.tr1 {background-color:#FFFFFF; font-size:14px; font-weight: normal; font-family:"Times New Roman", Times, serif}
+										.col0 {width:5%;text-align:center; border: solid 1px #000000; border-right: none; border-left: none}
+										.col1 {width:30%;text-align:center; border: solid 1px #000000; border-right: none}
+										.col2 {width:10%;text-align:center; border: solid 1px #000000; border-right: none;}
+										.col3 {width:50%;text-align:center; border: solid 1px #000000; border-right: none;}
+										.col4 {width:1%;text-align:center; border: solid 1px #000000;  border-right: none;}
+										.col5 {width:1%;text-align:center; border: solid 1px #000000; border-right: none;}
+									</style>
+
+									<table id="finalTable" style="border: solid 1px #000000; border-top: none; border-right: none; border-left: none; border-collapse: collapse">
+										<thead style = "font-weight: bold">							       
+											<td class="mht l" style="text-align:center; height: 21px; border: solid 1px #000000; border-right: none; border-left: none; border-top: none">SL. No.</td>
+											<td class="mht l" style="text-align:center; height: 21px; border: solid 1px #000000; border-right:none; border-top: none">Document Name</td>
+											<td class="mht l" style="text-align:center; height: 21px; border: solid 1px #000000; border-right: none; border-top: none">Rev. No.</td>
+											<td class="mht l" style="text-align:center; height: 21px; border: solid 1px #000000; border-right: none; border-top: none">Description</td>
+											<td class="mht l" style="text-align:center; height: 21px; border: solid 1px #000000; border-right: none; border-top: none">Action for</td>	
+											<td class="mht l" style="text-align:center; height: 21px; border: solid 1px #000000; border-right: none; border-top: none">No. of copies</td>
+										</thead>
+										<tbody id="finalTbody"></tbody>	
+									</table>
+								</div>		
+								<br />	
+								<br />	
+								<div><br><u>Action codes:</u>
+									<br>A: Submitted for Approval
+									<br>B: Submitted for Final Approval
+									<br>C: For information only
+								</div>	
+							</td></tr>						   
+						</table>
+						<div>
+						<table width="100%" >
+						<tr><td align="right">
+								<p>
+								<span style= "font-weight:bold">Yours faithfully,</span><br />
+								<span style= "font-weight:bold">For</span><span> TATA PROJECTS LIMITED</span><br />	
+								</p><br/>							
+								Uttam Khan,
+								<br />
+								PROJECT CO-ORDINATOR.								
+						</td></tr>
+						</table>
+						</div>
+						<div>
+							<span>Cc: Mr.R.V.Raghavulu (3 COPIES)</span>
+							<br />
+							<span>Dy. General Manager,</span><br />
+							Design & Engineering <br />
+							Administrative Building	<br />	
+							1st floor, Room No. 296, <br />
+							Block-D, <br />
+							Vishakapatnam Steel Plant, <br />
+							Vishakapatnam.
+						</div>														
+					</div>					    	   							 			
+				</div> 			  
+			</div>	
+			<div id="text-controls" style="text-align:right;display:inline">
+				<span>Assignee:</span>
+				<input id="EmailTo" name ="To" value="<%=toList%>" type= "text" style="width:80%">
+				<br/>
+				<span>Subscriber:</span>
+				<input id="EmailCc" name ="Cc" value="<%=ccList%>" type= "text" style="width:80%">
+			</div>
+			<br/>			
+			<div id="done" style="display:none;">
+				<p style="font-weight:bold;border:medium">Transmittal finished. Print or close window.</p>				
+			</div>	
+			<table id="button-controls" width="85%">	
+				<tr><td align="right">			
+					<input id="create-button" name="Create" value="Create" style="text-align:center;display:inline" type="button" onclick="logRequest();">	
+					<input id="print-button" name="Print" value="Print" style="text-align:center;display:none" type="button" onclick="printPage();"/>		
+					<input id="cancel-button" name="Cancel" value="Cancel" style="text-align:center;display:inline" type="button" onclick="window.close();"/>					
+				</td></tr>
+			</table>			
+		</div>
+	</div>			
+</body>
+</html>

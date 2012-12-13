@@ -1,0 +1,16 @@
+declare @table_name varchar(50)
+declare @user_type_column_name varchar(50)
+
+set @table_name = 'corr_user_map'			-- name of the table to check
+set @user_type_column_name = 'user_login_value'		-- name of the column to check
+
+declare @query varchar(4000)
+
+set @query = 'select com.* from ' + @table_name + ' com
+left join users u on u.user_login = com.' + @user_type_column_name + '
+where u.user_login is null or u.is_active = 0'
+
+print @query
+
+exec ( @query )
+

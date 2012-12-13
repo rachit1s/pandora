@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>Closing this window</title>
+    </head>
+    <script language="javascript">
+        function init()
+        {
+            var url = "<%=url%>";
+            var caller = "<%=caller%>";
+            var close = "<%=close%>";
+                /**********************************************************************************************************************************
+ *                                                        Close                                                                   
+ *                                                          |                                                                   
+ *                                  ----------------------------------------------------
+ *                                  |                                                  |
+ *                                  true                                              false
+ *                                  |                                                  |
+ *                                  |                                                  |
+ *                               Parent                                              Parent
+ *                                  |                                                  |
+ *                     |-------------------------|                              |-----------------------|
+ *                     Q                        not Q                           Q                     Not Q
+ *                     |                         |                              |                       |
+ *                  Caller                    Close the window.               Caller           Open Request details page
+ *                     |                                                        |
+ *                     |                                                        |
+ *           |-------------------------------------|                        |-----------------------------------|
+ *        Add Request                        Update Request/             Add Request                      Update Request/
+ *           |                               Add Subrequest                 |                             Add Subrequest
+ *           |                                     |                        |                                   |
+ *        Close current window                     |                        |                                   |
+ *                                          Close current window         Open Request detail page         Close current window.
+ *                                          Close the parent window                                        Redirect parent to
+ *                                                                                                        request details page
+ *                  
+ **********************************************************************************************************************************/
+            try
+            {                if (close == "true")                {                    if (window.opener == null)                    {                        window.opener ="self";                        closeWindow();                        return;                    }                    else                    {                        var parentLocation = new String(window.opener.location).toLowerCase();                        if (parentLocation.indexOf("/q/") < 0)  // Parent is not Q                        {                            window.opener ="self";                            closeWindow();                            return;                        }                        else                        {                            if (caller == 1) // Add request                            {                                window.opener ="self";                                closeWindow();                                return;                            }                            else                            {                                closeWindow();                                window.opener.close();                                return;                            }                        }                    }                }                else                {                    if (window.opener == null)                    {                        window.location = url;                        return;                    }                    else                    {                        var parentLocation = new String(window.opener.location).toLowerCase();                        if (parentLocation.indexOf("/q/") < 0) // Parent is not Q                        {                            window.location = url;                            return;                        }                        else                        {                            if (caller == 1) // Add Request                            {                                window.location = url;                                return;                            }                            else                            {                                window.opener ="self";                                closeWindow();                                window.opener.location = url;                                return;                            }                        }                    }                }            }
+            catch (e)
+            {
+                // For all exceptions, its safe to close the window.
+                closeWindow();
+            }
+        }
+        
+        function closeWindow()
+        {
+            if(document.all)
+            {
+                window.close();
+            }
+            else
+            {
+                window.open('', '_parent', '');
+                window.close();
+            }
+        }
+    </script>
+    <body leftMargin="0" topMargin="0" onload="init()">
+    </body>
+</html>

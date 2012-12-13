@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 1.7.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/1.7.0/distro-source/core/src/gwt-module.dtd">
+<module rename-to='trnadmin'>
+  <inherits name='commons.com.tbitsGlobal.utils.Utils'/>
+  <inherits name='bulkupdate.com.tbitsglobal.bulkupdate.BulkUpdate'/>
+
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class='admin.com.tbitsglobal.admin.client.Administration'/>
+</module>

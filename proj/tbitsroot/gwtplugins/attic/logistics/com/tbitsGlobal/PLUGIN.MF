@@ -1,0 +1,7 @@
+Author:Sourabh
+Name:com.tbitsglobal.logistics
+Description: Logistics Module
+Version: 1.0
+Depends: 
+Activator:
+

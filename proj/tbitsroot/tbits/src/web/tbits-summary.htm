@@ -1,0 +1,38 @@
+<tr id="summaryLabel" style="display:block">
+		<td class="s b" align="right" nowrap="nowrap">
+		<%=label%>
+		</td>
+		<td align="right" nowrap colspan="6">
+		 <button type="button" class="sx" id="summary_tglBtn">Toggle <%=label%></button>
+	    </td>
+</tr>
+<tr>
+    <td  colspan="7" align="left">
+        <textarea 
+        rows="14"
+        wrap="soft" 
+        class="sx ff" 
+        id="summary"
+        tabIndex="77" 
+        onkeydown="onKeyDownField();"
+        style="width: 99%; height: 100%"
+        name="summary"><%=value%></textarea>
+    
+    <script type='text/javascript'>
+            (function (){
+            	toggleControl('summary', 'summary_tglBtn');      
+	            controlSummary('ctrlsum');
+            })();
+	         
+	</script>
+	</td>
+	</tr>
+	<tr>
+	<td colspan='7' align='right'>
+		<!--  <input class="cw b bn sxs lsb" value="Spell Check..."  id="summary_spellCheckButton" type="button" NAME="btnSpellCheck"
+        	tabIndex="82" onclick="javascript:spellCheck('summary');" /> -->
+    </td>
+    </tr>
+                        
+	
+

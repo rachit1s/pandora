@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>tBits Administration: Add Business Area</title>
+        <meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+        <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+        <link rel="stylesheet" type="text/css" media="screen" href="<%=nearestPath%>web/css/<%=cssFile%>" />
+        <script language="javascript" src="<%=nearestPath%>web/scripts/admin.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+	<script>
+		YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+		    var obj = window.dialogArguments;
+	        function onKeyDownBody(e)
+	        {
+	            var event = (document.all) ? window.event : e;
+	            var keyCode = (document.all) ? event.keyCode : e.which;
+	            if (keyCode == 13) /* On Enter */
+	            {
+	                return onSubmit();
+	            }
+	            else if (keyCode == 27) /* On Escape */
+	            {
+	                window.close();
+	                return false;
+	            }
+	            return true;
+	        }
+	        
+	        function onSubmit()
+	        {
+	            var nameCtrl = document.getElementById("new_ba_name");
+	            var prefixCtrl = document.getElementById("new_ba_prefix");
+	            if (prefixCtrl != null && nameCtrl!= null)
+	            {
+	                var name = trim(nameCtrl.value);
+	                if ( name == "")
+	                {
+	                    alert("Specify a name for the new business area.");
+	                    nameCtrl.focus();
+	                    return false;
+	                }
+	                
+	                var prefix = trim(prefixCtrl.value);
+	                if (prefix == "")
+	                {
+	                    alert("Specify a prefix for the new business area.");
+	                    prefixCtrl.focus();
+	                    return false;
+	                }
+	                onSubmitAddBusinessArea();
+	                return false;
+	            }
+	            else
+	            {
+	                alert("Control is missing!!!\nPlease report this error to TBits-dev@tbitsglobal.com.");
+	                window.close();
+	                return false;
+	            }
+	            return false;
+	        }
+        </script>
+    </head>
+    <body class="dialog" onkeydown="return onKeyDownBody(event);">
+        <input type="hidden" name="nearestPath" id="nearestPath" value="<%=nearestPath%>" />
+        <FORM id="addNewBAForm" name="addNewBAForm" method="post">
+            <table style="width: 100%;">
+                <colgroup>
+                    <col align="right" class="sx" width="15%" />
+                    <col align="left" class="sx" width="85%" />
+                </colgroup>
+                <tr>
+                    <td>Name</td>
+                    <td><INPUT id="new_ba_name" type="text" name="new_ba_name" style="width: 100%"></td>
+                </tr>
+                <tr>
+                    <td>Prefix</td>
+                    <td><INPUT id="new_ba_prefix" type="text" name="new_ba_prefix" style="width: 100%"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <INPUT onclick="javascript:onSubmit();" type="button" value="Submit" ID="Button1" NAME="Button1">
+                    </td>
+                </tr>
+            </table>
+        </FORM>
+    </body>
+</html>

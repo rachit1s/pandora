@@ -1,0 +1,68 @@
+<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+<Set name="systemClasses">
+<Array type="java.lang.String">
+
+<!-- we copied these paths from jetty WebAppContext 
+source code ...
+-->
+<Item>java.</Item>
+<Item>javax.servlet.</Item>
+<Item>javax.xml.</Item>
+<Item>org.mortbay.</Item>
+<Item>org.xml.</Item>
+<Item>org.w3c.</Item>
+<Item>org.apache.commons.logging.</Item>
+<Item>org.apache.log4j.</Item>
+
+<!-- and ... added slf4j -->
+
+<!-- we must promote slf4j to system classes, otherwise 
+gwt
+hosted mode will not allow loading them due to a 
+policy
+that don't allow server classes to be loaded from 
+the
+outside world (see gwt JettyLauncher source code). 
+-->
+
+<Item>java.io.File</Item>
+<Item>java.io.IOException</Item>
+<Item>java.net.MalformedURLException</Item>
+<Item>java.security.PermissionCollection</Item>
+<Item>java.util.EventListener</Item>
+<Item>java.util.HashMap</Item>
+<Item>java.util.Map</Item>
+
+<Item>javax.servlet.ServletException</Item>
+<Item>javax.servlet.http.HttpServletRequest</Item>
+<Item>javax.servlet.http.HttpServletResponse</Item>
+<Item>javax.servlet.http.HttpSessionActivationListener</Item>
+<Item>javax.servlet.http.HttpSessionAttributeListener</Item>
+<Item>javax.servlet.http.HttpSessionBindingListener</Item>
+<Item>javax.servlet.http.HttpSessionListener</Item>
+
+<Item>org.mortbay.jetty.Connector</Item>
+<Item>org.mortbay.jetty.HandlerContainer</Item>
+<Item>org.mortbay.jetty.Server</Item>
+<Item>org.mortbay.jetty.deployer.WebAppDeployer</Item>
+<Item>org.mortbay.jetty.handler.ContextHandler</Item>
+<Item>org.mortbay.jetty.handler.ContextHandlerCollection</Item>
+<Item>org.mortbay.jetty.handler.ErrorHandler</Item>
+<Item>org.mortbay.jetty.handler.HandlerCollection</Item>
+<Item>org.mortbay.jetty.security.SecurityHandler</Item>
+<Item>org.mortbay.jetty.servlet.Context</Item>
+<Item>org.mortbay.jetty.servlet.ErrorPageErrorHandler</Item>
+<Item>org.mortbay.jetty.servlet.ServletHandler</Item>
+<Item>org.mortbay.jetty.servlet.SessionHandler</Item>
+<Item>org.mortbay.log.Log</Item>
+<Item>org.mortbay.resource.JarResource</Item>
+<Item>org.mortbay.resource.Resource</Item>
+<Item>org.mortbay.util.IO</Item>
+<Item>org.mortbay.util.LazyList</Item>
+<Item>org.mortbay.util.Loader</Item>
+<Item>org.mortbay.util.StringUtil</Item>
+<Item>org.slf4j.</Item>
+
+</Array>
+</Set>
+</Configure>

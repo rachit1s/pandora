@@ -1,0 +1,24 @@
+Version 6.0.32.
+The following enhancements are done as part of this release:
+* SMS can now work across proxy server too
+* Enhancements in Scheduled Reports: 
+	1. We can specify whether to send emails or not.
+	2. 'Reply by mail' and 'Close by mail' links added.
+* Enhanced Rules:
+	1. Now the attachments are accessible to rules.
+	2. Providing control to the rules so that a rule can update the tracking options
+	3. Now plugin can read files using getResource().
+	
+* Transmittals - Now users can create transmittaks.
+* Autovue integration
+* Quartz now keeps the data in database rather than files.
+* User can quickly test whether the specified incoming mail settings is correct.
+
+To Upgrade from previous version (6.0.31):
+The main reason of upgrading is that the scheduled jobs are no longer kept in file. Instead these jobs are kept in database. So, we need to move the existing jobs to the database.
+
+1. Keep a backup of the installed files.
+2. Install a fresh version following the settings of previous installation.
+3. Copy the old tbits-quartz-job.xml to the current installation. This file is available in ($INSTALL_PATH\build\etc).
+4. Run the SQL named "tbits_quartz_sqlServer.sql" (available in $INSTALL_PATH\build\bin\db)
+5. Now run the file "migratejobs2db.bat" (located in $INSTALL_PATH\build\bin\)

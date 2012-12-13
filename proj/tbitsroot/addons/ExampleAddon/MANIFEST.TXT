@@ -1,0 +1,6 @@
+Addon-Name: exampleAddon
+Addon-Version: 2.4
+Addon-EntryPointClass: example.addons.first.MyEntryPoint
+Addon-Author: Nitiraj Singh Rathore ( nitiraj.r@tbitsglobal.com )
+Addon-Description: This is an example addon for testing purposes.
+Addon-DB-Config-File: dbconfigfile

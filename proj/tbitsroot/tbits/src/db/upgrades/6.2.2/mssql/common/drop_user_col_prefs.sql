@@ -1,0 +1,5 @@
+IF EXISTS (SELECT 1 
+FROM INFORMATION_SCHEMA.TABLES 
+WHERE TABLE_TYPE='BASE TABLE' 
+AND TABLE_NAME='user_col_prefs') 
+drop table user_col_prefs

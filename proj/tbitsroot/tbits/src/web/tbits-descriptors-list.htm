@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<title>Descriptors List</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <link rel="stylesheet" href="<%=nearestPath%>web/css/<%=cssFile%>" />
+</HEAD>
+<BODY>
+      <DIV class="bn dm">
+	<TABLE cellSpacing=0 cellPadding=0>
+	  <TBODY>
+	    <TR>
+	      <TD noWrap align=left><SPAN class="b sx cw" 
+      style="MARGIN: 0ex 1ex 0.5ex"><%=sysPrefix%># BA IUCs/DQL usage help</SPAN> </TD>
+	      <TD vAlign=center noWrap align=middle width="100%">
+		<DIV style="MARGIN: 0ex 1ex 0.5ex"><SPAN id=""></SPAN></DIV></TD>
+	      <TD noWrap align=right>
+		<DIV class=cw style="MARGIN: 0ex 1ex 0.5ex">
+		  <span>
+                  <a name="Top" class="l sx cw <%=instanceBoldHyd%>" href="<%=instancePathHyd%>" target="search_hyd">
+		      HYD</a></span>&nbsp;|
+		  <span>
+		    <a class="l sx cw <%=instanceBoldNyc%>" href="<%=instancePathNyc%>" target="search_nyc">
+		      NYC</a></span>&nbsp;&nbsp;&nbsp;
+		  <span id="Span2">
+		    <a class="l sx b cw" href="<%=path%>search/<%=sysPrefix%>/my-requests" target="my_requests">
+		      <%=captions.all.my_requests%></a></span>&nbsp;&nbsp;&nbsp;
+		  <span id="Span1">
+		    <a class="l sx b cw" href="<%=path%>web/tbits-help.htm#EmailInterface" target="_blank">
+		      Help</a></span>&nbsp;&nbsp;&nbsp;
+		  
+		</DIV></TD></TR></TBODY></TABLE></DIV>
+	 <div>
+	<DIV class="h hsbb bhs">
+	  <DIV 
+	    style="PADDING-RIGHT: 5px; PADDING-LEFT: 12px;
+	    PADDING-BOTTOM: 12px; PADDING-TOP: 8px">
+	    <DIV class=sx><SPAN class=u>Note:</SPAN> <UL>
+<LI>See <A class="l cb" 
+href="<%=nearestPath%>web/tbits-help.htm#InlineUpdateCommands">IUCs 
+Help</A></LI> <UL>
+<LI>See <A class="l cb" 
+href="<%=nearestPath%>web/tbits-help.htm#IUCMinimalMatchExamples">IUCs 
+Minimal Matching Help</A></LI> </UL>
+<LI>See <A class="l cb" 
+href="<%=nearestPath%>web/tbits-help.htm#WritingDQL">DQL 
+Help</A> </LI>
+<LI>The primary descriptor is indicated in bold.</LI> 
+<LI>Values link next to type fields show details of type value descriptors
+</LI></UL></DIV><BR>
+	    <div>
+	    <TABLE>
+	  <COLGROUP>
+	  <COL width="50%">
+	  <COL width="50%">
+	 </COLGROUP>
+	 <TBODY>
+	  <TR>
+	   <TD>
+	  <TABLE border=1>
+	    <TBODY>
+	      <TR>
+		<TD class="bn sxs b cw dp"><%=captions.all.request%> Field Name</TD>
+		<TD class="bn sxs b cw dp">&nbsp;Descriptors</TD>
+		<!--TD class="bn sxs b cw dp">&nbsp;Field Type/Usage</TD-->
+		</TR>
+	      <TR>
+		<TD class="sx b dp" colSpan=3>Standard Fields</TD></TR>
+                 <%=standarddescriptors%>
+	         <%=extendeddescriptors%>
+           </tbody>
+            </table>
+      </td>
+      <td id="commonDiv" align="center" valign="top">
+     </td>
+    </TR></tbody></table> </div></div></div>
+	<div style="display:none">
+	  <%=typeValueDivs%>
+	</div>
+</BODY>
+<SCRIPT language="javascript">
+      function onKeyDownBody()
+        {
+            if (event.keyCode == 27)
+            {
+                window.close();
+            }
+        }
+       function show(field)
+        {
+		 var content = document.getElementById(field).innerHTML;
+		 document.getElementById("commonDiv").innerHTML = content;
+        }
+		</SCRIPT>
+</HTML>

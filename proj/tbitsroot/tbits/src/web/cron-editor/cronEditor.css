@@ -1,0 +1,91 @@
+th{
+  text-align:left;
+  font-family:Arial,Sans-serif;
+  font-size:12px;
+}
+
+.cronEditor{
+  background:#D2E6D2; 
+  display:block; 
+  overflow:visible; 
+  font-size:12px;
+  font-family:Arial,Sans-serif;
+  padding:5px;
+}
+
+#repeatWeeklyCol input{
+  margin-left:15px;
+}
+
+.datePicker{
+  position:absolute;
+  top:26px;
+  left:42px;
+  z-index:2;
+}
+
+.datePickerUntil{
+  position:absolute;
+  left:150px;
+  top:260px;
+}
+
+.timePicker{
+  position:absolute;
+  top:26px;
+  left:156px;
+  z-index:2;
+}
+
+.shortText{
+  width:100px;
+  margin-right:10px;
+  margin-left:5px;
+}
+
+.gwt-InlineLabel, .gwt-Label{
+  font-size:12px;
+  font-family:Arial,Sans-serif;
+  font-weight:bold;
+  margin:2px;
+}
+
+.gwt-CheckBox{
+  margin-right:15px;
+}
+
+.row{
+  display:block;
+}
+
+.row div{
+  display:inline;
+}
+
+.with-border{
+  padding-bottom:2px;
+  padding-top:2px;
+  border-bottom:1px solid #E0F1E0;
+}
+
+.showOverflow{
+  overflow:visible;
+}
+
+.margin-left-40{
+  margin-left:40px;
+}
+
+.margin-left-60{
+  margin-left:60px;
+}
+
+.margin-left-10{
+  margin-left:10px;
+}
+
+.cron-panel{
+  background:#B0D4B0;
+  border:1px solid #737B73;
+  padding : 8px 6px;
+}

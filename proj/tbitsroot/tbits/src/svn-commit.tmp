@@ -1,0 +1,5 @@
+modified TBitsLogger for better and complete error messages. added comments to the constructor
+--This line, and those below, will be ignored--
+
+M    java/transbit/tbits/common/TBitsLogger.java
+M    java/transbit/tbits/searcher/DqlSearcher.java

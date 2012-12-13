@@ -1,0 +1,31 @@
+//Never	Send Mail
+<NotificationConfig>
+ <SendMail value="never">
+    </SendMail> 
+</NotificationConfig>
+
+//Always Send Mail	
+<NotificationConfig>
+ <SendMail value="always">
+    </SendMail> 
+</NotificationConfig>
+
+//NYC HelpDesk Off Hours	
+<NotificationConfig>
+ <SendMail value="rules">
+  <Rule id="1" day="holiday" startTime="0:00" endTime="23:59" zone="EST" />
+  <Rule id="2" day="monday,tuesday,wednesday,thursday,friday" startTime="0:00" endTime="9:00" zone="EST" />
+  <Rule id="3" day="monday,tuesday,wednesday,thursday,friday" startTime="17:30" endTime="23:59" zone="EST" />
+  <Rule id="4" day="saturday,sunday" startTime="0:00" endTime="23:59" zone="EST" />
+</SendMail> 
+</NotificationConfig>
+
+//HYD HelpDesk Off Hours 	
+<NotificationConfig>
+ <SendMail value="rules">
+  <Rule id="1" day="holiday" startTime="0:00" endTime="23:59" zone="IST" />
+  <Rule id="2" day="monday,tuesday,wednesday,thursday,friday" startTime="0:00" endTime="9:00" zone="IST" />
+  <Rule id="3" day="monday,tuesday,wednesday,thursday,friday" startTime="17:30" endTime="23:59" zone="IST" />
+  <Rule id="4" day="saturday,sunday" startTime="0:00" endTime="23:59" zone="IST" />
+</SendMail> 
+</NotificationConfig>

@@ -1,0 +1,7 @@
+Index: jaguar/src/java/com/tbitsGlobal/admin/plugins.gwt.xml
+*** /dev/null
+--- /dev/null
+***************
+*** 1
+- <module><inherits name="corrGeneric.com.tbitsGlobal.Corradmin"/></module>--- 1 -----
++ <module><inherits name="transmittal.com.tbitsGlobal.Trnadmin"/><inherits name="corrGeneric.com.tbitsGlobal.Corradmin"/></module>

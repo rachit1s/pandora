@@ -1,0 +1,170 @@
+<html>
+
+<head>
+
+  <title><%=title%></title>
+
+</head>
+
+
+<script>
+
+<!-- Hide script from old browsers
+
+/*
+**  The javascript code listed here is optional.
+**  It is only used to:
+**   - connect the the applet frame with the file listing frame
+**     in our demonstration HTML page.
+**   - display a "please wait" window while the applet is loading.
+*/
+
+
+/*
+**  Create a popup window to tell the user to wait for the applet load
+*/
+window.msgLoadingApplet =
+	'<html><title>Loading Applet<' + '/title>' +
+	'<body bgcolor="#cccccc" style="padding:0; margin:0;"><center><br/><span style="font-family:Arial,Helvetica,sans-serif;font-size:10pt;">Please wait for Applet to load...</span><' + '/center><' + '/body><' +
+    '/html>';
+
+window.msgConnecting =
+	'<html><title>Loading Applet<' + '/title>' +
+	'<body bgcolor="#cccccc" style="padding:0; margin:0;"><center><br/><span style="font-family:Arial,Helvetica,sans-serif;font-size:10pt;">Connecting to server...</span><' + '/center><' + '/body><' +
+	'/html>';
+
+window.popupDlg =  (document.all && window.print) ?
+	/*ie5*/
+	window.showModelessDialog('frmHeading.html', 'popupDlg', 'dialogHeight:50px;dialogWidth:200px;resizable:1;help:0;scroll:0;status:0') :
+	/*not-ie5*/
+	window.open('', 'popupDlg', 'height=50,width=200,resizable=1,titlebar=0,scrollbars=0,status=0,menubar=0,toolbar=0');
+
+window.popupDlg.document.open();
+window.popupDlg.document.write(window.msgLoadingApplet);
+window.popupDlg.document.close();
+
+
+/*
+** Close the popup window
+*/
+function closePopupDlg()
+{
+	if (window.popupDlg != null && !window.popupDlg.closed) {
+		window.popupDlg.close();
+	}
+	window.popupDlg = null;
+	window.status = '';
+}
+
+/*
+** Called when the HTML is loaded: The applet will connect to the server
+** now. Show a connect message in the popup window.
+*/
+function onBodyLoad()
+{
+	if (window.popupDlg != null && !window.popupDlg.closed) {
+		window.popupDlg.document.open();
+		window.popupDlg.document.write(window.msgConnecting);
+		window.popupDlg.document.close();
+		setTimeout('closePopupDlg()', 10000);
+		window.status = 'Connecting to server...';
+	}
+}
+
+
+function setMarkupMode()
+{
+	// The main Applet object.
+	//var myApp = window.document.applets["JVue"];
+	var myApp = window.document.applets["JVue"];
+
+	//myApp.setMarkupMode(true);
+	// Load all markups
+	myApp.openMarkup("*");
+}
+
+/*
+** Called when the Applet has initalized. Ready to run now!
+** Close the popup window.
+*/
+function onAppletInit()
+{
+	closePopupDlg();
+	window.jVueLoaded = true;
+	window.status = 'Applet Loaded.';
+
+	setFile('attachments/<%=filename%>');
+	//setMarkupMode();
+}
+
+/*
+** Sets a file (URL) in the Applet
+*/
+function setFile(fileURL)
+{
+	if (window.jVueLoaded) {
+		// Load file on a seperate thread.
+		//window.document.applets["JVue"].setFile(fileURL);
+		window.document.applets["JVue"].setFile(fileURL);
+	} else {
+		alert('Please wait for the Applet to finish loading.');
+	}
+
+	//setMarkupMode();
+}
+
+function setCompareFile(fileURL)
+{
+	if(window.jVueLoaded) {
+		// Compare the file to the current one
+		//window.document.applets["JVue"].setCompareFile(fileURL);
+		window.document.applets["JVue"].setCompareFile(fileURL);
+	}	else {
+		alert('Please wait for the Applet to finish loading.');
+	}
+}
+
+
+	
+// -->
+</script>
+
+
+
+<body onLoad="onBodyLoad();" onUnload="closePopupDlg();">
+
+
+  <!-- BEGIN AutoVue for Java Applet -->
+  <APPLET
+    NAME="JVue"
+
+    CODE="transbit.tbits.autovue.connector.JvueTbits.class"
+    CODEBASE="<%=nearestPath%>jVue"
+    ARCHIVE="jvue.jar,jogl.jar,gluegen-rt.jar,autovueconnector.jar"
+
+    HSPACE="0" VSPACE="0"
+    WIDTH="100%" HEIGHT="100%" MAYSCRIPT>
+
+    <PARAM NAME="EMBEDDED"     VALUE="true">
+    <PARAM NAME="VERBOSE"      VALUE="false">
+
+    <!-- Optional: To call a Javascript function after the applet has initialized -->
+    <PARAM NAME="ONINIT"       VALUE="onAppletInit();">
+    
+   <!-- Set FILENAME parameter to the file you want to view at start -->
+   <!-- PARAM NAME="FILENAME"     VALUE="attachments/<%=filename%>" -->
+   <PARAM NAME="DMS" VALUE="<%=nearestPath%>autovue/DMS" >
+    
+    <!-- Try direct socket connection  and  servlet tunnelling -->
+    <PARAM NAME="JVUESERVER"   VALUE="<%=nearestPath%>autovue/VueServlet">
+    <PARAM NAME="USERNAME"     VALUE="<%=username%>" >
+     <PARAM NAME="CACHEUI"      VALUE="TRUE" />
+    <PARAM NAME="GUIFILE" VALUE="default.gui" />
+
+    <p><b>Requires a browser that supports Java.</b></p>
+
+  </APPLET>
+  <!-- END AutoVue for Java Applet -->
+
+</body>
+</html>

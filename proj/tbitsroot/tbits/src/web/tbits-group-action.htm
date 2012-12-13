@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>Bulk <%=captions.view.update_request%></title>
+        <meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+        <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+        <link rel="stylesheet" href="<%=nearestPath%>web/css/<%=cssFile%>" >
+        <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+	<script language="javascript">
+		YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+        </script>
+		<script language="javascript">
+            
+            var obj = window.dialogArguments;
+			
+       
+            function onKeyDownBody(e)
+            {
+                var e = (document.all) ? window.event : e;
+                var keyCode = (document.all) ? e.keyCode : e.which;
+                if (keyCode == 27)
+                {
+                    onCancel();
+                }
+                else if (keyCode == 13 && (event.altKey == true || event.altLeft == true))
+                {
+                    onSubmit();
+                }
+            }
+            
+            function onClickCategory()
+            {
+                document.getElementById("new_category").value = document.getElementById("category").value;
+            }
+            
+            function onClickStatus()
+            {
+                document.getElementById("new_status").value = document.getElementById("status").value;
+            }
+            
+            function onClickSeverity()
+            {
+                document.getElementById("new_severity").value = document.getElementById("severity").value;
+            }
+            
+            function onClickRequestType()
+            {
+                document.getElementById("new_request_type").value = document.getElementById("request_type").value;
+            }
+           function getCurrentTime()
+           {
+               return (new Date()).getTime();
+           }
+			
+			function aToggleIFrame(aword, ashow)
+            {
+				var actrl = document.getElementById("aFrmTable");
+				if (actrl)
+				{
+					if (ashow == true)
+					{
+						actrl.style.display  = "block";
+					}
+					else
+					{
+						actrl.style.display  = "none";
+					}
+				}
+			}
+
+             function closeWindow(){
+	             window.close();
+             }
+
+			function onSubmit()
+            {
+                
+				var sysPrefix = document.getElementById("sysPrefix").value;
+                var requestList = document.getElementById("requestList").value;
+                var isPrivate = document.getElementById("isPrivate").value;
+                var category = document.getElementById("new_category").value;
+                var status = document.getElementById("new_status").value;
+                var severity = document.getElementById("new_severity").value;
+                var requestType = document.getElementById("new_request_type").value;
+                var description = document.getElementById("description").value;
+		        var url = "<%=nearestPath%>group-action/" + sysPrefix;
+                
+                var data = "groupActionType=advanced"       +
+                        "&sysPrefix="   + sysPrefix      + 
+                        "&requestList=" + requestList  +
+                        "&isPrivate="   + isPrivate      + 
+                        "&category="    + category       +
+                        "&status="      + status         + 
+                        "&severity="    + severity       + 
+                        "&requestType=" + requestType    + 
+                        "&description=" + description    + 
+                        "&now="         + getCurrentTime();
+                          
+                
+				aToggleIFrame("updating your requests", true);
+				setDisabled(true);
+				var xmlObject = xmlHttpPostFormData(url, data);
+				onFinishedUpdating(xmlObject);
+            }
+            
+			function setDisabled(state)
+			{
+				document.getElementById("isPrivate").disabled = state;
+				document.getElementById("category").disabled = state;
+				document.getElementById("status").disabled = state;
+				document.getElementById("severity").disabled = state;
+				document.getElementById("request_type").disabled = state;
+				document.getElementById("description").disabled = state;
+				document.getElementById("btnSubmit").disabled = state;
+			} 
+			function onFinishedUpdating(output)
+			{
+						aToggleIFrame("", false);
+                        if (output.indexOf("true") >= 0)
+						{
+							if (obj != null) obj.returnValue = true;
+							alert("The bulk update has been sucessfully completed.");
+							 						     
+						}
+						else if (output.indexOf("Rejected") >= 0)
+						{
+							if (obj != null) 
+								obj.returnValue = true;
+								alert("The bulk update has been rejected by the server.");
+							
+						}
+						else
+						{
+							var GROUP_ACTION_FAILURE = "Bulk <%=captions.view.update_request%> failed due to a database error.\n" + 
+                                       "The tBits team has been notified. Please try again later.";
+							alert(GROUP_ACTION_FAILURE);
+						}
+
+					  //self.opener.document.forms[0].refresher.onclick();					 
+					  window.close();
+			}
+			function AsyncHandler(xmlHttpObject)
+			{
+			    if (xmlHttpObject)
+				{
+					var state = xmlHttpObject.readyState;
+					if (state == 4)
+					{
+						var output = xmlHttpObject.responseText;
+						onFinishedUpdating(output);
+					}							
+				}
+			}
+			
+            function onCancel()
+            {
+                if (obj != null) 
+					obj.returnValue = false;
+				window.close();
+            }
+        </script>
+    </head>
+    <body class="dialog" onkeydown="onKeyDownBody(event)">
+        
+<div id="aFrmDiv" style="height: 0px;">
+<div id="aFrmTable" class="itbl" style="display: none;" name="aFrmTable">
+<frame id="aBottomIFrame" class="ibot" scrolling="no" frameborder="no" style="display: block;" allowtransparency="true"  name="aBottomIFrame">
+<html>
+<body>
+<table border="0" width="1000" cellpadding="0" cellspacing="0">
+<tbody >
+<tr>
+<img src="<%=nearestPath%>web/images/searching.gif" align ="right"></img>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
+</frame>
+</div>
+</div>
+
+		<form id="grpActionForm" name="grpActionForm" action="<%=nearestPath%>search" target="_self">
+            <input type="hidden" name="sysPrefix" id="sysPrefix" value="<%=sysPrefix%>" /> <input type="hidden" name="requestList" id="requestList" value="<%=requestList%>" />
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <span class="s"><b>Note</b>: Changes made here will affect all selected <%=captions.all.requests%>. </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="s b">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="s b" valign="center">
+                                    Private:&nbsp;
+                                </td>
+                                <td><SELECt class="sx" id="isPrivate" name="isPrivate" tabIndex="1">
+                                        <OPTION value="none">&lt;No Change&gt;</OPTION>
+                                        <OPTION value="private">Private</OPTION>
+                                        <OPTION value="public">Public</OPTION>
+                                    </SELECt>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="s b">Category</td>
+                    <td class="s b">Status</td>
+                    <td class="s b">Severity</td>
+                    <td class="s b"><%=captions.all.camel_case_request%> Type</td>
+                </tr>
+                <tr>
+                    <td class="s b">
+                        <input type="text" id="new_category" name="new_category" value="" style="width: 160px"
+                            readonly />
+                    </td>
+                    <td class="s b">
+                        <input type="text" id="new_status" name="new_status" value="" style="width: 160px" readonly />
+                    </td>
+                    <td class="s b">
+                        <input type="text" id="new_severity" name="new_severity" value="" style="width: 160px"
+                            readonly />
+                    </td>
+                    <td class="s b">
+                        <input type="text" id="new_request_type" name="new_request_type" value="" style="width: 160px"
+                            readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <SELECT class="sx" size="6" tabIndex="3" name="category" ID="category" <%=category_disabled%> onChange="onClickCategory()" style="width: 160px" >
+                            <option value="">&lt;No Change&gt;</option>
+                            <%=categoryList%>
+                        </SELECT>
+                    </td>
+                    <td>
+                        <SELECT class="sx" size="6" tabIndex="5" name="status" ID="status" style="width: 99%" <%=status_disabled%> onchange="onClickStatus()" style="width: 160px" >
+                            <option value="">&lt;No Change&gt;</option>
+                            <%=statusList%>
+                        </SELECT>
+                    </td>
+                    <td>
+                        <SELECT class="sx" size="6" tabIndex="7" name="severity" ID="severity" style="width: 99%" <%=severity_disabled%>
+                            onchange="onClickSeverity()" style="width: 160px" >
+                            <option value="">&lt;No Change&gt;</option>
+                            <%=severityList%>
+                        </SELECT>
+                    </td>
+                    <td>
+                        <SELECT class="sx" size="6" tabIndex="9" name="request_type" ID="request_type" style="width: 99%" <%=requestType_disabled%>
+                            onchange="onClickRequestType()" style="width: 160px" >
+                            <option value="">&lt;No Change&gt;</option>
+                            <%=requestTypeList%>
+                        </SELECT>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="s b">Bulk Update Description</td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <textarea class="sx" id="description" name="description" rows="20" style="width: 100%;" tabindex="10" <%=description_disabled%> ></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="right">
+                        <input type="button" class="cw b bn sxs lsb" id="btnSubmit" name="btnSubmit" value="   Submit   "
+                            tabindex="11" onClick="onSubmit()" /> <input type="button" class="sxs lsb" id="Cancel" name="btnCancel" value="   Cancel   "
+                            tabindex="12" onClick="onCancel()" />
+                           <input type="hidden" id="caw" name="caw" value="" onClick="startClosing()" class="sx lsb"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    
+	       
+	</body>
+</html>

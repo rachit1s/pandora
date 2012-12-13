@@ -1,0 +1,185 @@
+<project name="tbitsroot" default="prepare-all">
+	<echo message="executing in dir = ${basedir}" />
+	<property name="tbitsroot.dir" value="." />
+	<property name="tBitsRules.dir" value="${tbitsroot.dir}/tBitsRules" />
+        <property name="gwtPlugins.dir" value="${tbitsroot.dir}/gwtplugins" />
+	<property name="tbits.dir" value="${tbitsroot.dir}/tbits" />
+	<property name="tbits.dist.dir" value="${tbits.dir}/dist" />
+	<property name="dist.classes.dir" value="${tbits.dist.dir}/build/webapps/WEB-INF/classes" />
+	<property name="dist.lib.dir" value="${tbits.dist.dir}/build/webapps/WEB-INF/lib" />
+	<property name="release.dir" value="${tbitsroot.dir}/../tbits-release" />
+	<property name="root.output.dir" value="${release.dir}" />
+	<property name="changeLogsFile" value="changeLogs.txt" />
+	<property name="completeLogsFile" value="completeLogs.txt" />
+	<property name="svnRevisionFile" value="svnRevision.txt" />
+	<property name="oldSvnRevisionFile" value="oldSvnRevision.txt" />
+	<property name="svnInfoFile" value="svnInfo.txt" />
+	<property name="oldSvnInfoFile" value="svnInfo.txt" />
+
+	<property file="build.properties" />
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml" />
+
+	<property name="svn.path" value="${basedir}/" />
+	<echo message="svn.path=${svn.path}" />
+	<echo message="tbitsroot= ${tbitsroot.dir}" />
+	<typedef resource="com/googlecode/svntask/svntask.xml">
+		<classpath>
+			<fileset dir="${tbitsroot.dir}/svntask/lib">
+				<include name="svnkit.jar" />
+				<include name="svntask.jar" />
+			</fileset>
+		</classpath>
+	</typedef>
+
+
+	<path id="additional.path">
+	</path>
+
+	<path id="project.class.path">
+		<pathelement location="${dist.classes.dir}" />
+		<fileset dir="${dist.lib.dir}" includes="**/*.jar" />
+		<pathelement path="${additional.path}" />
+	</path>
+
+
+	<target name="additional-define">
+
+	</target>
+
+	<target name="define" depends="additional-define">
+
+	</target>
+	<target name="svn-update">
+		<!-- svn>
+			<update path="${svn.path}" force="true" recursive="true" revisionProperty="updatedRevision" />
+		</svn>
+		<echo message="updatedRevision=${updatedRevision}" / -->
+		<echo message="Skipping Update Temporarily. Uncomment Code to update" />
+	</target>
+
+	<target name="svn-info">
+		<svn>
+			<info path="${svn.path}" revisionProperty="revision" repositoryRootUrlProperty="repositoryRootUrl" authorProperty="author" committedDateProperty="commitedDate" committedRevisionProperty="committedRevision" urlProperty="url" />
+		</svn>
+		<copy file="${svnInfoFile}" tofile="${oldSvnInfoFile}" force="true" failonerror="false"/>
+		<echo message="copy finished." />
+		<echo file="${svnInfoFile}" message="revision=${revision} ${line.separator}repositoryRootUrl=${repositoryRootUrl} ${line.separator}last_commit_by_author=${author} ${line.separator}commitedDate=${commitedDate} ${line.separator}committedRevision=${committedRevision} ${line.separator}url=${url}"
+		/>
+		<echo message="${svnInfoFile} created." />
+	</target>
+	
+	<target name="svn-revision" depends="svn-info">
+		<loadfile srcFile="${oldSvnRevisionFile}" property="old_svn_revision" failonerror="false" />
+		<copy file="${svnRevisionFile}" tofile="${oldSvnRevisionFile}" force="true" failonerror="false"/>
+		<echo file="${svnRevisionFile}" message="${committedRevision}" />
+	</target>
+
+<!--
+	 void 	setDiscoverChangedPaths(boolean discoverChangedPaths)
+          set to true to report of all changed paths for every revision being processed
+ void 	setEndRevision(java.lang.String endRevision)
+          the ending revision
+ void 	setIncludeMergedRevisions(boolean includeMergedRevisions)
+          if true logs will include changes merged in from elsewhere
+ void 	setLimit(long limit)
+          the max number of log messages to return must be positive.
+ void 	setLogProperty(java.lang.String logProperty)
+          the log output goes here
+ void 	setPath(java.lang.String path)
+          the path to the file
+ void 	setStartRevision(java.lang.String startRevision)
+          the starting revision
+ void 	setStopOnCopy(boolean stopOnCopy)
+          should svn logging stop on copy
+ void 	setUrl(java.lang.String url)
+          the svn url to use (as opposed to the path of a working copy)
+-->
+	<target name="svn-logs" depends="svn-revision">
+		<svn>
+			<log startRevision="${old_svn_revision}" endRevision="${committedRevision}" includeMergedRevisions="true" logProperty="changeLogs" path="${svn.path}" />
+		</svn>
+
+			<echo file="${changeLogsFile}" message="${changeLogs}" />
+		<svn>
+			<log discoverChangedPaths="true" startRevision="0" endRevision="${committedRevision}" includeMergedRevisions="true" logProperty="completeLogs" path="${svn.path}" />
+		</svn>
+			<echo file="${completeLogsFile}" message="${completeLogs}" />
+	</target>
+
+	<target name="clean-logs">
+		<delete file="${changeLogsFile}" />
+		<delete file="${completeLogsFile}" />
+		<delete file="${svnRevisionFile}" />
+		<delete file="${oldSvnRevisionFile}" />
+		<delete file="${svnInfoFile}" />
+		<delete file="${oldSvnInfoFile}" />
+	</target>
+	
+	<target name="javac">
+		<echo message="output.dir=${output.dir}" />
+		<mkdir dir="${output.dir}" />
+		<javac srcdir="${src.dir}" destdir="${output.dir}" debug="on" debuglevel="source,lines,vars" optimize="true" failonerror="true" deprecation="yes" fork="true" memoryinitialsize="256m" memorymaximumsize="512m" source="1.5" target="1.5" nowarn="true">
+			<classpath refid="project.class.path" />
+		</javac>
+	</target>
+
+	<target name="copy-info">
+		<mkdir dir="${output.dir}" />
+	         <copy todir="${output.dir}">
+                        <fileset dir="${src.dir}" excludes="*.java">
+                        </fileset>
+                </copy>
+	</target>
+
+	<target name="call-subant">
+		<echo message="running target = ${subant-target} on all sub-directories" />
+		<subant target="${subant-target}" failonerror="true" inheritall="false">
+			<fileset dir="." includes="**/build.xml" />
+		</subant>
+	</target>
+
+	<target name="prepare-all" depends="define">
+                <echo message="Starting prepare-all" />
+                
+		<var name="subant-target" value="clean-logs" />
+                <echo message="subant-target = ${subant-target}" />
+                <antcall target="call-subant" inheritAll="false" >
+                </antcall>
+
+		<var name="subant-target" value="svn-update" />
+                <echo message="subant-target = ${subant-target}" />
+                <antcall target="call-subant" inheritAll="false" >
+                </antcall>
+
+		<var name="subant-target" value="svn-revision" />
+               <echo message="subant-target = ${subant-target}" />
+                <antcall target="call-subant" inheritAll="false" >
+                </antcall>
+	
+
+		<var name="subant-target" value="svn-logs" />
+               <echo message="subant-target = ${subant-target}" />
+                <antcall target="call-subant" inheritAll="false" >
+                </antcall>
+
+		  <var name="subant-target" value="copy-info" />
+               <echo message="subant-target = ${subant-target}" />
+                <antcall target="call-subant" inheritAll="false" >
+                </antcall>
+
+	</target>
+	
+	<target name="release" depends="svn-revision,svn-logs,release-gwtplugins,release-tbits,release-gwtplugins">
+	</target>
+
+	<target name="release-tbits">
+		<ant useNativeBasedir="true" antfile="${tbits.dir}/build.xml" target="just-create-installer" inheritAll="false" />
+	</target>
+	<target name="release-gwtplugins">
+		<ant dir="${gwtPlugins.dir}" antfile="build.xml" target="build" inheritAll="false"/>
+	</target>
+	<target name="release-rules">
+		<ant dir="${tBitsRules.dir}" antfile="build.xml" target="build" inheritAll="false" />
+	</target>
+</project>

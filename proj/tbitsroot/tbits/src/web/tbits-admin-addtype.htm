@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>tBits Administration: Add Type</title>
+        <meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+        <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+        <link rel="stylesheet" type="text/css" media="screen" href="<%=nearestPath%>web/css/<%=cssFile%>">
+        <script language="javascript" src="<%=nearestPath%>web/scripts/admin.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/tt.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/ac.js"></script>
+	<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+        <script>
+		YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+		    var obj = window.dialogArguments;
+        </script>
+        <script>
+		    var obj = window.dialogArguments;
+		    /*var isIE = (document.all) ? true : false;
+		    if(isIE == true)
+		    {
+		       obj = window.dialogArguments;
+		    }
+		    else
+		    {
+		       obj = this.opener; 
+		       window.resizeTo(400,120);
+		    }*/
+		    
+	        function onKeyDownBody(e)
+	        {
+	            var event = (document.all) ? window.event : e;
+	            var keyCode = (document.all) ? event.keyCode : e.which;
+	            if (keyCode == 13) /* On Enter */
+	            {
+	                return onSubmit();
+	            }
+	            else if (keyCode == 27) /* On Escape */
+	            {
+	                window.close();
+	                return false;
+	            }
+	            return true;
+	        }
+	        
+	        function onSubmit()
+	        {
+	            var ctrl = document.getElementById("new_type_name");
+	            if (ctrl != null)
+	            {
+	                var value = trim(ctrl.value);
+	                if (value == "")
+	                {
+	                    alert("Specify a name for the new " + document.getElementById("field_name").value + ".");
+	                    ctrl.focus();
+	                    return false;
+	                }
+	                onSubmitAddType();
+	                return false;
+	            }
+	            else
+	            {
+	                alert("Please report this to tbits-dev@tbitsglobal.com.");
+	                window.close();
+	                return false;
+	            }
+	            return false;
+	        }
+        </script>
+    </head>
+    <body class="dialog" onkeydown="return onKeyDownBody()">
+        <input type="hidden" name="nearestPath" id="nearestPath" value="<%=nearestPath%>" />
+        <FORM name="addNewTypeForm" id="addNewTypeForm" method="post">
+            <INPUT type="hidden" name="field_name" id="field_name" value="" />
+            <table class="tbl" width="100%">
+                <colgroup>
+                    <col align="right" width="15%" />
+                    <col align="left" width="85%" />
+                </colgroup>
+                <tr>
+                    <td class="sx">Name</td>
+                    <td><INPUT id="new_type_name"  class="sx" type="text" name="new_type_name" style="width: 100%" ></td>
+                </tr>
+                <tr>
+                    <td colspan="2"  align="right">
+                        <INPUT id="Submit1" class="cw b bn sxs lsb" type="button" value="Submit"onclick="onSubmit()">
+                    </td>
+                </tr>
+            </table>
+        </FORM>
+    </body>
+    <style>
+        TABLE.tbl TD
+        {
+        }
+    </style>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+<h1>Command Interface</h1>
+
+<p>tBits provides command interface to do following three things:</p>
+<ol>
+  <li><a href="#View">View Article </a></li>
+  <li><a href="#Update">Update Article</a></li>
+  <li><a href="#Add">Add Article</a></li>
+</ol>
+<h2><strong>Setting up the environment: </strong></h2>
+<p>You can access the command interface  using the class <em>transbit.tbits.Helper.Wrapper</em> but to execute this class you need to setup the environment.
+This setting is available in C:\Program Files\tBits\build\bin\scheduler.bat. copy-paste everything starting "echo off" to "echo on" to command prompt.</p>
+<p>This would look something like:</p>
+<blockquote>
+  <p>echo off<br />
+    set JAVA_HOME=C:\Program Files\Java\jdk1.5.0_02<br />
+    set TBITS_HOME=C:\Program Files\tBits/build<br />
+    set HOME=C:\Program Files\tBits/build/bin<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\classes<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\quartz-1.4.5.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\activation-1.0.2.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\commons-beanutils.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\commons-collections-3.1.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\commons-digester.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\commons-lang-2.1.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\commons-logging.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\cos.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\htmlparser.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\jakarta-oro-2.0.8.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\jakarta-regexp-1.2.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\jcifs-0.7.9.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\jcommon-1.0.0.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\jmimemagic-0.0.4a.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\jmxtools.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\jtds-1.1.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\log4j-1.2.9.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\lucene-1.4.3.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\mail-1.3.2.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\primrose-2.7.0.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\tools.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\xercesImpl-2.6.2.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\pdfbox-0.6.7.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\poi-3.0.jar<br />
+    set CLASSPATH=%CLASSPATH%;C:\Program Files\tBits\build\webapps\WEB-INF\lib\poi-scratchpad-3.0.jar</p>
+  <p>rem C:\Program Files\tBits\build\bin\setenvwin.bat</p>
+  <p>echo &quot;USING JAVA_HOME:    %JAVA_HOME%&quot;<br />
+    echo &quot;USING TBITS_HOME: %TBITS_HOME%&quot;<br />
+    echo &quot;USING CLASSPATH: %CLASSPATH%&quot;<br />
+    echo &quot;Deleting the lock file: &quot;<br />
+    del &quot;%TBITS_HOME%/../tmp/indexer.lock&quot;<br />
+    echo on</p>
+</blockquote>
+<p>So, open the command prompt and paste the above content. Now, you are ready to execute the command. </p>
+<p>To test , try to execute this command:</p>
+<blockquote>
+  <p><em>java -Dapp.name=tbits -Dtbits.home=&quot;%TBITS_HOME%&quot; -Dhome=&quot;%HOME%&quot;  transbit.tbits.Helper.Wrapper</em></p>
+</blockquote>
+<p>You should get an incorrect usage and it should look like the following:</p>
+<blockquote>
+  <p><strong><em>[ 2007-09-11 16:56:56,218 [main] Helper.Wrapper.printHelp():291  INFO ]: Usage</em></strong></p>
+  <p><strong><em>wrapper<br />
+    -ba &lt;System Prefix&gt;<br />
+    -n  &lt;Article Id&gt;<br />
+    -a  &lt;Ascending Order&gt; [Optional, Default]<br />
+    -d  &lt;Descending Order&gt; [Optional]</em></strong></p>
+  <p><strong><em> -ba is optional if TBits_BA environment variable is defined.</em></strong></p>
+  <p><strong><em> wrapper -add<br />
+    -ba BusinessAreaPrefix<br />
+    -category Category<br />
+    -severity Severity<br />
+    -status Status<br />
+    -requesttype RequestType<br />
+    -logger Logger<br />
+    -duedate yyyymmddhhMMss<br />
+    -subject Subject<br />
+    -description Description<br />
+    -duetime HHmm<br />
+    -notify 1/0</em></strong></p>
+  <p><strong><em> Business Area Prefix and Subject are mandatory<br />
+  </em></strong></p>
+  <p><strong><em> wrapper -update<br />
+    -request RequestID<br />
+    -ba BusinessAreaPrefix<br />
+    -category Category<br />
+    -severity Severity<br />
+    -status Status<br />
+    -requestType RequestType<br />
+    -logger Logger<br />
+    -duedate yyyymmddhhMMss<br />
+    -duetime HHmm<br />
+    -subject Subject<br />
+    -description Description<br />
+    -notify 1/0</em></strong></p>
+  <p><strong><em> Business Area Prefix and RequestID are mandatory.</em></strong></p>
+</blockquote>
+<p>&nbsp; </p>
+<p><strong>View<a name="View" id="View"></a> Article</strong></p>
+<p>The syntax of to view articles is as follows:</p>
+<blockquote>
+  <p><em>java -Dapp.name=tbits -Dtbits.home=&quot;%TBITS_HOME%&quot; -Dhome=&quot;%HOME%&quot;  transbit.tbits.Helper.Wrapper  -ba &lt;System Prefix&gt; -n  &lt;Article Id&gt; -a  &lt;Ascending Order&gt; [Optional, Default] 
+    -d  &lt;Descending Order&gt; [Optional] </em></p>
+  <p><em>NOTE: -ba is optional if TBits_BA environment variable is defined.</em></p>
+</blockquote>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Update<a name="Update" id="Update"></a> Article</strong></p>
+<p>The syntax is as follows:</p>
+<blockquote>
+  <p><em>java -Dapp.name=tbits -Dtbits.home=&quot;%TBITS_HOME%&quot; -Dhome=&quot;%HOME%&quot;  transbit.tbits.Helper.Wrapper -update -request RequestID
+    -ba BusinessAreaPrefix -category Category 
+    -severity Severity 
+    -status Status 
+    -requestType RequestType 
+    -logger Logger 
+    -duedate yyyymmddhhMMss
+    -duetime HHmm 
+    -subject Subject
+    -description Description
+    -notify 1/0</em> attachments &lt;file_locations&gt; field1=value1 field2=value2... user_id &lt;user login&gt; exit_app_on_closed_xxxxx &lt;true|false&gt; </p>
+
+  <p><em> NOTE: </em></p>
+  <ol>
+    <li><em>Business Area Prefix and RequestID are mandatory.</em></li>
+    <li><em>field1, field2 are the extended field or any other field</em></li>
+    <li><em>user_id is the user on whose behalf you are updating article</em></li>
+    <li><em>exit_app_on_closed_xxxx is a flag that will make it force exit. If you dont mention it, you will have to press CTRL+C to close the command</em></li>
+    <li><em>attachments can be a number of comman separated file locations</em>. It will delete the file and put it in the system</li>
+  </ol>
+</blockquote>
+<p><strong> Add<a name="Add" id="Add"></a> Article</strong></p>
+<blockquote>
+  <p><em>java -Dapp.name=tbits -Dtbits.home=&quot;%TBITS_HOME%&quot; -Dhome=&quot;%HOME%&quot;  transbit.tbits.Helper.Wrapper  -add -ba BusinessAreaPrefix
+    -category Category
+    -severity Severity
+    -status Status
+    -requesttype RequestType
+    -logger Logger
+    -duedate yyyymmddhhMMss
+    -subject Subject
+    -description Description
+    -duetime HHmm
+    -notify 1/0 attachments &lt;file_locations&gt; field1=value1 field2=value2... user_id &lt;user login&gt; exit_app_on_closed_xxxxx &lt;true|false&gt; </em></p>
+  <p>Example:</p>
+  <p>java -Dapp.name=tbits -Dtbits.home=&quot;%TBITS_HOME%&quot; -Dhome=&quot;%HOME%&quot; transbit.tbits.Helper.Wrapper -add -ba sks_te -category newproducttesting -requesttype testreportnewproduct -subject &quot;T200_Column_NPD_OTS.pdf&quot; -description &quot;&quot; -status Approved attachments &quot;C:\\giri\\NPD_Test Report\\T200_Column_NPD_OTS.pdf&quot; user_id &quot;harmeet.bedi&quot; exit_app_on_closed_xxxxx true<br />
+  </p>
+  <p> <em>NOTE: </em></p>
+  <ol>
+    <li><em>Business Area Prefix and Subject are mandatory</em></li>
+    <li><em>field1, field2 are the extended field or any other field</em></li>
+    <li><em>user_id is the user on whose behalf you are updating article</em></li>
+    <li><em>exit_app_on_closed_xxxx is a flag that will make it force exit. If you dont mention it, you will have to press CTRL+C to close the command</em></li>
+    <li><em>attachments can be a number of comman separated file locations</em>. It will delete the file and put it in the system</li>
+  </ol>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+</blockquote>
+
+Copyright © 2006 <a target="_blank" href="http://www.transbittech.com">Transbit Technologies Pvt Ltd</a> - Hyderabad, India. All Rights Reserved. Email : <a href="mailto:info@transbittech.com"> info@transbittech.com</a>
+</body>
+</html>

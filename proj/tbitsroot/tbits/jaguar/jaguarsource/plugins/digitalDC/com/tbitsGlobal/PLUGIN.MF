@@ -1,0 +1,7 @@
+Author:Nitiraj
+Name:com.tbitsglobal.digitalDC
+Description: Digital DC  Module  (much of the code copied from zipuploader by Rohit)
+Version: 1.1
+Depends: 
+Activator:
+

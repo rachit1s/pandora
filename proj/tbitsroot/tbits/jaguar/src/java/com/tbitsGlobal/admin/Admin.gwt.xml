@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.3//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.0.3/distro-source/core/src/gwt-module.dtd">
+<module rename-to='adm'>
+	<inherits name="commons.com.tbitsGlobal.utils.Utils" />
+	
+	<!-- plugins -->
+  	<inherits name='com.tbitsGlobal.admin.plugins'/>
+	
+	  <!-- Include GWTUpload library -->
+  	<inherits name="gwtupload.GWTUpload"/>
+  	<!-- Load dinamically predefined styles in the library when the application starts -->
+  	<stylesheet src="Upload.css"/>
+	
+	<entry-point class='com.tbitsGlobal.admin.client.Admin'/>	
+</module>

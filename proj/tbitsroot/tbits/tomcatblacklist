@@ -1,0 +1,5 @@
+setclasspath.bat
+setclasspath.sh
+setenv.bat
+setenv.sh
+server.xml

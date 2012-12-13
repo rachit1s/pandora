@@ -1,0 +1,80 @@
+[ 2007-06-13 02:53:25,375 [main] search.DSQLParser.main():615  INFO ]: 1. NOT (has:logger)
+[ 2007-06-13 02:53:25,734 [main] search.DSQLParser.main():625  INFO ]: ParseTable: 
+1. [ request, request, 0, C_AND, [>0] ]
+2. [ ------ Nesting Open ------- ]C_NOT
+3. [ has, has, 1, C_AND, [logger] ]
+4. [ ------ Nesting Close ------ ]
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+[ 2007-06-13 02:53:25,734 [main] search.DSQLParser.main():615  INFO ]: 2. NOT (NOT(has:logger)) 
+[ 2007-06-13 02:53:25,734 [main] search.DSQLParser.main():625  INFO ]: ParseTable: 
+1. [ request, request, 0, C_AND, [>0] ]
+2. [ ------ Nesting Open ------- ]C_NOT
+3. [ has, has, 1, C_NOT, [logger] ]
+4. [ ------ Nesting Close ------ ]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[ 2007-06-13 02:53:25,734 [main] search.DSQLParser.main():615  INFO ]: 3. NOT (NOT has:logger) 
+[ 2007-06-13 02:53:25,734 [main] search.DSQLParser.main():625  INFO ]: ParseTable: 
+1. [ request, request, 0, C_AND, [>0] ]
+2. [ ------ Nesting Open ------- ]C_NOT
+3. [ has, has, 1, C_NOT, [logger] ]
+4. [ ------ Nesting Close ------ ]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[ 2007-06-13 02:53:25,750 [main] search.DSQLParser.main():615  INFO ]: 4. assign:(test1,test2)  NOT (category:(class))
+[ 2007-06-13 02:53:25,750 [main] search.DSQLParser.main():625  INFO ]: ParseTable: 
+1. [ assign, assign, 0, C_AND, [test1, test2] ]
+2. [ ------ Nesting Open ------- ]C_NOT
+3. [ category, category, 1, C_AND, [class] ]
+4. [ ------ Nesting Close ------ ]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[ 2007-06-13 02:53:25,750 [main] search.DSQLParser.main():615  INFO ]: 5. assign:(test1,test2)  OR NOT (NOT(category:(class))
+[ 2007-06-13 02:53:25,750 [main] search.DSQLParser.main():625  INFO ]: ParseTable: 
+1. [ assign, assign, 0, C_AND, [test1, test2] ]
+2. [ ------ Nesting Open ------- ]C_OR_NOT
+3. [ category, category, 1, C_NOT, [class] ]
+4. [ ------ Nesting Close ------ ]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[ 2007-06-13 02:53:25,750 [main] search.DSQLParser.main():615  INFO ]: 6. assign:(test1,test2) AND NOT (NOT(category:(class))
+[ 2007-06-13 02:53:25,750 [main] search.DSQLParser.main():625  INFO ]: ParseTable: 
+1. [ assign, assign, 0, C_AND, [test1, test2] ]
+2. [ ------ Nesting Open ------- ]C_AND_NOT
+3. [ category, category, 1, C_NOT, [class] ]
+4. [ ------ Nesting Close ------ ]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[ 2007-06-13 02:53:25,765 [main] search.DSQLParser.main():615  INFO ]: 7. assign:(test1,test2) or NOT (NOT(has:logger))
+[ 2007-06-13 02:53:25,765 [main] search.DSQLParser.main():625  INFO ]: ParseTable: 
+1. [ assign, assign, 0, C_AND, [test1, test2] ]
+2. [ ------ Nesting Open ------- ]C_OR_NOT
+3. [ has, has, 1, C_NOT, [logger] ]
+4. [ ------ Nesting Close ------ ]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[ 2007-06-13 02:53:25,765 [main] search.DSQLParser.main():615  INFO ]: 8. assign:(test1) AND (NOT (NOT (category:class)))
+[ 2007-06-13 02:53:25,765 [main] search.DSQLParser.main():625  INFO ]: ParseTable: 
+1. [ assign, assign, 0, C_AND, [test1] ]
+2. [ ------ Nesting Open ------- ]C_AND
+3. [ ------ Nesting Open ------- ]C_NOT
+4. [ ------ Nesting Open ------- ]C_NOT
+5. [ category, category, 3, C_AND, [class] ]
+6. [ ------ Nesting Close ------ ]
+7. [ ------ Nesting Close ------ ]
+8. [ ------ Nesting Close ------ ]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[ 2007-06-13 02:53:25,765 [main] search.DSQLParser.main():615  INFO ]: 9. assign:(test1)  (NOT (NOT (category:class)))
+[ 2007-06-13 02:53:25,765 [main] search.DSQLParser.main():625  INFO ]: ParseTable: 
+1. [ assign, assign, 0, C_AND, [test1] ]
+2. [ ------ Nesting Open ------- ]C_AND
+3. [ ------ Nesting Open ------- ]C_NOT
+4. [ ------ Nesting Open ------- ]C_NOT
+5. [ category, category, 3, C_AND, [class] ]
+6. [ ------ Nesting Close ------ ]
+7. [ ------ Nesting Close ------ ]
+8. [ ------ Nesting Close ------ ]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,219 @@
+Buildfile: /home/nitiraj/work/tbitsroot/tbits/build.xml
+
+define-build-number:
+     [echo] Version: 6.4.0, Build: 59
+
+define:
+
+subs-define-build:
+
+location-subs-win-build:
+
+define-libs:
+
+prepare-build:
+[yui-compressor] [JavaScript] No files to compress, or all files already up to date
+[yui-compressor] [CSS] No files to compress, or all files already up to date
+[yui-compressor] No files to compress, or all files already up to date
+[yui-compressor] [JavaScript] No files to compress, or all files already up to date
+[yui-compressor] [CSS] No files to compress, or all files already up to date
+[yui-compressor] No files to compress, or all files already up to date
+     [echo] help file is: src/web/tbits-help_request.htm
+
+compile:
+    [javac] /home/nitiraj/work/tbitsroot/tbits/build.xml:607: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    [javac] Compiling 396 source files to /home/nitiraj/work/tbitsroot/tbits/dist/build/webapps/WEB-INF/classes
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/RuleFactory.java:14: warning: sun.reflect.ReflectionFactory is Sun proprietary API and may be removed in a future release
+    [javac] import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
+    [javac]                   ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/RuleFactory.java:14: warning: sun.reflect.ReflectionFactory is Sun proprietary API and may be removed in a future release
+    [javac] import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
+    [javac]                   ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/authentication/AuthUtils.java:17: warning: sun.misc.BASE64Encoder is Sun proprietary API and may be removed in a future release
+    [javac] import sun.misc.BASE64Encoder;
+    [javac]                ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/addons/AddonManager.java:428: incompatible types; inferred type argument(s) transbit.tbits.events.Event,java.lang.Object do not conform to bounds of type variable(s) T,P
+    [javac] found   : <T,P>void
+    [javac] required: void
+    [javac] 				EventManager.getInstance().registerManagedHandler(er,al);
+    [javac] 				                                                 ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/addons/AddonManager.java:440: incompatible types; inferred type argument(s) transbit.tbits.events.Event,java.lang.Object do not conform to bounds of type variable(s) T,P
+    [javac] found   : <T,P>void
+    [javac] required: void
+    [javac] 					EventManager.getInstance().unRegisterManagedHandler(er);
+    [javac] 					                                                   ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/addons/AddonManager.java:487: incompatible types; inferred type argument(s) transbit.tbits.events.Event,java.lang.Object do not conform to bounds of type variable(s) T,P
+    [javac] found   : <T,P>void
+    [javac] required: void
+    [javac] 				EventManager.getInstance().unRegisterManagedHandler(er);
+    [javac] 				                                                   ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/APIUtil.java:869: warning: [deprecation] setRelatedRequests(java.util.Hashtable<java.lang.String,java.lang.String>) in transbit.tbits.domain.Request has been deprecated
+    [javac]             aRequest.setRelatedRequests(relatedRequestsHash);
+    [javac]                     ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/APIUtil.java:1030: warning: [deprecation] setRelatedRequests(java.util.Hashtable<java.lang.String,java.lang.String>) in transbit.tbits.domain.Request has been deprecated
+    [javac]         aRequest.setRelatedRequests(relatedRequestsHash);
+    [javac]                 ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/APIUtil.java:1191: warning: [deprecation] setDueDate(transbit.tbits.common.Timestamp) in transbit.tbits.domain.Request has been deprecated
+    [javac]                     aRequest.setDueDate(value);
+    [javac]                             ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/APIUtil.java:1194: warning: [deprecation] setLoggedDate(transbit.tbits.common.Timestamp) in transbit.tbits.domain.Request has been deprecated
+    [javac]                     aRequest.setLoggedDate(value);
+    [javac]                             ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/APIUtil.java:1197: warning: [deprecation] setLastUpdatedDate(transbit.tbits.common.Timestamp) in transbit.tbits.domain.Request has been deprecated
+    [javac]                     aRequest.setLastUpdatedDate(value);
+    [javac]                             ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/APIUtil.java:1253: warning: [deprecation] setSystemId(int) in transbit.tbits.domain.Request has been deprecated
+    [javac]                 aRequest.setSystemId(value);
+    [javac]                         ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/APIUtil.java:1457: warning: [deprecation] setDescription(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac]                         aRequest.setDescription(aValue);
+    [javac]                                 ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/APIUtil.java:1466: warning: [deprecation] setSummary(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac]                         aRequest.setSummary(aValue);
+    [javac]                                 ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/AddRequest.java:951: warning: [deprecation] setDueDate(transbit.tbits.common.Timestamp) in transbit.tbits.domain.Request has been deprecated
+    [javac]         myRequest.setDueDate(myDueDate);
+    [javac]                  ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/AddRequest.java:952: warning: [deprecation] setLoggedDate(transbit.tbits.common.Timestamp) in transbit.tbits.domain.Request has been deprecated
+    [javac]         myRequest.setLoggedDate(myLoggedDate);
+    [javac]                  ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/AddRequest.java:953: warning: [deprecation] setLastUpdatedDate(transbit.tbits.common.Timestamp) in transbit.tbits.domain.Request has been deprecated
+    [javac]         myRequest.setLastUpdatedDate(myUpdatedDate);
+    [javac]                  ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/autovue/connector/DMSBackendSessionImp.java:39: warning: [deprecation] getServletRequest() in com.cimmetry.vuelink.session.DMSBackendSession has been deprecated
+    [javac] 	public HttpServletRequest getServletRequest() {
+    [javac] 	                          ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/UpdateRequest.java:429: warning: [deprecation] setDueDate(transbit.tbits.common.Timestamp) in transbit.tbits.domain.Request has been deprecated
+    [javac]         myRequest.setDueDate(myDueDate);
+    [javac]                  ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/UpdateRequest.java:430: warning: [deprecation] setLoggedDate(transbit.tbits.common.Timestamp) in transbit.tbits.domain.Request has been deprecated
+    [javac]         myRequest.setLoggedDate(myLoggedDate);
+    [javac]                  ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/UpdateRequest.java:431: warning: [deprecation] setLastUpdatedDate(transbit.tbits.common.Timestamp) in transbit.tbits.domain.Request has been deprecated
+    [javac]         myRequest.setLastUpdatedDate(myUpdatedDate);
+    [javac]                  ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/UpdateRequest.java:1511: warning: [deprecation] getRequestExObject(transbit.tbits.domain.Field) in transbit.tbits.domain.Request has been deprecated
+    [javac]             RequestEx reqEx    = myRequest.getRequestExObject(f);
+    [javac]                                           ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/UpdateRequest.java:1512: warning: [deprecation] getRequestExObject(transbit.tbits.domain.Field) in transbit.tbits.domain.Request has been deprecated
+    [javac]             RequestEx oldReqEx = myOldRequest.getRequestExObject(f);
+    [javac]                                              ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/UpdateRequest.java:3785: warning: [deprecation] getRequestExObject(transbit.tbits.domain.Field) in transbit.tbits.domain.Request has been deprecated
+    [javac]         	RequestEx rex = myOldRequest.getRequestExObject(field);
+    [javac]         	                            ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/api/UpdateRequest.java:4799: warning: [deprecation] getRequestExObject(transbit.tbits.domain.Field) in transbit.tbits.domain.Request has been deprecated
+    [javac]                 RequestEx oldReqEx = myOldRequest.getRequestExObject(field);
+    [javac]                                                  ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/authentication/AuthUtils.java:66: warning: sun.misc.BASE64Encoder is Sun proprietary API and may be removed in a future release
+    [javac]     	return new BASE64Encoder().encode(str.getBytes());
+    [javac]     	           ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/common/CSVImportProcessor.java:437: warning: [deprecation] getExString(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 									String attString = oldRequest.getExString(field);
+    [javac] 									                             ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:22: warning: [deprecation] setExString(java.lang.String,java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			request.setExString(fieldName, value);
+    [javac] 			       ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:23: warning: [deprecation] getExString(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			assertEquals(value, request.getExString(fieldName));
+    [javac] 			                           ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:27: warning: [deprecation] setExString(java.lang.String,java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			request.setExString(fieldName, value);
+    [javac] 			       ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:28: warning: [deprecation] getExString(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			assertEquals(value, request.getExString(fieldName));
+    [javac] 			                           ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:42: warning: [deprecation] setExString(java.lang.String,java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			request.setExString(fieldName, value);
+    [javac] 			       ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:43: warning: [deprecation] getExString(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			assertEquals(value, request.getExString(fieldName));
+    [javac] 			                           ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:56: warning: [deprecation] setExString(java.lang.String,java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			request.setExString(fieldName, value);
+    [javac] 			       ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:57: warning: [deprecation] getExString(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			assertEquals(value, request.getExString(fieldName));
+    [javac] 			                           ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:69: warning: [deprecation] setExInt(java.lang.String,int) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			request.setExInt(fieldName, value);
+    [javac] 			       ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:70: warning: [deprecation] getExInt(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			assertEquals(value, request.getExInt(fieldName));
+    [javac] 			                           ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:82: warning: [deprecation] setExReal(java.lang.String,double) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			request.setExReal(fieldName, value);
+    [javac] 			       ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:83: warning: [deprecation] getExReal(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			assertEquals(value, request.getExReal(fieldName));
+    [javac] 			                           ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:95: warning: [deprecation] setExBoolean(java.lang.String,boolean) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			request.setExBoolean(fieldName, value);
+    [javac] 			       ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:96: warning: [deprecation] getExBoolean(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			assertTrue(request.getExBoolean(fieldName));
+    [javac] 			                  ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:99: warning: [deprecation] setExBoolean(java.lang.String,boolean) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			request.setExBoolean(fieldName, value);
+    [javac] 			       ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:100: warning: [deprecation] getExBoolean(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			assertFalse(request.getExBoolean(fieldName));
+    [javac] 			                   ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:114: warning: [deprecation] setExType(java.lang.String,java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			request.setExType(fieldName, value);
+    [javac] 			       ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/domain/RequestTest.java:115: warning: [deprecation] getExType(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 			assertEquals(value, request.getExType(fieldName).getName());
+    [javac] 			                           ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/dql/treecomponents/SpecialParameters.java:51: warning: [deprecation] setHours(int) in java.util.Date has been deprecated
+    [javac] 		today.setHours(0);
+    [javac] 		     ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/dql/treecomponents/SpecialParameters.java:52: warning: [deprecation] setMinutes(int) in java.util.Date has been deprecated
+    [javac] 		today.setMinutes(0);
+    [javac] 		     ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/dql/treecomponents/SpecialParameters.java:53: warning: [deprecation] setSeconds(int) in java.util.Date has been deprecated
+    [javac] 		today.setSeconds(0);
+    [javac] 		     ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/events/EventManager.java:257: incompatible types; inferred type argument(s) transbit.tbits.events.Event,java.lang.Object do not conform to bounds of type variable(s) T,P
+    [javac] found   : <T,P>void
+    [javac] required: void
+    [javac] 				disableRegistry(der,con);
+    [javac] 				               ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/events/EventManager.java:261: incompatible types; inferred type argument(s) transbit.tbits.events.Event,java.lang.Object do not conform to bounds of type variable(s) T,P
+    [javac] found   : <T,P>void
+    [javac] required: void
+    [javac] 				enableRegistry(der,con);
+    [javac] 				              ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/plugin/PluginClassLoader.java:56: warning: [deprecation] toURL() in java.io.File has been deprecated
+    [javac]     		URL url = new File(resourcePath).toURL();
+    [javac]     		                                ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/sms/RequestTemplate.java:29: warning: [deprecation] setDescription(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac]         request.setDescription("MD");
+    [javac]                ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/sms/RequestTemplate.java:31: warning: [deprecation] setSystemId(int) in transbit.tbits.domain.Request has been deprecated
+    [javac]         request.setSystemId(1);
+    [javac]                ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/sms/SMS.java:199: warning: [deprecation] clone() in transbit.tbits.domain.Request has been deprecated
+    [javac] 				requestClone = (Request) request.clone();
+    [javac] 				                                ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/sms/SMS.java:214: warning: [deprecation] modifyRequest(transbit.tbits.domain.Request,transbit.tbits.sms.PostProcessXmlRule) in transbit.tbits.sms.RequestModifier has been deprecated
+    [javac] 						boolean isModified = requestModifier.modifyRequest(
+    [javac] 						                                    ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/sms/SMS.java:269: warning: [deprecation] transbit.tbits.sms.SMSTemplate in transbit.tbits.sms has been deprecated
+    [javac] 			SMSTemplate template = new SMSTemplate(sms.getMessageFormat().get(1));
+    [javac] 			^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/sms/SMS.java:269: warning: [deprecation] transbit.tbits.sms.SMSTemplate in transbit.tbits.sms has been deprecated
+    [javac] 			SMSTemplate template = new SMSTemplate(sms.getMessageFormat().get(1));
+    [javac] 			                           ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/webapps/CSVImportData.java:451: warning: [deprecation] getExString(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 								String attString = oldRequest.getExString(field);
+    [javac] 								                             ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/webapps/ImportData.java:1231: warning: [deprecation] getExString(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 							String attString = oldRequest.getExString(field);
+    [javac] 							                             ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/webapps/ImportData.java:1728: warning: [deprecation] getExString(java.lang.String) in transbit.tbits.domain.Request has been deprecated
+    [javac] 							String attString = oldRequest.getExString(field);
+    [javac] 							                             ^
+    [javac] Note: Some input files use unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+    [javac] 5 errors
+    [javac] 55 warnings

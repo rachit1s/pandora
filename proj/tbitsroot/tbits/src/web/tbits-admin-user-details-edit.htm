@@ -1,0 +1,96 @@
+<div id="message" style="margin: 0.5ex 1ex 0.5ex 1ex;" > <%=message%> </div>
+<div class="hb bhs" style="margin:0ex 1ex 0.5ex 1ex;" id="user_update_form">
+<input type="hidden" name="page_name" value="<%=page_name%>" id="page_name">
+<input type="hidden" name="selected_user_id" id="selected_user_id" value="<%=selected_user_id%>" />
+											<table name="user_details" cellSpacing="3" cellPadding="0" width="95%" class ="bhs">
+											<tr>
+											<td class="sx">
+											Login</td>
+											<TD class="sx" align="left"><INPUT id="user_login" type="text" onchange="javascript:frmChanged()" name="user_login" value="<%=user_login%>" <%=user_login_disabled%> >
+											  * </td>
+											</tr>
+											<tr>
+											  <td height="24" class="sx">First Name</td>
+											  <td><INPUT id="first_name" type="text" onchange="javascript:frmChanged()" name="first_name" value="<%=first_name%>"></td>
+											  </tr>
+											<tr>
+											  <td class="sx">Last Name</td>
+											  <td><INPUT id="last_name" type="text" onchange="javascript:frmChanged()" name="last_name" value="<%=last_name%>"></td>
+											  </tr>
+											<tr>
+											  <td height="28" class="sx">Display Name</td>
+											  <td><INPUT id="display_name" type="text" onchange="javascript:frmChanged()" name="display_name" value="<%=display_name%>"></td>
+											  </tr>
+											<tr>
+											  <td class="sx">Email</td>
+											  <td><INPUT id="email_id" type="text" onchange="javascript:frmChanged()" name="email_id" value="<%=email_id%>"></td>
+											  </tr>
+											<tr>
+											  <td class="sx">Is Active</td>
+											  <td class="sx"><INPUT name="is_active" type="checkbox" class="chbox" id="is_active" onchange="javascript:frmChanged()" <%=is_active%>> 
+											    [Instead of deleting a user,
+											      just mark user inactive]</td>
+											  </tr>
+											<tr>
+											  <td class="sx">User Type</td>
+											  <td><INPUT id="user_type" type="text" onchange="javascript:frmChanged()" name="user_type" value="<%=user_type%>"></td>
+											  </tr>
+											  <tr>
+											  <td class="sx">Mobile number</td>
+											  <td><INPUT id="mobile_number" type="text" onchange="javascript:frmChanged()" name="mobile_number" value="<%=mobile_number%>"></td>
+											  </tr>
+											  </table>
+											 	
+											 	<p id='moreP' style='color:blue' onclick='javascript:toggleMoreOptions()'><u>Less << </u></p>												
+												<div id='more_options_div' style='display:block' >
+													<table>
+														<tr>
+															<td class='sx'>Location</td>																
+															<td>
+																<INPUT id='location' type='text' onchange='javascript:frmChanged()' name='location' value='<%=location%>' />
+															</td>
+														</tr>
+														<tr>
+															<td class='sx'>Firm Code</td>																
+															<td>
+																<INPUT id='firm_code' type='text' onchange='javascript:frmChanged()' name='firm_code' value='<%=firm_code%>' />
+															</td>
+														</tr>
+														<tr>
+															<td class='sx'>Designation</td>																
+															<td>
+																<INPUT id='designation' type='text' onchange='javascript:frmChanged()' name='designation' value='<%=designation%>' />
+															</td>
+														</tr>
+														<tr>
+															<td class='sx'>Firm Address</td>																
+															<td>
+																<textarea id='firm_address' onchange='javascript:frmChanged()' name='firm_address' ><%=firm_address%></textarea>
+															</td>
+														</tr>
+														<tr>
+															<td class='sx'>Sex(Male/Female)</td>																
+															<td>
+																<INPUT id='sex' type='text' onchange='javascript:frmChanged()' name='sex' value='<%=sex%>' />
+															</td>
+														</tr>
+														<tr>
+															<td class='sx'>Full Firm Name</td>																
+															<td>
+																<INPUT id='full_firm_name' type='text' onchange='javascript:frmChanged()' name='full_firm_name' value='<%=full_firm_name%>' />
+															</td>
+														</tr>
+													</table>
+												</div>
+											
+											<table>										  
+											<tr>
+											  <td class="sx">&nbsp;</td>
+											  <td>&nbsp;</td>
+											  </tr>
+											<tr>
+											  <td class="sx">  <input class="cw b bn sxs lsb" id="save_user" <%=submit_disabled%>  type="button" value="Save User" name="SaveButton" onClick="javascript:onUpdateUser()"></td>
+											  <td align="left"><input class="sx" id="Revert" type="button" value="Revert to Last Saved Value" name="Revert" onClick="javascript:onRevertLastSavedSettings()" <%=revert_disabled%> ></td>
+											  </tr>
+											</table>
+</div>

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+    <HEAD>
+        <TITLE>Configure Search Results</TITLE>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" media="screen,print" href="<%=nearestPath%>web/css/<%=cssFile%>" />
+        <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/configure-search.js"></script>
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+	<script language="javascript">
+		YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+	    	var skipcycle = false;
+	    </script>
+    </HEAD>
+    <body class="dialog bh" onkeydown="return onKeyDownBody(event)" onload="onLoadBody()">
+        <!-- onclick="alert('Width=' + window.dialogWidth + '\nHeight=' + window.dialogHeight);" -->
+        <input type="hidden" name="sysPrefix" id="sysPrefix" value="<%=sysPrefix%>" /> <input type="hidden" name="systemId" id="systemId" value="<%=systemId%>" />
+        <input type="hidden" name="systemName" id="systemName" value="<%=systemName%>" />
+        <input type="hidden" name="action" id="action" value="" />
+        <TABLE cellpadding="0" cellspacing="0" width="480" ID="Table1">
+            <COLGROUP>
+                <COL width="190" />
+                <COL width="100" />
+                <COL width="190" />
+            </COLGROUP>
+            <TR>
+                <TD class="sx" colspan="3"><STRONG>Columns in Search Results</STRONG></TD>
+            </TR>
+            <TR>
+                <TD class="sx" height="20">Available columns:</TD>
+                <TD class="sx" height="20"></TD>
+                <TD class="sx" height="20">Selected columns:</TD>
+            </TR>
+            <TR>
+                <TD class="sx" height="192">
+                    <select id="resultHeader" style="WIDTH: 190px" tabIndex="1" multiple size="10" name="resultHeader"  onfocus="skipcycle=true" onblur="skipcycle=false">
+                        <%=resultHeader%>
+                    </select>
+                </TD>
+                <TD class="sx" height="192" align="center">
+                    <input class="move-to-btn" style="width: 60px; height: 22px; margin-top: 5px;" tabIndex="2"
+                        type="button" name="add" ID="add" onclick="onAdd()" onfocus="skipcycle=true" onblur="skipcycle=false"/><br>
+                    <input class="remove-btn" style="width: 60px; height: 22px; margin-top: 5px" tabIndex="3"
+                        type="button" name="remove" ID="remove" onclick="onRemove()" onfocus="skipcycle=true" onblur="skipcycle=false"/>
+                </TD>
+                <TD class="sx" height="192">
+                    <select id="displayHeader" style="WIDTH: 190px" tabIndex="4" multiple size="10" name="displayHeader"  onfocus="skipcycle=true" onblur="skipcycle=false">
+                        <%=displayHeader%>
+                    </select>
+                </TD>
+            </TR>
+            <TR>
+                <TD class="sx" height="10"></TD>
+                <TD class="sx" height="10"></TD>
+                <TD class="sx" height="10">
+                    <input class="move-up-btn" type="button" id="up" style="width: 93px; height: 22px" tabIndex="5"
+                        name="moveup" onclick="onUp()"  onfocus="skipcycle=true" onblur="skipcycle=false"/> <input class="move-down-btn" id="down" style="width: 93px; height: 22px" tabIndex="6" type="button"
+                        name="movedown" onclick="onDown()"  onfocus="skipcycle=true" onblur="skipcycle=false"/>
+                </TD>
+            </TR>
+            <TR>
+                <TD class="sx" colSpan="3" height="10"></TD>
+            </TR>
+            <TR>
+                <TD class="sx" height="25" colspan="2" align="right">Default sort 
+                    column&nbsp;&nbsp;</TD>
+                <TD class="sx" height="25">
+                    <select id="sortColumn" style="WIDTH: 190px" tabIndex="7" size="1" name="sortColumn"  onfocus="skipcycle=true" onblur="skipcycle=false">
+                        <%=sortColumn%>
+                    </select>
+                </TD>
+            </TR>
+            <TR>
+                <TD class="sx" height="25" class="sx" colspan="2" align="right">Default sort 
+                    order&nbsp;&nbsp;</TD>
+                <TD class="sx" height="25">
+                    <select id="sortOrder" tabIndex="8" size="1" style="WIDTH: 190px" name="sortOrder"  onfocus="skipcycle=true" onblur="skipcycle=false">
+                        <option value="1" <%=descSelected%>>Descending</option>
+                        <option value="0" <%=ascSelected%>>Ascending</option>
+                    </select>
+                </TD>
+            </TR>
+            <TR>
+                <TD class="sx" colSpan="3" height="10">&nbsp;&nbsp;</TD>
+            </TR>
+            <TR>
+                <TD class="sx" colSpan="2" height="25" align="right">Date/time format in search 
+                    results&nbsp;&nbsp;</TD>
+                <TD class="sx" height="25">
+                    <select name="dateFormat" size="1" ID="dateFormat" tabIndex="9" style="WIDTH: 190px"  onfocus="skipcycle=true" onblur="skipcycle=false">
+                        <%=dateFormatList%>
+                    </select>
+                </TD>
+            </TR>
+            <TR>
+                <TD class="sx" noWrap align="right" colSpan="2"><span onclick="toggleCheckBox('enableVE')">Track read/unread <%=captions.all.requests%>&nbsp;&nbsp;</span></TD>
+                <td class="sx" colspan="2"><INPUT class="chbox" type="checkbox" value="ON" ID="enableVE" name="enableVE"  <%=enableVE%>  tabIndex="11"  onfocus="skipcycle=true" onblur="skipcycle=false"></td>
+            </TR>
+            <TR>
+                <TD class="sx" colSpan="3" height="10"></TD>
+            </TR>
+            <TR>
+                <TD class="sx" colspan="2" height="30">
+                    <input type="button" value="Revert to Default Settings" name="submit" style="WIDTH:202px"
+                        ID="revert" onclick="javascript:onRevert()" tabIndex="13">
+                </TD>
+                <TD class="sx" height="30" align="right">
+                    <input type="button" value="Save" name="submit" style="WIDTH:62px" ID="submit" onclick="onSubmit()"
+                        tabIndex="10"> <input type="button" value="Cancel" name="cancel" style="WIDTH:60px" ID="cancel" onclick="onCancel()"
+                        tabIndex="12">
+                </TD>
+            </TR>
+        </TABLE>
+    </body>
+    <script language="javascript">
+        function toggleCheckBox(chbox)
+        {
+            var ctrl = document.getElementById(chbox);
+            if (ctrl != null)
+            {
+                if (ctrl.checked == true) ctrl.checked = false;
+                else ctrl.checked = true;
+            }
+        }
+        			
+    </script>
+</HTML>

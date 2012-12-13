@@ -1,0 +1,58 @@
+Prerequisites
+-------------
+1) Create a FTP user on sap server machine, and make sure Sap Server can access files uploaded by this user.
+2) Create a SAP user for this integration, and do all the needful to the bapi "BAPI_DOCUMENT_CREATE2"
+
+
+Prerequisites for Windows operating system
+------------------------------------------
+1) For running this integration on windows, please install the latest Microsoft Visual Studio 2005 C/C++ runtime libraries.
+2) Download SapJco3 connector for Windows according to Windows version i.e. 32 bit or 64 bit.
+3) Copy sapjco3.dll, sapjco3.pdb, and sapjcomanifest.mf files from downloaded connector to C:\Windows\System32
+
+
+How to push documents to SAP
+----------------------------
+1) Create a new job of type "SAP INTEGRATION JOB"
+
+2) Make sure that all following mappings are done in parameters of this job, insert new parameter if any parameter is not present.
+JCO_CLIENT
+SAP_USER
+SAP_PASSWORD
+SAP_LANGUAGE
+SAP_HOST
+SAP_SYSTEM
+SAP_SYSNR
+BA_NAME
+DOCUMENTDATA_DOCUMENTTYPE
+DOCUMENTDATA_DOCUMENTPART
+DOCUMENTDATA_DOCUMENTVERSION
+PF_FTP_DEST
+CHARACTERISTICVALUES_CLASSTYPE
+CHARACTERISTICVALUES_CLASSNAME
+DOCUMENTDATA_AUTHORITYGROUP_MAPPING
+DOCUMENTDATA_DESCRIPTION_MAPPING
+EDMSDOCNO_MAPPING
+RFC_FILETYPE_MAPPING
+AS_BUILT_FILETYPE_MAPPING
+ORIGINATOR_MAPPING
+REVISION_MAPPING
+AREA_MAPPING
+PACKAGE_MAPPING
+DISCIPLINE_MAPPING
+INSPECTIONCATEGORY_MAPPING
+DOCUMENTFILES_STORAGECATEGORY_MAPPING
+SINGLE_DQL_FOR_ALL_REQUESTS
+FTP_HOST
+FTP_USER
+FTP_PASSWORD
+FTP_FOLDER_LOCATION
+
+3) Make sure that SAP server can access files from the location given in "FTP_FOLDER_LOCATION" parameter.
+
+4) Make sure that there is no space in name of files being uploaded to SAP server.
+
+5) Execute the created job.
+
+
+

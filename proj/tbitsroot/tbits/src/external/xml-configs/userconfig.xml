@@ -1,0 +1,112 @@
+<!--The settings specific to the user. Has to be stored in User's table. -->
+<TBitsLite>
+	<!-- 
+		prefix:	Default Business Area Prefix.
+	-->
+	<Home prefix="TBits" />
+
+	<!--
+		filter: Default filter to be applied when retrieving user's requests.
+	-->
+	<MyRequests filter="2" />
+
+	<!--
+		rowsPerPage: No of results to be displayed per page during search.
+		refreshRate: Periodicity of refreshing the search results.
+		renderType:  The method of rendering search results.
+		simpleView:  Flag to check if the simple view be shown or not.
+	-->
+	<Search rowsPerPage="500" refreshRate="-1" renderType="1" simpleView="true" />
+
+	<!--
+		autoClose:  Flag that says whether forms should be closed automatically on successful submission.
+		single:     Whether only one window should be used for showing requests details of any request in a given BA.
+		view:       Default view of search page.
+	-->
+	<IEWindow autoClose="true" single="false" view="2" />
+
+	<!--
+		sortOrder:  The order in which the actions should be displayed by default.
+		showHeader: Option that specifies whether the Request header should be expanded by default.
+		threadView: Default view of request details
+	-->
+	<Action sortOrder="1" showHeader="true" threadView="false" />
+
+	<!--
+		listFormat:  Date format when displayed in a list of results.
+		webFormat:   Date format when displayed as a single record.
+		zone:        Default time zone to be used while displaying dates.
+	-->
+	<DateFormat listFormat="dd-MMM-yyyy HH:mm:ss" webFormat="MM/dd/yyyy HH:mm:ss zzz" zone="1" />
+
+	<!--
+		autoSaveRate: Periodicity at which an unsubmitted Add/Update form should be saved.
+	-->
+	<Draft autoSaveRate="5" />
+
+	<!--
+		prefix:  The prefix of the BA whose configuration follows.
+	-->
+	<BusinessArea prefix="TBits">
+
+		<!--
+			value:  True if the user is on vacation for this BA.
+		-->
+		<Vacation value="false" />
+
+		<!--
+			enable: True if the user wants to get visual representation of Read/Unread/OverDue properties of a request.
+		-->
+		<EnableVE enable="true" />
+	    <!--
+			notify: Disables all incoming mail for the Business Area if this option is unset.
+		-->
+		<Notify notify="true" />
+
+		<!--
+			list: List of fields to be part of the header
+		-->
+		<DisplayHeader list="severity_id,request_id,subject,category_id,status_id,logged_datetime,logger_ids,assignee_ids,user_id" />
+
+		<!--
+			filter:  Default filter on Role.
+			show:    True if the user wants My Requests from this BA to be displayed by default.
+		-->
+		<MyRequests filter="2" show="true">
+
+			<!--
+				value: Name of the status
+			-->
+			<Status value="open" />
+			<Status value="active" />
+		</MyRequests>
+
+		<!--
+			field: Field on which search results should be sorted.
+			order: Order in which search results should be sorted.
+		-->
+		<Sort field="request_id" order="1" />
+
+		<!--
+			name:      Name of the shortcut.
+			view:      View in which the shortcut is stored.
+			query:     Query in DQL 
+			text:      Value in the text field when the shortcut is stored.
+			filter:    Text filter applied.
+			isDefault: True if this shortcut is the default one.
+			isPublic:  True if this shortcut can be shared.
+			listAll:   True if the listAll checkbox was checked when the shortcut was saved.
+		-->
+		<Shortcut 
+			name="Requests_By_Peter"
+			view="1"
+			query="log:reiss stat:open,active -cat:production_configuration -assignee:*sethig,*hussains"
+			text=""
+			filter=""
+			isDefault="true"
+			isPublic="false"
+			listAll="false"
+			baShortcut="false"
+		/>
+	</BusinessArea>
+</TBitsLite>

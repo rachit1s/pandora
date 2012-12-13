@@ -1,0 +1,24 @@
+<TR ID='<%=id%>' name='<%=id%>'>
+    <TD 
+        class='<%=className%>' 
+        nowrap 
+        onclick="openShortcut('<%=encName%>','<%=isPublic%>', 'false')">
+        <%=encName%>
+    </TD>
+    <TD align='center'>
+        <input 
+            type="checkbox" 
+            class='grp-chbox' 
+            id="<%=chboxId%>" 
+            onclick="markAsPrivate('<%=encName%>',this, '<%=isPublic%>')"
+            NAME="<%=chboxId%>" <%=isPublicChecked%>
+        />
+    </TD>
+    <TD align='center' onclick="removeShortcut('<%=encName%>','<%=id%>', event, '<%=isDefault%>', 'false')">
+        <img 
+            width="16" 
+            height="16" 
+            src="<%=nearestPath%>web/images/ckdeny.gif" 
+        />
+    </TD>
+</TR>

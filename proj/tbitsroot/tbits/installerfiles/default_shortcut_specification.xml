@@ -1,0 +1,103 @@
+<shortcuts>
+  <skipIfNotSupported/>
+  <programGroup defaultName="tBits" location="applications"/>
+
+  <shortcut
+    name="Start tBits Server"
+    target="$INSTALL_PATH\tomcat\bin\startup.bat"
+	commandLine=""
+    workingDirectory="$INSTALL_PATH\tomcat\bin\"
+    description="It starts the tomcat server that runs tBits."
+    iconFile="$INSTALL_PATH\startserver.ico"
+    initialState="normal"
+    programGroup="yes"
+    desktop="yes"
+    applications=""
+    startMenu="no"
+    startup="no">
+  </shortcut>
+ 
+ <shortcut
+    name="Stop tBits Server"
+    target="$INSTALL_PATH\tomcat\bin\shutdown.bat"
+    commandLine=""
+    workingDirectory="$INSTALL_PATH\tomcat\bin\"
+    description="It stops the tomcat server that runs tBits."
+    iconFile="$INSTALL_PATH\stopserver.ico"
+    iconIndex="0"
+    initialState="normal"
+    programGroup="yes"
+    desktop="yes"
+    applications="no"
+    startMenu=""
+    startup="no">
+  </shortcut>
+
+<shortcut
+     name="tBits"
+     programGroup="yes"
+     desktop="yes"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="$INSTALL_PATH\tbits.url"
+     commandLine=""
+     description="Opens up the webpage of running tBits">
+  </shortcut>
+
+	<shortcut
+     name="tBits Documentation"
+     programGroup="yes"
+     desktop="no"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="$INSTALL_PATH\tbitshelp.url"
+     commandLine=""
+     description="tBits user documentation (html format)">
+  </shortcut>
+
+<shortcut
+     name="tBits Global Website"
+     programGroup="yes"
+     desktop="no"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="$INSTALL_PATH\TransbitHomePage.url"
+     description="tBits Global Website">
+  </shortcut>
+
+  <shortcut
+     name="Uninstaller"
+     programGroup="yes"
+     desktop="no"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="$JAVA_HOME/bin/java"
+     commandLine="-jar &quot;$INSTALL_PATH\Uninstaller\uninstaller.jar&quot;"
+     initialState="noShow"
+     iconFile="$INSTALL_PATH\izpack.ico"
+     iconIndex="0"
+     workingDirectory=""
+     type="Application"
+     encoding="UTF-8"
+     description="tBits uninstaller">
+ </shortcut>
+  <shortcut
+    name="Upgrades tBits"
+    target="$INSTALL_PATH\upgrade\upgrade.bat"
+    commandLine=""
+    workingDirectory="$INSTALL_PATH\upgrade"
+    description="It updates the previous tBits to bring it on the par with the latest version available in the upgrade center."
+    iconFile=""
+    initialState="normal"
+    programGroup="yes"
+    desktop="yes"
+    applications=""
+    startMenu="no"
+    startup="no">
+  </shortcut>
+
+</shortcuts>

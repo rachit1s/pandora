@@ -1,0 +1,11 @@
+request.database.mydomain=hyd
+hyd.request.database.machinename=transbit2000
+hyd.request.database.dbname=tbits_test
+hyd.request.database.login=sa
+hyd.request.database.password=abc123
+
+request.database.mydomain=nyc
+nyc.request.database.machinename=transbit2000
+nyc.request.database.dbname=tbits_test
+nyc.request.database.login=sa
+nyc.request.database.password=abc123

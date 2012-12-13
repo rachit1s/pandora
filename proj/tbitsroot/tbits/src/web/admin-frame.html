@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title id='pagetitle'>tBits - Administration - Properties</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/admin-frame.css">
+<link rel="stylesheet" type="text/css" href="yui/build/reset-fonts-grids/reset-fonts-grids.css"> 
+<link rel="stylesheet" type="text/css" href="yui/build/fonts/fonts-min.css" />
+
+<!-- Individual YUI CSS files --> 
+<link rel="stylesheet" type="text/css" href="yui/build/container/assets/skins/sam/container.css"> 
+
+<!-- Individual YUI JS files --> 
+<script type="text/javascript" src="yui/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+<script type="text/javascript" src="yui/build/animation/animation-min.js"></script> 
+<script type="text/javascript" src="yui/build/connection/connection-min.js"></script> 
+<script type="text/javascript" src="yui/build/dragdrop/dragdrop-min.js"></script> 
+<script type="text/javascript" src="yui/build/container/container-min.js"></script> 
+<script type="text/javascript" src="yui/build/json/json-min.js"></script>
+
+<script type="text/javascript" src="scripts/admin-frame.js"></script>
+
+</head>
+
+<body id="yahoo-com" class=" yui-skin-sam">
+<script type="text/javascript">
+
+function init()
+{
+	var live = true;
+	if(!live)
+	{
+	    var dummyBAs = 
+				[ 
+					{ "name":"tBits", "displayName":"tBits Default"},
+					{ "name":"tBits1", "displayName":"tBits Default1"}
+				];
+		var dummyMenu = 
+		{
+			"AppMenu" : 
+				[
+				 {"description": "The first Menu1", "url" : "xyz1.html", "caption" : "The caption1"},
+				{"description": "The first Menu2", "url" : "xyz2.html", "caption" : "The caption2"}
+				],
+			"BAMenu" : 
+				[
+					{"description": "The first Menu4", "url" : "xyz3.html", "caption" : "The caption3"},
+					{"description": "The first Menu3", "url" : "xyz4.html", "caption" : "The caption4"}
+				]
+		};
+		var dummySettings = 
+		{
+			"displayLogout" : "true",
+			"contextPath"   : "/xyz",
+			"userLogin"     : "giris"
+		};
+		loadBAs(dummyBAs);
+		loadMenu(dummyMenu);
+		loadSettings(dummySettings);
+	}
+	else
+	{
+		showLoadingPanel();
+		retrieveAndloadBAs();
+		retrieveAndLoadMenu();
+		retrieveAndLoadSettings();
+	}
+	YAHOO.util.Event.on("subpageframe", "load", subPageFrameLoaded, "bamenu");
+	
+  docBody = document.getElementById('yahoo-com');
+  initDocBodyWidth = docBody.offsetWidth;
+	//setInterval('resizeCaller()', 500);
+}
+YAHOO.util.Event.onDOMReady(init); 
+var docBody;
+var initDocBodyWidth;
+</script>
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+		<div id="ygma">
+			<span id="miniinfo"></span><img src="images/header-first.gif" border="0"><span id="title">Administration</span>
+			<span style="float:right; margin:5px;" ><a href='../adm/' target='_blank'>Open New Administration Panel</a></span>		
+		</div>
+	</div>
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+				<div id="index-main">
+					<div id="adminpage">
+						<!-- iframe frameborder="0" scrolling="no" id="subpageframe" name="subpageframe" marginwidth="0" marginheight="0" 
+							 style="overflow:visible; width:100%; height:100%; "> </iframe> -->
+						<iframe id="subpageframe" marginwidth="0"  marginheight="0" frameborder="0" scrolling="no" 
+						vspace="0" hspace="0" style="overflow:hidden; width:100%; display:none"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="yui-b" id="tocWrapper"><!-- TABLE OF CONTENTS -->
+			<div id="toc">
+				<ul>
+					<li class="sect first">BA Specific</li>
+					<li class="bacaption">Business Area</li>
+					<li>	
+						<select size="1" id="baselect">
+							<option>Loading Business Areas...</option>
+						</select>
+					</li>
+				</ul>
+				<ul id="bamenu">
+					<li class="item">
+						<a title="Loading Properties menu...">Loading Menu...</a>
+					</li>
+				</ul>
+				<ul>
+					<li class="sect">tBits Administration</li>
+				</ul>
+				<ul id="appmenu">
+					<li class="item"><a title="Loading Properties menu...">Loading Menu...</a></li>
+				</ul>
+			</div> <!-- /toc -->
+		</div> <!-- tocWapper -->
+	</div> <!-- /bd -->
+	<div id="ft">
+			<p class="first">Copyright &copy; 2009 tBits Global All rights reserved.</p>
+	</div>
+</div> <!-- /doc3 -->
+</body>
+</html>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         id="%oda.data.source.id"
+         point="org.eclipse.datatools.connectivity.oda.dataSource">
+      <dataSource
+            driverClass="eclipse.birt.report.data.oda.csv.impl.Driver"
+            defaultDisplayName="%data.source.name"
+            setThreadContextClassLoader="false"
+            odaVersion="3.1"
+            id="%oda.data.source.id">
+         <properties>
+            <property
+                  name="tbitsHome"
+                  allowsEmptyValueAsNull="true"
+                  defaultDisplayName="tbits Home "
+                  type="string"
+                  isEncryptable="false">
+            </property>
+            <property
+                  allowsEmptyValueAsNull="false"
+                  defaultDisplayName="System ID "
+                  isEncryptable="false"
+                  name="SystemID"
+                  type="string">
+            </property>
+            <property
+                  allowsEmptyValueAsNull="false"
+                  defaultDisplayName="User ID"
+                  defaultValue="1"
+                  name="UserID"
+                  type="string">
+            </property>
+         </properties>
+      </dataSource>
+      <dataSet
+            defaultDisplayName="%data.set.name"
+            id="eclipse.birt.report.data.oda.csv.dataSet">
+         <properties>
+            <property
+                  name="property1"
+                  allowsEmptyValueAsNull="true"
+                  defaultDisplayName="Property 1"
+                  type="string"
+                  isEncryptable="false">
+            </property>
+            <property
+                  name="property2"
+                  allowsEmptyValueAsNull="true"
+                  defaultDisplayName="Property 2"
+                  type="string"
+                  isEncryptable="false">
+            </property>
+            <property
+                  name="property3"
+                  allowsEmptyValueAsNull="true"
+                  defaultDisplayName="Property 3"
+                  type="string"
+                  isEncryptable="false">
+            </property>
+            <property
+                  name="property4"
+                  allowsEmptyValueAsNull="true"
+                  defaultDisplayName="Property 4"
+                  type="string"
+                  isEncryptable="false">
+            </property>
+            <property
+                  name="property5"
+                  allowsEmptyValueAsNull="true"
+                  defaultDisplayName="Property 5"
+                  type="string"
+                  isEncryptable="false">
+            </property>
+            <property
+                  name="property6"
+                  allowsEmptyValueAsNull="true"
+                  defaultDisplayName="Property 6"
+                  type="string"
+                  isEncryptable="false">
+            </property>
+            <property
+                  name="property7"
+                  allowsEmptyValueAsNull="true"
+                  defaultDisplayName="Property 7"
+                  type="string"
+                  isEncryptable="false">
+            </property>
+            <property
+                  name="property8"
+                  allowsEmptyValueAsNull="true"
+                  defaultDisplayName="Property 8"
+                  type="string"
+                  isEncryptable="false">
+            </property>
+            <property
+                  name="property9"
+                  allowsEmptyValueAsNull="true"
+                  defaultDisplayName="Property 9"
+                  type="string"
+                  isEncryptable="false">
+            </property>
+         </properties>
+         <dataTypeMapping
+               nativeDataTypeCode="1"
+               odaScalarDataType="String"
+               nativeDataType="String">
+         </dataTypeMapping>
+         <dataTypeMapping
+               nativeDataTypeCode="4"
+               odaScalarDataType="Integer"
+               nativeDataType="Integer">
+         </dataTypeMapping>
+         <dataTypeMapping
+               nativeDataTypeCode="8"
+               odaScalarDataType="Double"
+               nativeDataType="Double">
+         </dataTypeMapping>
+         <dataTypeMapping
+               nativeDataTypeCode="3"
+               odaScalarDataType="Decimal"
+               nativeDataType="BigDecimal">
+         </dataTypeMapping>
+         <dataTypeMapping
+               nativeDataTypeCode="91"
+               odaScalarDataType="Date"
+               nativeDataType="Date">
+         </dataTypeMapping>
+         <dataTypeMapping
+               nativeDataTypeCode="92"
+               odaScalarDataType="Time"
+               nativeDataType="Time">
+         </dataTypeMapping>
+         <dataTypeMapping
+               nativeDataTypeCode="93"
+               odaScalarDataType="Timestamp"
+               nativeDataType="Timestamp">
+         </dataTypeMapping>
+         <dataTypeMapping
+               nativeDataTypeCode="16"
+               odaScalarDataType="Boolean"
+               nativeDataType="Boolean">
+         </dataTypeMapping>
+      </dataSet>
+   </extension>
+   <extension
+         point="org.eclipse.datatools.connectivity.connectionProfile">
+      <category
+            name="%data.source.name"
+            parentCategory="org.eclipse.datatools.connectivity.oda.profileCategory"
+            id="%oda.data.source.id">
+      </category>
+      <connectionProfile
+            pingFactory="org.eclipse.datatools.connectivity.oda.profile.OdaConnectionFactory"
+            name="%connection.profile.name"
+            category="%oda.data.source.id"
+            id="%oda.data.source.id">
+      </connectionProfile>
+      <connectionFactory
+            name="ODA Connection Factory"
+            profile="%oda.data.source.id"
+            class="org.eclipse.datatools.connectivity.oda.profile.OdaConnectionFactory"
+            id="org.eclipse.datatools.connectivity.oda.IConnection">
+      </connectionFactory>
+   </extension>
+
+</plugin>

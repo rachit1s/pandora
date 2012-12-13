@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>Add User</title>
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<link rel="stylesheet" type="text/css" media="screen" href="<%=nearestPath%>web/css/<%=cssFile%>">
+	    <input type="hidden" name="sysPrefix" id="sysPrefix" value="<%=sysPrefix%>" />
+	    <input type="hidden" name="nearestPath" id="nearestPath" value="<%=nearestPath%>" />
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+		<script language="javascript">
+			YAHOO.namespace("transbit.tbits");
+			YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+			var skipcycle = false;
+	    </script>
+	</head>
+	<body class="dialog" onkeydown="return onKeyDownBody(event);" onload="onBodyLoadUsers()">
+		<FORM id="addNewUserForm" name="addNewUserForm" method="post">
+		<table style="width: 100%">
+		    <tr>
+		        <td class="sx" width="10%" align="right">Name</td>
+		        <td width="90%" align="left">
+		            <input class="sx wickEnabled" style="width: 100%;" id="new_user_name" name="new_user_name" type="text" onfocus="skipcycle=true" onblur="skipcycle=false">
+		        </td>
+		    </tr>
+		    <tr>
+		        <td colspan="2" align="right">
+		            <INPUT onclick="javascript:onSubmit()" class="cw b bn sxs lsb"  type="button" value="Submit">
+		        </td>
+		    </tr>
+		</table>
+		</FORM>
+		<script language="javascript">
+			var nearestPath = document.getElementById('nearestPath').value;
+		    var obj;
+		    var isIE = (document.all) ? true : false;
+		    if(isIE == true)
+		    {
+		       obj = window.dialogArguments;
+		    }
+		    else
+		    {
+		       obj = this.opener; 
+		       window.resizeTo(400,120);
+		    }
+		    
+		    function onBodyLoadUsers()
+		    {
+		        if(isIE == false)
+		        {
+		            mytimer = setTimeout('fcsOnMe()', 50);
+				}
+			}
+			
+			function fcsOnMe()
+			{
+			   if (!skipcycle)
+			     {
+			       window.focus();
+			     }
+			    mytimer = setTimeout('fcsOnMe()', 50);
+			}
+		    
+	        function onKeyDownBody(e)
+	        {
+	            var event = (document.all) ? window.event : e;
+	            var keyCode = (document.all) ? event.keyCode : e.which;
+	            if (keyCode == 13) /* On Enter */
+	            {
+	                /*if(isIE == true)
+	                {
+	                    return onSubmit();
+	                }*/
+	            }
+	            else if (keyCode == 27) /* On Escape */ 
+	            {
+	                window.close();
+	                return false;
+	            }
+	            return true;
+	        }
+	        
+	        function onSubmit()
+	        {
+	            var nameCtrl = document.getElementById("new_user_name");
+	            if (nameCtrl!= null)
+	            {
+	                var name = trim(nameCtrl.value);
+	                if ( name == "")
+	                {
+	                    alert("Specify the user to be added.");
+	                    nameCtrl.focus();
+	                    return false;
+	                }
+	                
+	                onSubmitAddUser();
+	                return false;
+	            }
+	            else
+	            {
+	                alert("Control is missing!!!\nPlease report this error to tbits-dev@tbitsglobal.com.");
+	                window.close();
+	                return false;
+	            }
+	            return false;
+	        }
+		</script>
+		<script language="javascript" src="<%=nearestPath%>web/scripts/admin.js"></script>
+		<script language="javascript" src="<%=nearestPath%>web/scripts/wac.js"></script>
+		<script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+	     <!--<script language="javascript">		
+		    var sysPrefix = obj.sysPrefix;
+		    var url = "<%=nearestPath%>search-util/" + sysPrefix + "?userInfo=true";
+		    var content = "[" + executeHttpRequest("GET", url, false) + "]";
+		    var collection = eval(content);
+		    registerDefaultCollection(collection);
+         </script>-->
+	</body>
+</html>

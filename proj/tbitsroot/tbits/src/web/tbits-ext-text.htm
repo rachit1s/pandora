@@ -1,0 +1,48 @@
+<tr id="<%=field_name%>_rteheader">
+	<td class="s b" align="right" nowrap="nowrap">
+		<%=field_label%>
+	</td>
+	<td align="right" nowrap colspan="6">
+		 <button type="button" class="sx" id="<%=field_name%>_tglBtn">Toggle <%=field_label%></button>
+	</td>
+</tr>
+
+<tr>
+	<td colspan="7" align="left">
+		<textarea 
+		    tabIndex="15" 
+			class="sx ff" 
+			style="width:99%; height: 100%;" 
+			wrap="soft" 
+			ID="<%=field_name%>" 
+			onkeydown="onKeyDownField();" 
+			name="<%=field_name%>" 
+			rows="14" 
+		     ><%=field_value%></textarea>		
+	</td>
+</tr>
+<tr>
+	<td colspan='7' align='right'>
+		<!-- <input class="cw b bn sxs lsb" value="Spell Check..."  id='<%=field_name%>_spellCheckButton' type="button" NAME="btnSpellCheck"
+        	style='visibility:hidden'tabIndex="82" onclick="javascript:spellCheck('<%=field_name%>');" /> -->
+    </td>
+    <script type='text/javascript'>
+    (function(){
+    
+    var caller = document.getElementById("caller").value;	
+    caller = caller.replace(/^\s+/, "");
+	caller = caller.replace(/\s+$/, "");
+	/*var myEditor=null;
+	var myEditor = getRichTextArea("<%=field_name%>");
+    if(caller!=1)
+    {  
+    	   var obj= new dataObj(myEditor,"<%=field_name%>_rteheader");
+    	   myEditor.on('afterRender',postRender,obj);    	  
+    }  
+    configureSpellCheck(myEditor);
+    myEditor.render();*/      
+    toggleControl('<%=field_name%>','<%=field_name%>_tglBtn'); 
+    }
+    )();
+	</script> 
+</tr>

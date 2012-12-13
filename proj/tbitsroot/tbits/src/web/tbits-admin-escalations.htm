@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+    <head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type">
+        <title>
+            <%=title%>
+        </title>
+		<style type="text/css">
+			/*margin and padding on body element
+			  can introduce errors in determining
+			  element position and are not recommended;
+			  we turn them off as a foundation for YUI
+			  CSS treatments. */
+			body {
+				margin:0;
+				padding:0;
+			}
+		</style>
+		
+        <link rel="stylesheet" type="text/css" media="screen" href="<%=nearestPath%>web/css/<%=cssFile%>" />
+		
+		<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/fonts/fonts-min.css" />
+		<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/container/assets/skins/sam/container.css" />
+		<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/resize/assets/skins/sam/resize.css" />
+		<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/datatable/assets/skins/sam/datatable.css" />
+		<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/autocomplete/assets/skins/sam/autocomplete.css">
+				
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yuiloader/yuiloader-min.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/event/event-min.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/dom/dom-min.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/element/element-min.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/datasource/datasource-min.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/datatable/datatable-min.js"></script>		
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/container/container-min.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/resize/resize-min.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/animation/animation-min.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/autocomplete/autocomplete-min.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/connection-min.js"></script>
+		<script type="text/javascript" src="<%=nearestPath%>web/yui/build/utilities/utilities.js"></script>
+		
+		<script language="javascript" src="<%=nearestPath%>web/scripts/admin.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/messages.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/tt.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/ac.js"></script>		
+		<script type="text/javascript" src="<%=nearestPath%>web/scripts/json2.js"></script>
+		<script language="javascript" src="<%=nearestPath%>web/scripts/add-report.js"></script>		
+		<script type="text/javascript" src="<%=nearestPath%>web/scripts/admin-utils.js"></script>
+		
+		<script language="javascript">
+			YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+        </script>
+		<script language="javascript">
+			function openAddEscalationCondition(){
+				var url = "<%=nearestPath%>admin-user-escalation/<%=sysPrefix%>?pageType=condition";
+				window.open(url,'_blank','left=20, top=20, height=245, width=500,toolbar=no, location=no,status=yes, resize=yes, menubar=no, scrollbars=no,copyhistory=yes');
+			}
+			
+			function saveHierarchy(){
+				var url = "<%=nearestPath%>admin-user-escalation/<%=sysPrefix%>"
+							+ "?pageType=hierarchy"
+							+ "&sub_action=save"
+							+ "&user_id="+ document.getElementById("user_ids").value
+							+ "&childUsers=" + JSON.stringify(optionsList ("hierarchyUsers"));							
+							//+ "&parentUsers=" + JSON.stringify(optionsList ("includeUsers"))
+				var output = executeHttpRequest("POST", url, false);
+				alert(output);
+				//window.location.reload(true);			
+			}			
+					
+			function removeUserFromHierarchy(selectCtrlId, userType){
+				var userCtrl = document.getElementById("user_ids");
+				var userId = userCtrl.options[userCtrl.options.selectedIndex].value;
+				var selectCtrl = document.getElementById(selectCtrlId);
+				var optionElem = selectCtrl.options[selectCtrl.options.selectedIndex];
+				var deletionUrl = "<%=nearestPath%>admin-user-escalation/<%=sysPrefix%>"
+									+ "?pageType=hierarchy"
+								 	+ "&sub_action=deleteFromHierarchy"
+									+ "&userType=" + userType
+									+ "&userId=" + userId
+									+ "&removeUser=" + optionElem.value;
+				var deleted = executeHttpRequest("POST", deletionUrl, false);								
+				selectCtrl.removeChild(optionElem);
+				//window.location.reload(true);
+				//openEscalationHierarchy();
+			}
+		</script>
+    </head>
+    <body onLoad="onLoadBodyUsers();getEscConditionTable()"> <!-- main-navigator -->
+        <FORM name="adminUsersForm" id="adminUsersForm" method="post">
+            <input type="hidden" name="nearestPath" id="nearestPath" value="<%=nearestPath%>" />
+            
+            <DIV class="hb bhs" style="margin: 0ex 1ex 0.5ex 1ex;"><!-- properties -->
+                <DIV class="hsp">
+                    <TABLE id="Table3" cellSpacing="3" cellPadding="0" width="95%">
+                        <!--TR>
+                            <TD class="sx" colSpan="3"><SPAN class="b">Settings:</SPAN>&nbsp;&nbsp;&nbsp;<A href=""><SPAN class="b cb" id="categorySpan">Hierarchy</SPAN></A>&nbsp;|&nbsp;<A href="" id="roleSpan"><SPAN class="l cb">Conditions</SPAN></A>&nbsp;
+                            </TD>
+                        </TR-->
+                        <TR>
+                            <TD class="bos" colSpan="3" height="2"></TD>
+                        </TR>
+                        <TR>
+                            <TD vAlign="top">
+                                <TABLE id="UsersTableId" cellSpacing="0" cellPadding="0" width="95%">
+                                    <TR>
+                                        <TD width="175" vAlign="top">
+                                            <TABLE id="Table5" cellSpacing="3" cellPadding="0" width="99%">
+                                                <TR>
+                                                    <TD class="sx" vAlign="top" algin="left"><SPAN class="b">Escalate To:</SPAN><BR>
+                                                        <SELECT id="user_ids" style="WIDTH: 170px" size="20" name="user_ids" onChange="javascript:openEscalationHierarchy();">
+                                                            <%=user_ids%>
+                                                        </SELECT>
+                                                    </TD>
+                                                </TR>                                                
+                                            </TABLE>
+                                        </TD>
+                                        <TD class="bos" width="2"></TD>
+                                        <TD vAlign="top">
+                                            <div id="divReplacement" name="divReplacement" style="width:95%">
+                                                <%=divReplacement%>												
+                                            </div>
+											<table style="width:70%">
+												<tr>
+													<td>
+														<div class=" yui-skin-sam" style="width:70%">
+															<div id="userautocomplete2">
+																<input id="userinput2"  name="user-input2" type="text">
+																<div id="usercontainer2"></div>
+															</div>
+														</div>			
+													</td>
+												</tr>
+												<tr><td><br /></td><td></td><br /></tr>
+												<tr>
+													<td>
+													<input id="add2" type="button" name="adduser2" value="Add" onClick="javascript:addHierarchyUser ('userinput2','hierarchyUsers');">	
+													<input id="remove2" type="button"  name="removeUser2" value="Remove" onClick="javascript:removeUserFromHierarchy ('hierarchyUsers','childUser');">
+													</td>
+												</tr>
+												</table>
+											<!--div>
+												<input type="button" value="Save" onClick="saveHierarchy()" />
+											</div-->
+                                        </TD>
+                                    </TR>
+                                </TABLE>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="bos" colSpan="3" height="2"></TD>
+                        </TR>
+                    </TABLE>
+                </DIV>
+				<DIV class="hsp yui-skin-sam" style="display:block">
+					<div>
+						<h2>Escalation Conditions:</h2>	
+					</div>
+					<div id="conditions">
+					</div><br />
+					<div>
+						<input type="button" value="Add" onClick="javascript:openAddEscalationCondition();">
+					</div>
+				</DIV>
+            </DIV>
+            <DIV style="display: none;" id="allTypeFields" name="allTypeFields" width="100px">
+                <%=allTypeFields%>
+            </DIV>
+        </FORM>
+		<script type="text/javascript">
+			function getEscConditionTable(){
+				var rTable = executeHttpRequest("POST","<%=nearestPath%>admin-escalation-table/<%=sysPrefix%>?actionType=getTable", false);		
+				YAHOO.tbits.escalations.conditionsData = eval (rTable);
+			}
+		</script>
+		
+		<script type="text/javascript">
+			YAHOO.namespace ("tbits.escalations");
+			YAHOO.util.Event.addListener(window, "load", function() {
+			YAHOO.tbits.escalations.tableHandler = new function() {
+			var myColumnDefs = [{key:"severity_id", label:"Severity", sortable:true},
+								{key:"span", label:"Span", sortable:true},
+								{key:"category_id", label:"Category", sortable:true},
+								{key:"status_id", label:"Status", sortable:true},
+								{key:"type_id", label:"Type", sortable:true},						
+								{key:"delete",label:"Delete", formatter:function(elCell) {
+									elCell.innerHTML = "<img src= \"/web/images/ckdeny.gif\" title= \"delete row\"/>";
+									elCell.style.cursor = "pointer";
+								}}];							
+			this.myDataSource = new YAHOO.util.DataSource(YAHOO.tbits.escalations.conditionsData);
+			this.myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+			this.myDataSource.responseSchema = {
+				fields: ["severity_id","span","category_id","status_id","type_id"]
+			};
+		
+			this.myDataTable = new YAHOO.widget.DataTable("conditions",
+					myColumnDefs, this.myDataSource, {caption:""});
+					
+			this.myDataTable.subscribe("cellDblclickEvent",this.myDataTable.onEventShowCellEditor);
+			this.myDataTable.subscribe("cellClickEvent",function(ev) {	
+				var target = YAHOO.util.Event.getTarget(ev); 
+				var column = this.getColumn(target);
+				var arecord = this.getRecord(target);
+				if (column.key == "delete") {
+					if (confirm("Are you sure you want to delete the row ?")) {
+						var query = "?actionType=delete&severity=" + arecord.getData("severity_id")
+											+"&span=" + arecord.getData("span")
+											+"&category=" + arecord.getData("category_id")
+											+"&status=" + arecord.getData("status_id")
+											+"&requestType=" + arecord.getData("type_id");
+						var resp = executeHttpRequest ("GET","<%=nearestPath%>admin-escalation-table/<%=sysPrefix%>" + query ,false);	
+						if (eval (resp) == true) {							
+							this.deleteRow(target);						
+						}
+					}
+				} /*else {
+					//this.myDataTable.onEventShowCellEditor(ev);
+				}*/
+			});
+			};
+		});
+		</script>
+		<script type="text/javascript">
+			var usersList = <%=usersList%>;		
+			//YAHOO.example.ACJSArray1 = autoCompleteFunction ('userinput1', 'usercontainer1');
+			YAHOO.example.ACJSArray2 = autoCompleteFunction ('userinput2', 'usercontainer2');		
+			
+			function autoCompleteFunction (userinput, usercontainer){
+				// Instantiate second JS Array DataSource
+				this.oACDS = new YAHOO.widget.DS_JSArray(usersList);
+											
+				// Instantiate first AutoComplete
+				this.oAutoComp = new YAHOO.widget.AutoComplete(userinput,usercontainer, this.oACDS);
+				this.oAutoComp.prehighlightClassName = "yui-ac-prehighlight";
+				this.oAutoComp.typeAhead = true;
+				this.oAutoComp.useShadow = true;
+				this.oAutoComp.minQueryLength = 0;
+				this.oAutoComp.textboxFocusEvent.subscribe(function(){
+					var sInputValue = YAHOO.util.Dom.get(userinput).value;
+					if(sInputValue.length === 0) {
+						var oSelf = this;
+						setTimeout(function(){oSelf.sendQuery(sInputValue);},0);
+					}
+				});								
+			}
+		</script>
+		<script>
+			function addHierarchyUser(textCtrlId, selectCtrlId){	
+				var textCtrl = document.getElementById (textCtrlId);
+				var userLogin = textCtrl.value;
+				if (!isExists (userLogin, selectCtrlId)){
+					if (userLogin != ""){
+						var elem = document.createElement('Option');
+						elem.value = userLogin;	
+						elem.setAttribute('id', userLogin);					
+						elem.innerHTML = textCtrl.value;				
+						var selectCtrl= document.getElementById(selectCtrlId);
+						selectCtrl.appendChild(elem);
+						saveHierarchy();
+					}
+				}	
+				else{
+					alert ("User: " + "\"" + userLogin + "\" already exists in the list");					
+				}
+				textCtrl.value="";				
+			}
+		</script>	
+    </body>
+</html>

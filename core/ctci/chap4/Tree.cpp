@@ -100,15 +100,40 @@ class Tree
     Tree* leftTree;
     T data;
     Tree* rightTree;
+    Tree* parent;
 
   public:
 
     Tree( Tree* leftTree, T& data, Tree* rightTree) // keeps a copy of the data
     {
       this->leftTree = leftTree;
+      if( NULL != this->leftTree )
+        leftTree->setParent(this);
+
       this->rightTree = rightTree;
+      if(NULL != this->rightTree )
+        rightTree->setParent(this);
+
       this->data = data;
       this->visited = false;
+
+      this->parent = NULL;
+    }
+
+    Tree( Tree* leftTree, T& data, Tree* rightTree, Tree* parent) // keeps a copy of the data
+    {
+      this->leftTree = leftTree;
+      if( NULL != this->leftTree )
+        this->leftTree->setParent(this);
+
+      this->rightTree = rightTree;
+      if(NULL != this->rightTree )
+        this->rightTree->setParent(this);
+
+      this->data = data;
+      this->visited = false;
+
+      this->parent = parent;
     }
 
     ~Tree()
@@ -131,14 +156,28 @@ class Tree
       return data;
     }
 
+    void setParent(Tree* parent)
+    {
+      this->setParent(parent);
+    }
+
+    Tree* getParent() const
+    {
+      return parent;
+    }
+
     void setRightTree(Tree* rightTree)
     {
       this->rightTree = rightTree;
+      if(NULL != this->rightTree )
+        this->rightTree->setParent(this);
     }
 
     void setLeftTree(Tree* leftTree)
     {
       this->leftTree = leftTree;
+      if( NULL != this->leftTree )
+        this->leftTree->setParent(this);
     }
 
     void setData(T& data)

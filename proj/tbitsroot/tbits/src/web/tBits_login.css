@@ -1,0 +1,296 @@
+@charset "utf-8";
+/* CSS Document */
+
+#container
+{
+width: 940px;
+}
+
+#topcontainer
+{
+	width: 100%;
+	height: 35px;
+	margin: 0px;
+	padding: 0px;
+}
+
+#rightcurve
+{
+	height: 35px;
+	width: 30px;
+	float: left;
+}
+
+#leftcurve
+{
+	height: 35px;
+	width: 30px;
+	float: left;
+}
+
+#headpeice
+{
+	background-color: #2547a0;
+	height: 35px;
+	width: 90%;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#bodycontainer
+{
+	margin: 30px;
+	width: 90%;
+	height:auto;
+}
+
+#logincontainer
+{
+	width: 239px;
+	float: right;
+}
+
+#textcontainer
+{
+	width: 70%;
+	float: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	height:auto;
+}
+
+
+#greytext
+{
+	background-color: #eeeeee;
+	padding: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+#icon
+{
+	height: 60px;
+	width: 60px;
+	float: left;
+	margin-top: 15px;
+}
+
+#overview
+{
+	float: left;
+	width: 83%;
+	height: 55px;
+	background-image: url(customizable/icon1.jpg);
+	background-repeat: no-repeat;
+	padding-left: 75px;
+	margin-bottom: 20px;
+	padding-top: 10px;
+	clear: left;
+}
+
+#features
+{
+	float: left;
+	width: 83%;
+	height: 55px;
+	padding-left: 75px;
+	margin-bottom: 20px;
+	background-image: url(customizable/icon2.jpg);
+	background-repeat: no-repeat;
+	padding-top: 10px;
+	clear: left;
+}
+
+#benefits
+{
+	float: left;
+	width: 83%;
+	height: 55px;
+	padding-left: 75px;
+	margin-bottom: 20px;
+	background-image: url(customizable/icon3.jpg);
+	background-repeat: no-repeat;
+	padding-top: 10px;
+	clear: left;
+}
+
+#topcurve
+{
+	background-image: url(images/topcurve.gif);
+	height: 14px;
+	width: 239px;
+	float: left;
+	background-repeat: no-repeat;
+}
+
+#bottomcurve
+{
+	float: left;
+	height: 14px;
+	width: 239px;
+	background-image: url(images/bottomcurve.gif);
+	background-repeat: no-repeat;
+}
+#loginbox
+{
+	width: 217px;
+	height:auto;
+	float: right;
+	padding: 10px;
+	border: 1px solid #c5eaff;
+	margin-left: 20px;
+	margin-bottom: 15px;
+}
+
+#loginheader
+{
+	height: 22px;
+	background-image: url(images/tbitslogo1.jpg);
+	background-repeat: no-repeat;
+	background-position: right center;
+	padding-right: 75px;
+	padding-top: 8px;
+	margin-bottom: 5px;
+	width: 110px;
+}
+#recoveryheader
+{
+	height:22px;
+	padding-right: 75px;
+	padding-top: 8px;
+	margin-bottom: 5px;
+	width: 110px;
+}
+#signinbutton
+{
+	padding-left:75px;
+	
+}
+#inputtext
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	padding-top:10px;
+}
+
+#inputbox
+{
+	margin-top: 10px;
+	height: 13px;
+	border: 1px solid #CCCCCC;
+	float: right;
+	width: 140px;
+}
+
+
+
+#signin
+{
+	
+	margin-top:15px;
+	text-align:center;
+}
+
+
+#tipbox
+{
+	width: 217px;
+	height: auto;
+	float:right;
+	padding: 10px;
+	border: 1px solid #c5eaff;
+	margin-left: 20px;
+	margin-bottom: 15px;
+}
+#tipbox1
+{
+	width: 217px;
+	height: auto;
+	float:right;
+	padding: 10px;
+	border: 1px solid #c5eaff;
+	margin-left: 20px;
+	margin-bottom: 15px;
+}
+
+#contactbox
+{
+	width: 217px;
+	height:auto;
+	float:right;
+	padding: 10px;
+	border: 1px solid #c5eaff;
+	margin-left: 20px;
+	margin-bottom: 15px;
+}
+
+#otherheader
+{
+}
+
+#othertext
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	margin-top: 5px;
+	line-height: 15px;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #999999;
+	border-bottom-color: #999999;
+	padding-top: 15px;
+	padding-right: 10px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+}
+
+
+#othertext1
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	margin-top: 5px;
+	line-height: 25px;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #999999;
+	border-bottom-color: #999999;
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+}
+
+#combinealldivs{
+
+float:right;
+padding-bottom: 10px;
+padding-left: 10px;
+width: 270px;
+padding-right: 10px;
+height: auto;
+margin-left: 20px;
+padding-top: 10px;
+
+}
+#footer
+{
+	height: 16px;
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	float: left;
+	background-color: #e8e8e8;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	
+	}

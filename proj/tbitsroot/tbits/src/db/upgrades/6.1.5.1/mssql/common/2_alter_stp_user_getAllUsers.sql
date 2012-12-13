@@ -1,0 +1,33 @@
+ALTER procedure [dbo].[stp_user_getAllUsers]
+AS
+SELECT 
+	user_id,
+	user_login,
+	first_name,
+	last_name,
+	display_name,
+	email,
+	is_active,
+	user_type_id,
+	web_config,
+	windows_config,
+	is_on_vacation,
+	is_display,
+	cn,
+	distinguished_name,
+	name,
+	member_of,
+	member,
+	mail_nickname,
+	location,
+	extension,
+	mobile,
+	home_phone,
+	firm_code,
+	designation,
+	firm_address,
+	sex,
+	full_firm_name
+FROM 
+	users
+

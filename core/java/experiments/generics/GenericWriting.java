@@ -61,7 +61,7 @@ public class GenericWriting
 		fts.add(new Fruit());
 		fts.add(new Apple());
 
-		fts.add(new Object());
+		// fts.add(new Object());
 
 		List<Fruit> frs = new ArrayList<Apple>();
 

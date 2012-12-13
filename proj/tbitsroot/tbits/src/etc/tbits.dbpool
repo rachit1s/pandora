@@ -1,0 +1,62 @@
+#-----------------------------------------------------------------------------------------------
+# poolConfig.properties INFORMATION
+# Version : $Id: $
+# -----------------------------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------------------------
+# ==============
+# Admin settings 
+# ==============
+# adminUser: The user name for administering the pool via the web management interface
+# adminPassword: The password for administering the pool via the web management interface
+# adminWebManagementPort: The port for which the web management too should run
+# adminEmailAddresses: CSV Email address for the admin users to be notified of pool events.
+# adminEmailNotifcations: Whether the pool should send emails for pool events (true/false). 
+# adminPoolControllerLogFile: Location of the Pool Controller log.
+#-----------------------------------------------------------------------------------------------
+adminUser=giris
+adminPassword=abc123
+adminWebManagementPort=8090
+adminEmailAddresses=${build.transbit.logger.notifyFailureTo}
+adminEmailNotifcations=false
+adminPoolControllerLogFile=${build.adminPoolControllerLogFile}
+
+#-----------------------------------------------------------------------------------------------
+# Pool Instances
+#
+# poolName: The JNDI name to use when calling the pool
+# base: The number of base connections to hold by default
+# overflow: How many connections to hold in the overflow pool
+# log: Relative path to the log file (from the Tomcat bin directory)
+# idleTime: Number of milliseconds to keep a connection before releasing it when idle
+# messageLogging: Whether or not to log messages (such as SQL logging, connection gets() etc)
+# sizeLogging: Whether or not to log pool size data
+# driverClass: Type 4 java driver to be used for interaction with the database.
+# driverURL: JDBC URL for accessing the database.
+# user: Username to connect to the database with
+# password: Which password to use with the specified username
+# killActiveConnectionsOverAge: Number of milliseconds over which connections 
+#                                will be killed if still active (-1 disables)
+# cycleConnections: How many SQL transactions a connection should make before being refreshed, 
+#                   and creating a new one (-1 disables)
+#-----------------------------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------------------------
+# Pool - 1: General purpose pool to the tbits database.
+#-----------------------------------------------------------------------------------------------
+
+poolName=tbitsPool
+base=5
+overflow=15
+log=${build.tbits.dbpool.log}
+idleTime=12000000
+messageLogging=true
+sizeLogging=true
+driverClass=net.sourceforge.jtds.jdbc.Driver
+driverURL=jdbc:jtds:sqlserver://${build.transbit.database.server}/${build.transbit.database.name}
+user=${build.transbit.database.login}
+password=${build.transbit.database.password}
+killActiveConnectionsOverAge=120000000
+cycleConnections=1000
+
+

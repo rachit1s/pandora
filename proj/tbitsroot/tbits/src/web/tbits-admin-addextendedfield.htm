@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>TBits Administration: Add Extended Field</title>
+        <meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+        <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+        <link rel="stylesheet" href="<%=nearestPath%>web/css/<%=cssFile%>" />
+        <script language="javascript" src="<%=nearestPath%>web/scripts/admin.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+	<script>
+		YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+			 var obj = window.dialogArguments;
+			/*if(window.dialogArguments)
+			    obj = window.dialogArguments;
+			else
+				obj = getArgs();
+			*/
+	        function onKeyDownBody(e)
+	        {
+	            var event = (document.all) ? window.event : e;
+	            var keyCode = (document.all) ? event.keyCode : e.which;
+	            if (keyCode == 13) /* On Enter */
+	            {
+	                return onSubmit();
+	            }
+	            else if (keyCode == 27) /* On Escape */
+	            {
+	                window.close();
+	                return false;
+	            }
+	            return true;
+	        }
+	        function onSubmit()
+	        {
+	            var ctrl = document.getElementById("new_field_name");
+	            if (ctrl != null)
+	            {
+	                var value = trim(ctrl.value);
+	                if (value == "")
+	                {
+	                    alert("Specify a field name.");
+	                    ctrl.focus();
+	                    return false;
+	                }
+	                onSubmitAddExtendedField();
+	                return false;
+	            }
+	            else
+	            {
+	                alert("Please report this to tbits-dev@tbitsglobal.com.");
+	                window.close();
+	                return false;
+	            }
+	            return false;
+	        }
+        </script>
+    </head>
+    <body class="dialog" onkeydown="return onKeyDownBody(event);">
+        <input type="hidden" name="nearestPath" id="nearestPath" value="<%=nearestPath%>" />
+        <FORM id="addNewTypeForm" name="addNewTypeForm" method="post">
+            <div>
+                <table style="width: 100%;">
+                <colgroup>
+                    <col align="right" width="15%" />
+                    <col align="left" width="85%" />
+                </colgroup>
+                    <tr>
+                        <td class="sx">
+                            Field
+                        </td>
+                        <td class="sx">
+                            <INPUT id="new_field_name" type="text" name="new_field_name" style="width: 100%;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="sx">Type</td>
+                        <td class="sx">
+                            <SELECT id="new_field_type" name="new_field_type" style="width: 100%;">
+                                <OPTION value='1'>Bit</OPTION>
+                                <OPTION value='2'>Date</OPTION>
+                                <OPTION value='3'>Time</OPTION>
+                                <OPTION value='4'>Date-time</OPTION>
+                                <OPTION value='5'>Integer</OPTION>
+                                <OPTION value='6'>Real</OPTION>
+                                <OPTION value='7'>Varchar</OPTION>
+                                <OPTION value='8'>Text</OPTION>
+                                <OPTION value='9'>Type</OPTION>
+                                <OPTION value='11'>Attachments</OPTION>
+                                <OPTION value ='10'>UserType</option>
+                            </SELECT></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right">
+                            <INPUT onclick="javascript:onSubmit();" type="button" value="Submit">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </FORM>
+    </body>
+</html>

@@ -1,0 +1,147 @@
+This file describes the grammar of DQL --Nehra
+
+//An expression can be or/and'ed combination of two expressions
+Exp : 
+       Exp1
+       Exp1 op Exp
+
+//operator between two exp can be AND or OR
+op:    AND
+       OR
+
+
+//can be a negation 
+Exp1: 
+	Exp2
+        Not Exp1
+
+
+//there can be another expression between ()
+Exp2: 
+	(Exp)
+        fieldexp		
+
+
+//final individual condition
+fieldexp:
+      text_varchar_field         text_varchar_op_value		//field name + operator name   	
+      datetime_date_time_field   datetime_date_time_op_value	// + values depending on 
+      multivalue_field   	 multivalue_op_value 		//different types
+      type_field 	 	 type_op_value 		
+      int_real_field 	 	 int_real_op_value 		
+      bit_field 	 	 bit_op_value 		
+      has                         :                     has_fields
+
+//types using has:field condition
+hasfields:
+	multivalue_field
+	datetime_field
+	type_field
+	
+
+//present fields of text or varchar type
+text_varchar_field:
+	att
+	desc
+	summary
+	subj
+	Tags
+                                
+//all possible conditions in these types 
+text_varchar_op_value: 
+        :	"value"         		   //":" used for equals, value is a string
+        :	(value AND value AND value....)    //list of values to be ANDed
+        :	(value OR value OR value....)	   //list of values to be ORed.
+
+
+//present fields of datetime type
+datetime_date_time_field:
+	dueby
+	updateddate
+	loggeddate
+  
+  	 
+//all possible conditions in these types
+datetime_date_time_op_value:
+	before    value
+	after     value
+	between   [value,value]
+	:         value
+	last      time
+	next      time
+
+time:
+	1week
+	1month
+	1year
+	Nhours
+	Ndays
+	Nweeks
+	Nmonth
+	Nyears 
+
+N:
+	anydigit>=1
+		
+ 		
+//present fields of multitype type
+multivalue_field:
+	user
+	assign
+	logger
+	subscriber
+	to
+	appender
+
+//all possible conditions in these types
+multivalue_op_value:
+	:		 	value			//value is a string that is a name
+	: 			(value,value...)
+	membersof:expand 	(value,value...)	//list of names(strings)
+     	membersof:expand 	value			//single name
+
+
+
+//present fields of 'type' type
+type_field:
+	category
+	status
+	severity
+	Version
+	off
+	type
+
+//all possible conditions in these types
+type_op_value:
+	:	(value,value,.....)	//value is a string defining which type
+
+
+
+//present fields of int type
+int_real_field:
+	action
+	parent
+	request
+
+//all possible conditions in these types
+int_real_op_value:
+	: 	N
+	>	N
+	>=	N
+	:	N-N		//between N to N
+	<	N
+	<=	N
+	:	(N,N,....)	//including
+
+
+//present fields of bit type	
+bit_field:
+	mail
+	notlog
+	conf
+	read
+
+//all possible conditions in these types
+bit_op_value:
+	:	true
+	:	false

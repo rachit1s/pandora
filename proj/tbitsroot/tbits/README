@@ -1,0 +1,85 @@
+# Author: Sandeep Giri
+# Proposed setup mechanism for tbits.
+To work on tbits:
+1) First check out the source code from repository located at http://symphron/svn/MyNewRepository/trunk/tbits/ 
+2) To check out you might need tortoiseSVN client installed. Since you are reading this, you might have already checkout the code.
+3) Make sure that you have JDK 1.6 and Ant Installed.
+4) A good idea is to install cygwin too.
+
+The general configurations related to build is in build.properties and path related information (since it might be dependant on OS, it is kept in saparate file) is in build-win.properties.
+
+For installer preparation, you need to edit installer.properties and installer-win.properties.
+To make the complete installer preparations and instant build seemlessly smooth is a tricky part.
+Since, in build the variables are substitued at the time of build while in case of installer, the actual substitution happens at the time of installing. So, in case of installation the substitution happens twice.
+
+The installer is also a multifold process, we have checked in a complete instance of IzPack to avoid hasles of downloading it. It is always a better idea to update the Izpack but note before updating keep your classes intact. Better idea would be to move out the Java classes outside of this tree but that seems impossible at the moment. 
+
+In case, you want to modify the installer you need to add your java classes and then prepare the standalone-compiler.
+by:
+$cd IzPack
+$ant dist
+
+and to create the installer just:
+$ant create-installer
+
+Further since tBits has been branched out into ITS, KMS, PMS. You can create various installers by using -Dsystype flag.
+The following command creates request tracking system:
+$ant -Dsystype=request create-installer
+And to create KMS, you need to execute the following command:
+$ant -Dsystype=kms create-installer
+
+
+Configuring the LDAP integration
+1. ensure the following jar files are in tomcat/lib folder
+	waffle-jna.jar
+	jna.jar
+	commons-logging-1.1.1.jar 
+	platform.jar
+
+2. make sure the following configurations are uncommented in the TBITS_INSTALL/build/WEB-INF/web.xml
+
+<filter>
+  <filter-name>TbitsAuthenticationFilter</filter-name> 
+  <filter-class>transbit.tbits.authentication.LDAPAuthenticationFilter</filter-class> 
+ <init-param>
+  <param-name>enabled</param-name> 
+  <param-value>true</param-value> 
+  </init-param>
+  </filter>
+  
+ <security-role>
+    <role-name>Everyone</role-name>
+  </security-role>
+<security-constraint>
+    <display-name>Waffle Security Constraint</display-name>
+    <web-resource-collection>
+      <web-resource-name>Protected Area</web-resource-name>
+      <url-pattern>/*</url-pattern>
+      <http-method>DELETE</http-method>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+      <http-method>PUT</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Everyone</role-name>
+    </auth-constraint>
+  </security-constraint>
+  
+  <error-page>
+   <error-code>401</error-code>
+   <location>/web/401.html</location>
+  </error-page>
+
+3. ensure that the following configurations are COMMENTED in the TBITS_INSTALL/build/webapps/WEB-INF/web.xml
+
+<filter>
+  <filter-name>TbitsAuthenticationFilter</filter-name> 
+  <filter-class>transbit.tbits.authentication.AuthenticationFilter</filter-class> 
+ <init-param>
+  <param-name>enabled</param-name> 
+  <param-value>true</param-value> 
+  </init-param>
+  </filter>
+
+To revert back to normal form based login process uncomment the code in step 3 and comment the code in step 2.
+

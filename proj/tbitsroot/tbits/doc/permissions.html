@@ -1,0 +1,412 @@
+﻿<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<style type="text/css">
+.style1 {
+	margin-left: 49px;
+	margin-right: 0px;
+}
+.style2 {
+	border: 1px solid #008000;
+	text-align: justify;
+	border-left-style: dotted;
+}
+.newStyle1 {
+	border-style: dashed;
+}
+</style>
+</head>
+
+<body>
+<h2>Roles: </h2>
+
+<table class="style2">
+<tr>
+<td style="width: 228px">
+	<h3>tBits Internal Roles:</h3>
+	<ul>
+	<li>SuperUser</li>
+	<li>Permission Admin</li>
+	<li>Admin</li>
+	</ul>
+</td>
+<td style="width: 197px">
+	<H3>Dynamic Roles:</H3>
+	<UL>
+		<LI>Logger</li>
+		<li>Assignee</li>
+		<li>Subscriber</li>
+		<li>User</li>
+	</UL>
+</td>
+<td style="width: 250px">
+<H3>User Defined Roles:</H3>
+<UL>
+	<LI>Analyst</LI>
+	<li>Customer</LI>
+	<li>Manager</LI>
+</UL>
+</td>
+</tr>
+</table>
+
+
+
+
+<H2>Permissions:</H2>
+<h3>Permission Algebra:</h3>
+<table class="style2">
+<tr>
+
+<td>
+<p class="style1" style="width: 122px">0 0 = n<br>
+<br>
+n 0 = n<br>
+0 n = n<br>
+<br>
+n n = n<br>
+0 0 = n<br>
+</p>
+
+</td>
+
+<td>
+	<p class="style1" style="width: 136px">y 0 = y<br>
+	0 y = y<br>
+	<br>
+	y y = y<br>
+	<br>
+	y n = y<br>
+	n y = y
+	</p>
+</td>
+</tr>
+</table>
+<p>&nbsp;</p>
+<table class="style2">
+<tr>
+	<th>Field Name</th>
+	<th style="width: 238px">View</th>
+	<th style="width: 139px">Add</th>
+	<th style="width: 317px">Change</th>
+</tr>
+<tr>
+	<td># U</td>
+	<td style="width: 238px">No diff</td>
+	<td style="width: 139px">No Diff</td>
+	<td style="width: 317px">No Diff</td>
+</tr>
+<tr>
+	<td>append_interface</td>
+	<td style="width: 238px">	No Diff</td>
+	<td style="width: 139px">No Diff</td>
+	<td style="width: 317px">No Diff</td>
+</tr>
+<tr>
+	<td>Assignee</td>
+	<td style="width: 238px">	If true, it shows tracking of assignees.</td>
+	<td style="width: 139px">If false,<br>
+	can not add assignee value while addition a request.</td>
+	<td style="width: 317px">if false, can not change the assignees.</td>
+</tr>
+<tr>
+	<td>Attachments</td>
+	<td style="width: 238px">	User can not open an attachment. It doesn't mean 
+	that the attachment link is not visible.</td>
+	<td style="width: 139px">If true, user can add and remove attachment to an 
+	existing request or new 
+	request.</td>
+	<td style="width: 317px">If true, User can not remove/add attachments from existing 
+	request actions. <br>
+	Note: This is only possible if user has permission on changing the 
+	description.</td>
+</tr>
+<tr>
+	<td>Business Area</td>
+	<td style="width: 238px">To view a business area or a request user must have this permission.</td>
+	<td style="width: 139px">No diff</td>
+	<td style="width: 317px">Link to Admin Page appears.</td>
+</tr>
+<tr>
+	<td>Category</td>
+	<td style="width: 238px">	No diff</td>
+	<td style="width: 139px">No diff</td>
+	<td style="width: 317px">if true, lets user to add/change category.</td>
+</tr>
+<tr>
+	<td>Cc</td>
+	<td style="width: 238px">	if true, shows the tracking of CC.</td>
+	<td style="width: 139px">All to add/change subscriber.</td>
+	<td style="width: 317px">No diff</td>
+</tr>
+<tr>
+	<td>Description</td>
+	<td style="border-width: 1; list-style: decimal; width: 238px; table-layout: fixed; azimuth: center;">	No diff</td>
+	<td style="width: 139px">If true, user can add description while updating 
+	existing request or adding a new request.&nbsp; </td>
+	<td style="width: 317px">If true, user can change previously added 
+	description. </td>
+</tr>
+<tr>
+	<td>Due Date 			</td>
+	<td style="width: 238px">if true, shows the tracking of Due Date.</td>
+	<td style="width: 139px">No Diff</td>
+	<td style="width: 317px">If true, user can set the due date of new request 
+	or existing request.</td>
+</tr>
+<tr>
+	<td>Header Description 			</td>
+	<td style="width: 238px">No diff</td>
+	<td style="width: 139px">No diff</td>
+	<td style="width: 317px">No diff</td>
+</tr>
+<tr>
+	<td>Last Update By. 			</td>
+	<td style="width: 238px"></td>
+	<td style="width: 139px"></td>
+	<td style="width: 317px"></td>
+</tr>
+<tr>
+	<td>Last Updated 			</td>
+	<td style="width: 238px"></td>
+	<td style="width: 139px"></td>
+	<td style="width: 317px"></td>
+</tr>
+<tr>
+	<td>Linked Requests 			</td>
+	<td style="width: 238px">If true, the request is tracked.</td>
+	<td style="width: 139px">If true, allows a new request to be linked.</td>
+	<td style="width: 317px">If true, allows the existing request to be linked.</td>
+</tr>
+<tr>
+	<td>Logged Date 			</td>
+	<td style="width: 238px"></td>
+	<td style="width: 139px"></td>
+	<td style="width: 317px"></td>
+</tr>
+<tr>
+	<td>Logger 			</td>
+	<td style="width: 238px">If true, tracking of this field is on.</td>
+	<td style="width: 139px">No diff</td>
+	<td style="width: 317px">If true, user can edit the logger while adding a 
+	new request or updating existing request.</td>
+</tr>
+<tr>
+	<td>Memo 			</td>
+	<td style="width: 238px">&nbsp;</td>
+	<td style="width: 139px"></td>
+	<td style="width: 317px"></td>
+</tr>
+<tr>
+	<td>Notify 			</td>
+	<td style="width: 238px">If true, tracking of this field is on.<br>
+	Tracking info is like &quot;<span id="actionDetails">[ No e-mail notification ] &quot;</span></td>
+	<td style="width: 139px">No Diff</td>
+	<td style="width: 317px">If true, user can change notify field while adding 
+	a new request or updating existing request.</td>
+</tr>
+<tr>
+	<td>Notify Logger 			</td>
+	<td style="width: 238px"><span id="actionDetails0">If true, tracking of this 
+	field is on.<br>
+	Tracking info is like <br>
+	[ Mail not sent to loggers ] </span></td>
+	<td style="width: 139px">No Diff</td>
+	<td style="width: 317px">No Diff</td>
+</tr>
+<tr>
+	<td>Office 			</td>
+	<td style="width: 238px">if true, shows the tracking.</td>
+	<td style="width: 139px">No Diff</td>
+	<td style="width: 317px">If true, user can set the due date of new request 
+	or existing request.</td>
+</tr>
+<tr>
+	<td>Parent Change</td>
+	<td style="width: 238px">If true, tracking of this field is on.</td>
+	<td style="width: 139px">No Diff</td>
+	<td style="width: 317px">If true, user can set the parent of new request or 
+	existing request.</td>
+</tr>
+<tr>
+	<td>Private 			</td>
+	<td style="width: 238px">
+	<ol>
+	<li>If false, then can not see the private BA<br>
+	even if the user has permission to view the field called &#39;Business Area</li>
+	<li>Tracking is on.</li>
+	<li>Allows user to see the private requests.</li>
+	</ol>
+	</td>
+	<td style="width: 139px">No Diff</td>
+	<td style="width: 317px">If true, user can change is_private field while adding 
+	a new request or updating existing request.</td>
+</tr>
+<tr>
+	<td>replied_to_action 			</td>
+	<td style="width: 238px"></td>
+	<td style="width: 139px"></td>
+	<td style="width: 317px"></td>
+</tr>
+<tr>
+	<td>Request 			</td>
+	<td style="width: 238px">If unchecked, throws error. So do not uncheck.</td>
+	<td style="width: 139px">If unchecked, User can not add a new request.</td>
+	<td style="width: 317px">If unchecked, user can not update and even see the 
+	details of a request. But user can see the requests in search panel.</td>
+</tr>
+<tr>
+	<td>Request Type 			</td>
+	<td style="width: 238px">if true, tracking of this field is on and also does 
+	not allow it to be seen in the search result. </td>
+	<td style="width: 139px">No diff</td>
+	<td style="width: 317px">if unchecked , user can not add a type to an 
+	existing request and even to a new request. </td>
+</tr>
+<tr>
+	<td>Severity 			</td>
+	<td style="width: 238px">if&nbsp; true, tracking of this field is on and 
+	also does not allow it to be seen in the search result. </td>
+	<td style="width: 139px">No diff</td>
+	<td style="width: 317px">if unchecked, user can&nbsp; not add a severity to 
+	an existing request and even to a new request.</td>
+</tr>
+<tr>
+	<td>Status 			</td>
+	<td style="width: 238px">if true, tracking of this field is </td>
+	<td style="width: 139px">No diff</td>
+	<td style="width: 317px">if unchecked, user can&nbsp; not add a status to an 
+	existing request and even to a new request.</td>
+</tr>
+<tr>
+	<td>Subject 			</td>
+	<td style="width: 238px">if true will show the field in the search result 
+	and also show the tracking of the field</td>
+	<td style="width: 139px">will not allow the user to add a subject if 
+	unchecked.</td>
+	<td style="width: 317px">will allow the user to add the subject in an new 
+	request but not allow him to change the subject while updating the request , 
+	if unchecked</td>
+</tr>
+<tr>
+	<td>Subscribers</td>
+	<td style="width: 238px">if true, tracking of this field is on</td>
+	<td style="width: 139px">will not allow the user to add a subscriber in an 
+	new request. if unchecked</td>
+	<td style="width: 317px">will allow the user to change the </td>
+</tr>
+<tr>
+	<td>Summary</td>
+	<td style="width: 238px">if true, i will enable the field tracking and also 
+	allow the user to see the summary. </td>
+	<td style="width: 139px">If true, allows user to add summary in new request.</td>
+	<td style="width: 317px">If true, allows user to update or add the summary 
+	to the existing request.&nbsp; </td>
+</tr>
+<tr>
+	<td>To 			</td>
+	<td style="width: 238px"></td>
+	<td style="width: 139px"></td>
+	<td style="width: 317px"></td>
+</tr>
+<tr>
+	<td>Extended Boolean field</td>
+	<td style="width: 238px">if true, tracking of this field is on</td>
+	<td style="width: 139px">will not allow the user to add the value to field 
+	in an new request. if unchecked</td>
+	<td style="width: 317px">will allow the user to change the field.</td>
+</tr>
+
+<tr>
+	<td>Extended Field</td>
+	<td style="width: 238px">If false, does not show them in request details 
+	header, update form, search columns and tracking footer.</td>
+	<td style="width: 139px">Does not make&nbsp; any difference.</td>
+	<td style="width: 317px">If false, user can not fill/select the value 
+	neither while adding a new request nor while updating an existing request.</td>
+</tr>
+
+</table>
+
+<h2>Random Notes</h2>
+<p>
+Association is allowed only the if the user has change permission on parent request id field.<br>
+Relating Requests is allowed only the if the user has add permission on parent request id field.<br>
+
+<p>
+Role 'User' doesnt mean BA user. It means any user inside the system.<br>
+Permission on 'BA- view' means a role can view BA.<br>
+If you add a user to BA and don't assign any role. It is as good as not adding him to BA.<br>
+<p>
+Private BA, If a BA is private a User will not be able to see it. It is effectively equivalent of not giving User View permission on 'BA'.<br>
+
+<h3>Field Controls - The field control applies to the whole business area. Overall permission on the field is boolean and on field control and role permission</h3>
+<table>
+<tr><th>Name</th><th style="width: 510px">Meaning</th><th>The value in DB</th></tr>
+<tr>
+	<td>Add</td>
+	<td style="width: 510px">The field will be available in Add Request form. </td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>Change</td>
+	<td style="width: 510px">The field will be available in Update Request form</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>View</td>
+	<td style="width: 510px">The field will be available in view Request form</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>Display</td>
+	<td style="width: 510px"></td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>d-action</td>
+	<td style="width: 510px">The email actions can be taken.</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>Search</td>
+	<td style="width: 510px">The field will be available in search panel</td>
+	<td>32</td>
+</tr>
+<tr>
+	<td>Set</td>
+	<td style="width: 510px">The field will be carried over</td>
+	<td>64</td>
+</tr>
+<tr>
+	<td>Hyperlink</td>
+	<td style="width: 510px">The field will be displayed as link in request user. But it is no longer honoured.</td>
+	<td>128</td>
+</tr>
+<tr>
+	<td>IS_REQUEST_UNIQUE</td>
+	<td style="width: 510px">The field value will be unique across the requests. Only valid for varchar, double, int and date. In case of double, the precision is upto four decimal places.</td>
+	<td>256</td>
+</tr>
+<tr>
+	<td>IS_ACTION_UNIQUE</td>
+	<td style="width: 510px">The field value will be unique across the actions. Only valid for varchar, double, int and date. In case of double, the precision is upto four decimal places.</td>
+	<td>512</td>
+</tr>
+<p>
+	<b>Note on Unique field contrains</b>
+	 tBits supports unique field constraints. Using these contraints you can specify whether a duplicate value for a field is allowed or not in a business area. As of now, the uniqueness criteria can be applied on real, varchar and int type of fields. On real values, the tolerance for matching is 0.00001.
+
+	The empty and null values are ignored and thus not checked for uniqueness. Though this is not valid for real types because the default is always 0.0.
+
+	You can mark the field as "Uniq in Actions" and "Uniq in Request" using the admin page "Admin Fields". These controls are available next field controls.
+
+	If a field is marked "Uniq in Actions", its value should be unique across the actions. This might be required for the cases like Correspondance Number which is unique in every action.
+
+	If a field is marked as "Uniq in Requests", it value should be unique across requests. 
+
+	Please note that never mark a field as "Uniq in Actions" as well as "Uniq in Request" because results can be unpredictable.
+</p>
+</table>
+</body>
+</html>

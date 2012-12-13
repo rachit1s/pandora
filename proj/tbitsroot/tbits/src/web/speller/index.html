@@ -1,0 +1,179 @@
+<html>
+	<head>
+		<title>Spell Check Tester</title>
+		<style type="text/css">
+body {
+	font-family:verdana, helvetica, arial, sans-serif;
+	font-size:small;
+	color:black;
+	background:white;
+	margin-top:0;
+	margin-left:0;
+	margin-right:0;
+}
+table {
+	color:#000000;
+	background:#FFFFFF;
+}
+td, p {
+	font-family:verdana, helvetica, arial, sans-serif;
+	font-size:small;
+}
+h1 {
+	font-family: sans-serif;
+	font-size: 150%;
+	font-weight: bold;
+	margin-top:.8em;
+	letter-spacing:2;
+}
+h2 {
+	font-family: sans-serif;
+	font-size: 125%;
+	font-weight: bold;
+	letter-spacing:2;
+}
+h3 {
+	font-family: sans-serif;
+	font-size: 100%;
+	font-weight: bold;
+	letter-spacing:2;
+}
+img {
+	vertical-align: middle;
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	color: blue;
+	background-color: #EBEBEB;
+}
+a.headerlink {
+	color: #EBEBEB;
+	/*text-decoration: none;*/
+	background-color: #999999;
+}
+a.headerlink:hover {
+	color: #FFFFFF;
+	background-color: transparent;
+	text-decoration: underline;
+}
+a.imghref:hover {
+	background-color: transparent;
+}
+.smaller {
+	font-size: 75%;
+}
+</style>
+		<script src="spellChecker.js"></script>
+		<script>
+function openSpellChecker( txt ) {
+	var txt1 = document.testform.words2test;
+	var txt2 = document.testform.words2test2;
+
+	var speller = new spellChecker( txt1, txt2 );
+	speller.openChecker();
+}
+
+</script>
+	</head>
+	<body>
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr valign="top">
+				<td width="100"> <!-- begin left nav table-->
+					<table border="0">
+						<tr bgcolor="E6EEB5">
+							<td>&nbsp;</td>
+						</tr>
+						<tr bgcolor="D2E17B">
+							<td>&nbsp;</td>
+						</tr>
+						<tr bgcolor="B5CC2F">
+							<td align="right">&nbsp;
+								<span style="font-size:8pt; font-family:arial; font-weight:bold;
+	color:FFFFFF">Speller Pages</span>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								<a href="http://spellerpages.sourceforge.net/index.html">
+									<span style="font-size:8pt; font-family:arial;
+	font-weight:bold; color:999999">home</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								<a href="http://spellerpages.sourceforge.net/about.html">
+									<span style="font-size:8pt; font-family:arial;
+	font-weight:bold; color:999999">about</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								<span style="font-size:8pt; font-family:arial; font-weight:bold;
+	color:000000">online demo</span>
+							</td>
+						</tr>
+						<tr bgcolor="999999">
+							<td align="right">
+								<span style="font-size:8pt; font-family:arial; font-weight:bold;
+	color:FFFFFF">sf.net links</span>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								<a href="http://sourceforge.net/projects/spellerpages/">
+									<span style="font-size:8pt; font-family:arial; font-weight:bold;
+	color:999999">project page</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								<a href="http://sourceforge.net/project/showfiles.php?group_id=86602">
+									<span style="font-size:8pt; font-family:arial; font-weight:bold;
+	color:999999">download</span></a>
+							</td>
+						</tr>
+						<tr bgcolor="FFFFFF">
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<p><a href="http://sourceforge.net/projects/spellerpages/"><img src="http://sourceforge.net/sflogo.php?group_id=86602&type=1" width="88" height="31"
+											border="0" alt="SourceForge.net Logo" /></a><br />
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<p><a href="http://www.netjs.com/"><img src="images/netjs-devel.gif" width="88" height="31" border="0" alt="netJS logo" /></a><br />
+								</p>
+							</td>
+						</tr>
+					</table> <!--End left nav table-->
+				</td>
+				<td width="5%">&nbsp;&nbsp;&nbsp;</td>
+				<td width="650">
+					<h1>Speller Pages</h1>
+					<form name="testform">
+						<textarea name="words2test" rows="10" cols="60">
+</textarea> <textarea name="words2test2" rows="10" cols="60">
+</textarea>
+						<br />
+						<input type="button" value="Check Spelling" onClick="openSpellChecker();" />
+					</form>
+					<hr noshade />
+					<p class="smaller">
+						<a href="http://spellerpages.sourceforge.net">home</a> &middot; <a href="http://spellerpages.sourceforge.net/about.html">
+							about</a> &middot; online demo
+					</p>
+					<p class="smaller">
+						sf.net - <a href="http://sourceforge.net/projects/spellerpages/">project page</a>
+						&middot; <a href="http://sourceforge.net/project/showfiles.php?group_id=86602">download</a>
+					</p>
+				</td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,824 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<style type="text/css">
+.bh {
+	text-align: center;
+	height: 21px;
+	border: solid 1px #000000;
+	border-right: none;
+	border-top: none
+}
+
+.bht {
+	text-align: center;
+	height: 21px;
+	border: solid 1px #000000;
+	border-right: none;
+	border-left: none;
+	border-top: none
+}
+</style>
+
+<link rel="stylesheet" type="text/css" media="screen" href="<%=nearestPath%>web/css/cal-blue.css" />
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/fonts/fonts-min.css" />
+<!-- Individual YUI CSS files --> 
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/assets/skins/sam/skin.css"> 
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/autocomplete/assets/skins/sam/autocomplete.css"> 
+
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/event.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/connection.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/container/container-min.js"></script> 
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/animation/animation-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/dragdrop/dragdrop-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/menu/menu-min.js"></script> 
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/element/element-min.js"></script> 
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/button/button-min.js"></script> 
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/editor/editor-min.js"></script> 
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/datasource/datasource-min.js"></script> 
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/autocomplete/autocomplete-min.js"></script> 
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/utilities/utilities.js"></script>
+
+<script type="text/javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/scripts/search.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/scripts/cal.js"></script>
+
+<script type="text/javascript" src="<%=nearestPath%>web/scripts/tbits-yui-utils.js"></script>
+
+
+<script type="text/javascript">
+ 	YAHOO.namespace("transbit.tbits");
+	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";	
+</script>
+
+<style type="text/css">
+	table {width:90%;}
+	.tableWrapper {text-align:center}
+	.tr0 {background-color:#FFFFFF;}
+	.tr1 {background-color:#FFFFFF;}
+	.col0 {font-size:9pt; text-align:center; border: solid 1px #000000; border-right: none; border-left: none;border-collapse:collapse}
+	.col1 {font-size:9pt; text-align:center; border: solid 1px #000000; border-right: none;border-collapse:collapse}
+	.col2 {font-size:9pt; text-align:center; border: solid 1px #000000; border-right: none;border-collapse:collapse}
+	.col3 {font-size:9pt; text-align:center; border: solid 1px #000000; border-right: none;border-collapse:collapse}
+	.col4 {font-size:9pt; text-align:center; border: solid 1px #000000; border-right: none;border-collapse:collapse}
+	.col5 {font-size:9pt; text-align:center; border: solid 1px #000000; border-right: none;border-collapse:collapse}
+	.col6 {font-size:9pt; text-align:center; border: solid 1px #000000; border-right: none;border-collapse:collapse}
+	.col7 {font-size:9pt; text-align:center; border: solid 1px #000000; border-right: none;border-collapse:collapse}
+	.col8 {font-size:9pt; text-align:left; border: solid 1px #000000;border-collapse:collapse}
+</style>
+<script type="text/javascript">
+/*
+ * This method returns list of values for each row in the table and particular column
+ */
+ //var tableData = [{request_id:1, doc_no:2, ref_no:3, desp:'whatever',action:'client',sl_no:4,copies:1},
+ //		 {request_id:11, doc_no:22, ref_no:33, desp:'whichever',action:'field',sl_no:45,copies:1}];
+  	var request = <%=tableData%>;
+    var tableData = eval (request);
+	
+    var typeList = <%=typeList%>
+    var documentTypes = eval (typeList);
+
+    var catList = <%=catList%>
+    var approvalCategories = eval (catList); 
+                   
+    function createList(fieldname,length)
+	{
+		var list = '';
+		for (var i = 0; i <length; i++){
+			var val = getValue(fieldname+i);		
+			if ((val=='') || (val== null) || val ==' ')
+				val= '-';				
+			list = (i==0) ? encodeURIComponent(val) : list + "," + encodeURIComponent(val);					
+		}
+		return list;
+	} 
+
+    function createBrSeparatedList(fieldname,length)
+	{
+		var list = '';
+		for (var i = 0; i <length; i++){
+			var val = getValue(fieldname+i);		
+			if ((val=='') || (val== null) || val ==' ')
+				val= '-';					
+			list = (i==0) ?  val : list + "<br><br>" + val;					
+		}
+		return list;
+	} 
+   
+    function transmittalPage()
+    {   
+		var finalurl = "<%=nearestPath%>transmittal?requestType=preview&ba=<%=sysPrefix%>&requestList=<%=requestList%>" + getParameters();
+		window.open(finalurl,"_self","resizable=yes, toolbar=yes, location=yes, status=yes,  scrollbars=yes, menubar=yes, copyhistory=yes");
+    }	 
+    	
+	function fillTable()
+    {
+	var tbodyElem = document.getElementById("selectionTbody");
+	var trElem, tdElem, txtNode;	
+	var serialNo = 0;
+	var length = tableData.length;
+	
+	for (var j=0,serialNo=1; j < length; j++,serialNo++) {	
+	   trElem = tbodyElem.insertRow(tbodyElem.rows.length);
+	   trElem.className = "tr" + (j%2);
+	   trElem.onClick = function(){this.rowIndex;};	
+	   // serialNo = serialNo + 1;
+	   tdElem = trElem.insertCell(trElem.cells.length);
+	   tdElem.className = "col0";
+	   txtNode = document.createTextNode(serialNo);
+	   tdElem.appendChild(txtNode);
+
+	   /*tdElem = trElem.insertCell(trElem.cells.length);
+	   tdElem.className = "col1";
+	   txtNode = document.createTextNode("-");
+	   tdElem.appendChild(txtNode);*/
+	   
+	   tdElem = trElem.insertCell(trElem.cells.length);
+	   tdElem.className = "col1";
+	   txtNode = document.createTextNode(tableData[j].desp);
+	   tdElem.appendChild(txtNode);
+	   
+	   tdElem = trElem.insertCell(trElem.cells.length);
+	   tdElem.className = "col2";
+	   txtNode = document.createTextNode(tableData[j].doc_no);
+	   tdElem.appendChild(txtNode);
+		
+	   tdElem = trElem.insertCell(trElem.cells.length);
+	   tdElem.className = "col3";
+	   txtNode = document.createTextNode(tableData[j].rev_no);
+	   tdElem.appendChild(txtNode);
+		
+	   tdElem = trElem.insertCell(trElem.cells.length);
+	   tdElem.className = "col4";
+	   txtNode = document.createElement('input');
+	   txtNode.setAttribute('id', "copies"+j);
+	   txtNode.setAttribute('name', "copies"+j);
+	   txtNode.value=tableData[j].sheets;
+	   txtNode.style.width ="2em"; 
+	   txtNode.style.textAlign = "center";
+	   tdElem.appendChild(txtNode);		
+	  	    
+	   tdElem.appendChild(txtNode);		   		   
+	   tdElem = trElem.insertCell(trElem.cells.length);
+	   tdElem.className = "col5";
+	   txtNode = document.createElement('select');	
+	   txtNode.setAttribute('id', "cat"+j);
+	   txtNode.setAttribute('name', "cat"+j);  
+	   optValue = approvalCategories;
+		    			   
+	   for (var index = 0;index<optValue.length ; index++)
+	   {
+		   var option = document.createElement ('option');	   	
+		   option.text = optValue[index].name;
+		   option.value = optValue[index].value; 
+		   
+		   try {
+			txtNode.add (option ,null);
+		   }
+			catch (exp){
+				txtNode.add(option);
+			}
+	   }
+	   txtNode.style.width ="10em";  
+	   tdElem.appendChild(txtNode);
+	   
+	   //set the option, doing is separately since selected=true did not work
+	  /* setCodeOption("cat"+j , tableData[j].appCategory);
+
+	   tdElem.appendChild(txtNode);		   		   
+	   tdElem = trElem.insertCell(trElem.cells.length);
+	   tdElem.className = "col6";
+	   txtNode = document.createElement('select');	
+	   txtNode.setAttribute('id', "type"+j);
+	   txtNode.setAttribute('name', "type"+j);  
+	   optValue = documentTypes;
+		   //[{name:"IN - For Information" , value:"IN"},
+	   	   // {name:"CD - Compact Disc", value:"CD"}];
+			   
+	   for (var index = 0;index<optValue.length ; index++)
+	   {
+		   var option = document.createElement ('option');	   	
+		   option.text = optValue[index].name;
+		   option.value = optValue[index].value; 
+		   
+		   try {
+			txtNode.add (option ,null);
+		   }
+			catch (exp){
+				txtNode.add(option);
+			}
+	   }
+	   txtNode.style.width ="10em";  
+	   tdElem.appendChild(txtNode);
+	   
+	   //set the option, doing is separately since selected=true did not work
+	   setCodeOption("type"+j , tableData[j].docType);*/
+
+	   tdElem = trElem.insertCell(trElem.cells.length);
+	   tdElem.className = "col6";
+	   txtNode = document.createElement('input');
+	   txtNode.setAttribute('id', "summary"+j);
+	   txtNode.setAttribute('name', "summary"+j);
+	   txtNode.value=tableData[j].summary;
+	   txtNode.style.width ="10em"; 
+	   txtNode.style.textAlign = "center";
+	   tdElem.appendChild(txtNode);	
+	   
+	   //Finally the attachments column
+	   tdElem = trElem.insertCell(trElem.cells.length);
+	   tdElem.className = "col7"; 
+	   //Latest attachments div
+	   var latestDiv = document.createElement('div');
+	   latestDiv.setAttribute('id', "latestAtt"+j);
+	   tdElem.appendChild(latestDiv);
+	   //Previous attachments div
+	   var othersDiv = document.createElement('div');
+	   othersDiv.setAttribute('id', "otherAtt"+j);
+	   othersDiv.style.display='none';
+	   tdElem.appendChild(othersDiv);
+	   
+	   var latestDCRRevNumber = "";
+	   var actionDCRAttachment = tableData[j].deliverables;
+	   var hasDCRAttachments = false;	   
+	   for (attIndex = 0; attIndex< actionDCRAttachment.length; attIndex++){   
+	   		//Create 'div' element here update all the attachments for an action into it, to 
+			//demark individual actions.			
+			var divElement = document.createElement('div');	
+			divElement.setAttribute('id', "action"+j+attIndex);	
+		    var attachmentDname = actionDCRAttachment[attIndex].attDnameList.split("<br2>");	  
+		   	var attachmentName = actionDCRAttachment[attIndex].attNameList.split("<br2>");
+			var revNumber = actionDCRAttachment[attIndex].revisionNumber;
+			var dateTime = actionDCRAttachment[attIndex].dateTime;
+			
+			if (attIndex==0)
+				latestDCRRevNumber = revNumber;
+			
+		   	if (attachmentDname!="")
+		   	{					   
+			   for (i = 0; i < attachmentDname.length; i++)
+			   {			   		
+					txtNode = document.createElement('input');
+					txtNode.setAttribute('type', "checkbox");
+					txtNode.setAttribute('id', "deliverable"+j+attIndex+i);
+					txtNode.setAttribute('name', attachmentName[i]);
+					divElement.appendChild(txtNode);
+					txtNode.defaultChecked = true; 
+					txtNode.checked = 1;
+					
+					txtNode = document.createTextNode (attachmentDname[i])
+					divElement.appendChild (txtNode);
+					txtNode = document.createElement('br');					
+					divElement.appendChild(txtNode);
+					
+					/*txtNode = document.createTextNode ("Rev:" + revNumber);
+					revElem = document.createElement ('span');
+					revElem.style.color = "red";
+					revElem.appendChild (txtNode);
+					
+					txtNode = document.createTextNode (" Date: "+ dateTime);	
+					dateElem = document.createElement ('span');
+					dateElem.appendChild (txtNode);*/
+					
+					//spanElem = document.createElement ('span');			
+					//spanElem.appendChild (revElem);	
+					//spanElem.appendChild (dateElem);				
+					//divElement.appendChild(spanElem);
+					
+					txtNode = document.createElement('br');					
+					divElement.appendChild(txtNode);					
+				}
+				hasDCRAttachments = true;
+				if (revNumber === latestDCRRevNumber)
+					latestDiv.appendChild(divElement);
+				else
+					othersDiv.appendChild(divElement);	
+			}
+		  }//No. of latest attachments - for loop
+
+		  //Finally the attachments column
+		   tdElem = trElem.insertCell(trElem.cells.length);
+		   tdElem.className = "col8"; 
+		   //Latest attachments div
+		   var latestDiv = document.createElement('div');
+		   latestDiv.setAttribute('id', "latestAtt"+j);
+		   tdElem.appendChild(latestDiv);
+		   //Previous attachments div
+		   var othersDiv = document.createElement('div');
+		   othersDiv.setAttribute('id', "otherAtt"+j);
+		   othersDiv.style.display='none';
+		   tdElem.appendChild(othersDiv);
+	   
+		   var latestRevNumber = "";
+		   var actionAttachment = tableData[j].attachments;
+		   var hasAttachments = false;	   
+		   for (attIndex = 0; attIndex< actionAttachment.length; attIndex++){   
+	   		//Create 'div' element here update all the attachments for an action into it, to 
+			//demark individual actions.			
+			var divElement = document.createElement('div');	
+			divElement.setAttribute('id', "action"+j+attIndex);	
+		    var attachmentDname = actionAttachment[attIndex].attDnameList.split("<br2>");	  
+		   	var attachmentName = actionAttachment[attIndex].attNameList.split("<br2>");
+			var revNumber = actionAttachment[attIndex].revisionNumber;
+			var dateTime = actionAttachment[attIndex].dateTime;
+			
+			if (attIndex==0)
+				latestRevNumber = revNumber;
+			
+		   	if (attachmentDname!="")
+		   	{					   
+			   for (i = 0; i < attachmentDname.length; i++)
+			   {			   		
+					txtNode = document.createElement('input');
+					txtNode.setAttribute('type', "checkbox");
+					txtNode.setAttribute('id', "other-attachment"+j+attIndex+i);
+					txtNode.setAttribute('name', attachmentName[i]);
+					divElement.appendChild(txtNode);
+					txtNode.checked = 0;
+					
+					txtNode = document.createTextNode (attachmentDname[i])
+					divElement.appendChild (txtNode);
+					txtNode = document.createElement('br');					
+					divElement.appendChild(txtNode);
+					
+					/*txtNode = document.createTextNode ("Rev:" + revNumber);
+					revElem = document.createElement ('span');
+					revElem.style.color = "red";
+					revElem.appendChild (txtNode);
+					
+					txtNode = document.createTextNode (" Date: "+ dateTime);	
+					dateElem = document.createElement ('span');
+					dateElem.appendChild (txtNode);
+					
+					spanElem = document.createElement ('span');			
+					spanElem.appendChild (revElem);	
+					spanElem.appendChild (dateElem);				
+					divElement.appendChild(spanElem);
+					
+					txtNode = document.createElement('br');					
+					divElement.appendChild(txtNode);*/					
+				}
+				hasAttachments = true;
+				if (revNumber === latestRevNumber)
+					latestDiv.appendChild(divElement);
+				else
+					othersDiv.appendChild(divElement);	
+			}
+		  }//No. of latest attachments - for loop
+	   }//No. of rows - for loop
+    }	
+	
+	function setCodeOption(id, val){
+		var x=document.getElementById(id);
+		for (i=0; i<x.options.length;i++){
+			if(x.options[i].value == val)
+     				x.selectedIndex = i;
+   			}
+	}
+	
+	function getAttachmentList1 (tableData, attachmentType) {
+		var emptystring = "";
+		var reqAttachmentList = emptystring;
+		var actionAttachmentList = emptystring;		
+		for (j=0; j<tableData.length; j++) {			
+			actionAttachmentList = emptystring;					
+			var actionAttachment = "";
+			if (attachmentType == "other-attachment")
+				actionAttachment = tableData[j].attachments;
+			else
+				actionAttachment = tableData[j].deliverables;
+				
+			for (attIndex = 0; attIndex< actionAttachment.length; attIndex++) {	
+				//Get the length(number of attachments) in each action  
+				var actionAttachmentDNames = actionAttachment[attIndex].attDnameList;
+				if (actionAttachmentDNames != emptystring) {					   
+					for (i = 0; i < actionAttachmentDNames.split (",").length; i++) {
+						var chBoxField = document.getElementById (attachmentType+j+attIndex+i);
+						if((chBoxField == "undefined") || (chBoxField == null)){
+							actionAttachmentList = 	(actionAttachmentList == emptystring) ?
+														";" : actionAttachmenList + ";" + emptystring;
+						}
+						else{
+							if (chBoxField.checked) {
+								actionAttachmentList= (actionAttachmentList == emptystring) ? 
+															chBoxField.name : actionAttachmentList + ";" + chBoxField.name;						
+							}
+						}
+			   		}				   
+				}					
+			}
+			if (actionAttachmentList == emptystring)
+				actionAttachmentList = " ";
+			reqAttachmentList = (reqAttachmentList == emptystring)? 
+									actionAttachmentList : reqAttachmentList + "," + actionAttachmentList;				
+		}
+		return reqAttachmentList;
+	}	
+
+	function getAttachmentList (tableData, attachmentType) {
+		var emptystring = "";
+		var reqAttachmentList = emptystring;
+		var actionAttachmentList = emptystring;		
+		for (j=0; j<tableData.length; j++) {			
+			actionAttachmentList = emptystring;					
+			var actionAttachment = "";
+			if (attachmentType == "other-attachment")
+				actionAttachment = tableData[j].attachments;
+			else
+				actionAttachment = tableData[j].deliverables;
+				
+			for (attIndex = 0; attIndex< actionAttachment.length; attIndex++) {	
+				//Get the length(number of attachments) in each action  
+				var actionAttachmentDNames = actionAttachment[attIndex].attDnameList;
+				if (actionAttachmentDNames != emptystring) {					   
+					for (i = 0; i < actionAttachmentDNames.split ("<br2>").length; i++) {
+						var chBoxField = document.getElementById (attachmentType+j+attIndex+i);
+						if((chBoxField == "undefined") || (chBoxField == null)){
+							actionAttachmentList = 	(actionAttachmentList == emptystring) ?
+														"<br3>" : actionAttachmenList + "<br3>" + emptystring;
+						}
+						else{
+							if (chBoxField.checked) {
+								actionAttachmentList= (actionAttachmentList == emptystring) ? 
+															chBoxField.name : actionAttachmentList + "<br3>" + chBoxField.name;						
+							}
+						}
+			   		}				   
+				}					
+			}
+			if (actionAttachmentList == emptystring)
+				actionAttachmentList = " ";
+			reqAttachmentList = (reqAttachmentList == emptystring)? 
+									actionAttachmentList : reqAttachmentList + "<br2>" + actionAttachmentList;				
+		}
+		return reqAttachmentList;
+	}
+</script>
+
+<script type="text/javascript">
+	onload = function() {
+		fillTable();
+		for (i = 0; i < tableData.length; i++) {
+		    if (tableData[i].attachments.length>0){
+				var buttonElem = document.getElementById('button'+i);
+				if (buttonElem != null){
+					buttonElem.onclick = function() {
+						var tdEl = this.parentNode;
+						var rowIndex=tdEl.parentNode.rowIndex;
+						var otherDivId = 'otherAtt'+ (rowIndex-1);
+						toggleAttachments(otherDivId);
+						if (this.value == 'Show All')
+							this.value="Only Latest";
+						else{				
+							this.value='Show All';
+							var checkBoxes=document.getElementById(otherDivId).getElementsByTagName('input');
+							for (var index=0; index<checkBoxes.length;index++)
+								checkBoxes[index].checked=0;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	function toggleAttachments(id){	
+		var othersElem = document.getElementById(id);
+		if (othersElem.style.display == 'block')
+			othersElem.style.display='none';
+		else
+			othersElem.style.display='block'		
+	}
+
+	function hideDiv()
+	{
+		document.getElementById("done").style.display='none';		
+	}
+	
+	function showDiv(value)
+	{		
+		alert ("Transmittal completed. \n" + "Ref: " + value);
+		//document.getElementById("print-button").style.display='inline';
+		//window.parent.location.reload();
+	}
+
+	var handlePreviewSuccess = function(o){
+		if(o.responseText !== undefined){
+			reply = o.responseText;
+			var elem = document.getElementById ("previewBlock");
+			var newdiv = document.createElement("div");
+			newdiv.innerHTML = reply;
+			elem.appendChild (newdiv);
+			elem.style.display = "inline";
+			YAHOO.transmittal.container.wait.hide();				
+		}
+	}
+
+	var handlePreviewFailure = function(o){
+		if(o.responseText !== undefined){
+			YAHOO.transmittal.container.wait.hide();	
+			alert (o.status + ":\nStatus code message: " + o.statusText);
+		}
+	}
+	
+	var previewCallback =
+	{
+	  success:handlePreviewSuccess,
+	  failure: handlePreviewFailure
+	};
+
+	function previewTransmittalNote(){
+		document.getElementById("selectionBlock").style.display = 'none';
+		init();
+		YAHOO.transmittal.container.wait.show();			
+		var requestList = document.getElementById("requestList").value;
+		var catList =  createList ("cat", tableData.length);
+		//var typeList = createList ("type", tableData.length);
+	    var copiesList =  createList ("copies", tableData.length);
+	    var summaryList = createBrSeparatedList ("summary", tableData.length);
+	    var dToList = document.getElementById("toList").value;
+	    var dCcList = document.getElementById("ccList").value;
+	    var distributionList = dToList + "," + dCcList;
+	    var dtnNumberInfix = encodeURIComponent(document.getElementById("dtnNumberInfix").value);
+	    var actualDate = document.getElementById("ActualDate").value;
+	    YAHOO.widget.EditorInfo.getEditorById('remarks').saveHTML();
+	    var queryString = '?requestType=preview'		    				  
+	    					+ '&dcrBA=' + document.getElementById('dcrBA').value
+	    					+ '&trnType=' + document.getElementById("trnType").value
+							+ '&requestList=' + requestList		    				
+		    				+ '&catList=' + catList					//+ '&typeList=' + typeList
+	    					+ '&copiesList=' + copiesList
+	    					+ '&toList=' + dToList
+	    					+ '&ccList=' + dCcList
+	    					+ '&ActualDate=' + actualDate
+	    					+ '&summaryList=' + encodeURIComponent(summaryList)
+	    					+ '&reference=' + encodeURIComponent(document.getElementById("reference").value)
+	    					+ '&dtnNumberInfix=' + dtnNumberInfix
+	    					+ '&transmittalSubject=' + encodeURIComponent(document.getElementById("transmittalSubject").value)
+	    					+ '&remarks=' + encodeURIComponent(document.getElementById("remarks").value);
+	    var cObj = YAHOO.util.Connect.asyncRequest("get", "<%=nearestPath%>transmittal" + queryString, previewCallback);
+	    document.getElementById("previewBlock").style.display = 'inline';
+	    document.getElementById("final-buttons-div").style.display = 'inline';
+		return false;		    
+	}
+	
+	var handleSuccess = function(o){
+		if(o.responseText !== undefined){
+			reply = o.responseText;	
+			var result = eval ("(" + reply + ")");	
+			document.getElementById("create-button").style.display='none';
+			YAHOO.transmittal.container.wait.hide();
+			showDiv(result.value);
+		}
+	}
+	
+	var handleFailure = function(o){
+		YAHOO.transmittal.container.wait.hide();
+		if(o.responseText !== undefined){
+			alert (o.status + ":\nStatus code message: " + o.statusText);
+		}
+	}
+	
+	var callback =
+	{
+	  success:handleSuccess,
+	  failure: handleFailure
+	};
+
+	function logRequest(){
+		YAHOO.transmittal.container.wait.setHeader("Creating transmittal, please wait");
+		YAHOO.transmittal.container.wait.show();
+		document.getElementById("catList").value =  createList ("cat", tableData.length);
+		//document.getElementById("typeList").value = createList ("type", tableData.length);		
+	    document.getElementById("copiesList").value =  createList ("copies", tableData.length);
+	    document.getElementById("docListId").value = createList ("doc_no", tableData.length);
+	    document.getElementById("revListId").value = createList ("rev_no", tableData.length);
+	    document.getElementById("despList").value = createList ("desp", tableData.length);
+	    document.getElementById("summaryList").value = createBrSeparatedList ("summary", tableData.length);
+	    document.getElementById("deliverablesList").value = getAttachmentList (tableData, "deliverable");
+	    document.getElementById("attachmentList").value = getAttachmentList (tableData, "other-attachment");
+	    YAHOO.widget.EditorInfo.getEditorById('emailBody').saveHTML();
+		document.getElementById ("create-button").disabled = true; 
+		var formObject = document.getElementById('trnForm');
+		YAHOO.util.Connect.setForm(formObject);
+		var cObj = YAHOO.util.Connect.asyncRequest("post", "<%=nearestPath%>transmittal", callback);
+		return false;
+	}
+	
+	function getDocList()
+	{
+		var list = '';
+   		for (var i = 0; i <tableData.length; i++){
+   			if (i==0)
+   	   			list = tableData[i].doc_no;
+			else 
+				list = list + ","+ tableData[i].doc_no;
+		}
+		return list;		
+	}
+	
+	function getRevList()
+	{
+		var list = '';
+   		for (var i = 0; i <tableData.length; i++){
+   			if (i==0)
+   	   			list = tableData[i].rev_no;
+			else 
+				list = list + ","+ tableData[i].rev_no;
+		}
+		return list;		
+	}
+</script>
+</head>
+<body bgcolor="#e6f4fd" class="yui-skin-sam">
+<form id="trnForm">
+<input type="hidden" id='dcrBA' name="dcrBA" value="<%=sysPrefix%>" />
+<input type="hidden" id="requestList" name="requestList" value="<%=requestList%>"/>
+<input type="hidden" id="refListId" name="refList" value="" />
+<input type="hidden" id="docListId" name="docList" value="" />
+<input type="hidden" id="revListId" name="revList" value="" />
+<input type="hidden" id="despList" name="despList" value="" />
+<input type="hidden" id="copiesList" name="copiesList" value="" /> 
+<input type="hidden" id="catList" name="catList" value="" />
+<input type="hidden" id="summaryList" name="summaryList" value="" /> 
+<!--  input type="hidden" id="typeList" name="typeList" value="" />-->
+<input type="hidden" id="deliverableFieldId" name="deliverableFieldId" value="<%=deliverableFieldId%>" />
+<input type="hidden" id="deliverablesList" name="deliverablesList" value="" />
+<input type="hidden" id="attachmentList" name="attachmentList" value="" />
+<input type="hidden" id="transmittalProcessName" name="transmittalProcessName" value="<%=transmittalProcessName%>"/>
+<input type="hidden" id="trnType" name="trnType" value="<%=trnType%>" />
+<div id="mailBlock" style='display:block'>
+	<b>Circulation List: </b>
+	<table>
+		<tr>
+			<td style="width:8%">To:</td>
+			<td>
+				<div id="toListAutocomplete">
+					<input type="text" name="toList" id='toList' value="<%=toList%>"></input>
+					<div id="toListContainer"></div>
+				</div>
+				<br></br>
+				<br></br>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:8%">Cc:</td>
+			<td>
+				<div id="ccListAutocomplete">
+					<input type="text" name="ccList" id='ccList' value="<%=ccList%>"></input>
+        			<div id="ccListContainer"></div>
+    			</div>   			
+				<br></br>
+				<br></br>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:8%;"><p style="display:<%=actualDateDisplay%>"></>Actual Date(of transmittal)</p></td>
+			<td class="s" align="left" width="25%" >
+				<table width="100%" cellspacing="0" cellpadding="0" style="display: <%=actualDateImageDisplay%>">
+					<tbody>
+					<tr>
+						<td>
+						<input id="ActualDate" type="text" name="ActualDate" value="" onkeydown="onKeyDownField();" tabindex="49" style=""/>
+						</td>
+						<td>
+							<img id="_due_date_img_cal_ActualDate" align="left" height="22" src="<%=nearestPath%>web/images/cal.gif"/>
+							<script type="text/javascript">
+								Calendar.setup({
+								inputField : "ActualDate",
+								button : "_due_date_img_cal_ActualDate",
+								ifFormat : "%d-%b-%Y",//"%Y-%m-%d",
+								showsTime : "true",
+								timeFormat : "24" });
+							</script>
+						</td>
+						<td width="100%"> </td>
+					</tr>
+					</tbody>
+					</table>								
+				<br></br>
+				<br></br>
+			</td>
+		</tr>
+		<!--<tr>
+			<td style="width:8%;"><p style="display:<%=actualDateDisplay%>"></>Transmittal Number:</p></td>
+			<td class="s" align="left" width="25%" >
+				<table style='display:<%=actualDateDisplay%>'><tr><td><%=transmittalPrefix%></td><td><input type="text" name="preDefinedDTNNumber" id='preDefinedDTNNumber' value=""></td></tr></table>
+			</td>
+		</tr>-->
+		<tr>
+			<td style="width:8%">Comments:</td>
+			<td><textarea name="remarks" id="remarks" rows="4" cols="98" value="<%=remarks%>"><%=remarks%></textarea>
+				<script>
+					var remarksEditor = getRichTextArea("remarks", "99%", "110px");
+					remarksEditor.render();
+				</script>			
+			</td>
+		</tr>
+		<tr>
+			<td style="width:8%">Reference:</td>
+			<td><input type="text" name="reference" id='reference' size="137" value="<%=reference%>"></input>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:8%; display: <%=dtnNumberInfixDisplay%>"><%=dtnNumberInfixName%></td>
+			<td><select name="dtnNumberInfix" id='dtnNumberInfix'  style="display: <%=dtnNumberInfixDisplay%>" value="<%=dtnNumberInfix%>">
+				<%=dtnNumberInfixOptions%></select></td>
+		</tr>
+		<tr>
+			<td style="width:8%">Subject:</td>
+			<td><input type="text" name="transmittalSubject" id='transmittalSubject' size="137" value="<%=transmittalSubject%>"></input></td>
+		</tr>		
+		<tr>
+			<td style="width:8%">Email Body:</td>
+			<td><textarea name="emailBody" id="emailBody" rows="9" cols="98" value="<%=emailBody%>"><%=emailBody%></textarea></td>
+			<script>
+				var emailEditor = getRichTextArea("emailBody", "99%", "110px");
+				emailEditor.render();
+			</script>	
+		</tr>
+	</table>
+	
+	<div id="buttons1block" style="width: 99%; text-align: right;">
+		<input type="button" value='Next' id="back1" onClick="toggleDiv('mailBlock', 'selectionBlock');"/>		
+	</div>
+</div> 
+
+<div id="selectionBlock" style="display:none; font-size:12px; font-style:normal; font-variant:normal; font-family:&quot;Verdana New&quot;">
+<h3>Select the documents required for the transmittal:</h3>
+	<div class="tableWrapper">				
+		<table id="selectionTable" align="center" style="border:solid 1px #000000; width:95%; border-collapse: collapse">
+		   <thead style="font-weight:bold; font-size:10pt">	
+		   	<tr>
+				<td class="bht" style="width:5%">SL. No.</td>
+				<!--  td class="bh" style="width:5%">Ref Id.</td>-->
+				<td class="bh" style="width:15%">Description</td>
+				<td class="bh" style="width:10%">Document No.</td>
+				<td class="bh" style="width:5%">Rev.</td>
+				<td class="bh" style="width:5%">Qty.</td>
+				<td class="bh" style="width:10%">Cat</td>	
+				<td class="bh" style="width:15%">Remarks</td>
+				<td class="bh" style="width:18%"><%=deliverableField%></td>
+				<td class="bh" style="width:18%"><%=otherAttachmentField%></td>				
+			</tr>
+		   </thead>
+		   <tbody id="selectionTbody">				   	
+		   </tbody>							   
+		</table>
+		<div id="buttons2block" align="right" >
+			<input type="button" value='Back' id="back2" onClick="toggleDiv('selectionBlock', 'mailBlock')"/>
+			<input type="button" value='Preview' id="preview-button" onclick="previewTransmittalNote();"/>						
+		</div>
+	</div>		
+</div>
+
+<div id="previewBlock" style='display:none'>
+</div>
+<div id="final-buttons-div" style="display:none;text-align:right; width:95%"/>
+	<input type="button" value='Create' id="create-button" onclick="logRequest();"/>
+</div>
+</form>
+<div id="progressBar"></div> 
+<script>
+	function toggleDiv(bDivId, nDivId){
+		var bDivElem = document.getElementById(bDivId);
+		var nDivElem = document.getElementById(nDivId);
+		bDivElem.style.display= 'none';
+		nDivElem.style.display='block';		
+	}
+</script>
+
+<script>	
+	YAHOO.namespace("transmittal.container");
+
+    function init() {
+        var content = document.getElementById("progressBar");        
+        content.innerHTML = "";
+        if (!YAHOO.transmittal.container.wait) {
+            // Initialize the temporary Panel to display while waiting for external content to load
+            YAHOO.transmittal.container.wait = 
+                    new YAHOO.widget.Panel("wait",  
+                                                    { width: "240px", 
+                                                      fixedcenter: true, 
+                                                      close: false, 
+                                                      draggable: false, 
+                                                      zindex:4,
+                                                      modal: true,
+                                                      visible: false
+                                                    }
+                                                );
+    
+            YAHOO.transmittal.container.wait.setHeader("Generating preview, please wait...");
+            YAHOO.transmittal.container.wait.setBody("<img src=\"<%=nearestPath%>web/images/loading-continuous.gif\"/>");
+            YAHOO.transmittal.container.wait.render(document.body);
+        }
+    }
+</script>
+<script type="text/javascript">
+    var usersList = <%=usersList%>;		
+   	autoCompleteFunction ("toList", "toListContainer", usersList, true);
+    autoCompleteFunction ("ccList", "ccListContainer", usersList, true);	    
+</script>
+</body>
+</html>

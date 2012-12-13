@@ -1,0 +1,98 @@
+ 
+                <%--Get all Passible values of multiple Image Field Get display name of this field then Iterate and for each 
+                Value of field generate an Image
+--%>
+                <%
+                ArrayList<String> multipleImageFieldValues = ReportHelper.getFieldAllValues(requests, multipleImageField, ba.getSystemId());
+                String multipleImageFieldDN = "";
+                try{Field myField = Field.lookupBySystemIdAndFieldName( ba.getSystemId(),multipleImageField);
+                if(myField != null){
+                multipleImageFieldDN = myField.getDisplayName();
+                }
+                }catch(Exception e){
+                    e.printStackTrace();
+                    throw new Exception("Exception in fieled Lookup Field.lookupBySystemIdAndFieldName",e);
+                }
+                //declare array of dataproducers this will be set as bean to pass to cewolf tags
+                transbit.tbits.dataProducer.StaticalDataProducer[] staticalDataMultipleImage = new transbit.tbits.dataProducer.StaticalDataProducer[multipleImageFieldValues.size()];
+                StringBuffer    debugInfo = new StringBuffer();
+                int imageNuumber =0;
+                for(String imageFieldfiledValue :  multipleImageFieldValues){
+                    staticalDataMultipleImage[imageNuumber] = new transbit.tbits.dataProducer.StaticalDataProducer();
+                    try{
+                        //make it a bean 
+                        pageContext.setAttribute(("staticalDataMultipleImage"+String.valueOf(imageNuumber)), staticalDataMultipleImage[imageNuumber], PageContext.PAGE_SCOPE);
+                    }catch(Exception e){
+                          throw new Exception("Exception pageContext.setAttribute",e);
+                    }debugInfo.append(imageFieldfiledValue +"   "+"staticalDataMultipleImage"+String.valueOf(imageNuumber)+ "<br>");
+        %>    
+        <table align="center" width="100%" class="results" >
+            <thead>
+                <tr>
+                    <th align="center" width="100%">Statistics for <%=(multipleImageFieldDN + " " + imageFieldfiledValue)%></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>        
+                        <table border="1" class='results' width="100%">
+                            <thead>
+                                <%
+                                    String firstField = Field.lookupBySystemIdAndFieldName( ba.getSystemId(),request.getParameter("firstVariant")).getDisplayName();
+                                    String secondVariant = Field.lookupBySystemIdAndFieldName( ba.getSystemId(),request.getParameter("secondVariant")).getDisplayName();
+                                %> 
+                                <tr class='header'>
+                                    <th><%=firstField%></th>
+                                    <th><%=secondVariant%></th>
+                                    <th>Total Records</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% // make a report helper with 
+                                    ReportHelper myReportHelper = new ReportHelper(requests ,request.getParameter("firstVariant"), request.getParameter("secondVariant"),request.getParameter("multipleImageField") , imageFieldfiledValue, ba.getSystemId()) ;
+                                    ArrayList<String> firstVariantValues =myReportHelper.getFirstVariantValues();
+                                    ArrayList<String> secondVariantValues=myReportHelper.getSecondVariantValues() ;
+                                    for(String firstVariant : firstVariantValues) {
+                                        for(String secondVriant : secondVariantValues) {
+                                            Integer noOfMatches = myReportHelper.getCategoryChartData().get(firstVariant).get(secondVriant);
+                                            if(noOfMatches!= null){
+                                %>
+                                <tr>
+                                    <td><%=firstVariant %></td>
+                                    <td><%=secondVriant %></td>
+                                    <td><%=noOfMatches%></td>
+                                </tr>
+                                <%
+                                    }
+                                    }
+                                    }
+
+                                    staticalDataMultipleImage[imageNuumber].generateData(myReportHelper , "category");
+                                %>   
+                            </tbody>
+                        </table>           
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">    
+                        <cewolf:chart 
+                            id="line" 
+                            title='<%=("Statistics for "+multipleImageFieldDN + " " + imageFieldfiledValue) %>'
+                            type='<%= request.getParameter("chartType")%>' 
+                            xaxislabel='<%=secondVariant%>' 
+                            yaxislabel="Number of Requests">
+                            <cewolf:data>
+                                <cewolf:producer  id='<%=("staticalDataMultipleImage"+String.valueOf(imageNuumber))%>' />
+                            </cewolf:data>
+                        </cewolf:chart>
+                        <cewolf:img chartid="line" renderer="/cewolf" width="400" height="300">
+                          <cewolf:map tooltipgeneratorid='<%=("staticalDataMultipleImage"+String.valueOf(imageNuumber))%>'/>
+                            </cewolf:img>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <%
+            imageNuumber++;
+        }%>
+        

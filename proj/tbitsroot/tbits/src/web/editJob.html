@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title>List of Jobs</title>
+    </head>
+  	<body>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="145" height="100%" valign="top">
+
+	<table width="145" height="100%" class="nav" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="142" valign="top" ><a href="<%=nearestPath%>all-job-actions?action=create-job">Create Job</a></td>
+		<td width="3" >&nbsp;</td>
+	</tr>
+	<tr>
+	<td width="142" valign="top" ><a href="<%=nearestPath%>all-job-actions?action=list-jobs">List Jobs</a></td>
+		<td width="3" >&nbsp;</td>
+	</tr>
+	<tr height="100%">
+		<td width="142" valign="top" >&nbsp;</td>
+		<td width="3" >&nbsp;</td>
+	</tr>
+</table></td>
+						<td width="10">&nbsp;</td>
+						<td ><!--insert attribute="bodyhead"--><h1>Create/Update 
+						Job</h1>
+<form name="jobDetailForm" method="post" action="<%=nearestPath%>all-job-actions?action=save-job&subaction=edit">
+<table>
+	<tr>
+		<td>group</td>
+		<td><input type="text" id="q" name="jobGroup" value="<%=jobGroup%>"/></td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td><input type="text" name="jobName" value="<%=jobName%>"/> </td>
+	</tr>
+	<tr>
+		<td>job class</td>
+		
+		<td><input type="text" name="className" value="<%=className%>" /></td>
+	</tr> 																				<tr>
+		<td>description</td>
+		<td><textarea name="description"><%=description%></textarea></td>
+	</tr>
+	</table>
+
+
+<table>
+</table>
+
+<h3>Job Parameters</h3>
+<table>
+	<tr>
+		<td>parameter name</td>
+		<td>value</td>
+		
+	</tr>
+	<%=parameterList%>
+    <tr>
+    	<td><input type="text" name="parameterNames"/></td>
+    	<td><input type="text" name="parameterValues"/></td>
+    </tr>
+    <tr>
+    	<td><input type="text" name="parameterNames"/></td>
+    	<td><input type="text" name="parameterValues"/></td>
+    </tr>
+     <tr>
+    	<td><input type="text" name="parameterNames"/></td>
+    	<td><input type="text" name="parameterValues"/></td>
+    </tr>
+    <tr>
+    	<td><input type="text" name="parameterNames"/></td>
+    	<td><input type="text" name="parameterValues"/></td>
+    </tr>
+
+</table>
+<h3>Trigger Parameters</h3>
+<table>
+	<tbody>
+	<tr>
+		<td style="height: 60px">Cron expression</td>
+
+		<td style="width: 425px; height: 60px;"><input name="cronExpression" value="<%=cronExpression%>" type="text"></td>
+	</tr>
+	
+</tbody></table>
+<input type="submit"  class="submit" />
+</form></td>
+						  
+					</tr>
+				</table>
+			
+	</body>
+</html>

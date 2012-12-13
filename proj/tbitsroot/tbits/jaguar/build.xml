@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="Jaguar" default="build" basedir=".">
+	<target name="define">
+		<property name="dist.dir.jaguar" value="../dist" />
+		<property name="jaguar.dir.jaguar" value="${dist.dir.jaguar}/jaguarsource/jaguar" />
+		<property name="plugins.dir.jaguar" value="${dist.dir.jaguar}/jaguarsource/plugins" />
+		<property name="resources.dir.jaguar" value="${dist.dir.jaguar}/jaguarsource/resources" />
+	</target>
+
+	<target name="build" depends="define">
+		<mkdir dir="${jaguar.dir.jaguar}"/>
+		<mkdir dir="${plugins.dir.jaguar}"/>
+		<copy todir="${jaguar.dir.jaguar}">
+			<fileset dir="src/java" />
+		</copy>
+		<copy todir="${dist.dir.jaguar}/jaguarsource">
+			<fileset dir="jaguarsource" />
+		</copy>
+	</target>
+</project>

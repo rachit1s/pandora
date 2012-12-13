@@ -1,0 +1,204 @@
+<html>
+    <head>
+        <style>
+			body {
+				background:#fff;
+				margin:1ex
+			}
+			
+			body,td,input {
+				font-family:trebuchet ms;
+				font-size: 14px;
+			}
+			
+			input {
+				font-size:100%
+			}
+			
+			form {
+				margin:0;
+				width:100%
+			}
+
+			
+			.tl {
+				background:url(/dflow/images/corner_tl.gif) top left
+			}
+			
+			.bl {
+				background:url(/dflow/images/corner_bl.gif) bottom left
+			}
+			
+			.tr {
+				background:url(/dflow/images/corner_tr.gif) top right
+			}
+			
+			.br {
+				background:url(/dflow/images/corner_br.gif) bottom right
+			}
+		
+			.tl, .bl, .tr, .br {
+				background-repeat:no-repeat;
+				padding-left:4;
+				width:4
+			}
+            TD.results-header 
+            {
+	            BORDER-RIGHT: #d6d6d6 1px solid; 
+	            PADDING-RIGHT: 2px; 
+	            BORDER-TOP: medium none; 
+	            PADDING-LEFT: 2px; 
+	            PADDING-BOTTOM: 2px; 
+	            FONT: bold 8pt verdana; 
+	            VERTICAL-ALIGN: top; 
+	            BORDER-LEFT: #d6d6d6 1px solid; 
+	            COLOR: #000000; 
+	            PADDING-TOP: 2px; 
+	            BORDER-BOTTOM: #d6d6d6 1px solid; 
+	            BACKGROUND-COLOR: #ffffff
+            }
+            TD.results-content 
+            {
+	            BORDER-RIGHT: #d6d6d6 1px solid; 
+	            PADDING-RIGHT: 2px; 
+	            PADDING-LEFT: 2px; 
+	            PADDING-BOTTOM: 2px; 
+	            FONT: 8pt verdana; 
+	            VERTICAL-ALIGN: top; 
+	            COLOR: #000000; 
+	            PADDING-TOP: 2px; 
+	            BORDER-BOTTOM: #d6d6d6 1px solid; 
+	            BACKGROUND-COLOR: #ffffff
+            }
+        </style>
+        <script language="javascript">
+        
+            var controlName = "";
+            var objXmlHttp;
+            function onBodyLoad()
+            {
+                var agent = navigator.userAgent.toLowerCase();
+                // 
+                // In case of Internet Explorer, agent would contain something like this:
+                //      mozilla/4.0 (compatible; msie 6.0; windows nt 5.1; .net clr 1.0.3075; .net clr 1.1.4322; 
+                // 
+                // In case of Mozilla/firefox, agent would contain something like this:
+                //      mozilla/5.0 (windows; u; windows nt 5.1; rv: 1.7.3) gecko/20041001 firefox/0.10.1
+                //
+                
+                // Our XML Http Control depends on the browser. 
+                // We would be using 'Microsoft.XMLHTTP' if the browser is Iexplorer.
+                // and 'Msxml2.XMLHTTP' in case of Non-Iexplorer browsers.
+                
+                var index = agent.indexOf("msie");
+                if (index < 0)
+                {
+                    controlName = "Msxml2.XMLHTTP";
+                    try
+                    {
+                        objXmlHttp = new XMLHttpRequest();
+                    }
+                    catch (e)
+                    {
+                        document.all.item("error").innerHTML = "This browser does not support ActiveXControls.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                    }
+                }
+                else
+                {
+                    controlName = "Microsoft.XMLHTTP";
+                    try
+                    {
+                        objXmlHttp = new ActiveXObject(controlName);
+                    }
+                    catch (e)
+                    {
+                        document.all.item("error").innerHTML = "This browser does not support ActiveXControls.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                    }
+                }
+                document.all.item("query").focus();
+            }
+            
+            function onAddRequest()
+            {
+                sendRequest("add");
+            }
+            
+            function onUpdateRequest()
+            {
+                sendRequest("update");
+            }
+            
+            function sendRequest(action)
+            {
+	            document.all.item("results").innerText = "";
+	            var query = document.all.item("query").value;
+	            if (query == "") return;
+	            var baPrefix = document.all.item("baPrefix").value;
+	            var url = "<%=nearestPath%>api-wrapper/" + baPrefix + "?query=" + query + "&action=" + action + "&date=" + new Date();
+	            objXmlHttp.open("GET", url, false);
+	            objXmlHttp.send();
+	            var output = new String(objXmlHttp.ResponseText);
+	            document.all.item("results").innerHTML = output;
+            }
+            
+        </script>
+    </head>
+    <body onload="onBodyLoad()">
+        <input type="hidden" name="baPrefix" id="baPrefix" value="<%=baPrefix%>" />
+        <TABLE width="100%" cellspacing="0" cellpadding="0" bgcolor="#96312B" ID="Table1">
+            <TBODY>
+                <TR height="2">
+                    <TD class="tl" />
+                    <TD class="tr" />
+                </TR>
+            </TBODY>
+        </TABLE>
+        <div style="padding:0 2 0 2; background:#96312B; width:100%">
+            <table cellspacing="0" cellpadding="0" style="background:#96312B; width:100%" ID="Table2">
+                <tr style="padding:7">
+                    <td>
+                        <span style="font-size:120%;font-weight:bold;color:FFFFFF;">TBits&nbsp;API Wrapper</span>
+                    </td>
+                </tr>
+            </table>
+            <table cellspacing="0" cellpadding="0" style="background:#FFFFFF; width:100%" ID="Table3">
+                <tr>
+                    <td style="padding:10">
+                        <INPUT type="text" value="" name="q" maxlength="2048" size="131" ID="query" /> 
+                        <INPUT 
+                            type="submit" 
+                            value="&nbsp;&nbsp;<%=captions.view.add_request%>&nbsp;&nbsp;" 
+                            ID="addReq" 
+                            NAME="addReq" 
+                            onclick="onAddRequest()"
+                        />
+                        <INPUT 
+                            type="submit" 
+                            value="&nbsp;&nbsp;<%=captions.view.update_request%>&nbsp;&nbsp;" 
+                            ID="updateReq" 
+                            NAME="updateReq" 
+                            onclick="onUpdateRequest()"
+                        />
+                    </td>
+                </tr>
+            </table>
+            <table cellspacing="0" cellpadding="0" style="background:#FFFFFF; width:100%" ID="Table4">
+                <tr>
+                    <td valign="bottom" align="right">
+                        <span style="font-size:75%;font-weight:bold;color:red;" id="error" name="error"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <TABLE width="100%" cellspacing="0" cellpadding="0" bgcolor="#96312B" ID="Table5">
+            <TBODY>
+                <TR height="2">
+                    <TD class="bl" />
+                    <TD class="br" />
+                </TR>
+            </TBODY>
+        </TABLE>
+        <div id="results" name="results"></div>
+    </body>
+</html>
+

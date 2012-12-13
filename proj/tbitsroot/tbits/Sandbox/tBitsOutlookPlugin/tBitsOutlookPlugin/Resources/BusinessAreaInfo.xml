@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tbitsconf>
+  <users>
+    <user id="1">
+      <login>root</login>
+      <firstName>Root</firstName>
+      <lastName>tBits</lastName>
+      <displayName>Root</displayName>
+    </user>
+    <user id="2">
+      <login>uday</login>
+      <firstName>Uday</firstName>
+      <lastName>Kiran</lastName>
+      <displayName>Uday</displayName>
+    </user>
+
+    <user id="3">
+      <login>ritesh</login>
+      <firstName>Ritesh</firstName>
+      <lastName>Tripathi</lastName>
+      <displayName>Ritesh</displayName>
+    </user>
+
+    <user id="4">
+      <login>sandeep</login>
+      <firstName>Sandeep</firstName>
+      <lastName>Giri</lastName>
+      <displayName>Sandeep</displayName>
+    </user>
+
+    <user id="5">
+      <login>lokesh</login>
+      <firstName>Lokesh</firstName>
+      <lastName>S</lastName>
+      <displayName>Lokesh</displayName>
+    </user>
+  </users>
+    
+  <bas>
+    <business_area name="IT Helpdesk" display_name="IT Helpdesk[tbits]">
+      <bausers>3,4,5</bausers>
+      <assignees>1</assignees>
+      <email>it@nishita.mshome.net</email>
+	  <category>others,whatever</category>
+	  <status>Active,Closed,Pending,Reopened,Suspended,test</status>	  
+	  <prefix>it</prefix>
+      <fields>
+        <field type="list" name="category_id" display_name="Category" fd="cat" id="1">
+          <value name="Pending" display_name="Pending" fd="p" />
+        </field>
+        <field type="boolean" name="is_private" display_name="Private" fd="conf" id="2"/>
+        <field type="int" name="hours" display_name="Hours" fd="conf" id="4"/>
+        <field type="text" name="subject" display_name="Subject" fd="conf" id="3"/>
+        <field type="date" name="duedatetime" display_name="Due Date" fd="dueby" id="5"/>
+        <field type="textarea" name="desc" display_name="Description" id="6"/>
+        <field type="real" name="order" display_name="Order" id="7"/>     
+      </fields>    
+    </business_area>
+
+    <business_area name="Accounts" display_name="Accounts[ac]">
+      <bausers>1,2,3,4</bausers>
+      <assignees>2</assignees>
+      <email>accounts@nishita.mshome.net</email>
+	  <category>others,whatever</category>
+	  <status>Active,Closed,Pending,Reopened,Suspended,test</status>
+	  <prefix>accounts</prefix>
+      <fields>
+        <field type="list" name="category_id" display_name="Category" fd="cat" id="1">
+          <value name="Pending" display_name="Pending" fd="p" />
+        </field>
+        <field type="boolean" name="is_private" display_name="Private" fd="conf" id="2"/>
+        <field type="int" name="hours" display_name="Hours" fd="conf" id="4"/>
+        <field type="text" name="subject" display_name="Subject" fd="conf" id="3"/>
+        <field type="date" name="duedatetime" display_name="Due Date" fd="dueby" id="5"/>
+        <field type="textarea" name="desc" display_name="Description" id="6"/>
+        <field type="real" name="order" display_name="Order" id="7"/>
+      </fields>
+    </business_area>
+
+    <business_area name="Facilities Mgmt" display_name="Facilities Mgmt[facilities]">
+      <bausers>2,3,4</bausers>
+      <assignees>4</assignees>
+      <email>facilities@nishita.mshome.net</email>
+	  <category>others,whatever</category>
+	  <status>Active,Closed,Pending,Reopened,Suspended,test</status>
+	  <prefix>facilities</prefix>
+      <fields>
+        <field type="list" name="category_id" display_name="Category" fd="cat" id="1">
+          <value name="Pending" display_name="Pending" fd="p" />
+        </field>
+        <field type="boolean" name="is_private" display_name="Private" fd="conf" id="2"/>
+        <field type="int" name="hours" display_name="Hours" fd="conf" id="4"/>
+        <field type="text" name="subject" display_name="Subject" fd="conf" id="3"/>
+        <field type="date" name="duedatetime" display_name="Due Date" fd="dueby" id="5"/>
+        <field type="textarea" name="desc" display_name="Description" id="6"/>
+        <field type="real" name="order" display_name="Order" id="7"/>
+      </fields>
+    </business_area>
+    <business_area name="Partners" display_name="Partners">
+      <bausers>1,2,3,4,5</bausers>
+      <assignees>4</assignees>
+      <email>partners@pd.mytbits.com</email>
+	  <category>others</category>
+	  <status>Active,Closed,Pending,Reopened,Suspended,test</status>	  
+	  <prefix>partners</prefix>
+      <fields>
+        <field type="list" name="category_id" display_name="Category" fd="cat" id="1">
+          <value name="Pending" display_name="Pending" fd="p" />
+        </field>
+        <field type="boolean" name="is_private" display_name="Private" fd="conf" id="2"/>
+        <field type="int" name="hours" display_name="Hours" fd="conf" id="4"/>
+        <field type="text" name="subject" display_name="Subject" fd="conf" id="3"/>
+        <field type="date" name="duedatetime" display_name="Due Date" fd="dueby" id="5"/>
+        <field type="textarea" name="desc" display_name="Description" id="6"/>
+        <field type="real" name="order" display_name="Order" id="7"/>
+      </fields>
+    </business_area>
+  </bas>  
+</tbitsconf>

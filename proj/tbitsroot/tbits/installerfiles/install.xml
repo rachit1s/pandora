@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+	<!--
+
+		A sample installation file. Use it as a base for your own installers
+		:-) To compile it : - go in the bin directory where you installed
+		IzPack - call "compile ../sample/install.xml -b ../sample"
+	-->
+<installation version="1.0">
+	<!--
+
+		The info section. The meaning of the tags should be natural ...
+	-->
+	<info>
+		<appname>tBits</appname>
+		<appversion>@{major.version}-@{svn.info.lastRev}</appversion>
+		<authors>
+			<author name="tBits Global" email="tbits@tbitsglobal.com" />
+		</authors>
+		<javaversion>1.5</javaversion>
+		<url>http://www.tbitsglobal.com/</url>
+		<webdir>http://download.mytbits.com/download
+		</webdir>
+		<requiresjdk>true</requiresjdk>
+	</info>
+	<!-- Required for shortcuts -->
+	<native type="izpack" name="ShellLink.dll" />
+	<!--
+		The gui preferences indication. Sets the installer window to 640x480.
+		It will not be able to change the size.
+	-->
+	<guiprefs height="600" resizable="yes" width="800">
+		<laf name="metouia">
+			<os family="unix" />
+		</laf>
+		<laf name="looks">
+			<os family="windows" />
+			<param name="variant" value="extwin" />
+		</laf>
+		<modifier key="useHeadingPanel" value="yes" />
+		<modifier key="useHeadingForSummary" value="yes" />
+		<modifier key="headingImageOnLeft" value="yes" />
+		<modifier key="headingLineCount" value="2" />
+		<modifier key="headingFontSize" value="1.5" />
+		<modifier key="headingBackgroundColor" value="0x00ffffff" />
+		<modifier key="headingPanelCounter" value="text" />
+		<modifier key="headingPanelCounterPos" value="inHeading" />
+	</guiprefs>
+	<!--
+		The locale section. Asks here to include the English and French
+		langpacks.
+	-->
+	<locale>
+		<langpack iso3="eng" />
+	</locale>
+	<!--
+		The resources section. The ids must be these ones if you want to use
+		the LicencePanel and/or the InfoPanel.
+	-->
+	<resources>
+		<res id="LicencePanel.licence" src="res/Licence.txt" />
+		<res id="InfoPanel.info" src="res/Readme.txt" />
+		<res id="Installer.image.0" src="res/Installer.image.0.png" />
+		<res id="Installer.image.1" src="res/Installer.image.1.png" />
+		<res id="Installer.image.2" src="res/Installer.image.2.png" />
+		<res id="Installer.image.3" src="res/Installer.image.3.png" />
+		<res id="Installer.image.4" src="res/Installer.image.4.png" />
+		<res id="Installer.image.5" src="res/Installer.image.5.png" />
+		<res id="Installer.image.6" src="res/Installer.image.6.png" />
+		<res id="Installer.image.7" src="res/Installer.image.7.png" />
+		<res id="userInputSpec.xml" src="userinputpanel_spec.xml" />
+		<res src="default_shortcut_specification.xml" id="shortcutSpec.xml" />
+	</resources>
+	<!-- User defined variables -->
+	<variables>
+		<variable name="TBITS_LOG_DIR" value="$INSTALL_PATH\build\logs" />
+		<variable name="TOMCAT_LOG_DIR" value="$INSTALL_PATH\tomcat\logs" />
+		<variable name="TBITS_HOME" value="$INSTALL_PATH\build" />
+		<variable name="JDKPathPanel.minVersion" value="1.5" />
+		<variable name="JDKPathPanel.skipIfValid" value="yes" />
+		<variable name="DesktopShortcutCheckboxEnabled" value="true" />
+	</variables>
+	<!--
+		The panels section. We indicate here which panels we want to use. The
+		order will be respected.
+	-->
+	<panels>
+		<panel classname="HelloPanel" />
+		<panel classname="InfoPanel" />
+		<panel classname="UserInputPanel" id="UserInputPanel.0"/>
+		<panel classname="LicencePanel" />
+		<panel classname="JDKPathPanel" />
+		<panel classname="TargetPanel" />
+		<panel classname="UserInputPanel" id="UserInputPanel.1">
+			<validator classname="com.tbitsglobal.izpack.DBConfigValidator" />
+		</panel>
+		<panel classname="UserInputPanel" id="UserInputPanel.2"/>
+		<panel classname="PacksPanel" />
+		<panel classname="InstallPanel" />
+		<panel classname="ShortcutPanel" />
+		<panel classname="FinishPanel" />
+	</panels>
+	<!--
+
+		The packs section. We specify here our packs.
+	-->
+	<packs>
+
+		<!-- The file will be parsed -->
+		<!--parsable targetfile="$INSTALL_PATH/script.bat"/-->
+		<pack name="Install tBits Core" required="yes">
+			<description>tBits Core</description>
+			<file src="build" targetdir="$INSTALL_PATH" />
+			<file src="jaguarsource" targetdir="$INSTALL_PATH" />
+			<!--
+				file src="build/tmp" targetdir="$INSTALL_PATH/build" /> <file
+				src="build/index" targetdir="$INSTALL_PATH/build" /> <file
+				src="build/attachments" targetdir="$INSTALL_PATH/build" /> <file
+				src="logs" targetdir="$INSTALL_PATH/build" /
+			-->
+			<file src="TransbitHomePage.url" targetdir="$INSTALL_PATH" />
+			<file src="tbits.url" targetdir="$INSTALL_PATH" />
+			<file src="tbitshelp.url" targetdir="$INSTALL_PATH" />
+			<file src="startserver.ico" targetdir="$INSTALL_PATH" />
+			<file src="stopserver.ico" targetdir="$INSTALL_PATH" />
+			<file src="izpack.ico" targetdir="$INSTALL_PATH" />
+			<file src="Backup" targetdir="$INSTALL_PATH" />
+			<file src="tmp" targetdir="$INSTALL_PATH" />
+			<parsable targetfile="$INSTALL_PATH/tbits.url" />
+			<parsable targetfile="$INSTALL_PATH/tbitshelp.url" />
+			<parsable targetfile="$INSTALL_PATH/build/webapps/WEB-INF/web.xml" />
+			<parsable targetfile="$INSTALL_PATH/build/bin/tbits-start.bat" />
+			<parsable targetfile="$INSTALL_PATH/build/bin/tbits-stop.bat" />
+			<parsable targetfile="$INSTALL_PATH/build/bin/tbitscmd.bat" />
+			<parsable targetfile="$INSTALL_PATH/build/bin/tbitscmd.sh" />
+			<parsable targetfile="$INSTALL_PATH/build/bin/scheduler.bat" />
+			<parsable targetfile="$INSTALL_PATH/build/bin/dbupgrade.bat" />
+			<parsable targetfile="$INSTALL_PATH/build/bin/dbupgrade.sh" />
+			<parsable targetfile="$INSTALL_PATH/build/bin/backup.bat" />
+			<parsable targetfile="$INSTALL_PATH/build/bin/migratejobs2db.bat" />
+			<parsable targetfile="$INSTALL_PATH/build/etc/instances.xml" />
+			<parsable targetfile="$INSTALL_PATH/build/etc/log4java.conf"
+				type="javaprop" />
+			<parsable targetfile="$INSTALL_PATH/build/etc/tbits-quartz.server"
+				type="javaprop" />
+			<parsable targetfile="$INSTALL_PATH/build/etc/tbits-quartz.serverdb"
+				type="javaprop" />
+			<!--
+				parsable
+				targetfile="$INSTALL_PATH/build/bin/db/sqlForProperties/log4j_conf.sql"/>
+				<parsable
+				targetfile="$INSTALL_PATH/build/bin/db/sqlForProperties/tbits_properties.sql"/>
+				<parsable
+				targetfile="$INSTALL_PATH/build/bin/db/sqlForProperties/quartz_properties.sql"/
+			-->
+			<parsable targetfile="$INSTALL_PATH/build/etc/tbits.auth" />
+			<parsable targetfile="$INSTALL_PATH/build/etc/tbits.dbpool" />
+			<parsable targetfile="$INSTALL_PATH/build/etc/tbits.properties" />
+		</pack>
+		<!--
+			pack name="Create Database" preselected="yes" required="no"
+			os="windows"> <description>Creates Database and fills the default
+			data required for tBits. If you already have created a database,
+			please unselect this option as it will overwrite the
+			database.</description> </pack
+		-->
+		<pack name="Install Tomcat 5.5" required="yes">
+			<description>The tomcat files</description>
+			<file src="tomcat" targetdir="$INSTALL_PATH" />
+			<parsable targetfile="$INSTALL_PATH/tomcat/bin/setenv.bat" />
+			<parsable targetfile="$INSTALL_PATH/tomcat/bin/startup.bat" />
+			<parsable targetfile="$INSTALL_PATH/tomcat/bin/shutdown.bat" />
+			<parsable targetfile="$INSTALL_PATH/tomcat/bin/startup.sh" />
+			<parsable targetfile="$INSTALL_PATH/tomcat/bin/shutdown.sh" />
+			<parsable targetfile="$INSTALL_PATH/tomcat/conf/server.xml" />
+		</pack>
+		<pack name="Upgrade System" required="yes">
+			<description>The Upgrade System upgrades the installation and
+				database of tBits using the central repository</description>
+			<file src="upgrade" targetdir="$INSTALL_PATH" />
+			<file src="version.properties" targetdir="$INSTALL_PATH" />
+			<file src="svn-revision.txt" targetdir="$INSTALL_PATH" />
+		</pack>
+	</packs>
+	<jar src="../IzPack/lib/izpack-tbits.jar" />
+	<jar src="../src/lib/jtds-1.1.jar" />
+</installation>

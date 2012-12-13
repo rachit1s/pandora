@@ -1,0 +1,649 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>
+            <%=title%>
+        </title>
+        <link rel="stylesheet" type="text/css" media="screen" href="<%=nearestPath%>web/css/<%=cssFile%>" />
+		<!-- Individual YUI CSS files --> 
+		<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/container/assets/skins/sam/container.css"> 
+		
+        <script language="javascript" src="<%=nearestPath%>web/scripts/admin.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/messages.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/tt.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/ac.js"></script>
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+<style type="text/css">
+#imailsettings caption {
+	padding: 1px;
+	text-align: center;
+	border: 1px solid #C1DAD7;
+}
+
+#imailsettings th {
+	font-size: 11px;
+	font-weight: bold;
+	color: #4f6b72;
+	border: 1px solid #C1DAD7;
+	letter-spacing: 2px;
+	text-align: left;
+	padding: 6px 6px 6px 12px;
+}
+
+#imailsettings td {
+	border: 1px solid #C1DAD7;
+	background: #fff;
+	padding: 6px 6px 6px 12px;
+	color: #4f6b72;
+}
+
+#imailsettings td.alt {
+	background-color: #F7FAEA;
+	color: #797268;
+}
+</style>
+	<script language="javascript">
+		YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+        </script>
+        <script language="javascript">
+        var baMailConfig = <%=baMailConfig%>;
+//var baMailConfig = [{"active":true,"myBAMailAcId":0,"myBAPrefix":"tbits","myEmailID":"tbits",
+//	"myMailServer":"localhost","myPassward":"tbits","myProtocol":"pop3","port":110}];
+var myCategories = <%=myCategories%>;
+//var categories = {"1":"Pending", "2":"Marketing", "3":"Sales", "4":"IT"};
+var defaultSelected = 3;
+function loadBaMailAccounts()
+{
+	var baMailAcTable = document.getElementById("ba_mail_accounts");
+	var totalAccountsElem = document.getElementById("totalAccounts");
+	var rowCount = 0;
+	for(var i=0;i<baMailConfig.length;i++)
+	{
+		rowCount ++;
+	    var accountConfig = baMailConfig[i];
+	    var n = rowCount;// accountConfig["myBAMailAcId"];
+	    var row =  createRow(n, accountConfig);
+	    baMailAcTable.appendChild(row);
+	}
+	totalAccountsElem.value = rowCount;
+	setDefaultCat();
+}
+function setDefaultCat()
+{
+	for(var cat in myCategories)
+	{
+		if(myCategories[cat]["isDefault"])
+			defaultSelected = myCategories[cat]["typeId"];
+	}
+}
+function addNewRow()
+{
+	var newRowData;
+	var baMailAcTable = document.getElementById("ba_mail_accounts");
+	var totalAccountsElem = document.getElementById("totalAccounts");
+
+	var totalAccounts = totalAccountsElem.value;
+
+	if(baMailConfig.length > 0)
+	{
+		newRowData = copyObj(baMailConfig[baMailConfig.length - 1]);
+		newRowData["myBAMailAcId"] = 0;
+	}	
+	else
+	{
+		newRowData = {"active":false,"myBAMailAcId":0,"myBAPrefix":"","myEmailID":"",
+			"myMailServer":"localhost","myPassward":"","myProtocol":"pop3","port":110};
+	}
+	totalAccounts++;
+	var row = createRow(totalAccounts, newRowData);
+	baMailAcTable.appendChild(row);
+	totalAccountsElem.value = totalAccounts;
+}
+function copyObj(obj)
+{
+	var newObj = new Object();
+	for(var name in obj)
+	{
+		newObj[name] = obj[name];
+	}
+	return newObj;
+}
+function deleteMailAcRow(n)
+{
+	//alert('hi');
+	var baMailAcTable = document.getElementById("ba_mail_accounts");
+	var r = document.getElementById("ba_mail_account_"+n);
+	baMailAcTable.removeChild(r);
+	//var totalAccountsElem = document.getElementById("totalAccounts");
+	//var totalRows = totalAccountsElem.value;
+	//totalRows--;
+	//totalAccountsElem.value = totalRows;
+}
+
+function TestMailSettings(n)
+{
+	var myMailServer = document.getElementById("ba_mail_server_"+n).value;
+	var myLogin = document.getElementById("ba_mail_login_"+n).value;
+	var myPassword = document.getElementById("ba_mail_password_"+n).value;
+	var myProtocol = document.getElementById("ba_mail_protocol_"+n).value;
+	var myPort = document.getElementById("ba_mail_port_"+n).value;
+
+	var Url = "<%=nearestPath%>check-mail?emailserver="+myMailServer+"&login="+myLogin+"&password="+myPassword+"&protocol="+myProtocol+"&port="+myPort;
+	
+	var response=eval(executeHttpRequest("POST",Url,false));
+	
+	if(response[0].active == true) {
+	alert("Server Tested Successfully");
+	}
+	else if(response[0].active == false) { 
+	alert(response[0].ErrorMessage);
+	}
+	else { 
+	alert("Your Request Could Not be completed");
+	}
+}
+function createCategories(n, accountConfig)
+{
+	var input = document.createElement("select");
+	input.setAttribute("name","category_id_"+n);
+	//alert('type of Default:' + typeof(defaultSelected) + ',value: ' + defaultSelected);
+	//alert('accountConfig[categoryId]' + accountConfig["categoryId"]);
+	var toBeSelected = accountConfig["categoryId"];	
+	
+	if((toBeSelected == null) || (toBeSelected == ""))
+	{
+		toBeSelected = defaultSelected;
+	}
+	
+	for(var key in myCategories)
+	{
+		var cat = myCategories[key];
+		var shouldSelect = false;
+		if(typeof(cat) == 'function')
+			continue;
+		
+		var typeId = cat["typeId"];
+		if(typeId == toBeSelected)
+		{
+			//alert('Should select: ' + typeId);
+			shouldSelect = true;
+		}
+		// Create a new Option object
+		var opt = new Option(cat["displayName"],  // The text property
+	                       typeId,  // The value property
+	                       false,    // The defaultSelected property
+	                       shouldSelect);   // The selected property
+	    if(shouldSelect)
+	    {
+	    	opt.setAttribute("selected", "selected");
+	    }
+	    else
+	    {
+	    	//opt.setAttribute("selected", "false");
+	    }
+		//opt.selected = shouldSelect;
+		//if(shouldSelect) opt.selected = "1"
+		//alert('Creating: ' + categories[key] + ',' + key + ',' + shouldSelect);
+		
+		input.options[input.options.length] = opt;
+		try
+		{
+			//input.add(opt,null); // standards compliant
+		}
+		catch(ex)
+		{
+			//input.add(opt); // IE only
+		}
+		//alert('opt.selected:' + opt.selected);
+	}
+	input.value = toBeSelected;
+	return input;
+}
+function createdTD(n)
+{
+	var td = document.createElement("td");
+	if(n%2 == 0)
+		td.className = "alt";
+	else
+		td.className = "sx";
+	return td;
+}
+
+function emptyIfNull(val)
+{
+	if(val == undefined)
+		val = "";
+	return val;
+}
+
+function createRow(n, accountConfig) {
+	var row = document.createElement("tr");
+
+	row.setAttribute("id", "ba_mail_account_" + n);
+	
+	//Server
+	var td = createdTD(n);
+	input = document.createElement("input");
+	input.type = "text";
+	input.setAttribute("onchange", "javascript:frmChanged()");
+	input.setAttribute("value", emptyIfNull(accountConfig["myMailServer"]));
+	input.setAttribute("name", "ba_mail_server_" + n);
+	input.setAttribute("id", "ba_mail_server_" + n);
+	input.size = 12;
+	td.appendChild(input);
+
+	//Hidden Id
+	input = document.createElement("input");
+	input.type = "hidden";
+	input.setAttribute("name", "ba_mail_ac_id_" + n);
+	input.setAttribute("value", emptyIfNull(accountConfig["myBAMailAcId"]));
+	td.appendChild(input);
+	row.appendChild(td);
+	
+	//Login
+	td = createdTD(n);
+	input = document.createElement("input");
+	input.type = "text";
+	input.setAttribute("onchange", "javascript:frmChanged()");
+	input.setAttribute("value", emptyIfNull(accountConfig["myEmailID"]));
+	input.setAttribute("name", "ba_mail_login_" + n);
+	input.setAttribute("id", "ba_mail_login_" + n);
+	input.size = 12;
+	td.appendChild(input);
+	row.appendChild(td);
+
+	//Password
+	td = createdTD(n);
+	input = document.createElement("input");
+	input.type = "password";
+	input.setAttribute("onchange", "javascript:frmChanged()");
+	input.setAttribute("value", emptyIfNull(accountConfig["myPassward"]));
+	input.setAttribute("name", "ba_mail_password_" + n);
+	input.setAttribute("id", "ba_mail_password_" + n);
+	input.size = 12;
+	td.appendChild(input);
+	row.appendChild(td);
+
+	//Protocol
+	td = createdTD(n);
+	input = document.createElement("input");
+	input.type = "text";
+	input.setAttribute("onchange", "javascript:frmChanged()");
+	input.setAttribute("value",emptyIfNull(accountConfig["myProtocol"]));
+	input.setAttribute("name", "ba_mail_protocol_" + n);
+	input.setAttribute("id", "ba_mail_protocol_" + n);
+	input.size = 4;
+	td.appendChild(input);
+	row.appendChild(td);
+
+	//Port
+	td = createdTD(n);
+	input = document.createElement("input");
+	input.type = "text";
+	input.setAttribute("onchange", "javascript:frmChanged()");
+	input.setAttribute("value", emptyIfNull(accountConfig["port"]));
+	input.setAttribute("name", "ba_mail_port_" + n);
+	input.setAttribute("id", "ba_mail_port_" + n);
+	input.size = 4;
+	td.appendChild(input);
+	row.appendChild(td);
+
+	//BAEmailAddress
+	td = createdTD(n);
+	
+	input = document.createElement("input");
+	input.type = "text";
+	input.setAttribute("onchange", "javascript:frmChanged()");
+	input.setAttribute("value", emptyIfNull(accountConfig["BAEmailAddress"]));
+	input.setAttribute("name", "ba_email_address_" + n);
+	input.setAttribute("id", "ba_email_address_" + n);
+	td.appendChild(input);
+	row.appendChild(td);
+
+	//Category
+	td = createdTD(n);
+	
+	td.appendChild(createCategories(n, accountConfig));
+	row.appendChild(td);
+	
+	//Is Active
+	td = createdTD(n);
+	var input = document.createElement("input");
+	input.type = "checkbox";
+	input.className = "chkbox";
+	input.setAttribute("onchange", "javascript:frmChanged()");
+	input.setAttribute("id", "ba_mail_is_active_" + n);
+	input.checked = emptyIfNull(accountConfig["active"]);
+	input.defaultChecked = emptyIfNull(accountConfig["active"]);
+	input.setAttribute("value", "on");
+	input.setAttribute("name", "ba_mail_is_active_" + n);
+	td.appendChild(input);
+	row.appendChild(td);
+	
+	// delete button
+	td = createdTD(n);
+	input = document.createElement("input");
+	input.type = "button";
+	// input.setAttribute("onclick","deleteMailAcRow(" + n + ")");
+	input.onclick = function() {
+		deleteMailAcRow(n)
+	};
+	input.setAttribute("value", "Delete");
+	td.appendChild(input);
+	row.appendChild(td);
+
+	// Check the Incoming mail server
+	td = createdTD(n);
+	input = document.createElement("input");
+	input.type = "button";
+	input.onclick = function() {
+		TestMailSettings(n)
+	};
+	input.setAttribute("value", "Test");
+	td.appendChild(input);
+	row.appendChild(td);
+
+	return row;
+}
+
+function exportBusinessArea(){
+	var url =  "<%=nearestPath%>exportbusinessarea?ba=" + sysPrefix + "&actionType=export";	
+	elem.action = executeHttpRequest("POST", url, false);
+}
+
+function getSysPrefix(){
+	return sysPrefix;
+}
+
+function openImportWindow(){
+	var url = "<%=nearestPath%>importbusinessarea?ba=" + sysPrefix;		
+	window.open(url, "_blank", "dialogWidth:300px; dialogHeight:350px;resizable: yes; modal:no");	
+}		
+
+		</script>
+    </head>
+    <body onLoad="onLoadBody();loadBaMailAccounts()" class=" yui-skin-sam"> <!-- main-navigator -->
+        <FORM name="adminPropertiesForm" id="adminPropertiesForm" method="post">
+        	<input type="hidden" name="totalAccounts" id="totalAccounts" value="0"/>
+            <input type="hidden" name="nearestPath" id="nearestPath" value="<%=nearestPath%>" />
+            <INPUT type="hidden" name="sys_prefix" id="sys_prefix" value="<%=sys_prefix%>" />
+            <INPUT type="hidden" name="severity_list" id="severity_list" value="<%=severity_list%>" />
+            <input type="hidden" name="action" id="action" value="">
+            <DIV class="hb bhs" style="margin:0ex 1ex 0.5ex 1ex;"><!-- properties -->
+                <DIV class="hsp bhs">
+                    <TABLE id="Table3" cellSpacing="3" cellPadding="0" width="95%" class ="bhs">
+                    	
+                        <TR>
+                            <TD>
+                                <SPAN class="sx l cb" align="left" onClick="javascript:createBusinessArea()" <%=display_name_disabled%>>
+                                    &nbsp;&nbsp;Create Business Area...&nbsp;&nbsp;</SPAN>
+                            </TD>
+							 <TD>
+                                <a class="sx l cb" align="left" href="<%=nearestPath%>exportbusinessarea?ba=<%=sys_prefix%>&actionType=export"; <%=display_name_disabled%>>
+                                    &nbsp;&nbsp;Export Business Area...&nbsp;&nbsp;</a>
+                            </TD>
+							 <TD>
+                                <SPAN class="sx l cb" align="left" onClick="javascript:openImportWindow()" <%=display_name_disabled%>>
+                                    &nbsp;&nbsp;Import Business Area...&nbsp;&nbsp;</SPAN>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap>Name
+                            </TD>
+                            <TD class="sx" align="left"><INPUT id="ba_name" type="text" onChange="javascript:frmChanged()" name="ba_name" value="<%=ba_name%>" <%=ba_name_disabled%> >
+                            </TD>
+                            <!--TD class="sx" noWrap>Location
+                            </TD-->
+                            <!--TD class="sx" noWrap-- ><INPUT id="location_hyd" <%=location_hyd%> <%=location_hyd_disabled%> type="hidden" onchange="javascript:frmChanged()" value="location_hyd" name="location">HYD&nbsp;&nbsp;<INPUT id="location_nyc" <%=location_nyc%> <%=location_nyc_disabled%> type="radio" value="location_nyc" name="location">NYC
+                            <!-- /TD -->
+							                            <TD class="sx" noWrap>Assign Volunteer By
+                            </TD>
+							<TD class="sx" noWrap><INPUT id="volunteer_round" onChange="javascript:frmChanged()" type="radio" value="volunteer_round" <%=volunteer_round_checked%> <%=volunteer_round_checked_disabled%> name="volunteer">Round 
+                                Robin&nbsp;&nbsp;<INPUT id="volunteer_random" type="radio" value="volunteer_random" onChange="javascript:frmChanged()" <%=volunteer_random_checked%> <%=volunteer_random_checked_disabled%> name="volunteer">Random 
+                                &nbsp;&nbsp;<INPUT id="volunteer_none" type="radio" value="volunteer_none" onChange="javascript:frmChanged()" <%=volunteer_none_checked%> <%=volunteer_none_checked_disabled%> name="volunteer">None
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap>Display Name
+                            </TD>
+                            <TD class="sx" align="left"><INPUT id="display_name" type="text" onChange="javascript:frmChanged()" name="display_name" value="<%=display_name%>" <%=display_name_disabled%>>
+                            </TD>
+							<TD class="sx" noWrap colSpan="2"><INPUT class="chbox" onChange="javascript:frmChanged()" id="assign_to_any" <%=assign_to_any%> <%=assign_to_any_disabled%> type="checkbox" value="on" name="assign_to_any">Allow 
+                                assigning <%=captions.all.requests%> to any employee
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap>Prefix
+                            </TD>
+                            <TD class="sx" align="left"><INPUT id="request_prefix" type="text" onChange="javascript:frmChanged()" value="<%=request_prefix%>" <%=request_prefix_disabled%> name="request_prefix">
+                            </TD>
+                          <TD class="sx" noWrap>Due by field
+                            </TD>
+                            <TD class="sx" noWrap colspan="5"><SELECT id="due_by_field" <%=due_date_options_disabled%> size="1" name="due_by_field" onChange="javascript:onChangeDueDateOptions()">
+                                    <%=due_date_options%>
+                                </SELECT>
+                                <INPUT title="The default value of due date will be this value(mins) + today" id="default_due_date" onChange="javascript:frmChanged()" style="display:<%=due_date_display%>" type="text" size="5" name="default_due_date" value="<%=default_due_date%>" <%=default_due_date_disabled%>>
+                                <INPUT id="is_time_enabled" onChange="javascript:frmChanged()" style="display:<%=is_time_enabled_display%>" onClick="javascript:onClickEnableTime()" type="checkbox" size="5" name="is_time_enabled" <%=is_time_enabled%>  <%=is_time_enabled_disabled%>>
+                                <span class="sx" id="is_time_enabled_label" style="display:<%=is_time_enabled_display%>" >
+                                    Enable Time</span>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap>Supported Prefixes
+                            </TD>
+                            <TD class="sx" align="left"><INPUT id="supported_prefixes" onChange="javascript:frmChanged()" value="<%=supported_prefixes%>" <%=supported_prefixes_disabled%> type="text" name="supported_prefixes">
+                            </TD>
+                            
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap>Contact:
+                            </TD>
+                            <TD class="sx" align="left">
+                                <INPUT id="administrative_contact" value="<%=administrative_contact%>" onChange="javascript:frmChanged()" <%=administrative_contact_disabled%> type="text" name="administrative_contact">
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="bos" colSpan="4" height="2"></TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap>E-mail
+                            </TD>
+                            <TD class="sx" align="left"><INPUT id="email" type="text" name="email" onChange="javascript:frmChanged()" value="<%=email%>" <%=email_disabled%> >
+                            </TD>
+                            <TD class="l cb sx" noWrap align="left" colSpan="2" style="display:none">Set 
+                                exclusion list...
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap>E-mail Format
+                            </TD>
+                            <TD class="sx" align="left">HTML
+                            </TD>
+                            <TD class="sx" noWrap>No. of actions in e-mail
+                            </TD>
+                            <TD class="sx" noWrap><INPUT id="email_actions" onChange="javascript:frmChanged()" value="<%=email_actions%>" <%=email_actions_disabled%> type="text" size="10" name="email_actions">
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="2"><INPUT class="chbox" onChange="javascript:frmChanged()" onClick="javascript:onClickRequestEmail()" id="send_email_request" <%=send_email_request%> <%=send_email_request_disabled%> type="checkbox" value="on" name="send_email_request">
+                            Email address is active
+                            </TD>
+                            <TD class="sx" noWrap>Date/Time Format
+                            </TD>
+                            <TD class="sx" noWrap><SELECT id="date_time_formats" size="1" onChange="javascript:frmChanged()" <%=date_time_formats_disabled%> name="date_time_formats">
+                                    <%=date_time_formats%>
+                                </SELECT>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="2"><INPUT class="chbox" onChange="javascript:frmChanged()" id="send_email_action" onClick="javascript:onClickActionEmail()" <%=send_email_action%> <%=send_email_action_disabled%> type="checkbox" value="on" name="send_email_action">Notify 
+                                appender for every action
+                            </TD>
+                            <TD class="sx" noWrap>Time Zone
+                            </TD>
+                            <TD class="sx" noWrap><SELECT id="time_zone" onChange="javascript:frmChanged()" size="1" <%=time_zone_disabled%>  name="time_zone">
+                                    <%=time_zone%>
+                                </SELECT>
+                            </TD>
+                        </TR>
+						<TR>
+                            <TD class="bos" colSpan="4" height="2"></TD>
+                        </TR>
+                        <!-- TR>
+                            <TD class="sx b" noWrap colSpan="4">Incoming Mail Setting
+                            </TD>
+                        </TR-->
+						<tr>
+							<td colspan="4">
+								
+								<table border="0" cellpadding="0" cellspacing="2" id="imailsettings">
+									<caption
+										title="This section shows the configuration of various email accounts tied to the business area. The Business area would continuously monitor this mail accounts and log the mails as requests."><strong>Incoming
+									Mail Settings</strong></caption>
+									<thead>
+										<tr>
+											<th
+												title="The mail server from which the business area would fetch the email and log.">Server</th>
+											<th title="The login id of the email account. This is generally the text of email id before @.">Login</th>
+											<th title="The password of email account.">Password</th>
+											<th title="The supported protocols are pop3, pop3s, imap, imaps">Protocol</th>
+											<th>Port</th>
+											<th title="Once a request is logged, the BA would send mails from this email address. If this email address is correct, the category is correctly marked.">Email Address</th>
+											<th title="The category of the request to be logged for the incoming mail from this account.">Category</th>
+											<th title="You can activate/deactivate the email setting.">Is Active</th>
+											<th title="Delete this setting.">Delete</th>
+											<th title="Test if the settings are correct. This asks the tBits server to check if it is able to login and connect using these current specified values">Test</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<td colspan="10"><input type="button" onClick="addNewRow()"
+												value="Add Incoming Email"></td>
+										</tr>
+									</tfoot>
+									<tbody id="ba_mail_accounts">
+								
+									</tbody>
+								</table>
+							</td>
+						</tr>
+                        <TR>
+                            <TD class="bos" colSpan="4" height="2"></TD>
+                        </TR>
+                        <TR>
+                            <TD class="b sx" noWrap colSpan="2"><%=captions.view.add_request%> Defaults
+                            </TD>
+                            <TD class="b sx" noWrap colSpan="2"><%=captions.view.update_request%> Defaults
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="2"><INPUT class="chbox" onChange="javascript:frmChanged()" id="notify_addRequest" <%=notify_addRequest%> <%=notify_addRequest_disabled%> type="checkbox" value="on" name="notify_addRequest">'Notify: 
+                                By E-mail' option is checked
+                            </TD>
+                            <TD class="sx" noWrap colSpan="2"><INPUT class="chbox" onChange="javascript:frmChanged()" id="notify_addAction" <%=notify_addAction%> <%=notify_addAction_disabled%> type="checkbox" value="on" name="notify_addAction">'Notify: By E-mail' option is checked</TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="2"><INPUT class="chbox" onChange="javascript:frmChanged()" id="notify_loggers_addRequest" <%=notify_loggers_addRequest%> <%=notify_loggers_addRequest_disabled%> type="checkbox" value="on" name="notify_loggers_addRequest">Logger(s) 
+                                option is checked
+                            </TD>
+                            <TD class="sx" noWrap colSpan="2"><INPUT class="chbox" onChange="javascript:frmChanged()" id="notify_loggers_addAction" <%=notify_loggers_addAction%> <%=notify_loggers_addAction_disabled%> type="checkbox" value="on" name="notify_loggers_addAction">Logger(s) 
+                                option is checked
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="bos" colSpan="4" height="2"></TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx b" noWrap colSpan="4">Severity
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="4">Incoming: High Value
+                                <SELECT id="incoming_high_value" size="1" onChange="javascript:frmChanged()" name="incoming_high_value" <%=incoming_high_disabled%>>
+                                    <%=incoming_high%>
+                                </SELECT>
+                                Low Value
+                                <SELECT id="incoming_low_value" size="1" onChange="javascript:frmChanged()" name="incoming_low_value" <%=incoming_low_disabled%>>
+                                    <%=incoming_low%>
+                                </SELECT>
+                            </TD>
+                        </TR>
+                        <TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="4">Outgoing: High Value
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="4">
+                                <%=outgoing_high%>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="4">Outgoing: Low Value
+                            </TD>
+                        </TR>
+                        <tr>
+                            <TD class="sx" noWrap colSpan="4">
+                                <%=outgoing_low%>
+                            </TD>
+                        </tr>
+                        </TR>
+                        <TR>
+                            <TD class="sx  b" noWrap colSpan="4">Help
+                            </TD>
+                        </TR>
+                        <TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="4" align="left">Display Name: <INPUT id="help_display" onChange="javascript:frmChanged()" value="<%=help_display%>" <%=help_display_disabled%> type="text" name="help_display">
+                                Link: <INPUT id="help_link" value="<%=help_link%>" <%=help_link_disabled%> onChange="javascript:frmChanged()" type="text" size="50" name="help_link">
+                            </TD>
+                        </TR>
+                        </TR>
+                        <TR>
+                            <TD class="bos" colSpan="4" height="2"></TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="4">Description
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx" noWrap colSpan="4"><TEXTAREA id="description"  onchange="javascript:frmChanged()" <%=description_disabled%> style="WIDTH: 99%" name="description" rows="3"><%=description%></TEXTAREA>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="bos" colSpan="4" height="2"></TD>
+                        </TR>
+                        <TR>
+                            <TD class="sx b" noWrap colSpan="4"><INPUT class="chbox" onChange="javascript:frmChanged()" id="private_ba" <%=private_ba%> <%=private_ba_disabled%> type="checkbox" value="on" name="private_ba">Private
+                                <INPUT class="chbox" onChange="javascript:frmChanged()" id="active_ba" <%=active_ba%> <%=active_ba_disabled%> type="checkbox" value="on" name="active_ba">Active
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="bos" colSpan="4" height="2"></TD>
+                        </TR>
+                    </TABLE>
+                </DIV>
+                <DIV class="arhm">
+                    <TABLE id="Table4" cellSpacing="0" cellPadding="0" width="95%">
+                        <TR>
+						<TD align="left"><INPUT class="cw b bn sxs lsb" id="Submit1" <%=submit_disabled%> type="button" onClick="javascript:onSubmitProperties();" value="Save Settings" name="Submit1">
+                            </TD>
+                            <TD align="right"><INPUT class="sx" id="Button1" type="button" value="Revert to Last Saved Settings" name="Button1" onClick="javascript:onRevertLastSavedSettings()" <%=revert_disabled%> >
+                            </TD>
+                            
+                        </TR>
+                    </TABLE>
+                </DIV>
+            </DIV>
+            <DIV style="display: none;" id="allTypeFields" name="allTypeFields" width="100px">
+                <%=allTypeFields%>
+            </DIV>			
+        </FORM>
+    </body>
+	<div>
+		<iframe style="visibility: hidden;" id="saveOption" name="saveOption" action="">
+	</div>
+    <script language="javascript" src="<%=nearestPath%>web/scripts/wtt.js"></script>
+</html>

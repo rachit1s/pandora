@@ -1,0 +1,98 @@
+body
+{
+    font-family: verdana;
+    font-size: 8pt;
+    margin: 10px 10px 5px 8px;
+}
+table
+{
+    font-family: verdana;
+    font-size: 8pt;
+    padding: 2px 0px 2px 0px;
+    border: 1px solid #cee794;
+    width: 100%;
+}
+
+td
+{
+    height: 20px;
+    background-color: white;
+    border: 1px solid #cee794;
+    border-top: none;
+    border-right: none;
+    padding: 0px 2px 0px 2px;
+    vertical-align: top;
+}
+
+a
+{
+    font-family: verdana;
+    font-size: 8pt;
+    color: blue;
+    text-align: left;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: red;
+    text-decoration: none;
+}
+
+a:visited
+{
+    color: blue;
+    text-decoration: none;
+}
+
+a.header-link
+{
+    font: bold 8pt verdana;
+    color: #cee794;
+    text-decoration: underline;
+    float: right;
+    margin: -15px 5px 3px 500px;
+}
+
+a.header-link:hover
+{
+    text-decoration: underline;
+    color: white;
+}
+
+a.header-link:visited
+{
+    color: #cee794;
+    text-decoration: underline;
+}
+
+td.chart-title
+{
+    font-weight: bold;
+    color: #6679b3;
+    background-color: #E6F3C9;
+    padding-right: 0px;
+    white-space: nowrap;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.header
+{
+    font: bold 8pt verdana;
+    color: white;
+    text-indent: 3px;
+    white-space: nowrap;
+    background-color: #6679b3;
+    border: 1px solid black;
+    padding: 3px;
+    margin: 0px 0px 10px 0px;
+    height: 10px;
+}
+
+.container
+{
+    padding: 0px;
+    margin: 0px;
+    width: 99%;
+}

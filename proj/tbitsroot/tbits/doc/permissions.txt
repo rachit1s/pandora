@@ -1,0 +1,74 @@
+Roles: 
+
+tBits Internal Roles:
+SuperUser
+Permission Admin
+Admin
+
+Dynamic Roles:
+Logger
+Assignee 
+Subscriber
+
+Fixed predefined Roles:
+Analyst
+Customer
+Manager
+
+
+
+
+Permissions:
+# U 			
+append_interface 			
+Assignee 			
+Attachments 			
+Business Area 			
+	To view a business area or a request user must have this permission.
+Category 			
+Cc 			
+Description 			
+Due Date 			
+Header Description 			
+Last Update By. 			
+Last Updated 			
+Linked Requests 			
+Logged Date 			
+Logger 			
+Memo 			
+Notify 			
+Notify Logger 			
+Office 			
+Parent 			
+	Change: User should have permission to change for adding the subrequests.
+Private 			
+Rejected 			
+replied_to_action 			
+Request 			
+Request Type 			
+Severity 			
+Status 			
+Subject 			
+Subscribers 			
+Summary 			
+To 			
+workaround
+
+==================Random Notes===============================
+Association is allowed only the if the user has change permission on parent request id field.
+Relating Requests is allowed only the if the user has add permission on parent request id field.
+
+Role 'User' doesnt mean BA user. It means any user inside the system.
+Permission on 'BA- view' means a role can view BA.
+If you add a user to BA and don't assign any role. It is as good as not adding him to BA.
+
+Private BA, If a BA is private a User will not be able to see it. It is effectively equivalent of not giving User View permission on 'BA'.
+
+
+Manager can:
+See 'BA Users', 'Manage Fields', SMS Logs
+
+
+In database: Add: 1, Change: 2, View: 4. Can remember it ACV (Lexical sorting).
+
+This needs to be consolidated.

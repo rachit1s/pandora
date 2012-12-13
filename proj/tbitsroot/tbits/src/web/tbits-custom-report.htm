@@ -1,0 +1,201 @@
+<html>
+    <head>
+        <meta content="text/html; charset=ISI-8859-1" http-equiv="content-type">
+        <link rel="stylesheet" type="text/css" media="screen" href="<%=nearestPath%>web/css/<%=cssFile%>" />
+	 <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+	<script language="javascript">
+		YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+        </script>
+        <script>
+        function onSubmit()
+            {	
+           		var report = document.getElementById("report").value;
+				if (trim(report) == "")
+					 {
+							alert(" Select a Report Type.");
+							return;
+					 }
+				var ba = document.getElementById("ba").value;	 
+				if (report == "7" && trim(ba) == "")
+					{
+							alert(" Select a Business Area.");
+							return;
+					 }	
+					 
+				if (document.getElementById("format").checked)
+				{
+					exportToExcel();
+					return;
+				}
+					  
+					var url = "<%=nearestPath%>custom-report";
+					var data = "reportType=" + report + "&sysPrefix=" + ba;
+					var word = 'Loading';
+					toggleIFrame(word, true);
+    
+					 // Send the request to the url.
+					  try
+					   {
+					   xmlHttpAsyncPostFormData(url, data, Handler);
+					  }
+					 catch (e)
+					 {
+				   // TODO: log this event with the server.
+					 //toggleIFrame(word, false);
+				   }
+		}	
+
+/*
+ * This is a callback method for the asynchronous search request.
+ */
+function Handler(xmlHttpObject)
+{		
+    if (xmlHttpObject)
+    {
+        var state = xmlHttpObject.readyState;
+        if (state == 4)
+        {
+            // Output is ready to be absorbed.
+            var output = xmlHttpObject.responseText;
+        
+			 // Output contains the search results. So display them
+            var holder = document.getElementById("ResultsHolder");
+			if (holder != null) 
+			 {
+				holder.innerHTML = "<div class='bhs'><span class='sx l cb' onclick='exportToExcel()'>Export To Excel</span></div>" + output;
+				holder.style.display = "block";
+			 }		
+            toggleIFrame("", false);
+        }
+    }
+    else
+    {
+        //TODO: Log this error with the server.
+        toggleIFrame("", false);
+    }
+}
+
+/*
+ * This method toggles the iframe shown while search is in progress.
+ */
+function toggleIFrame(word, show)
+{
+	var ctrl = document.getElementById("frmTable");
+    if (ctrl)
+    {
+      if (show == true)
+        {
+            window.frames["topIFrame"].document.writeln("<body style='cursor:wait'></body>");
+             document.getElementById("ResultsHolder").style.display='none';
+            var url = "<%=nearestPath%>search-util" + "?loading=true&word=" + word;
+            window.frames["bottomIFrame"].document.location = url;
+			ctrl.style.display  = "block";
+        }
+        else
+        {
+            ctrl.style.display  = "none";
+            document.getElementById("ResultsHolder").style.display='block';
+            window.frames["bottomIFrame"].document.location = "about:blank";
+        }
+    }
+    else
+    {
+        //TODO: log this event with the server.
+    }
+}				
+	function exportToExcel()
+	{
+	  var report = document.getElementById("report").value;
+		if (trim(report) == "")
+			{
+				alert(" Select a Report Type.");
+				return;
+			 }
+		var ba = document.getElementById("ba").value;	 	 
+		var url = "<%=nearestPath%>custom-report?reportType=" + report + "&sysPrefix=" + ba + "&format=excel";
+	  // Finally open the results in a new window.
+	  window.open(url);    
+	}
+	
+	function onChangeReportType()
+	{
+		var report = document.getElementById("report").value;
+		if (trim(report) != "7")
+		document.getElementById("baSpan").style.display = 'none'
+		else
+		document.getElementById("baSpan").style.display = '';
+	}
+
+     </script>
+          </head>
+       <body>
+         <div id="frmDiv" style="height: 0px">
+        <script language="javascript">
+                if (document.all)
+                {
+                    document.getElementById("frmDiv").innerHTML = 
+                        "<table id='frmTable' name='frmTable' class='itbl'  style='display:none'>" + 
+                        "    <tr>" + 
+                        "        <td>" + 
+                        "            <iframe id='topIFrame' name='topIFrame' class='itop' style='height: 50px' allowtransparency='true'>" + 
+                        "            </iframe>" + 
+                        "        </td>" + 
+                        "    </tr>" + 
+                        "    <tr>" + 
+                        "        <td>" + 
+                        "            <iframe id='bottomIFrame' name='bottomIFrame' class='ibot' src='<%=nearestPath%>search-util?loading=true' allowtransparency='true' frameborder='no' style='display: block' scrolling='no'>" + 
+                        "            </iframe>" + 
+                        "        </td>" + 
+                        "    </tr>" + 
+                        "</table>";
+                    
+                }
+                else
+                {
+                    document.getElementById("frmDiv").innerHTML = 
+                        "<div class='itbl' id='frmTable' name='frmTable' style='display:none'>" + 
+                        "    <iframe id='topIFrame' name='topIFrame' class='itop' style='height: 50px' allowtransparency='true'></iframe>" + 
+                        "    <br>" + 
+                        "    <iframe id='bottomIFrame' name='bottomIFrame' class='ibot' src='<%=nearestPath%>search-util?loading=true' allowtransparency='true' frameborder='no' style='display: block' scrolling='no'>" + 
+                        "    </iframe>" + 
+                        "</div>";
+                } 
+            </script>
+        </div>
+          <div class="bhs h">
+         <div class="m">
+         <span class="sxs b">Reports:&nbsp;&nbsp;</span>
+         <select class="sx" size="1" ID="report" NAME="report" onchange="onChangeReportType();">
+			<OPTION value='' SELECTED class="list-item-default">[ Select Report Type ]</OPTION>                                       
+			<OPTION value='1'># current non-closed requests per BA</OPTION>
+			<OPTION value='2'># current non-closed requests per BA per Assignee.</OPTION>
+			<OPTION value='3'># of updates per person, historic.</OPTION>
+			<OPTION value='4'># of updates per person, per BA for 2007</OPTION>
+			<OPTION value='5'># of requests logged per person, historic.</OPTION>
+			<OPTION value='6'># of requests logged per person, per BA for 2007</OPTION>
+			<OPTION value='7'># of requests closed in 2007 per BA.</OPTION>
+			</OPTION>
+          </select>&nbsp;&nbsp;&nbsp;
+          <span id="baSpan" name="baSpan" style="display:none">
+           <span class="sxs b">for BA:&nbsp;&nbsp;</span>
+           <select class="sx" size="1" ID="ba" NAME="ba">
+			<OPTION value='' SELECTED class="list-item-default">[ Select BA ]</OPTION>  
+			<%=baList%>                                     
+			</OPTION>
+          </select>&nbsp;&nbsp;&nbsp;
+          </span>
+          <span class="sx">
+              <input type="checkbox" id="format" name="format" value="excel"> Excel
+		</span>
+           <input type="button" class="cw b bn sxs lsb" id="btnSubmit" name="btnSubmit" value="   Submit   "
+                             onclick="onSubmit()" /> 
+         </div>
+         </div>
+         <div id="ResultsHolder" name="ResultsHolder" class="m" style="display:none">
+        </div>
+         
+      </body>
+ 
+</html>

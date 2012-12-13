@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>Transfer <%=captions.all.camel_case_request%></title>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+        <link rel="stylesheet" href="<%=nearestPath%>web/css/<%=cssFile%>" />
+        <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/speller/spellChecker.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/messages.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/jspspellcheck/spellcheck-caller.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/jspspellcheck/jquery.form_big.js"></script>
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>        
+	<script language="javascript">                
+		YAHOO.namespace("transbit.tbits");
+                YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";       
+	 </script> 
+        <script language="javascript">
+        <!-- This is should be before action-details.js -->
+        var nearestPath = "<%=nearestPath%>";
+        </script>
+        <script language="javascript">
+           var args = window.dialogArguments; 
+	
+            function toggleImage(name)
+            {
+                if (name == "plus")
+                {
+                    document.getElementById("plusImg").style.display = "none";
+                    document.getElementById("minusImg").style.display = "block";
+                    document.getElementById("reqHistory").style.display = "block";
+                }
+                else if (name == "minus")
+                {
+                    document.getElementById("plusImg").style.display = "block";
+                    document.getElementById("minusImg").style.display = "none";
+                    document.getElementById("reqHistory").style.display = "none";
+                }
+            }
+            
+            function onSubmit()
+            {
+				var errorOutput = '';
+				var count = 0;
+				
+				var targetPrefix = document.getElementById("businessArea").value;
+				if (trim(targetPrefix) == "")
+					 {
+						count++;
+						errorOutput = errorOutput + count + "." + SELECT_TRANSFER_BA + "\n";
+					 }
+					 
+				 // var strSubject = document.getElementById("subject").value;
+				 // 				 if (trim(strSubject) == "")
+				 // 					 {
+				 // 						count++;
+				 // 						errorOutput = errorOutput + count + "." + SUBJECT_MANDATORY + "\n";
+				 // 					 }
+				var closedStatus = document.getElementById("closedStatus").value;
+				if (trim(closedStatus) == "")
+					 {
+						count++;
+						var SELECT_CLOSED_STATUS = "Select the status to which current <%=captions.all.request%> should be marked.";
+						errorOutput = errorOutput + count + "." + SELECT_CLOSED_STATUS + "\n";
+					 }
+				 if (trim(errorOutput) != "")
+					 {
+						alert(errorOutput);
+						return;
+					 }
+				
+                var sysPrefix = document.getElementById("sysPrefix").value;
+                var requestId = document.getElementById("requestId").value;
+				var logger = document.getElementById("logger_ids").value;
+                var subscriber = document.getElementById("subscriber_ids").value;
+                var subject = document.getElementById("subject").value;
+                var description = document.getElementById("description").value;
+                var reqHistory = document.getElementById("reqHistory").value;
+            	
+                  description = 
+                    description  + 
+                    "\n\n" + 
+                    "--------------------------------------------------------------------------------" + 
+                    "\n\n" + 
+                    reqHistory;               
+                                 
+             // Create a dynamic form and set its target to hidden Iframe and submit.
+             var obj1 = document.createElement("form");
+			 obj1.name="dymForm";
+			 obj1.id="dymForm";
+			 obj1.target="hiddenIFrame";
+			 obj1.action = "<%=nearestPath%>transfer-request";
+		     obj1.method="post";
+			 obj1.appendChild(createObject("sysPrefix", sysPrefix));
+			 obj1.appendChild(createObject("requestId",requestId));
+			 obj1.appendChild(createObject("targetPrefix", targetPrefix));
+    		 obj1.appendChild(createObject("logger_ids", logger));	
+    		 obj1.appendChild(createObject("subscriber_ids", subscriber));	 
+    		 obj1.appendChild(createObject("closedStatus", closedStatus));
+			 
+    		var sub = document.createElement("textarea");
+			sub.name= "subject";
+			sub.value= subject;
+
+			var desc = document.createElement("textarea");
+			desc.name= "description";
+			desc.value= description;
+    		 
+    		 obj1.appendChild(sub);	
+    		 obj1.appendChild(desc);
+    		 document.body.appendChild(obj1);
+    		 //var dymForm = document.getElementById("dymform");
+    		 obj1.submit();
+    		 document.body.removeChild(obj1);  
+    		 
+    		 }
+    		 
+    		function onIframeBodyLoad()
+    		{ 
+    			var output = window.frames["hiddenIFrame"].document.body.innerHTML;
+    			
+    			if (output == '')
+					return;
+				
+				var sysPrefix = document.getElementById("sysPrefix").value;
+                var requestId = document.getElementById("requestId").value;
+				var requestUrl = "<%=nearestPath%>q/" + sysPrefix + "/" + requestId;
+             	  
+				if(output.indexOf("true") >= 0)
+                {
+					window.close();
+				    if (document.all)
+					  {
+						 args.returnValue = 1;
+					  }
+					 else 
+					  {
+						if (window.opener != null)
+							{
+								window.close();
+								window.opener.location = requestUrl;
+				            }
+						else
+						{
+							window.location = requestUrl;
+						}
+								
+					 } 
+					  return;
+				}
+                else
+                {
+                    alert(output);
+                    return;
+                }
+            }
+            
+            function onCancel()
+            {
+                window.close();
+            }
+            
+            function onKeyDownBody(e)
+            {
+			   var event = (document.all) ? window.event : e;
+               var keyCode = (document.all) ? event.keyCode : e.which;
+               if (keyCode == 27)
+                {
+					onCancel();
+                    return true;
+                }
+               if (keyCode == 13 && (event.ctrlKey == true || event.ctrlLeft == true))
+				{
+					onSubmit();
+					return true;
+				}
+              return false;
+            }
+            function spellCheck()
+            {
+        // Build an array of form elements (not there values)
+        var elements = new Array(0);
+
+        // Your form elements that you want to have spell checked
+      
+        elements[elements.length] = document.getElementById('description');
+
+        // Start the spell checker
+        startSpellCheck( "<%=nearestPath%>web/jspspellcheck/", elements );
+
+    }
+        </script>
+    </head>
+    <body style="padding-top:4px; padding-left: 4px;" onkeydown="onKeyDownBody(event);" style="width:880px;">
+        <div style="display:none">
+            <iframe id='hiddenIFrame' name='hiddenIFrame' style="display:none" onload="onIframeBodyLoad()"></iframe>
+        </div>
+        <form id="transferForm" name="transferForm" action="">
+            <input type="hidden" name="sysPrefix" id="sysPrefix" value="<%=sysPrefix%>" /> <input type="hidden" name="systemId" id="systemId" value="<%=systemId%>" />
+            <input type="hidden" name="requestId" id="requestId" value="<%=requestId%>" />
+            <div class="sx cal h" align="left" style="background: #FFFFBF;">
+            <div class="m">
+                    <blockquote>
+                    Note: <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Select the business area to which you would like to transfer this <%=captions.all.request%>.<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;All changes made below will become part of the new <%=captions.all.request%>.<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Double check before submitting because a transfer cannot be undone.<br>
+                    </blockquote>
+                    </div>
+            </div>
+            <div class="bhs h">
+                <table cellpadding="0" cellspacing="2" style="margin-left: 0ex; margin-right: -0.3ex;">
+                    <colgroup>
+                        <col width="180px" align="left" />
+                        <col width="685px" align="left" />
+                    </colgroup>
+                    <tr>
+                        <td class="s b" nowrap>Transfer
+                            <%=prefixId%>
+                            to</td>
+                        <td><SELECT class="sx" id="businessArea" name="businessArea" tabindex="1">
+                                <OPTION value='' SELECTED class="list-item-default">[ Select Business Area ]</OPTION>
+                                <%=baList%>
+                            </SELECT>
+                        </td>
+                    </tr>
+					<tr>
+                        <td class="s b" nowrap>Mark current <%=captions.all.request%> as 
+                            </td>
+                        <td><SELECT class="sx" id="closedStatus" name="closedStatus" tabindex="1">
+                                <OPTION value='' SELECTED class="list-item-default">[ Select Status]</OPTION>
+                                <%=statusList%>
+                            </SELECT>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="s b" nowrap>Logger&nbsp;&nbsp;</td>
+                        <td class="sx">
+                            <input type="text" readonly name="logger_ids" id="logger_ids" value="<%=logger_ids%>" style="width: 99%; background-color: #D9D9D9;" tabindex="-2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td nowrap>
+                            <span class="s b cb l" onClick="javascript:openUserPicker(document.all.subscriber_ids)">Subscribers</span>&nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <input class="sx wickEnabled" style="width: 99%;" id="subscriber_ids" name="subscriber_ids" value="<%=subscriber_ids%>" type="text" tabindex="2">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="s b" nowrap>Subject&nbsp;&nbsp;</td>
+                        <td>
+                            <input class="sx" type="text" name="subject" id="subject" value="<%=subject%>"  style="width: 99%" tabindex="3"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="s b" valign="top">Description&nbsp;&nbsp;</td>
+                        <td align="right" nowrap>
+                            <span class="s l cb u" onClick="javascript:spellCheck()"
+                                tabindex="5">Check Spelling</span>&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <textarea class="ww sx ff" id="description" name="description" rows="4" style="width: 99%;"
+                                tabindex="4"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="sx" nowrap><span class="l help" onMouseOver="return makeTrue(domTT_activate(this,event,'content','This is the information that will be transferred to the business area you select.','closeAction','remove'));"><%=captions.view.request_history%></span>&nbsp;&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="left">
+                             <textarea id="reqHistory" name="reqHistory" readonly class="ww sx ff" style="width: 99%; background-color: #F4F4EA; padding-top:10px; padding-left: 10px;" rows="10"><%=description%></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                        	<div style="width: 99%;text-align: right">
+                            <input type="button" class="cw b bn sxs lsb" id="btnSubmit" name="btnSubmit" value="   Submit   "
+                                tabindex="6" onClick="onSubmit()" /> <input type="button" class="sxs lsb" id="Cancel" name="btnCancel" value="   Cancel   "
+                                tabindex="7" onClick="onCancel()" />
+                                </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </body>
+    <script language="javascript" src="<%=nearestPath%>web/scripts/wac.js"></script>
+    <script language="javascript" src="<%=nearestPath%>web/scripts/tt.js"></script>
+</html>

@@ -1,0 +1,7 @@
+Author:Nitiraj
+Name:com.tbitsglobal.corr
+Description: Correspondance Module
+Version: 1.5
+Depends: 
+Activator:
+

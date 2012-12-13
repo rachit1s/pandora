@@ -1,0 +1,944 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!--
+	Definitions of the following jobs: 
+		o AD2tbits Sync script scheduled to be run every 30 min.
+		o TBits User DB Sync script scheduled to be run every 30 min.
+		o Indexer Daemon scheduled to be run every 5 min.
+		o Index Optimizer scheduled to be run every day at 06:00 AM.
+		o DH-Cron that logs requests for data hyd every day at 06:00 AM.
+		o Job to log request to TBits to add holidays for forthcoming year. 
+		  This is scheduled to be run every year on December 20th.
+		o Sync Dependent Types in business areas in the current instance of TBits.
+-->
+<quartz 
+	xmlns="http://www.quartzscheduler.org/ns/quartz" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.quartzscheduler.org/ns/quartz http://www.quartzscheduler.org/ns/quartz/job_scheduling_data_1_1.xsd"
+	version="1.1">
+    <!--
+        This Job syncs the TBits User database with the Active Directory.
+        It is configured to run every 30min.
+        Please do not change the name of the job.
+    -->
+    <!--job>
+        <job-detail>
+            <name>AddRequest</name>
+            <group>RequestOperations</group>
+            <description>Add a Request</description>
+            <job-class>transbit.tbits.scheduler.ScheduleRequest</job-class>
+            <volatility>false</volatility>
+            <durability>true</durability>
+            <recover>false</recover>
+	    <job-data-map>
+		<entry>
+		    <key>sys_id</key>
+		    <value>tbits</value>
+		</entry>
+		<entry>
+		    <key>subject</key>
+		    <value>Testing the job</value>
+		</entry>
+		<entry>
+		    <key>user_id</key>
+		    <value>root</value>
+		</entry>
+	    </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>AddRequest</name>
+                <group>RequestOperations</group>
+                <job-name>AddRequest</job-name>
+                <job-group>RequestOperations</job-group>
+                <cron-expression>0 0 9 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job-->
+    <!--job>
+        <job-detail>
+            <name>AD2TBitsSync</name>
+            <group>MaintenanceGroup</group>
+            <description>AD to TBits User Sync.</description>
+            <job-class>transbit.tbits.scheduler.MaintenanceJob</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+	    <job-data-map>
+		<entry>
+		    <key>FQCN</key>
+		    <value>transbit.tbits.Helper.AD2TBitsSync</value>
+		</entry>
+		<entry>
+		    <key>CmdLineArgumentNameCSV</key>
+		    <value>update,add</value>
+		</entry>
+		<entry>
+		    <key>update</key>
+		    <value>/update</value>
+		</entry>
+		<entry>
+		    <key>add</key>
+		    <value>/add</value>
+		</entry>
+	    </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>AD2TBitsSyncTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>AD2TBitsSync</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 0/1 * ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job-->
+    <!-- 
+        This Job syncs the TBits User databases across different instances.
+        It is configured to run every 30min.
+        ___Please do not change the name of the job.___
+    -->
+    <!--job>
+        <job-detail>
+            <name>SyncTBitsUserDBs</name>
+            <group>MaintenanceGroup</group>
+            <description>TBits User DB Sync.</description>
+            <job-class>transbit.tbits.scheduler.MaintenanceJob</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+	    <job-data-map>
+		<entry>
+		    <key>FQCN</key>
+		    <value>transbit.tbits.util.SyncTBitsUserDBs</value>
+		</entry>
+		<entry>
+		    <key>CmdLineArgumentNameCSV</key>
+		    <value></value>
+		</entry>
+	    </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>SyncTBitsUserDBsTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>SyncTBitsUserDBs</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 0/30 * ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job-->
+    <!--
+        This Reads all mails for business area accounts and logs the requests in TBits database.
+        It is configured to run every 2min.
+        ___Please do not change the name of the job.___
+    -->
+    <job>
+        <job-detail>
+            <name>RecieveAllMails</name>
+            <group>MaintenanceGroup</group>
+            <description>Receive All Mails of business areas.</description>
+            <job-class>transbit.tbits.scheduler.MaintenanceJob</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>FQCN</key>
+                    <value>transbit.tbits.mail.RecieveMail</value>
+                </entry>
+                <entry>
+                    <key>CmdLineArgumentNameCSV</key>
+                    <value></value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>RecieveMailTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>RecieveAllMails</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 0/1 * ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+    <job>
+        <job-detail>
+            <name>PreventiveAlerts</name>
+            <group>PreventiveAlertsGroup</group>
+            <description>Send preventive alerts</description>
+            <job-class>transbit.tbits.scheduler.PreventiveAlerts</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                	<!-- Before how long (in minutes) an alert should be sent. -->
+                    <key>alertTime</key>
+                    <value>60</value>
+                </entry>
+                <entry>
+                	<!-- The frequency(in minutes) at which the event is fired. This needed to ensure the event is correctly handled. -->
+                    <key>schFreq</key>
+                    <value>5</value>
+                </entry>
+                <entry>
+                	<!-- a == assignee, l == loggers, s = subscribers, c = CC. 
+                		The valid examples are  "alsc" which means send mail to assignee, loggers, subscribers and CC. 
+                		"a" means send mail to only assignee. -->
+                    <key>recipients</key>
+                    <value>a</value>
+                </entry>
+                <entry>
+                    <key>subject</key>
+                    <value>Upcoming requests alert.</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@tbits</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>PreventiveAlerts</name>
+                <group>PreventiveAlertsGroup</group>
+                <job-name>PreventiveAlerts</job-name>
+                <job-group>PreventiveAlertsGroup</job-group>
+                <!-- If you change cron expression, dont forget to update schFreq (in minutes)  -->
+                <cron-expression>0 0/5 * ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+   <job>
+        <job-detail>
+            <name>BirtDailyReportSender</name>
+            <group>MaintenanceGroup</group>
+            <description>End of the day report</description>
+            <job-class>transbit.tbits.scheduler.BirtReportMailer</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>subject</key>
+                    <value>End of the day report- Opened/Closed Requests on $date</value>
+                </entry>
+                <entry>
+                    <key>recipients</key>
+                    <value>manish@transbittech.com,jayakumar.subramanian@standardcharteredcapitalmarkets.com,root@localhost</value>
+                </entry>
+                <entry>
+                    <key>reportURL</key>
+                    <value>http://localhost/reports/frameset?__report=daily_report.rptdesign&amp;daysAgo=1&amp;__format=pdf</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@localhost</value>
+                </entry>
+                <entry>
+                    <key>body</key>
+                    <value>Please find the report  on daily opened and closed requests attached.</value>
+                </entry>
+                <entry>
+                    <key>fileName</key>
+                    <value>opened-closed-eod.pdf</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+            	<name>BirtDailyReportSenderTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>BirtDailyReportSenderTrigger</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 1 18 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+
+   <!--job>
+        <job-detail>
+            <name>BirtAgeingReportSender</name>
+            <group>MaintenanceGroup</group>
+            <description>The Ageing Report</description>
+            <job-class>transbit.tbits.scheduler.BirtReportMailer</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>subject</key>
+                    <value>The ageing report of IT Helpdesk</value>
+                </entry>
+                <entry>
+                    <key>recipients</key>
+                    <value>manish@transbittech.com,jayakumar.subramanian@standardcharteredcapitalmarkets.com</value>
+                </entry>
+                <entry>
+                    <key>reportURL</key>
+                    <value>http://transbit/reports/frameset?__report=express_it_ageing.rptdesign&amp;sys_id=1&amp;__format=pdf</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@localhost</value>
+                </entry>
+                <entry>
+                    <key>body</key>
+                    <value>Please find the overdue tasks report attached.</value>
+                </entry>
+                <entry>
+                    <key>fileName</key>
+                    <value>ageingreport.pdf</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+            	<name>BirtAgeingReportSenderTriger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>BirtAgeingReportSenderTriger</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 0 9 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job-->
+    
+    <job> 
+        <job-detail>
+            <name>BirtDailyReportuserActivityReport</name>
+            <group>MaintenanceGroup</group>
+            <description> User Activity Report </description>
+            <job-class>transbit.tbits.scheduler.BirtReportMailer</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>subject</key>
+                    <value>User Activity Report on $date</value>
+                </entry>
+                <entry>
+                    <key>recipients</key>
+                    <value> manish@transbittech.com,paritosh@transbittech.com,jayakumar.subramanian@standardcharteredcapitalmarkets.com,root@localhost</value>
+                </entry>
+                <entry>
+                    <key>reportURL</key>
+                    <value>http://localhost/reports/frameset?__report=ttattu.rptdesign&amp;__format=pdf</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@localhost</value>
+                </entry>
+                <entry>
+                    <key>body</key>
+                    <value>Please find the User Activity Report enclosed </value>
+                </entry>
+                <entry>
+                    <key>fileName</key>
+                    <value>user_activity_report.pdf</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+            	<name>BirtDailyReportuserActivityReportTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>BirtDailyReportuserActivityReport</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 7 9 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+	
+  <job> 
+        <job-detail>
+            <name>BirtDailyReportcallsummaryreport</name>
+            <group>MaintenanceGroup</group>
+            <description> Call Summary Report </description>
+            <job-class>transbit.tbits.scheduler.BirtReportMailer</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>subject</key>
+                    <value>Call Summary Report on $date</value>
+                </entry>
+                <entry>
+                    <key>recipients</key>
+                    <value> manish@transbittech.com,paritosh@transbittech.com,jayakumar.subramanian@standardcharteredcapitalmarkets.com,root@localhost</value>
+                </entry>
+                <entry>
+                    <key>reportURL</key>
+                    <value>http://localhost/reports/frameset?__report=callsummaryreport.rptdesign&amp;user_id=1&amp;url=&quot;&quot;&amp;__format=pdf</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@localhost</value>
+                </entry>
+                <entry>
+                    <key>body</key>
+                    <value>Please find the Call Summary Report enclosed </value>
+                </entry>
+                <entry>
+                    <key>fileName</key>
+                    <value>Call_summary_reports.pdf</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+            	<name>BirtDailyReportcallsummaryreportTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>BirtDailyReportcallsummaryreport</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 25 9 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+
+
+	<job> 
+        <job-detail>
+            <name>BirtDailyReportageingreport</name>
+            <group>MaintenanceGroup</group>
+            <description> Ageing  Report </description>
+            <job-class>transbit.tbits.scheduler.BirtReportMailer</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>subject</key>
+                    <value>Ageing  Report on $date</value>
+                </entry>
+                <entry>
+                    <key>recipients</key>
+                    <value> manish@transbittech.com,paritosh@transbittech.com,jayakumar.subramanian@standardcharteredcapitalmarkets.com,root@localhost</value>
+                </entry>
+                <entry>
+                    <key>reportURL</key>
+                    <value>http://localhost/reports/frameset?__report=ageing_report.rptdesign&amp;sys_id=1&amp;user_id=1&amp;url=&quot;&quot;&amp;__format=pdf</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@localhost</value>
+                </entry>
+                <entry>
+                    <key>body</key>
+                    <value>Please find the Ageing  Report enclosed </value>
+                </entry>
+                <entry>
+                    <key>fileName</key>
+                    <value>Overdue_tasks_in_project.pdf</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+            	<name>BirtDailyReportageingreportTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>BirtDailyReportageingreport</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 3 9 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+	<job> 
+        <job-detail>
+            <name>ExpenseReport</name>
+            <group>MaintenanceGroup</group>
+            <description>Expense Report</description>
+            <job-class>transbit.tbits.scheduler.BirtReportMailer</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>subject</key>
+                    <value>Expense Report on $date</value>
+                </entry>
+                <entry>
+                    <key>recipients</key>
+                    <value>manish@transbittech.com,ritesh@transbittech.com,jayakumar.subramanian@standardcharteredcapitalmarkets.com,root@localhost</value>
+                </entry>
+                <entry>
+                    <key>reportURL</key>
+                    <value>http://localhost/reports/frameset?__report=newexpensereport.rptdesign&amp;sys_id=1&amp;user_id=1&amp;url=&quot;&quot;&amp;__format=pdf</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@localhost</value>
+                </entry>
+                <entry>
+                    <key>body</key>
+                    <value>Please find the Expense Report enclosed </value>
+                </entry>
+                <entry>
+                    <key>fileName</key>
+                    <value>expensereport.pdf</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+            	<name>ExpenseReportTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>ExpenseReport</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 13 18 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+	
+	<job> 
+        <job-detail>
+            <name>TimesheetReport</name>
+            <group>MaintenanceGroup</group>
+            <description>Timesheet Report</description>
+            <job-class>transbit.tbits.scheduler.BirtReportMailer</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>subject</key>
+                    <value>Timesheet Report on $date</value>
+                </entry>
+                <entry>
+                    <key>recipients</key>
+                    <value>manish@transbittech.com,ritesh@transbittech.com,jayakumar.subramanian@standardcharteredcapitalmarkets.com,root@localhost</value>
+                </entry>
+                <entry>
+                    <key>reportURL</key>
+                    <value>http://localhost/reports/frameset?__report=timesheet.rptdesign&amp;sys_id=1&amp;user_id=1&amp;url=&quot;&quot;&amp;__format=pdf</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@localhost</value>
+                </entry>
+                <entry>
+                    <key>body</key>
+                    <value>Please find the Timesheet Report enclosed </value>
+                </entry>
+                <entry>
+                    <key>fileName</key>
+                    <value>timesheetreport.pdf</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+            	<name>TimesheetReportTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>TimesheetReport</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 15 18 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+	
+	<job> 
+        <job-detail>
+            <name>ProjectOverdueReport</name>
+            <group>MaintenanceGroup</group>
+            <description>Project Overdue Report</description>
+            <job-class>transbit.tbits.scheduler.BirtReportMailer</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>subject</key>
+                    <value>Project Overdue on $date</value>
+                </entry>
+                <entry>
+                    <key>recipients</key>
+                    <value>manish@transbittech.com,ritesh@transbittech.com,jayakumar.subramanian@standardcharteredcapitalmarkets.com,root@localhost</value>
+                </entry>
+                <entry>
+                    <key>reportURL</key>
+					<value>http://localhost/reports/frameset?__report=projectsummary.rptdesign&amp;sys_id=1&amp;user_id=1&amp;url=&quot;&quot;&amp;__format=pdf</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@localhost</value>
+                </entry>
+                <entry>
+                    <key>body</key>
+                    <value>Please find the Timesheet Report enclosed </value>
+                </entry>
+                <entry>
+                    <key>fileName</key>
+                    <value>projectoverduereport.pdf</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+            	<name>ProjectOverdueReportTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>ProjectOverdueReport</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 10 18 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+	
+ 	<job>
+        <job-detail>
+            <name>DailyTaskList</name>
+            <group>MaintenanceGroup</group>
+            <description>The Daily Task Report</description>
+            <job-class>transbit.tbits.report.PerUserReportEmailer</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>subject</key>
+                    <value>Tasks assigned to $user as on $date</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@localhost</value>
+                </entry>
+                <entry>
+                    <key>upcomingreqsdays</key>
+                    <value>3</value>
+                </entry>
+                <entry>
+                    <key>reportfile</key>
+                    <value>dailytasklist.rptdesign</value>
+                </entry>
+                <entry>
+                    <key>leaveOutputFile</key>
+                    <value>false</value>
+                </entry>
+              <entry>
+                    <key>includeExternalUsers</key>
+                    <value>false</value>
+              </entry>
+              <entry>
+              		<key>essentialData</key>
+              		<value>overduetasks,upcomingtasks,taskswithoutduedate</value>
+              </entry>
+               <entry>
+              		<key>sendmails</key>
+              		<value>true</value>
+              </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+            	<name>DailyTaskListTriger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>DailyTaskList</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 0 9 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+	
+	<job>
+        <job-detail>
+            <name>LoggedByMeDailyTaskList</name>
+            <group>MaintenanceGroup</group>
+            <description>The Daily Task Report</description>
+            <job-class>transbit.tbits.report.PerUserReportEmailer</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>subject</key>
+                    <value>Tasks created by $user as on $date</value>
+                </entry>
+                <entry>
+                    <key>fromAddress</key>
+                    <value>donotreply@localhost</value>
+                </entry>
+                <entry>
+                    <key>upcomingreqsdays</key>
+                    <value>3</value>
+                </entry>
+                <entry>
+                    <key>reportfile</key>
+                    <value>taskslogggedbyme.rptdesign</value>
+                </entry>
+                <entry>
+                    <key>leaveOutputFile</key>
+                    <value>false</value>
+                </entry>
+              <entry>
+                    <key>includeExternalUsers</key>
+                    <value>true</value>
+              </entry>
+              <entry>
+              		<key>essentialData</key>
+              		<value>overduetasks,upcomingtasks,taskswithoutduedate</value>
+              </entry>
+               <entry>
+              		<key>sendmails</key>
+              		<value>true</value>
+              </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+            	<name>LoggedByMeDailyTaskListTriger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>LoggedByMeDailyTaskList</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 30 9 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+	
+    <!-- 
+        This Job incrementally indexes the requests in TBits database.
+        It is configured to run every 5min.
+        ___Please do not change the name of the job.___
+    -->
+    <job>
+        <job-detail>
+            <name>IndexerDaemon</name>
+            <group>MaintenanceGroup</group>
+            <description>Incremental Indexer.</description>
+            <job-class>transbit.tbits.scheduler.MaintenanceJob</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+	    <job-data-map>
+		<entry>
+		    <key>FQCN</key>
+		    <value>transbit.tbits.indexer.IndexerDaemon</value>
+		</entry>
+		<entry>
+		    <key>CmdLineArgumentNameCSV</key>
+		    <value></value>
+		</entry>
+	    </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>IndexerDaemonTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>IndexerDaemon</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 0/5 * ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+    <!-- 
+        This Job optimizes the Lucene Index.
+        It is configured to run every day at 9:00 AM.
+        ___Please do not change the name of the job.___
+    -->
+    <job>
+        <job-detail>
+            <name>IndexOptimizer</name>
+            <group>MaintenanceGroup</group>
+            <description>Index Optimizer.</description>
+            <job-class>transbit.tbits.scheduler.MaintenanceJob</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+	    <job-data-map>
+		<entry>
+		    <key>FQCN</key>
+		    <value>transbit.tbits.indexer.OptimizeIndex</value>
+		</entry>
+		<entry>
+		    <key>CmdLineArgumentNameCSV</key>
+		    <value></value>
+		</entry>
+	    </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>IndexOptimizerTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>IndexOptimizer</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 0 9 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+    <!--
+        This Job runs dh-cron perl script that logs requests
+        for Data (HYD) business area.
+        It is configured to run every day at 6:00 AM.
+        ___Please do not change the name of the job.___
+    -->
+    <!--job>
+        <job-detail>
+            <name>DHCronJob</name>
+            <group>MaintenanceGroup</group>
+            <description>DH Cron Job.</description>
+            <job-class>transbit.tbits.scheduler.DHJob</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>DHCronJobTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>DHCronJob</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 0 6 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job-->
+    
+    <!-- 
+        This Job logs a request on 20th December of every year
+	to add company holidays list for next year.
+        ___Please do not change the name of the job.___
+    -->
+    <!--job>
+        <job-detail>
+            <name>AddHolidayList</name>
+            <group>MaintenanceGroup</group>
+            <description>Add Holiday's List to both HYD and NYC instances.</description>
+            <job-class>transbit.tbits.scheduler.MaintenanceJob</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>AddHolidayListTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>AddHolidayList</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 30 10 20 DEC ?</cron-expression>
+            </cron>
+        </trigger>
+    </job-->
+    <!-- 
+        This Job syncs the dependent types in tbits business areas in the current
+	instance. It is configured to run every day at 09:00 AM.
+        ___Please do not change the name of the job.___
+    -->
+    <job>
+        <job-detail>
+            <name>SyncDependentTypes</name>
+            <group>MaintenanceGroup</group>
+            <description>Sync Dependent Types.</description>
+            <job-class>transbit.tbits.scheduler.MaintenanceJob</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+	    <job-data-map>
+		<entry>
+		    <key>FQCN</key>
+		    <value>transbit.tbits.util.SyncDependentTypes</value>
+		</entry>
+		<entry>
+		    <key>CmdLineArgumentNameCSV</key>
+		    <value></value>
+		</entry>
+	    </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>SyncDependentTypesTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>SyncDependentTypes</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 0 9 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+
+<!-- 
+	This Job searches for given DQL and update the corresponding requestIDs with the given field-value pairs . Thus it can be used for notifying purpose through requests updates only.
+	 It is configured to run every day at 09:00 AM.
+-->
+
+ <!--job>
+        <job-detail>
+            <name>SearchAndUpdateAllBAs</name>
+            <group>MaintenanceGroup</group>
+            <description>SearchingAndUpdating.</description>
+            <job-class>transbit.tbits.scheduler.SearchAndUpdateJob</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+			<job-data-map>
+				<entry-->
+					<!-- 
+					Regular Expression matching all the bas. 
+					Each regex is matched against business area name 
+					.* - means all business areas
+					tbits.* - means all business areas starting with tbits
+					tbits|tbitssupport - means business areas are  tbits and tbitssupport. 
+					 -->
+					<!--key>BA_REGEX</key>
+					<value>tbits.*</value>
+				</entry>
+				<entry>
+					<key>DQL</key>
+					<value>dueby:tomorrow</value>
+				</entry>
+				<entry>
+					<key>USER</key>
+					<value>root</value>
+				</entry>
+				<entry>
+					<key>description</key>
+					<value>Warning: the duedate is tomorrow!</value>
+				</entry>				
+			</job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>SearchAndUpdateTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>SearchAndUpdateAllBAs</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <cron-expression>0 0 */1 ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job-->
+    
+    <!-- 
+	This Job finds out the requests that need to be escalated and to who - mean who should the request be assigned to.
+	Along with changing assignee, you can also supply the other fields.
+	-->
+
+ 	<job>
+        <job-detail>
+            <name>SeverityBasedEscalation</name>
+            <group>MaintenanceGroup</group>
+            <description>SeverityBasedEscalation.</description>
+            <job-class>transbit.tbits.scheduler.SeverityBasedEscalation</job-class>
+            <volatility>false</volatility>
+            <durability>false</durability>
+            <recover>false</recover>
+			<job-data-map>
+				<entry>
+					<key>user_id</key>
+					<value>root</value>
+				</entry>
+				<entry>
+					<key>description</key>
+					<value>[The request is being escalated automatically by tBits.]</value>
+				</entry>
+			</job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>SeverityBasedEscalationTrigger</name>
+                <group>MaintenanceGroup</group>
+                <job-name>SeverityBasedEscalation</job-name>
+                <job-group>MaintenanceGroup</job-group>
+                <!--  remember that the job should be executed at the minimum unit of time used in stp_severity_escalation. -->
+                <cron-expression>0 */1 * ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+</quartz>

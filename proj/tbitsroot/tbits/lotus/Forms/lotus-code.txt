@@ -1,0 +1,299 @@
+Declarations:
+-------------------
+Dim track As Boolean
+Dim baString As String
+Dim assignee As String
+Dim status As String
+Dim dueDate As String
+Dim setSms As Boolean
+Dim doc As NotesUIDocument
+Dim domParser As NotesDOMParser
+
+Type BAUser 
+	id As String
+	login As String
+	firstname As String
+	lastname As String
+	email As String
+	defaultBA As String
+End Type
+
+Type BA	
+	displayName As String
+	baUsers As String
+	email As String
+	category As String
+	status As String
+	prefix As String
+End Type
+
+Dim baArray () As BA
+Dim baUserArray() As BAUser
+
+getBAInfo
+--------------
+Sub getBAInfo ()
+	Dim notesDocument  As NotesDocument
+	Dim session As NotesSession
+	Dim db As NotesDatabase
+	Dim inputStream As NotesStream	
+	Dim docNode As NotesDOMDocumentNode	
+	Dim child As notesdomnode
+	Dim user As notesdomnode
+	Dim ba As notesdomnode
+	Dim attr As notesdomattributenode
+	Dim eltNode As NotesDOMElementNode 		
+	Dim balist As NotesDOMNodeList
+	Dim userlist As NotesDOMNodeList	
+	Dim tlist As NotesDOMNodeList
+	Dim tempStr As String	
+	Dim numChildNodes As Integer	
+	Dim baXML As String
+	
+	Dim webDb As NotesDatabase
+	Dim dbDoc As NotesDocument
+	Dim fileobject As NotesEmbeddedObject
+	Dim XmlFile As String	
+	
+	Set session = New NotesSession		
+	'Set db = session.CurrentDatabase
+	Set webDb = session.GetDatabase ("",session.URLDatabase.FilePath)
+	
+	Set dbDoc = webDb.GetDocumentByURL ("http://demo.mytbits.com:81/outlookconfig")			
+	Set fileobject = dbDoc.GetAttachment("outlookconfig")		
+	
+	XmlFile = "C:\" & fileobject.Source
+	fileobject.ExtractFile(xmlFile)
+	
+     'open the XML file
+	Set inputStream = session.CreateStream	
+	inputStream.Open (XmlFile)
+	If inputStream.Bytes = 0 Then
+		'outputStream.WriteText (XMLFile+" is empty")
+	End If
+	
+	'create DOM parser andateDOMParser (inputam.Close
+	Set domParser = session.CreateDOMParser (inputStream)
+	domParser.Process
+	inputStream.Close
+	
+	'get the document node	
+	Set docNode = domParser.Document	
+	
+	Set userlist = docNode.GetElementsByTagName ( "user")			
+	Redim baUserArray (1 To userlist.NumberOfEntries)	
+	For i = 1 To  userlist.NumberOfEntries				
+		Set user= userlist.GetItem(i)			
+		Set attr = user.Attributes.GetItem(1)
+		If (attr.AttributeName = "id") Then			
+			baUserArray(i).id = attr.AttributeValue
+		End If
+		
+		'Set eltNode = user		
+		'Set tlist = eltNode.GetElementsByTagName("login")
+		'Set child =  tlist.GetItem(1)	
+		'baUserArray(i).login = child.FirstChild.NodeValue
+		baUserArray(i).login = getNodeValue (user, "login")		
+		baUserArray(i).firstname = getNodeValue (user,  "first_name")		
+		baUserArray(i).lastname = getNodeValue (user,  "last_name")		
+	Next	'user		
+	
+	'Proceeding to retrieve ba values
+	Set balist = docNode.GetElementsByTagName ( "business_area")		
+	Redim baArray (1 To balist.NumberOfEntries)
+	For i = 1 To balist.NumberOfEntries
+		Set ba = balist.GetItem(i)
+		
+		For j = 1 To ba.Attributes.NumberOfEntries
+			Set attr = ba.Attributes.GetItem(j)
+			If (attr.AttributeName = "display_name") Then
+				baArray(i).displayName = attr.AttributeValue
+			End If			
+		Next 'ba attribute			
+		
+		baArray(i).email = getNodeValue (ba, "email")
+		baArray(i).prefix = getNodeValue (ba, "prefix")
+		baArray(i).category = getNodeValue (ba, "category")
+		baArray(i).status = getNodeValue (ba, "status")
+	Next 'ba		
+results:	
+	Exit Sub
+End Sub
+
+Function getNodeValue()
+---------------------------------------
+Function getNodeValue (pNode As NotesDOMNode, Byval nodeName As String) As String
+	Dim tlist As NotesDOMNodeList	
+	Dim eltNode As NotesDOMElementNode
+	Dim child As notesdomnode
+	
+	Set eltNode = pNode	
+	Set tlist = eltNode.GetElementsByTagName(nodeName)
+	
+	If ((tlist.NumberOfEntries > 0) And  ((tlist.GetItem(1).IsNull))) Then
+		getNodeValue= ""		
+	Else		
+		Set child =  tlist.GetItem(1).FirstChild	
+		If (child.IsNull) Then 
+			getnodeValue = ""		
+		Else
+			getnodeValue = child.NodeValue
+		End If
+	End If	
+End Function
+
+
+TBitsTrack:
+------------------
+Onload:
+------------
+Sub Onload(Source As Notesuidocument)	
+	On Error Goto docError
+	Set doc = Source	
+	track = False		
+	Call getBAInfo	
+	
+	Forall ba In baArray		
+		doc.FieldAppendText "baValues" , Chr(13)+Chr(10) & ba.displayName
+	End Forall		
+	
+	Forall ba In baArray		
+		If doc.FieldGetText ("EnterSendTo") = ba.email Then			
+			doc.FieldSetText "BACombobox" , ba.displayName
+			doc.FieldSetText "Track", "Track"
+			doc.Refresh
+			track = True
+			Exit Forall
+		End If		
+	End Forall			
+	
+	If (doc.FieldGetText ("Subject") <> "" ) And (doc.FieldGetText ("Subject") Like "[Fw: ]" & "[a-z,A-Z]*#[0-9]*: " & "*") Or  (doc.FieldGetText ("Subject") Like "[Fw: ]" & "[a-z,A-Z]*#[0-9]*:")Then
+		doc.FieldSetText "Duedate", ""
+		track = True			
+		doc.FieldSetText "Track", "Track"
+		doc.FieldSetText "baDefValue","ITHelpdesk"
+		Messagebox doc.FieldGetText ("baDefValue")
+		doc.Refresh			
+	End If
+docError:
+	Exit Sub  			
+End Sub
+
+QuerySend:
+-----------------
+Sub Querysend(Source As Notesuidocument, Continue As Variant)
+	Static aFlag As Boolean 	'to set the value only once, as it gets assigned twice during querysend
+	
+	If track And (aFlag=False)  Then
+		If  (assignee = "") Then 		
+			assignee = Source.FieldGetText ("EnterSendTo")	
+			Source.FieldAppendText "Body", Chr$(13) & Chr$(10) & Chr$(13) & Chr$(10) & "/assignee:" & assignee		
+			aFlag = True
+		End If		
+		
+		Forall ba In baArray		
+			If doc.FieldGetText ("BACombobox") =  ba.displayName Then
+				Source.FieldClear "SendTo"
+				Source.FieldSetText "SendTo", ba.email
+				Source.FieldSetText "EnterSendTo", ba.email
+				Exit Forall
+			End If
+		End Forall	
+		
+		If dueDate <> "" Then
+			Source.FieldAppendText "Body", Chr$(13) & Chr$(10) & "/dueby:" & dueDate
+		End If
+		
+		If  (status <> "") And (status <>"none") Then
+			Messagebox status
+			Source.FieldAppendText "Body", Chr$(13) & Chr$(10) & "/status:" & status
+		End If
+		
+		If setSms Then
+			Source.FieldAppendText "Body", Chr$(13) & Chr$(10) & "/sendsms:" & setSms
+		End If		
+	End If	
+End Sub
+
+
+Track:
+---------
+Sub Onchange(Source As Field)
+	doc.Refresh
+	If track Then
+		track = False		
+	Else		
+		track = True	
+		ba = doc.FieldGetText ("BACombobox")
+		dueDate= doc.FieldGetText ("Duedate")
+		dueDate= Right(dueDate, 10)		
+	End If
+End Sub
+
+BACombobox:
+--------------------
+Input Enabled:
+--------------------
+@If(Track="";0;1)
+
+Sub Onchange(Source As Field)	
+	Dim temp As Variant	
+	baString = doc.FieldGetText ("BACombobox")	
+	Forall ba In baArray				
+		If doc.FieldGetText ("BACombobox") = ba.displayName Then	
+			doc.FieldSetText "statusValues",""
+			doc.Refresh
+			doc.FieldClear "statusValues"
+			doc.Refresh
+			temp = Split (ba.status , ",")						
+			Forall value In temp				
+				doc.FieldAppendText  "statusValues", Chr(13)+Chr(10) &value	
+			End Forall				
+			doc.FieldAppendText  "statusValues", Chr(13)+Chr(10) & "None"
+			doc.Refresh
+		End If			
+	End Forall	
+End Sub
+
+Duedate
+--------------
+Default Value
+-------------------
+@If (Subject != "";"";@Adjust(@Now; 0 ;0 ; 2 ;0 ;0 ;0) )
+
+Input Enabled
+--------------------
+@If(Track="";0;1)
+
+OnChange
+---------------
+Sub Onchange(Source As Field)
+	dueDate= doc.FieldGetText ("Duedate")
+	dueDate= Right(dueDate, 10)
+End Sub
+
+StatusCombobox
+---------------------------
+Default Value:""
+
+Input Enabled: @If(Track="";0;1)
+
+Sub Onchange(Source As Field)
+	status = doc.FieldGetText ("StatusCombobox")
+End Sub
+
+SendSMS:
+----------------
+Input Enabled: @If(Track="";0;1)
+
+Sub Onchange(Source As Field)
+	If setSms Then
+		setSms = False
+	Else
+		setSms = True
+	End If
+End Sub
+
+
+
+

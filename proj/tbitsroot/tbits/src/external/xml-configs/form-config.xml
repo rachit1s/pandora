@@ -1,0 +1,93 @@
+<Form>
+    <Name value="Data Retrieval Form" />
+    <ShortName value="drf" />
+    <Title value="Systems NYC: Data Retrieval Form" />
+    <FieldInfo>
+		<BulletedList>
+			<Heading><![CDATA[Heading 1]]></Heading>
+			<Bullet><![CDATA[Bullet1]]></Bullet>
+			<Bullet><![CDATA[Bullet2]]></Bullet>
+		</BulletedList>
+    		<Attachment label="contract document" />
+		<DynamicList 
+			name="subCategory" 
+			label="Sub Category" 
+			width=""
+			toolTip="Sub Category field." 
+			baField="category_id" 
+		/>
+		<Date 
+			name="StartDate" 
+			label="Date when started" 
+			width=""
+			toolTip="Starting date" 
+			validate="true" 
+			baField=""
+		/>
+		<StaticList 
+                name="dept" 
+                label="Department" 
+                width=""
+                toolTip="Department of the user." 
+                baField="">
+			<Option value="IT/Techincal" />
+			<Option value="SG" />
+			<Option value="HR" />
+		</StaticList>
+		<TextBox
+			name="userLogin"
+			label="User"
+			width=""
+			toolTip="User Login"
+			prePopulate="true"
+			value="$User.user_login"
+			readOnly="true"
+			baField=""
+		/>
+		<User 
+			name="employee_name" 
+			label="Employee Name" 
+			width=""
+			toolTip="Enter the user login in lowercase." 
+			validate="false" 
+			baField="logger_ids" 
+		/>
+		<User 
+			name="Assignee" 
+			label="Assignee" 
+			width=""
+			toolTip="Assignee name" 
+			baField="assignee_ids" 
+			multiple="true" 
+		/>
+		<CheckBox 
+			name="closeBrowser"
+			label="close browser" 
+			width=""
+			baField=""
+		/>
+		<RadioGroup 
+            		groupName="OptionGroup" 
+            		label="Qualification" 
+			width=""
+            		baField="">
+			<Radio label="Graduation" />
+			<Radio label="Post-Graduation" />
+			<Radio label="PHD" />
+		</RadioGroup>
+		<TextArea 
+			name="description" 
+			label="Description" 
+			width=""
+			rows=""
+			toolTip="Enter here." 
+		/>
+    </FieldInfo>
+    <Action mode="email">
+        <From email="info@transbittech.com" />
+        <To email="info@transbittech.com" />
+        <Cc email="info@transbittech.com" />
+        <Subscriber email="info@transbittech.com" />
+        <Subject><![CDATA[Test form submission]]></Subject>
+    </Action>
+</Form>

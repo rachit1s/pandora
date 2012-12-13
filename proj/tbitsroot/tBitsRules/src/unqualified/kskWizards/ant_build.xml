@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="Wizards" default="build" basedir=".">
+  <!-- Configure path to GWT SDK -->
+  <property file="build.properties" />
+  <target name="define">
+	<echo message="ant.java.version: ${ant.java.version}" />
+	<property name="module.name" value="com.tbitsglobal.wizards.Wizards"/>
+	<property name="project.name" value="Wizards"/>
+	<property name="plugins.dir" value="${tbits.home}/jaguar/src/plugins"/>
+  </target>
+
+  <path id="project.class.path">
+    <pathelement location="war/WEB-INF/classes"/>
+    <pathelement location="${tbits.home}/dist/build/webapps/WEB-INF/classes"/>
+    <fileset dir="${tbits.home}/dist/build/webapps/WEB-INF/lib" includes="**/*.jar"/>
+  </path>
+
+  <target name="resources" depends="define" description="Copy libs, resources, web.xml etc. and other files to WAR">
+	<copy todir="war/resources">
+		<fileset dir="${tbits.home}/GWTUtils/resources" />
+	</copy>
+	<copy todir="war">
+		<fileset dir="src/_war"></fileset>
+	</copy>
+  </target>
+
+  <target name="javac" depends="resources" description="Compile java source">
+    <mkdir dir="war/WEB-INF/classes"/>
+    <javac srcdir="${gwt.utils.home}" includes="**/*.java" encoding="utf-8"
+        destdir="war/WEB-INF/classes"
+        source="1.5" target="1.5" nowarn="true"
+        debug="true" debuglevel="lines,vars,source"  memoryinitialsize="256m" memorymaximumsize="512m">
+      <classpath refid="project.class.path"/>
+    </javac>
+    <copy todir="war/WEB-INF/classes">
+      <fileset dir="${gwt.utils.home}"/>
+    </copy>
+    <javac srcdir="${plugins.dir}/invitationLetterWizard" includes="**/*.java" encoding="utf-8"
+        destdir="war/WEB-INF/classes"
+        source="1.5" target="1.5" nowarn="true"
+        debug="true" debuglevel="lines,vars,source"  memoryinitialsize="256m" memorymaximumsize="512m">
+      <classpath refid="project.class.path"/>
+    </javac>
+    <copy todir="war/WEB-INF/classes/invitationLetterWizard">
+      <fileset dir="${plugins.dir}/invitationLetterWizard"/>
+    </copy>
+    <javac srcdir="src/java" includes="**/*.java" encoding="utf-8"
+        destdir="war/WEB-INF/classes"
+        source="1.5" target="1.5" nowarn="true"
+        debug="true" debuglevel="lines,vars,source">
+      <classpath refid="project.class.path"/>
+    </javac>
+    <copy todir="war/WEB-INF/classes">
+      <fileset dir="src/java" excludes="**/*.java"/>
+    </copy>
+    <!--<mkdir dir="../tbits/dist/build/plugins/com/tbitsGlobal/plugin/server"/>-->
+    <copy todir="${tbits.home}/dist/build/plugins/">
+      <fileset dir="war/WEB-INF/classes/" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+  <target name="copy-classes">
+    <copy todir="${tbits.home}/dist/build/plugins/">
+      <fileset dir="war/WEB-INF/classes/" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+  <target name="gwtc" depends="javac" description="GWT compile to JavaScript">
+    <java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+      <classpath>
+        <pathelement location="src/java"/>
+        <path refid="project.class.path"/>
+      </classpath>
+      <jvmarg value="-Xmx512M"/>
+      <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+      <arg value="${module.name}"/>
+    </java>
+  </target>
+	
+	<target name="copy-war">
+	    <mkdir dir="${tbits.home}/dist/build/plugins/wizards/war"/>
+	    <copy todir="${tbits.home}/dist/build/plugins/wizards/war">
+	      <fileset dir="war" excludes="/WEB_INF/**"/>
+	    </copy>
+		<delete dir="${tbits.home}/dist/build/plugins/wizards/war/WEB-INF" failonerror="false" />
+	</target>
+	
+  	<target name="clean-war">
+		<delete dir="war" failonerror="false" />
+	</target>
+
+
+  <target name="build" depends="clean-war,gwtc,copy-war" description="Build this project" />
+</project>

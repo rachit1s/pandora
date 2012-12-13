@@ -1,0 +1,56 @@
+Installation procedure for Outlook Pluggin:
+-------------------------------------------
+
+Pre-requisites:
+---------------
+1. Microsoft Office(Outlook) 2003 and above.
+2. a. Microsoft .NET Framework 2.0 
+   b. An update for .Net 2.0 (Shared add-in update, KB908002)
+3. Microsoft Office SP2.
+4. Visual Studio Tools for Office Runtime (vstor.exe)
+5. Office 2003 Primary Interoperability Assemblies (O2003PIA.exe)
+
+Currently, the installer does the following:
+	- full-trust policy in the background while installing for the toolbar
+	- checks for the pre-requisites 4, 5 and prompts a message to the user if they are not installed.
+	  They can be found in the pre-requsites folder inside the release folder.
+
+does not do the following:
+	- does not check if the office 2003 sp2 is already installed (so it has to be installed before installing
+	  the toolbar. It is also packaged in the pre-requisites folder)
+	
+Assumptions:
+        - Office 2003 or above is installed
+	- .Net framework is installed. Otherwise will have to run the setup.exe to installing it provdied in the
+	  release folder. Even the patch will be installed by running setup.exe.
+
+Installing the plugin:
+----------------------
+Finally, the toolbar can be installed by running, QutbitsSetup.msi.
+
+Configuring the server path/ default XML file if the server is not available to the user:
+----------------------------------------------------------------------------------------
+Server URL:
+------------
+In file, Qutbits.dll.config, modify value property of "outlookConfigUrl" below to set the appropriate URL,
+
+<userSettings>
+        <Qutbits.Properties.Settings>
+            <setting name="outlookConfigUrl" serializeAs="String">
+                <value>http://localhost/outlookconfig</value>
+
+Default XML (BAXMLInfo.xml) file path:
+-------------------------------------
+If the server is not available for a user, the user can still track a mail using the default XML file.
+
+Its path in Qutbits.dll.config can be set by modifying  value property of "outlookDefXmlPath", 
+
+<setting name="tBitsXml" serializeAs="String">
+                <value>C:\Program Files\transbit technologies\tBitsPlugin\BAXMLInfo.xml</value>
+            </setting>
+
+To set default values in "BAXMLInfo.xml":
+----------------------------------------
+This is the file which contains the information about business areas and users for a particular tbits installation.
+This can be found inside release folder as well.
+

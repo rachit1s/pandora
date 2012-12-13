@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>
+            <%=title%>
+        </title>
+        <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+        <link rel="stylesheet" type="text/css" media="screen" href="<%=nearestPath%>web/css/<%=cssFile%>" />
+        <script language="javascript" src="<%=nearestPath%>web/scripts/admin.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/messages.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/tt.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/ac.js"></script>
+        <script language="javascript" src="<%=nearestPath%>web/scripts/usermgmt.js"></script>
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+	<script language="javascript">
+		YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+        </script>
+    </head>
+    <body onload="onLoadBody();selectFirstUser();getUserDetails()"> <!-- main-navigator -->
+        <FORM name="adminUsersForm" id="adminUsersForm" method="post">
+            <input type="hidden" name="nearestPath" id="nearestPath" value="<%=nearestPath%>" />
+            <DIV class="hb bhs" style="margin: 0ex 1ex 0.5ex 1ex;"><!-- properties -->
+                <DIV class="hsp">
+                    <TABLE id="Table3" cellSpacing="3" cellPadding="0" width="95%">
+                        <TR>
+                            <TD vAlign="top">
+                                <TABLE id="Table4" cellSpacing="0" cellPadding="0" width="95%">
+                                    <TR>
+                                        <TD width="175" vAlign="top">
+                                            <TABLE id="Table5" cellSpacing="3" cellPadding="0" width="99%">
+                                                <TR>
+                                                    <TD class="sx" vAlign="top" algin="left"><SPAN class="b">Users:</SPAN><BR>
+                                                        <SELECT id="user_ids" style="WIDTH: 170px" size="20" name="user_ids" onchange="javascript:getUserDetails()">
+                                                            <%=user_ids%>
+                                                        </SELECT>
+                                                    </TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="sx" vAlign="top"><SPAN class="l cb" onclick="javascript:newUser()">New</SPAN>&nbsp;|&nbsp;<SPAN class="l cb" onclick="javascript:chagePasswordView()">Change
+                                                  Password</SPAN></TD>
+                                                </TR>
+                                            </TABLE>
+                                        </TD>
+                                        <TD class="bos" width="2">
+											
+										</TD>
+                                        <TD vAlign="top">
+											<div id="divReplacement" name="divReplacement">
+                                                <!--%=divReplacement%-->
+                                            </div>
+										  
+                                        </TD>
+                                    </TR>
+                                </TABLE>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="bos" colSpan="3" height="2"></TD>
+                        </TR>
+                    </TABLE>
+                </DIV>
+                <DIV class="arhm"> </DIV>
+            </DIV>
+            <DIV style="display: none;" id="allTypeFields" name="allTypeFields" width="100px">
+                <%=allTypeFields%>
+            </DIV>
+        </FORM>
+    </body>
+</html>

@@ -1,0 +1,2657 @@
+BEGIN UI VIEW
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+		    MENUITEM VueActionFileOpenServer, , PERM_READ
+		    SEPARATOR
+	        MENUITEM VueActionFileMarkup, , PERM_READ
+	        SEPARATOR
+            MENUITEM VueActionFileProperties, , PERM_READ
+            SEPARATOR
+            POPUP IDS_TOOLS
+            BEGIN
+                MENUITEM VueActionToolsDrawingInfo, , PERM_READ
+            END
+            SEPARATOR
+			MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+			MENUITEM VueActionFileConvert, , PERM_READ
+			SEPARATOR
+            MENUITEM VueActionFileExit, , PERM_NONE
+			SEPARATOR
+            MENUITEM VueActionFileMRU, , PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+			MENUITEM VueActionEditSearch, , PERM_READ
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			MENUITEM VueActionViewZoom, , PERM_READ
+			MENUITEM VueActionViewRotate, , PERM_READ
+			MENUITEM VueActionViewFlip, , PERM_READ
+			POPUP IDS_VIEW_IMAGE
+			BEGIN
+			    MENUITEM VueActionViewContrast, , PERM_READ
+			    MENUITEM VueActionViewAntiAlias, , PERM_READ
+			    MENUITEM VueActionViewInvert, , PERM_READ
+			END
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			MENUITEM VueActionViewMultiContent, Previous/Next/Number, PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewViewPoint, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewViews, , PERM_READ
+			MENUITEM VueActionViewLayers, , PERM_READ
+			MENUITEM VueActionViewBlocks, , PERM_READ
+			MENUITEM VueActionViewXRefs, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewSpecialViewModes, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewTree, , PERM_READ
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+		    MENUITEM VueActionFileCompare, , PERM_READ
+            MENUITEM VueActionFileOverlays, , PERM_READ
+            SEPARATOR
+			MENUITEM VueActionAnalysisMeasure, Measure, PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewDrawingInfo, , PERM_READ
+		END
+		POPUP IDS_COLLABORATION
+		BEGIN
+			MENUITEM ClbActionInitSession, , PERM_READ
+			MENUITEM ClbActionJoinSession, , PERM_READ
+			MENUITEM ClbActionDoNotDisturb, , PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+			MENUITEM VueActionOptionsBars, , PERM_NONE
+			SEPARATOR
+			MENUITEM VueActionOptionsConfiguration, , PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp, , PERM_NONE
+		END
+	END
+	TOOLBAR NORTH IDS_VIEWMODE_MAIN
+	BEGIN
+	    BUTTON VueActionFileUpload, , PERM_READ
+		BUTTON VueActionFilePrint, PrintPreview/Print, PERM_READ
+		BUTTON VueActionFileMarkup, , PERM_READ
+		BUTTON VueActionViewZoom, In/Out/FullRes/FitBoth, PERM_READ
+		BUTTON VueActionViewViews, , PERM_READ
+		BUTTON VueActionViewLayers, , PERM_READ
+		BUTTON VueActionViewBlocks, , PERM_READ
+		BUTTON VueActionAnalysisMeasure, Distance/Area/Angle/Arc, PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR WEST IDS_VIEWMODE_AUX
+	BEGIN
+		BUTTON VueActionViewPage, , PERM_READ
+		BUTTON VueActionViewRotate, , PERM_READ
+		BUTTON VueActionViewSpecialViewModes, BirdsEye/MagnifyWindow/MagnifyGlass, PERM_READ
+	END
+	TABBEDPANETOOLBAR WEST IDS_VIEWMODE_TREE
+	BEGIN
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON VueActionBookmarks, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+	    PANE ClbActionJoinSession, , PERM_READ
+	    PANE VueActionFileMarkup, , PERM_READ
+		PANE VueActionFileProperties, , PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM VueActionViewZoom, ,  PERM_READ
+		SEPARATOR
+		MENUITEM VueActionFileMarkup, , PERM_READ
+        MENUITEM VueActionBookmarks, , PERM_READ
+	END
+END
+BEGIN UI COMPARE
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+		    MENUITEM VueActionFileOpen, , PERM_READ
+		    MENUITEM VueActionFileUpload, , PERM_READ
+		    MENUITEM VueActionFileOpenServer, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionFileProperties, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+			SEPARATOR
+			MENUITEM VueActionExitCompareMode, , PERM_NONE
+			SEPARATOR
+            MENUITEM VueActionFileMRU, , PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+			MENUITEM EcadActionSelect, , PERM_HIDE
+			MENUITEM EcadActionBrowseTips, , PERM_HIDE
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			MENUITEM VueActionViewZoom, , PERM_READ
+			MENUITEM VueActionViewRotate, , PERM_READ
+			MENUITEM VueActionViewFlip, , PERM_READ
+			POPUP IDS_VIEW_IMAGE
+			BEGIN
+			    MENUITEM VueActionViewContrast, , PERM_READ
+			    MENUITEM VueActionViewAntiAlias, , PERM_READ
+			    MENUITEM VueActionViewInvert, , PERM_READ
+			END
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			MENUITEM VueActionViewMultiContent, Previous/Next/Number, PERM_READ
+			MENUITEM VueActionSynchronizePages, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewViewPoint, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewViews, , PERM_READ
+			MENUITEM VueActionViewLayers, , PERM_READ
+			MENUITEM EcadActionViewEntityTypeFilter, PERM_READ
+			MENUITEM VueActionViewBlocks, , PERM_READ
+			MENUITEM VueActionViewXRefs, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewSpecialViewModes, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionBookmarks, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewNoViewPorts, , PERM_READ
+			MENUITEM VueActionViewScaleOffset, , PERM_READ
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+			MENUITEM VueActionAnalysisMeasure, Measure, PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewDrawingInfo, , PERM_READ
+			MENUITEM EcadActionViewEntityBrowser, , PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+		    MENUITEM VueActionOptionsCompare, , PERM_READ
+			SEPARATOR
+		    MENUITEM VueActionOptionsBars, , PERM_NONE
+			SEPARATOR
+			MENUITEM VueActionOptionsConfiguration, ,  PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp, , PERM_NONE
+		END
+	END
+	TOOLBAR NORTH
+	BEGIN
+	    BUTTON VueActionFileOpen, , PERM_READ
+		BUTTON VueActionFilePrint, PrintPreview/Print, PERM_READ
+		BUTTON VueActionViewViews, , PERM_READ
+		BUTTON VueActionViewLayers, , PERM_READ
+		BUTTON VueActionViewBlocks, , PERM_READ
+		BUTTON EcadActionViewEntityBrowser, , PERM_READ
+		BUTTON EcadActionViewEntityTypeFilter, PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR WEST
+	BEGIN
+	    BUTTON VueActionViewPage, , PERM_READ
+		BUTTON VueActionViewRotate, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+		PANE VueActionFileProperties, ,  PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM VueActionViewZoom, , PERM_READ
+		SEPARATOR
+		MENUITEM VueActionOptionsCompare, , PERM_READ
+		SEPARATOR
+		MENUITEM VueActionExitCompareMode, , PERM_NONE
+	END
+	RMB ENTITYSELECT
+	BEGIN
+		MENUITEM VueActionViewZoom, , PERM_READ
+		MENUITEM EcadActionZoomSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM VueActionOptionsCompare, , PERM_READ
+		SEPARATOR
+		MENUITEM VueActionExitCompareMode, , PERM_NONE
+	END
+    RMB ECADENTITY
+	BEGIN
+		MENUITEM EcadActionZoomSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionFollowLink, Descend, PERM_READ
+		MENUITEM EcadActionGoToNet, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionShowNetConnectivity, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionEntityProperties, , PERM_READ
+	END
+END
+BEGIN UI PRINTPREVIEW
+  	TOOLBAR NORTH
+	BEGIN
+	    BUTTON VueActionPreviewPrint, , PERM_READ
+        SEPARATOR
+	    BUTTON VueActionPreviewPage, , PERM_READ
+        SEPARATOR
+	    BUTTON VueActionPreviewZoom, In/Out/Fit, PERM_READ
+        SEPARATOR
+	    BUTTON VueActionPreviewHelp, , PERM_NONE
+        SEPARATOR
+	    BUTTON VueActionPreviewExit, , PERM_READ
+    END
+	STATUSBAR SOUTH
+	BEGIN
+		PANE VueActionFileProperties, ,  PERM_READ
+	END
+END
+BEGIN UI MARKUP
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+		    MENUITEM MrkActionFileMarkup, New/Open/Save/Save As/Save All, PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionFileMarkup, Set Active/Consolidate, PERM_READ
+		    SEPARATOR
+		    MENUITEM VueActionFileProperties, , PERM_READ
+		    SEPARATOR
+		    POPUP IDS_TOOLS
+            BEGIN
+                MENUITEM VueActionToolsDrawingInfo, , PERM_READ
+            END
+            SEPARATOR
+		    MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+		    MENUITEM VueActionFileConvert, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionFileMarkup, Exit, PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+		    MENUITEM MrkActionUndo, , PERM_READ
+			SEPARATOR
+		    MENUITEM MrkActionClipboard, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionEditSearch, , PERM_READ
+		END
+		POPUP IDS_ENTITIES
+		BEGIN
+			MENUITEM MrkActionLine, , PERM_READ
+			MENUITEM MrkActionPolyLine, , PERM_READ
+			MENUITEM MrkActionPolygon, , PERM_READ
+			MENUITEM MrkActionBox, , PERM_READ
+			MENUITEM MrkActionFilledBox, , PERM_READ
+			MENUITEM MrkActionCircle, , PERM_READ
+			MENUITEM MrkActionArc, , PERM_READ
+			MENUITEM MrkActionFreeStyle, , PERM_READ
+			MENUITEM MrkActionCloud, , PERM_READ
+			MENUITEM MrkActionText, , PERM_READ
+			MENUITEM MrkActionLeader, , PERM_READ
+			MENUITEM MrkActionHighlight, , PERM_READ
+			MENUITEM MrkActionNote, , PERM_READ
+			MENUITEM MrkActionSymbol, , PERM_READ
+		END
+		POPUP IDS_MODIFY
+		BEGIN
+		    MENUITEM MrkActionFileMarkup, Information, PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionModifyDelete, Delete/DeleteAll, PERM_READ
+			SEPARATOR
+			POPUP IDS_HYPERLINK
+            BEGIN
+                MENUITEM MrkActionHyperlinkEstablish, , PERM_READ
+                MENUITEM MrkActionHyperlink, , PERM_READ
+            END
+            SEPARATOR
+		    MENUITEM MrkActionGroup, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		    MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		    MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		    MENUITEM MrkActionModifyFillType, , PERM_READ
+		    MENUITEM MrkActionModifyEntityColor, , PERM_READ
+			MENUITEM MrkActionModifyRotate, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyHideMarkups, , PERM_READ
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			MENUITEM VueActionViewZoom, , PERM_READ
+			MENUITEM MrkActionViewRotate, , PERM_READ
+			MENUITEM MrkActionViewFlip, , PERM_READ
+			POPUP IDS_VIEW_IMAGE
+			BEGIN
+			    MENUITEM VueActionViewContrast, , PERM_READ
+			    MENUITEM VueActionViewAntiAlias, , PERM_READ
+			    MENUITEM VueActionViewInvert, , PERM_READ
+			END
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			MENUITEM VueActionViewMultiContent, Previous/Next/Number, PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewViews, , PERM_READ
+			MENUITEM VueActionViewLayers, , PERM_READ
+			MENUITEM VueActionViewBlocks, , PERM_READ
+			MENUITEM VueActionViewXRefs, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewSpecialViewModes, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewTree, , PERM_READ
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+		    MENUITEM VueActionFileCompare, , PERM_READ
+            MENUITEM VueActionFileOverlays, , PERM_READ
+            SEPARATOR
+			MENUITEM MrkActionAnalysisMeasure, Measure, PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewDrawingInfo, , PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+			MENUITEM VueActionOptionsBars, , PERM_NONE
+			MENUITEM VueActionOptionsConfiguration, , PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp,,  PERM_NONE
+		END
+	END
+	TOOLBAR NORTH IDS_MRKMODE_MAIN
+	BEGIN
+	    BUTTON MrkActionFileMarkup, New/Combo, PERM_READ
+		BUTTON MrkActionModifyMarkupLayers, , PERM_READ
+		BUTTON VueActionViewZoom, In/Out/FullRes/FitBoth, PERM_READ
+		BUTTON VueActionViewPage, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MRKMODE_ACCS
+	BEGIN
+	    BUTTON MrkActionFont, , PERM_READ
+	    BUTTON MrkActionModifyLineStyle, , PERM_READ
+		BUTTON MrkActionModifyLineThickness, , PERM_READ
+		BUTTON MrkActionModifyArrowStyle, , PERM_READ
+		BUTTON MrkActionModifyLineColor, , PERM_READ
+		BUTTON MrkActionModifyFillColor, , PERM_READ
+		BUTTON MrkActionModifyFillType, , PERM_READ
+		BUTTON MrkActionModifyRotate, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR WEST IDS_MRKMODE_ENTS
+	BEGIN
+	    BUTTON MrkActionSelect, , PERM_READ
+	    BUTTON MrkActionLine, , PERM_READ
+		BUTTON MrkActionPolyLine, , PERM_READ
+		BUTTON MrkActionPolygon, , PERM_READ
+		BUTTON MrkActionBox, , PERM_READ
+		BUTTON MrkActionFilledBox, , PERM_READ
+		BUTTON MrkActionCircle, , PERM_READ
+		BUTTON MrkActionArc, , PERM_READ
+		BUTTON MrkActionFreeStyle, , PERM_READ
+		BUTTON MrkActionCloud, , PERM_READ
+		BUTTON MrkActionText, , PERM_READ
+		BUTTON MrkActionLeader, , PERM_READ
+		BUTTON MrkActionHighlight, , PERM_READ
+		BUTTON MrkActionNote, , PERM_READ
+		BUTTON MrkActionSymbol, , PERM_READ
+		BUTTON MrkActionAnalysisMeasure, Distance/Area/Angle/Arc, PERM_READ
+	END
+	TABBEDPANETOOLBAR WEST IDS_VIEWMODE_TREE
+	BEGIN
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON VueActionBookmarks, , PERM_READ
+		BUTTON MrkActionMarkupTree, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+	    PANE ClbActionJoinSession, , PERM_READ
+	    PANE VueActionFileMarkup, , PERM_READ
+	    PANE VueActionFileProperties, , PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM VueActionViewZoom, ,  PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionHyperlink, , PERM_READ
+		MENUITEM VueActionBookmarks, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyOrdering, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+    	SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionFileMarkup, Exit, PERM_READ
+	END
+	RMB SELECT
+	BEGIN
+		MENUITEM MrkActionMarkupTree, Goto, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionMarkupTree, Edit, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		MENUITEM MrkActionModifyEntityLayer, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+        SEPARATOR
+		MENUITEM MrkActionModifyDelete, Delete, PERM_READ
+	END
+	RMB MARKUPNODESELECT
+	BEGIN
+		MENUITEM MrkActionMarkupTree, ShowHide, PERM_READ
+		MENUITEM MrkActionMarkupTree, SetActive, PERM_READ
+	END
+END
+BEGIN UI SMVIEW
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+        	MENUITEM VueActionFileOpen, , PERM_READ
+			MENUITEM VueActionFileUpload, , PERM_READ
+			MENUITEM VueActionFileOpenServer, , PERM_READ
+			SEPARATOR
+            MENUITEM VueActionFileMarkup, , PERM_READ
+            SEPARATOR
+	        MENUITEM VueActionFileProperties, , PERM_READ
+	        SEPARATOR
+            MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+            MENUITEM SMActionFileConvert, , PERM_READ
+            SEPARATOR
+            MENUITEM VueActionFileExit, , PERM_NONE
+			SEPARATOR
+            MENUITEM VueActionFileMRU, , PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+        	MENUITEM SMActionSelect, , PERM_READ
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			POPUP IDS_SMVIEW_ZOOM
+			BEGIN
+			    MENUITEM SMActionZoomMod, , PERM_READ
+			    MENUITEM SMActionZoomFit, , PERM_READ
+			    MENUITEM SMActionZoomPrv, , PERM_READ
+			    MENUITEM SMActionZoomSel, , PERM_READ
+		        SEPARATOR
+			    MENUITEM SMActionZoomBox, , PERM_READ
+			    MENUITEM SMActionZoomDyn, , PERM_READ
+			END
+			MENUITEM SMActionPan, , PERM_READ
+			MENUITEM SMActionRotate, , PERM_READ
+			MENUITEM SMActionSpin, , PERM_READ
+			MENUITEM SMActionRecenter, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			MENUITEM VueActionViewMultiContent, Previous/Next/Number, PERM_READ
+			SEPARATOR
+			MENUITEM SMActionPerspective, , PERM_READ
+			POPUP IDS_SMVIEW_VIEWS
+			BEGIN
+			    MENUITEM SMActionViewViews, , PERM_READ
+			    SEPARATOR
+    	    	POPUP IDS_SMVIEW_NATIVE_VIEWS
+	    	    BEGIN
+        			MENUITEM SMActionViewViews, , PERM_READ
+			    END
+			    SEPARATOR
+    	    	POPUP IDS_SMVIEW_USER_VIEWS
+	    	    BEGIN
+    			    MENUITEM SMActionViewViews, , PERM_READ
+			    END
+			    SEPARATOR
+			    MENUITEM SMActionViewPointView, , PERM_READ
+			END
+			MENUITEM VueActionViewLayers, , PERM_READ
+			MENUITEM SMActionPMI, , PERM_READ
+			SEPARATOR
+			POPUP IDS_SMVIEW_ATTRIBUTES
+			BEGIN
+			    MENUITEM SMActionRenderModes, , PERM_READ
+			    SEPARATOR
+			    MENUITEM SMActionEntityColor, , PERM_READ
+			    MENUITEM SMActionTransparency, , PERM_READ
+			END
+    		MENUITEM SMActionLight, , PERM_READ
+			SEPARATOR
+            MENUITEM VueActionViewTree, , PERM_READ
+            MENUITEM SMActionHighlightSelection, , PERM_HIDE
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+            MENUITEM VueActionFileCompare, , PERM_READ
+		    MENUITEM SMActionFileImportModel, , PERM_READ
+			MENUITEM EcadActionFileCrossProbe, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionCoordinateSystem, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionMeasure, Measure, PERM_READ
+			MENUITEM SMActionCollisionDetection, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionManipulator, , PERM_READ
+			MENUITEM SMActionPartAlignment, , PERM_READ
+			MENUITEM SMActionExplode, , PERM_READ
+			MENUITEM SMActionTransform, , PERM_READ
+			SEPARATOR
+			POPUP IDS_SECTION
+            BEGIN
+                MENUITEM SMActionViewSection, Define/Remove, PERM_READ
+                SEPARATOR
+                MENUITEM SMActionViewSection, Enable/Invert/Both/Edges, PERM_READ
+            END
+			SEPARATOR
+			MENUITEM SMActionSearch, , PERM_READ
+			MENUITEM SMActionBillOfMaterial, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionEntityProperties, , PERM_READ
+		END
+		POPUP IDS_COLLABORATION
+		BEGIN
+			MENUITEM ClbActionInitSession, , PERM_READ
+			MENUITEM ClbActionJoinSession, , PERM_READ
+			MENUITEM ClbActionDoNotDisturb, , PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+			MENUITEM VueActionOptionsBars, , PERM_NONE
+			SEPARATOR
+			MENUITEM VueActionOptionsConfiguration, , PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp, , PERM_NONE
+		END
+	END
+	TOOLBAR NORTH IDS_VIEWMODE_MAIN
+	BEGIN
+	    BUTTON VueActionFileUpload, , PERM_READ
+		BUTTON VueActionFilePrint, PrintPreview/Print, PERM_READ
+        BUTTON VueActionFileMarkup, , PERM_READ
+		BUTTON SMActionSelect, , PERM_READ
+		BUTTON EcadActionFileCrossProbe, , PERM_READ
+		BUTTON SMActionZoomFit, , PERM_READ
+		BUTTON SMActionZoomBox, , PERM_READ
+		BUTTON SMActionZoomDyn, , PERM_READ
+		BUTTON SMActionSpin, , PERM_READ
+		BUTTON SMActionRotate, , PERM_READ
+		BUTTON SMActionPan, , PERM_READ
+		BUTTON SMActionTransform, Apply, PERM_READ
+		BUTTON SMActionManipulator, , PERM_READ
+		BUTTON SMActionPartAlignment, , PERM_READ
+		BUTTON SMActionExplode, , PERM_READ
+		BUTTON SMActionCollisionDetection, , PERM_READ
+		BUTTON SMActionSearch, , PERM_READ
+		BUTTON SMActionEntityProperties, , PERM_READ
+		BUTTON SMActionRenderModes, , PERM_READ
+		BUTTON SMActionLight, , PERM_READ
+		BUTTON SMActionPMI, , PERM_READ
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON SMActionCoordinateSystem, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR WEST IDS_VIEWMODE_AUX
+	BEGIN
+		BUTTON SMActionMeasure, Distance/MinDistance/Length/Arc/Angle/Surface/Vertex, PERM_READ
+		BUTTON SMActionViewSection, Define, PERM_READ
+	END
+	TABBEDPANETOOLBAR WEST IDS_VIEWMODE_TREE
+	BEGIN
+		BUTTON SMActionModelTree, , PERM_READ
+		BUTTON SMActionViewViews, , PERM_READ
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON VueActionBookmarks, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+	    PANE ClbActionJoinSession, , PERM_READ
+	    PANE VueActionFileMarkup, , PERM_READ
+		PANE VueActionFileProperties, , PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM SMActionZoomFit, , PERM_READ
+		MENUITEM SMActionZoomPrv, , PERM_READ
+		MENUITEM SMActionRecenter, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionPan, ,  PERM_READ
+		MENUITEM SMActionRotate, ,  PERM_READ
+		MENUITEM SMActionZoomBox, ,  PERM_READ
+		SEPARATOR
+		POPUP IDS_SMVIEW_VIEWS
+		BEGIN
+			MENUITEM SMActionViewViews, , PERM_READ
+		    SEPARATOR
+   	    	POPUP IDS_SMVIEW_NATIVE_VIEWS
+    	    BEGIN
+       			MENUITEM SMActionViewViews, , PERM_READ
+		    END
+			SEPARATOR
+    		POPUP IDS_SMVIEW_USER_VIEWS
+	    	BEGIN
+   			    MENUITEM SMActionViewViews, , PERM_READ
+		    END
+			SEPARATOR
+			MENUITEM SMActionViewPointView, , PERM_READ
+	 	END
+		SEPARATOR
+		MENUITEM SMActionRenderModes, , PERM_READ
+		SEPARATOR
+		MENUITEM VueActionFileMarkup, , PERM_READ
+        MENUITEM VueActionBookmarks, , PERM_READ
+	END
+	RMB SELECT
+	BEGIN
+		MENUITEM SMActionZoomFit, , PERM_READ
+		MENUITEM SMActionZoomPrv, , PERM_READ
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenter, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionPan, ,  PERM_READ
+		MENUITEM SMActionRotate, ,  PERM_READ
+		MENUITEM SMActionZoomBox, ,  PERM_READ
+		SEPARATOR
+		POPUP IDS_SMVIEW_VIEWS
+		BEGIN
+			MENUITEM SMActionViewViews, , PERM_READ
+		    SEPARATOR
+   	    	POPUP IDS_SMVIEW_NATIVE_VIEWS
+    	    BEGIN
+       			MENUITEM SMActionViewViews, , PERM_READ
+		    END
+			SEPARATOR
+   	        POPUP IDS_SMVIEW_USER_VIEWS
+    	    BEGIN
+        		 MENUITEM SMActionViewViews, , PERM_READ
+			END
+			SEPARATOR
+			MENUITEM SMActionViewPointView, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionEntityVisibility, Hide/Hide Rest, PERM_READ
+		POPUP IDS_SMVIEW_ATTRIBUTES
+		BEGIN
+			MENUITEM SMActionRenderModes, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionEntityColor, , PERM_READ
+			MENUITEM SMActionTransparency, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionManipulator, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionSelectIdenticalParts, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM VueActionFileMarkup, , PERM_READ
+	END
+	RMB PMISELECT
+	BEGIN
+		MENUITEM SMActionZoomFit, , PERM_READ
+		MENUITEM SMActionZoomPrv, , PERM_READ
+		MENUITEM SMActionRecenter, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionPan, ,  PERM_READ
+		MENUITEM SMActionRotate, ,  PERM_READ
+		MENUITEM SMActionZoomBox, ,  PERM_READ
+		SEPARATOR
+		MENUITEM SMActionPMIGoTo, GoTo/AlignTo, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM VueActionFileMarkup, , PERM_READ
+	END
+	RMB MODELTREE
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		POPUP IDS_SMVIEW_ATTRIBUTES
+		BEGIN
+			MENUITEM SMActionRenderModes, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionEntityColor, , PERM_READ
+			MENUITEM SMActionTransparency, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenterSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionManipulator, , PERM_READ
+		MENUITEM SMActionPartAlignment, , PERM_READ
+		MENUITEM SMActionExplode, , PERM_READ
+		MENUITEM SMActionTransform, , PERM_READ
+		SEPARATOR
+		POPUP IDS_SECTION
+		BEGIN
+			MENUITEM SMActionViewSection, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionModelTree, CollapseAllChildren/ExpandAllChildren, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionSelectIdenticalParts, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+	END
+	RMB PMIMODELTREE
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionPMIGoTo, GoTo/AlignTo, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+	END
+	RMB VIEWS
+	BEGIN
+		MENUITEM SMActionViewViews, , PERM_READ
+	END
+	RMB SEARCH3D
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		POPUP IDS_SMVIEW_ATTRIBUTES
+		BEGIN
+			MENUITEM SMActionRenderModes, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionEntityColor, , PERM_READ
+			MENUITEM SMActionTransparency, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenterSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionManipulator, , PERM_READ
+		MENUITEM SMActionExplode, , PERM_READ
+		MENUITEM SMActionTransform, , PERM_READ
+		SEPARATOR
+		POPUP IDS_SECTION
+		BEGIN
+			MENUITEM SMActionViewSection, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionSelectIdenticalParts, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+	END
+END
+BEGIN UI COMPARE3D
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+        	MENUITEM VueActionFileOpen, , PERM_READ
+			MENUITEM VueActionFileUpload, , PERM_READ
+			MENUITEM VueActionFileOpenServer, , PERM_READ
+			SEPARATOR
+	        MENUITEM VueActionFileProperties, , PERM_READ
+			SEPARATOR
+	        MENUITEM SMActionCompareSets, , PERM_READ
+			SEPARATOR
+            MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+			SEPARATOR
+			MENUITEM VueActionExitCompareMode, , PERM_NONE
+			SEPARATOR
+            MENUITEM VueActionFileMRU, , PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+        	MENUITEM SMActionSelect, , PERM_READ
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			POPUP IDS_SMVIEW_ZOOM
+			BEGIN
+			    MENUITEM SMActionZoomMod, , PERM_READ
+			    MENUITEM SMActionZoomFit, , PERM_READ
+			    MENUITEM SMActionZoomPrv, , PERM_READ
+			    MENUITEM SMActionZoomSel, , PERM_READ
+		        SEPARATOR
+			    MENUITEM SMActionZoomBox, , PERM_READ
+			    MENUITEM SMActionZoomDyn, , PERM_READ
+			END
+			MENUITEM SMActionPan, , PERM_READ
+			MENUITEM SMActionRotate, , PERM_READ
+			MENUITEM SMActionRecenter, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			SEPARATOR
+			POPUP IDS_SMVIEW_VIEWS
+			BEGIN
+			    MENUITEM SMActionViewViews, , PERM_READ
+			    SEPARATOR
+			    MENUITEM SMActionViewPointView, , PERM_READ
+			END
+            MENUITEM VueActionViewTree, , PERM_READ
+            MENUITEM SMActionHighlightSelection, , PERM_HIDE
+			SEPARATOR
+			MENUITEM VueActionSynchronizePages, , PERM_READ
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+			MENUITEM SMActionCoordinateSystem, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionMeasure, Measure, PERM_READ
+			SEPARATOR
+			MENUITEM SMActionCompareEntityProperties, Default, PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+			MENUITEM VueActionOptionsBars, , PERM_NONE
+			SEPARATOR
+			MENUITEM VueActionOptionsConfiguration, , PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp, , PERM_NONE
+		END
+	END
+	TOOLBAR NORTH IDS_VIEWMODE_MAIN
+	BEGIN
+	    BUTTON VueActionFileUpload, , PERM_READ
+		BUTTON VueActionFilePrint, PrintPreview/Print, PERM_READ
+		BUTTON SMActionSelect, , PERM_READ
+		BUTTON SMActionZoomFit, , PERM_READ
+		BUTTON SMActionZoomBox, , PERM_READ
+		BUTTON SMActionZoomDyn, , PERM_READ
+		BUTTON SMActionRotate, , PERM_READ
+		BUTTON SMActionPan, , PERM_READ
+		BUTTON SMActionCompareEntityProperties, Default, PERM_READ
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON SMActionCoordinateSystem, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR WEST IDS_VIEWMODE_AUX
+	BEGIN
+		BUTTON SMActionMeasure, Distance/MinDistance/Length/Arc/Angle/Surface/Vertex, PERM_READ
+	END
+	TABBEDPANETOOLBAR WEST IDS_VIEWMODE_TREE
+	BEGIN
+		BUTTON SMActionCompareTree, , PERM_READ
+		BUTTON VueActionViewTree, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+	    PANE ClbActionJoinSession, , PERM_READ
+	    PANE VueActionFileMarkup, , PERM_READ
+		PANE VueActionFileProperties, , PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM SMActionZoomFit, , PERM_READ
+		MENUITEM SMActionZoomPrv, , PERM_READ
+		MENUITEM SMActionRecenter, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionPan, ,  PERM_READ
+		MENUITEM SMActionRotate, ,  PERM_READ
+		MENUITEM SMActionZoomBox, ,  PERM_READ
+		MENUITEM SMActionZoomDyn, ,  PERM_READ
+		SEPARATOR
+		POPUP IDS_SMVIEW_VIEWS
+		BEGIN
+		    MENUITEM SMActionViewViews, , PERM_READ
+		    SEPARATOR
+		    MENUITEM SMActionViewPointView, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM VueActionExitCompareMode, , PERM_NONE
+	END
+	RMB SELECT
+	BEGIN
+		MENUITEM SMActionZoomFit, , PERM_READ
+		MENUITEM SMActionZoomPrv, , PERM_READ
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenter, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionPan, ,  PERM_READ
+		MENUITEM SMActionRotate, ,  PERM_READ
+		MENUITEM SMActionZoomBox, ,  PERM_READ
+		MENUITEM SMActionZoomDyn, ,  PERM_READ
+		SEPARATOR
+		POPUP IDS_SMVIEW_VIEWS
+		BEGIN
+		    MENUITEM SMActionViewViews, , PERM_READ
+		    SEPARATOR
+		    MENUITEM SMActionViewPointView, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionCompareEntityProperties, Default, PERM_READ
+		SEPARATOR
+		MENUITEM VueActionExitCompareMode, , PERM_NONE
+	END
+	RMB COMPARESELECT
+	BEGIN
+		MENUITEM SMActionZoomFit, , PERM_READ
+		MENUITEM SMActionZoomPrv, , PERM_READ
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenter, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionPan, ,  PERM_READ
+		MENUITEM SMActionRotate, ,  PERM_READ
+		MENUITEM SMActionZoomBox, ,  PERM_READ
+		MENUITEM SMActionZoomDyn, ,  PERM_READ
+		SEPARATOR
+		POPUP IDS_SMVIEW_VIEWS
+		BEGIN
+		    MENUITEM SMActionViewViews, , PERM_READ
+		    SEPARATOR
+		    MENUITEM SMActionViewPointView, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionCompareEntityProperties, Entity1/Entity2, PERM_READ
+		SEPARATOR
+		MENUITEM VueActionExitCompareMode, , PERM_NONE
+	END
+	RMB COMPARETREE1
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenterSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionCompareTree, CollapseAllChildren/ExpandAllChildren, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionCompareEntityProperties, Default, PERM_READ
+	END
+	RMB COMPARETREE2
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenterSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionCompareTree, CollapseAllChildren/ExpandAllChildren, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionCompareEntityProperties, Entity1/Entity2, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionCompareResults, , PERM_READ
+	END
+	RMB VIEWS
+	BEGIN
+		MENUITEM SMActionViewViews, , PERM_READ
+	END
+END
+BEGIN UI MARKUP3D
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+		    MENUITEM MrkActionFileMarkup, New/Open/Save/Save As/Save All, PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionFileMarkup, Set Active/Consolidate, PERM_READ
+		    SEPARATOR
+            MENUITEM VueActionFileProperties, , PERM_READ
+            SEPARATOR
+		    MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+		    MENUITEM SMActionFileConvert, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionFileMarkup, Exit, PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+		    MENUITEM MrkActionUndo, , PERM_READ
+			SEPARATOR
+            MENUITEM SMActionSelect, , PERM_READ
+            MENUITEM MrkActionClipboard, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionEditSearch, , PERM_READ
+		END
+		POPUP IDS_ENTITIES
+		BEGIN
+		    MENUITEM MrkAction3DText, , PERM_READ
+		    MENUITEM MrkAction3DNote, , PERM_READ
+		END
+		POPUP IDS_MODIFY
+		BEGIN
+		    MENUITEM MrkActionFileMarkup, Information, PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionGroup, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionModifyDelete, Delete/DeleteAll, PERM_READ
+			SEPARATOR
+		    MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		    MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		    MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		    MENUITEM MrkActionModifyFillType, , PERM_READ
+		    MENUITEM MrkActionModifyEntityColor, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyHideMarkups, , PERM_READ
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			POPUP IDS_SMVIEW_ZOOM
+			BEGIN
+			    MENUITEM SMActionZoomMod, , PERM_READ
+			    MENUITEM SMActionZoomFit, , PERM_READ
+			    MENUITEM SMActionZoomPrv, , PERM_READ
+			    MENUITEM SMActionZoomSel, , PERM_READ
+		        SEPARATOR
+			    MENUITEM SMActionZoomBox, , PERM_READ
+			    MENUITEM SMActionZoomDyn, , PERM_READ
+			END
+			MENUITEM SMActionPan, , PERM_READ
+			MENUITEM SMActionRotate, , PERM_READ
+			MENUITEM SMActionSpin, , PERM_READ
+			MENUITEM SMActionRecenter, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			MENUITEM VueActionViewMultiContent, Previous/Next/Number, PERM_READ
+			SEPARATOR
+			MENUITEM SMActionPerspective, , PERM_READ
+			POPUP IDS_SMVIEW_VIEWS
+			BEGIN
+			    MENUITEM SMActionViewViews, , PERM_READ
+			    SEPARATOR
+    	    	POPUP IDS_SMVIEW_NATIVE_VIEWS
+	    	    BEGIN
+        			MENUITEM SMActionViewViews, , PERM_READ
+			    END
+			    SEPARATOR
+    	    	POPUP IDS_SMVIEW_USER_VIEWS
+	    	    BEGIN
+    			    MENUITEM SMActionViewViews, , PERM_READ
+			    END
+			    SEPARATOR
+			    MENUITEM SMActionViewPointView, , PERM_READ
+			END
+			MENUITEM VueActionViewLayers, , PERM_READ
+			SEPARATOR
+			POPUP IDS_SMVIEW_ATTRIBUTES
+			BEGIN
+			    MENUITEM SMActionRenderModes, , PERM_READ
+			    SEPARATOR
+			    MENUITEM SMActionEntityColor, , PERM_READ
+			    MENUITEM SMActionTransparency, , PERM_READ
+			END
+    		MENUITEM SMActionLight, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionPMI, , PERM_READ
+            MENUITEM VueActionViewTree, , PERM_READ
+            MENUITEM SMActionHighlightSelection, , PERM_HIDE
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+			MENUITEM VueActionFileCompare, , PERM_READ
+		    MENUITEM SMActionFileImportModel, , PERM_READ
+			MENUITEM EcadActionFileCrossProbe, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionCoordinateSystem, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkAction3DMeasure, Measure, PERM_READ
+			MENUITEM SMActionCollisionDetection, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionManipulator, , PERM_READ
+			MENUITEM SMActionPartAlignment, , PERM_READ
+			MENUITEM SMActionExplode, , PERM_READ
+			MENUITEM SMActionTransform, , PERM_READ
+			SEPARATOR
+			POPUP IDS_SECTION
+            BEGIN
+                MENUITEM SMActionViewSection, Define/Remove, PERM_READ
+                SEPARATOR
+                MENUITEM SMActionViewSection, Enable/Invert/Both/Edges, PERM_READ
+            END
+			SEPARATOR
+			MENUITEM SMActionSearch, , PERM_READ
+			MENUITEM SMActionBillOfMaterial, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionEntityProperties, , PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+			MENUITEM VueActionOptionsBars, , PERM_NONE
+			SEPARATOR
+			MENUITEM VueActionOptionsConfiguration, , PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp, , PERM_NONE
+		END
+	END
+	TOOLBAR NORTH IDS_MRKMODE_MAIN
+	BEGIN
+	    BUTTON MrkActionFileMarkup, New/Combo, PERM_READ
+		BUTTON MrkActionModifyMarkupLayers, , PERM_READ
+		BUTTON SMActionSelect, , PERM_READ
+		BUTTON EcadActionFileCrossProbe, , PERM_READ
+		BUTTON SMActionZoomFit, , PERM_READ
+		BUTTON SMActionZoomBox, , PERM_READ
+		BUTTON SMActionZoomDyn, , PERM_READ
+		BUTTON SMActionSpin, , PERM_READ
+		BUTTON SMActionRotate, , PERM_READ
+		BUTTON SMActionPan, , PERM_READ
+		BUTTON SMActionTransform, Apply, PERM_READ
+		BUTTON SMActionManipulator, , PERM_READ
+		BUTTON SMActionPartAlignment, , PERM_READ
+		BUTTON SMActionExplode, , PERM_READ
+		BUTTON SMActionCollisionDetection, , PERM_READ
+		BUTTON SMActionSearch, , PERM_READ
+		BUTTON SMActionEntityProperties, , PERM_READ
+		BUTTON SMActionRenderModes, , PERM_READ
+		BUTTON SMActionLight, , PERM_READ
+		BUTTON SMActionPMI, , PERM_READ
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON SMActionCoordinateSystem, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MRKMODE_ACCS
+	BEGIN
+	    BUTTON MrkActionFont, , PERM_READ
+	    BUTTON MrkActionModifyLineStyle, , PERM_READ
+		BUTTON MrkActionModifyLineThickness, , PERM_READ
+		BUTTON MrkActionModifyArrowStyle, , PERM_READ
+		BUTTON MrkActionModifyLineColor, , PERM_READ
+		BUTTON MrkActionModifyFillColor, , PERM_READ
+		BUTTON MrkActionModifyFillType, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR WEST IDS_MRKMODE_ENTS
+	BEGIN
+		BUTTON MrkActionSelect, PERM_READ
+		BUTTON MrkAction3DMeasure, Distance/MinDistance/Arc/Angle/Vertex, PERM_READ
+		BUTTON MrkAction3DText, , PERM_READ
+		BUTTON MrkAction3DNote, , PERM_READ
+	END
+	TABBEDPANETOOLBAR WEST IDS_VIEWMODE_TREE
+	BEGIN
+		BUTTON SMActionModelTree, , PERM_READ
+		BUTTON SMActionViewViews, , PERM_READ
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON VueActionBookmarks, , PERM_READ
+		BUTTON MrkActionMarkupTree, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+	    PANE ClbActionJoinSession, , PERM_READ
+	    PANE VueActionFileMarkup, , PERM_READ
+	    PANE VueActionFileProperties, , PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM SMActionZoomFit, , PERM_READ
+		MENUITEM SMActionZoomPrv, , PERM_READ
+		MENUITEM SMActionRecenter, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyOrdering, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+	  MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+        MENUITEM VueActionBookmarks, , PERM_READ
+		MENUITEM MrkActionFileMarkup, Exit, PERM_READ
+	END
+	RMB SELECT
+	BEGIN
+		MENUITEM MrkActionMarkupTree, Goto, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionMarkupTree, Edit, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyDelete, Delete, PERM_READ
+	END
+	RMB MODELTREE
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		POPUP IDS_SMVIEW_ATTRIBUTES
+		BEGIN
+			MENUITEM SMActionRenderModes, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionEntityColor, , PERM_READ
+			MENUITEM SMActionTransparency, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenterSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionManipulator, , PERM_READ
+		MENUITEM SMActionPartAlignment, , PERM_READ
+		MENUITEM SMActionExplode, , PERM_READ
+		MENUITEM SMActionTransform, , PERM_READ
+		SEPARATOR
+		POPUP IDS_SECTION
+		BEGIN
+			MENUITEM SMActionViewSection, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionModelTree, CollapseAllChildren/ExpandAllChildren, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionSelectIdenticalParts, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+	END
+	RMB PMIMODELTREE
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionPMIGoTo, GoTo/AlignTo, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+	END
+    RMB VIEWS
+    BEGIN
+        MENUITEM SMActionViewViews, , PERM_READ
+	END
+	RMB SEARCH3D
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		POPUP IDS_SMVIEW_ATTRIBUTES
+		BEGIN
+			MENUITEM SMActionRenderModes, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionEntityColor, , PERM_READ
+			MENUITEM SMActionTransparency, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenterSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionManipulator, , PERM_READ
+		MENUITEM SMActionExplode, , PERM_READ
+		MENUITEM SMActionTransform, , PERM_READ
+		SEPARATOR
+		POPUP IDS_SECTION
+		BEGIN
+			MENUITEM SMActionViewSection, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionSelectIdenticalParts, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+	END
+	RMB MARKUPNODESELECT
+	BEGIN
+		MENUITEM MrkActionMarkupTree, ShowHide, PERM_READ
+		MENUITEM MrkActionMarkupTree, SetActive, PERM_READ
+	END
+END
+BEGIN UI COLLABORATION
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+		    MENUITEM VueActionFileOpen, , PERM_READ
+		    MENUITEM VueActionFileUpload, , PERM_READ
+		    MENUITEM VueActionFileOpenServer, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionFileMarkup, Open/Save/Save As, PERM_READ
+        	SEPARATOR
+            MENUITEM VueActionFileProperties, , PERM_READ
+            SEPARATOR
+            POPUP IDS_TOOLS
+            BEGIN
+                MENUITEM VueActionToolsDrawingInfo, , PERM_READ
+            END
+            SEPARATOR
+		    MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+		    MENUITEM VueActionFileConvert, , PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+		    MENUITEM MrkActionUndo, , PERM_READ
+			SEPARATOR
+		    MENUITEM MrkActionClipboard, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionEditSearch, , PERM_READ
+		END
+		POPUP IDS_ENTITIES
+		BEGIN
+			MENUITEM MrkActionLine, , PERM_READ
+			MENUITEM MrkActionPolyLine, , PERM_READ
+			MENUITEM MrkActionPolygon, , PERM_READ
+			MENUITEM MrkActionBox, , PERM_READ
+			MENUITEM MrkActionFilledBox, , PERM_READ
+			MENUITEM MrkActionCircle, , PERM_READ
+			MENUITEM MrkActionArc, , PERM_READ
+			MENUITEM MrkActionFreeStyle, , PERM_READ
+			MENUITEM MrkActionCloud, , PERM_READ
+			MENUITEM MrkActionText, , PERM_READ
+			MENUITEM MrkActionLeader, , PERM_READ
+			MENUITEM MrkActionHighlight, , PERM_READ
+			MENUITEM MrkActionNote, , PERM_READ
+			MENUITEM MrkActionSymbol, , PERM_READ
+		END
+		POPUP IDS_MODIFY
+		BEGIN
+		    MENUITEM MrkActionFileMarkup, Information, PERM_READ
+		    SEPARATOR
+		    POPUP IDS_HYPERLINK
+            BEGIN
+                MENUITEM MrkActionHyperlinkEstablish, , PERM_READ
+                MENUITEM MrkActionHyperlink, , PERM_READ
+            END
+		    SEPARATOR
+		    MENUITEM MrkActionGroup, , PERM_READ
+            SEPARATOR
+		    MENUITEM MrkActionModifyDelete, Delete/DeleteAll, PERM_READ
+			SEPARATOR
+		    MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		    MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		    MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		    MENUITEM MrkActionModifyFillType, , PERM_READ
+			MENUITEM MrkActionModifyRotate, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyHideMarkups, , PERM_READ
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			MENUITEM VueActionViewZoom, , PERM_READ
+			MENUITEM MrkActionViewRotate, , PERM_READ
+			MENUITEM MrkActionViewFlip, , PERM_READ
+			POPUP IDS_VIEW_IMAGE
+			BEGIN
+			    MENUITEM VueActionViewContrast, , PERM_READ
+			    MENUITEM VueActionViewAntiAlias, , PERM_READ
+			    MENUITEM VueActionViewInvert, , PERM_READ
+			END
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			MENUITEM VueActionViewMultiContent, Previous/Next/Number, PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewViewPoint, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewViews, , PERM_READ
+			MENUITEM VueActionViewLayers, , PERM_READ
+			MENUITEM VueActionViewBlocks, , PERM_READ
+			MENUITEM VueActionViewXRefs, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewSpecialViewModes, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewTree, , PERM_READ
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+		    MENUITEM VueActionFileOverlays, , PERM_READ
+		    SEPARATOR
+			MENUITEM MrkActionAnalysisMeasure, Measure, PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewDrawingInfo, , PERM_READ
+		END
+		POPUP IDS_COLLABORATION
+		BEGIN
+ 		    MENUITEM ClbActionRequestControl, , PERM_READ
+		    MENUITEM ClbActionGrantControl, , PERM_READ
+		    MENUITEM ClbActionPointer, , PERM_READ
+		    SEPARATOR
+		    MENUITEM ClbActionAssignHost, , PERM_READ
+			MENUITEM ClbActionInviteUsers, , PERM_READ
+		    SEPARATOR
+			MENUITEM ClbActionLockView, , PERM_READ
+			MENUITEM ClbActionRemoteEventTracker, , PERM_READ
+			SEPARATOR
+			MENUITEM ClbActionChat, , PERM_READ
+			SEPARATOR
+			MENUITEM ClbActionSessionInfo, , PERM_READ
+			SEPARATOR
+			MENUITEM ClbActionLeaveSession, , PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+			MENUITEM VueActionOptionsBars, , PERM_NONE
+			MENUITEM VueActionOptionsConfiguration, , PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp,,  PERM_NONE
+		END
+	END
+	TOOLBAR NORTH IDS_MRKMODE_MAIN
+	BEGIN
+		BUTTON MrkActionModifyMarkupLayers, , PERM_READ
+		BUTTON VueActionViewZoom, In/Out/FullRes/FitBoth, PERM_READ
+		BUTTON VueActionViewPage, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR NORTH IDS_MRKMODE_ACCS
+	BEGIN
+	    BUTTON MrkActionFont, , PERM_READ
+	    BUTTON MrkActionModifyLineStyle, , PERM_READ
+		BUTTON MrkActionModifyLineThickness, , PERM_READ
+		BUTTON MrkActionModifyArrowStyle, , PERM_READ
+		BUTTON MrkActionModifyLineColor, , PERM_READ
+		BUTTON MrkActionModifyFillColor, , PERM_READ
+		BUTTON MrkActionModifyFillType, , PERM_READ
+		BUTTON MrkActionModifyRotate, , PERM_READ
+	END
+	TOOLBAR WEST IDS_MRKMODE_ENTS
+	BEGIN
+	    BUTTON MrkActionSelect, , PERM_READ
+	    BUTTON MrkActionLine, , PERM_READ
+		BUTTON MrkActionPolyLine, , PERM_READ
+		BUTTON MrkActionPolygon, , PERM_READ
+		BUTTON MrkActionBox, , PERM_READ
+		BUTTON MrkActionFilledBox, , PERM_READ
+		BUTTON MrkActionCircle, , PERM_READ
+		BUTTON MrkActionArc, , PERM_READ
+		BUTTON MrkActionFreeStyle, , PERM_READ
+		BUTTON MrkActionCloud, , PERM_READ
+		BUTTON MrkActionText, , PERM_READ
+		BUTTON MrkActionLeader, , PERM_READ
+		BUTTON MrkActionHighlight, , PERM_READ
+		BUTTON MrkActionNote, , PERM_READ
+		BUTTON MrkActionSymbol, , PERM_READ
+		BUTTON MrkActionAnalysisMeasure, Distance/Area/Angle/Arc, PERM_READ
+	END
+	TABBEDPANETOOLBAR WEST IDS_VIEWMODE_TREE
+	BEGIN
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON VueActionBookmarks, , PERM_READ
+		BUTTON MrkActionMarkupTree, , PERM_READ
+		BUTTON ClbActionShowUsers, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+	    PANE VueActionFileMarkup, , PERM_READ
+	    PANE VueActionFileProperties, , PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	CLBSTATUSBAR SOUTH
+	BEGIN
+	    PANE ClbActionPointer, , PERM_READ
+	    PANE ClbActionLockView, , PERM_READ
+	    PANE ClbActionChat, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM VueActionViewZoom, ,  PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionHyperlink, , PERM_READ
+		MENUITEM VueActionBookmarks, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyOrdering, , PERM_READ
+		SEPARATOR
+	  MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+	  SEPARATOR
+	  MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM ClbActionLeaveSession, , PERM_READ
+	END
+	RMB SELECT
+	BEGIN
+		MENUITEM MrkActionMarkupTree, Goto, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionMarkupTree, Edit, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyDelete, Delete, PERM_READ
+	END
+	RMB CLBUSERS
+	BEGIN
+		MENUITEM ClbActionShowUsers, , PERM_READ
+	END
+END
+BEGIN UI COLLABORATION3D
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+		    MENUITEM VueActionFileOpen, , PERM_READ
+		    MENUITEM VueActionFileUpload, , PERM_READ
+		    MENUITEM VueActionFileOpenServer, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionFileMarkup, Open/Save/Save As, PERM_READ
+		    SEPARATOR
+		    MENUITEM VueActionFileProperties, , PERM_READ
+		    SEPARATOR
+			MENUITEM EcadActionFileCrossProbe, , PERM_READ
+		    MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+		    MENUITEM SMActionFileConvert, , PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+		    MENUITEM MrkActionUndo, , PERM_READ
+			SEPARATOR
+            MENUITEM SMActionSelect, , PERM_READ
+            MENUITEM MrkActionClipboard, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionEditSearch, , PERM_READ
+		END
+		POPUP IDS_ENTITIES
+		BEGIN
+		    MENUITEM MrkAction3DText, , PERM_READ
+		    MENUITEM MrkAction3DNote, , PERM_READ
+		END
+		POPUP IDS_MODIFY
+		BEGIN
+		    MENUITEM MrkActionFileMarkup, Information, PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionGroup, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionModifyDelete, Delete/DeleteAll, PERM_READ
+			SEPARATOR
+		    MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		    MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		    MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		    MENUITEM MrkActionModifyFillType, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyHideMarkups, , PERM_READ
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			POPUP IDS_SMVIEW_ZOOM
+			BEGIN
+			    MENUITEM SMActionZoomMod, , PERM_READ
+			    MENUITEM SMActionZoomFit, , PERM_READ
+			    MENUITEM SMActionZoomPrv, , PERM_READ
+			    MENUITEM SMActionZoomSel, , PERM_READ
+		        SEPARATOR
+			    MENUITEM SMActionZoomBox, , PERM_READ
+			    MENUITEM SMActionZoomDyn, , PERM_READ
+			END
+			MENUITEM SMActionPan, , PERM_READ
+			MENUITEM SMActionRotate, , PERM_READ
+			MENUITEM SMActionSpin, , PERM_READ
+			MENUITEM SMActionRecenter, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			MENUITEM VueActionViewMultiContent, Previous/Next/Number, PERM_READ
+			SEPARATOR
+			MENUITEM SMActionPerspective, , PERM_READ
+			POPUP IDS_SMVIEW_VIEWS
+			BEGIN
+			    MENUITEM SMActionViewViews, , PERM_READ
+			    SEPARATOR
+    	    	POPUP IDS_SMVIEW_NATIVE_VIEWS
+	    	    BEGIN
+        			MENUITEM SMActionViewViews, , PERM_READ
+			    END
+			    SEPARATOR
+    	    	POPUP IDS_SMVIEW_USER_VIEWS
+	    	    BEGIN
+    			    MENUITEM SMActionViewViews, , PERM_READ
+			    END
+			    SEPARATOR
+			    MENUITEM SMActionViewPointView, , PERM_READ
+			END
+			MENUITEM VueActionViewLayers, , PERM_READ
+			SEPARATOR
+			POPUP IDS_SMVIEW_ATTRIBUTES
+			BEGIN
+			    MENUITEM SMActionRenderModes, , PERM_READ
+			    SEPARATOR
+			    MENUITEM SMActionEntityColor, , PERM_READ
+			    MENUITEM SMActionTransparency, , PERM_READ
+			END
+    		MENUITEM SMActionLight, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionPMI, , PERM_READ
+            MENUITEM VueActionViewTree, , PERM_READ
+            MENUITEM SMActionHighlightSelection, , PERM_HIDE
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+		    MENUITEM SMActionFileImportModel, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionCoordinateSystem, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkAction3DMeasure, Measure, PERM_READ
+			MENUITEM SMActionCollisionDetection, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionManipulator, , PERM_READ
+			MENUITEM SMActionPartAlignment, , PERM_READ
+			MENUITEM SMActionExplode, , PERM_READ
+			MENUITEM SMActionTransform, , PERM_READ
+		 	SEPARATOR
+		 	POPUP IDS_SECTION
+            BEGIN
+                MENUITEM SMActionViewSection, Define/Remove, PERM_READ
+                SEPARATOR
+                MENUITEM SMActionViewSection, Enable/Invert/Both/Edges, PERM_READ
+            END
+			SEPARATOR
+			MENUITEM SMActionSearch, , PERM_READ
+			MENUITEM SMActionBillOfMaterial, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionEntityProperties, , PERM_READ
+		END
+		POPUP IDS_COLLABORATION
+		BEGIN
+		    MENUITEM ClbActionRequestControl, , PERM_READ
+		    MENUITEM ClbActionGrantControl, , PERM_READ
+		    MENUITEM ClbActionPointer, , PERM_READ
+		    SEPARATOR
+		    MENUITEM ClbActionAssignHost, , PERM_READ
+			MENUITEM ClbActionInviteUsers, , PERM_READ
+		    SEPARATOR
+			MENUITEM ClbActionLockView, , PERM_READ
+			MENUITEM ClbActionRemoteEventTracker, , PERM_READ
+			SEPARATOR
+			MENUITEM ClbActionChat, , PERM_READ
+			SEPARATOR
+			MENUITEM ClbActionSessionInfo, , PERM_READ
+			SEPARATOR
+	        MENUITEM ClbActionLeaveSession, , PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+			MENUITEM VueActionOptionsBars, , PERM_NONE
+			SEPARATOR
+			MENUITEM VueActionOptionsConfiguration, , PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp, , PERM_NONE
+		END
+	END
+	TOOLBAR NORTH IDS_MRKMODE_MAIN
+	BEGIN
+		BUTTON MrkActionModifyMarkupLayers, , PERM_READ
+		BUTTON SMActionSelect, , PERM_READ
+		BUTTON EcadActionFileCrossProbe, , PERM_READ
+		BUTTON SMActionZoomFit, , PERM_READ
+		BUTTON SMActionZoomBox, , PERM_READ
+		BUTTON SMActionZoomDyn, , PERM_READ
+		BUTTON SMActionSpin, , PERM_READ
+		BUTTON SMActionRotate, , PERM_READ
+		BUTTON SMActionPan, , PERM_READ
+		BUTTON SMActionTransform, Apply, PERM_READ
+		BUTTON SMActionManipulator, , PERM_READ
+		BUTTON SMActionPartAlignment, , PERM_READ
+		BUTTON SMActionExplode, , PERM_READ
+		BUTTON SMActionCollisionDetection, , PERM_READ
+		BUTTON SMActionSearch, , PERM_READ
+		BUTTON SMActionEntityProperties, , PERM_READ
+		BUTTON SMActionRenderModes, , PERM_READ
+		BUTTON SMActionLight, , PERM_READ
+		BUTTON SMActionPMI, , PERM_READ
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON SMActionCoordinateSystem, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MRKMODE_ACCS
+	BEGIN
+	    BUTTON MrkActionFont, , PERM_READ
+	    BUTTON MrkActionModifyLineStyle, , PERM_READ
+		BUTTON MrkActionModifyLineThickness, , PERM_READ
+		BUTTON MrkActionModifyArrowStyle, , PERM_READ
+		BUTTON MrkActionModifyLineColor, , PERM_READ
+		BUTTON MrkActionModifyFillColor, , PERM_READ
+		BUTTON MrkActionModifyFillType, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR WEST IDS_MRKMODE_ENTS
+	BEGIN
+		BUTTON MrkActionSelect, PERM_READ
+		BUTTON MrkAction3DMeasure, Distance/Arc/Angle/Vertex, PERM_READ
+		BUTTON MrkAction3DText, , PERM_READ
+		BUTTON MrkAction3DNote, , PERM_READ
+	END
+	TABBEDPANETOOLBAR WEST IDS_VIEWMODE_TREE
+	BEGIN
+		BUTTON SMActionModelTree, , PERM_READ
+		BUTTON SMActionViewViews, , PERM_READ
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON VueActionBookmarks, , PERM_READ
+		BUTTON MrkActionMarkupTree, , PERM_READ
+		BUTTON ClbActionShowUsers, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+	    PANE VueActionFileMarkup, , PERM_READ
+	    PANE VueActionFileProperties, , PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	CLBSTATUSBAR SOUTH
+	BEGIN
+	    PANE ClbActionPointer, , PERM_READ
+	    PANE ClbActionLockView, , PERM_READ
+	    PANE ClbActionChat, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM SMActionZoomFit, , PERM_READ
+		MENUITEM SMActionZoomPrv, , PERM_READ
+		MENUITEM SMActionRecenter, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyOrdering, , PERM_READ
+	    SEPARATOR
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM ClbActionLeaveSession, , PERM_READ
+	END
+	RMB SELECT
+	BEGIN
+		MENUITEM MrkActionMarkupTree, Goto, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionMarkupTree, Edit, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyDelete, Delete, PERM_READ
+	END
+	RMB MODELTREE
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		POPUP IDS_SMVIEW_ATTRIBUTES
+		BEGIN
+			MENUITEM SMActionRenderModes, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionEntityColor, , PERM_READ
+			MENUITEM SMActionTransparency, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenterSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionManipulator, , PERM_READ
+		MENUITEM SMActionPartAlignment, , PERM_READ
+		MENUITEM SMActionExplode, , PERM_READ
+		MENUITEM SMActionTransform, , PERM_READ
+		SEPARATOR
+		POPUP IDS_SECTION
+		BEGIN
+			MENUITEM SMActionViewSection, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionModelTree, CollapseAllChildren/ExpandAllChildren, PERM_READ
+		MENUITEM SMActionSelectIdenticalParts, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+	END
+	RMB PMIMODELTREE
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionPMIGoTo, GoTo/AlignTo, PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+	END
+    RMB VIEWS
+    BEGIN
+    	MENUITEM SMActionViewViews, , PERM_READ
+	END
+	RMB CLBUSERS
+	BEGIN
+		MENUITEM ClbActionShowUsers, , PERM_READ
+	END
+	RMB SEARCH3D
+	BEGIN
+		MENUITEM SMActionEntityVisibility, Show/Hide/Hide Rest, PERM_READ
+		POPUP IDS_SMVIEW_ATTRIBUTES
+		BEGIN
+			MENUITEM SMActionRenderModes, , PERM_READ
+			SEPARATOR
+			MENUITEM SMActionEntityColor, , PERM_READ
+			MENUITEM SMActionTransparency, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionZoomSel, , PERM_READ
+		MENUITEM SMActionRecenterSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionManipulator, , PERM_READ
+		MENUITEM SMActionExplode, , PERM_READ
+		MENUITEM SMActionTransform, , PERM_READ
+		SEPARATOR
+		POPUP IDS_SECTION
+		BEGIN
+			MENUITEM SMActionViewSection, , PERM_READ
+		END
+		SEPARATOR
+		MENUITEM SMActionSelectIdenticalParts, , PERM_READ
+		SEPARATOR
+		MENUITEM SMActionEntityProperties, , PERM_READ
+	END
+END
+BEGIN UI ECADVIEW
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+            MENUITEM VueActionFileOpen, , PERM_READ
+		    MENUITEM VueActionFileUpload, , PERM_READ
+		    MENUITEM VueActionFileOpenServer, , PERM_READ
+		    SEPARATOR
+            MENUITEM VueActionFileMarkup, , PERM_READ
+            SEPARATOR
+            MENUITEM VueActionFileProperties, , PERM_READ
+            SEPARATOR
+            POPUP IDS_TOOLS
+            BEGIN
+                MENUITEM VueActionToolsDrawingInfo, , PERM_READ
+            END
+            SEPARATOR
+			MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+			MENUITEM VueActionFileConvert, , PERM_READ
+            MENUITEM VueActionFileExit, , PERM_NONE
+			SEPARATOR
+            MENUITEM VueActionFileMRU, , PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+			MENUITEM EcadActionSelect, , PERM_HIDE
+			MENUITEM EcadActionBrowseTips, , PERM_HIDE
+			SEPARATOR
+			MENUITEM VueActionEditSearch, , PERM_READ
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			MENUITEM VueActionViewZoom, , PERM_READ
+			MENUITEM VueActionViewRotate, , PERM_READ
+			MENUITEM VueActionViewFlip, , PERM_READ
+			POPUP IDS_VIEW_IMAGE
+			BEGIN
+			    MENUITEM VueActionViewContrast, , PERM_READ
+			    MENUITEM VueActionViewAntiAlias, , PERM_READ
+			    MENUITEM VueActionViewInvert, , PERM_READ
+			END
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			MENUITEM VueActionViewMultiContent, Previous/Next/Number, PERM_READ
+			MENUITEM EcadActionFollowLink, Ascend/Descend, PERM_READ
+			MENUITEM EcadActionGoToNet, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewViews, , PERM_READ
+			MENUITEM VueActionViewLayers, , PERM_READ
+			MENUITEM EcadActionViewPCBViews, , PERM_READ
+			MENUITEM EcadActionViewEntityTypeFilter, , PERM_READ
+			MENUITEM VueActionViewBlocks, , PERM_READ
+			MENUITEM VueActionViewXRefs, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewSpecialViewModes, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewTree, , PERM_READ
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+		    MENUITEM VueActionFileCompare, , PERM_READ
+            MENUITEM VueActionFileOverlays, , PERM_READ
+            MENUITEM EcadActionFileCrossProbe, , PERM_READ
+            SEPARATOR
+			MENUITEM VueActionAnalysisMeasure, Measure, PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionDesignRuleChecks, , PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionViewEntityBrowser, , PERM_READ
+			MENUITEM EcadActionViewBillOfMaterial, , PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionEntityProperties, , PERM_READ
+		END
+
+		POPUP IDS_COLLABORATION
+		BEGIN
+			MENUITEM ClbActionInitSession, , PERM_READ
+			MENUITEM ClbActionJoinSession, , PERM_READ
+			MENUITEM ClbActionDoNotDisturb, , PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+			MENUITEM VueActionOptionsBars, , PERM_NONE
+			SEPARATOR
+			MENUITEM VueActionOptionsConfiguration, , PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp, , PERM_NONE
+		END
+	END
+	TOOLBAR NORTH IDS_VIEWMODE_MAIN
+	BEGIN
+	    BUTTON VueActionFileUpload, , PERM_READ
+		BUTTON VueActionFilePrint, PrintPreview/Print, PERM_READ
+		BUTTON VueActionFileMarkup, , PERM_READ
+		BUTTON EcadActionFileCrossProbe, , PERM_READ
+		BUTTON VueActionViewZoom, In/Out/FullRes/FitBoth, PERM_READ
+		BUTTON VueActionViewLayers, , PERM_READ
+		BUTTON EcadActionViewPCBViews, , PERM_READ
+		BUTTON EcadActionViewEntityTypeFilter,  , PERM_READ
+		BUTTON EcadActionDesignRuleChecks, , PERM_READ
+		BUTTON EcadActionViewEntityBrowser, , PERM_READ
+		BUTTON EcadActionViewBillOfMaterial, , PERM_READ
+		BUTTON EcadActionEntityProperties, , PERM_READ
+        BUTTON EcadActionDimUnselected, , PERM_READ
+		BUTTON VueActionAnalysisMeasure, Distance/Area/Angle/Arc/MinDistance, PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR WEST IDS_VIEWMODE_AUX
+	BEGIN
+		BUTTON VueActionViewPage, , PERM_READ
+		BUTTON VueActionViewFlip, , PERM_READ
+		BUTTON VueActionViewSpecialViewModes, BirdsEye/MagnifyWindow/MagnifyGlass, PERM_READ
+	END
+	TABBEDPANETOOLBAR WEST IDS_VIEWMODE_TREE
+	BEGIN
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON EcadActionComponents, , PERM_READ
+		BUTTON EcadActionNets, , PERM_READ
+		BUTTON VueActionBookmarks, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+	    PANE ClbActionJoinSession, , PERM_READ
+	    PANE VueActionFileMarkup, , PERM_READ
+		PANE VueActionFileProperties, , PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM VueActionViewZoom, ,  PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionFollowLink, Ascend/Descend, PERM_READ
+		SEPARATOR
+		MENUITEM VueActionViewLayers, , PERM_READ
+		MENUITEM EcadActionViewPCBViews, , PERM_READ
+		SEPARATOR
+		MENUITEM VueActionFileMarkup, , PERM_READ
+        MENUITEM VueActionBookmarks, , PERM_READ
+	END
+	RMB ENTITYSELECT
+	BEGIN
+		MENUITEM VueActionViewZoom, ,  PERM_READ
+		MENUITEM EcadActionZoomSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionFollowLink, Ascend/Descend, PERM_READ
+		MENUITEM EcadActionGoToNet, , PERM_READ
+		SEPARATOR
+		MENUITEM VueActionViewLayers, , PERM_READ
+		MENUITEM EcadActionViewPCBViews, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionShowNetConnectivity, , PERM_READ
+		MENUITEM EcadActionEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM VueActionFileMarkup, , PERM_READ
+	END
+	RMB ECADENTITY
+	BEGIN
+		MENUITEM EcadActionZoomSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionFollowLink, Descend, PERM_READ
+		MENUITEM EcadActionGoToNet, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionShowNetConnectivity, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionEntityProperties, , PERM_READ
+	END
+END
+BEGIN UI ECADMARKUP
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+		    MENUITEM MrkActionFileMarkup, New/Open/Save/Save As/Save All, PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionFileMarkup, Set Active/Consolidate, PERM_READ
+		    SEPARATOR
+		    MENUITEM VueActionFileProperties, , PERM_READ
+		    SEPARATOR
+		    POPUP IDS_TOOLS
+            BEGIN
+                MENUITEM VueActionToolsDrawingInfo, , PERM_READ
+            END
+            SEPARATOR
+		    MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+		    MENUITEM VueActionFileConvert, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionFileMarkup, Exit, PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+		    MENUITEM MrkActionUndo, , PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionSelect, , PERM_HIDE
+			MENUITEM EcadActionBrowseTips, , PERM_HIDE
+		    MENUITEM MrkActionClipboard, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionEditSearch, , PERM_READ
+		END
+		POPUP IDS_ENTITIES
+		BEGIN
+			MENUITEM MrkActionLine, , PERM_READ
+			MENUITEM MrkActionPolyLine, , PERM_READ
+			MENUITEM MrkActionPolygon, , PERM_READ
+			MENUITEM MrkActionBox, , PERM_READ
+			MENUITEM MrkActionFilledBox, , PERM_READ
+			MENUITEM MrkActionCircle, , PERM_READ
+			MENUITEM MrkActionArc, , PERM_READ
+			MENUITEM MrkActionFreeStyle, , PERM_READ
+			MENUITEM MrkActionCloud, , PERM_READ
+			MENUITEM MrkActionText, , PERM_READ
+			MENUITEM MrkActionLeader, , PERM_READ
+			MENUITEM MrkActionHighlight, , PERM_READ
+			MENUITEM MrkActionNote, , PERM_READ
+			MENUITEM MrkActionSymbol, , PERM_READ
+		END
+		POPUP IDS_MODIFY
+		BEGIN
+		    MENUITEM MrkActionFileMarkup, Information, PERM_READ
+		    SEPARATOR
+		    POPUP IDS_HYPERLINK
+            BEGIN
+                MENUITEM MrkActionHyperlinkEstablish, , PERM_READ
+                MENUITEM MrkActionHyperlink, , PERM_READ
+            END
+		    SEPARATOR
+		    MENUITEM MrkActionGroup, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionModifyDelete, Delete/DeleteAll, PERM_READ
+			SEPARATOR
+		    MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		    MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		    MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		    MENUITEM MrkActionModifyFillType, , PERM_READ
+		    MENUITEM MrkActionModifyEntityColor, , PERM_READ
+			MENUITEM MrkActionModifyRotate, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyHideMarkups, , PERM_READ
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			MENUITEM VueActionViewZoom, , PERM_READ
+			MENUITEM MrkActionViewRotate, , PERM_READ
+			MENUITEM MrkActionViewFlip, , PERM_READ
+			POPUP IDS_VIEW_IMAGE
+			BEGIN
+			    MENUITEM VueActionViewContrast, , PERM_READ
+			    MENUITEM VueActionViewAntiAlias, , PERM_READ
+			    MENUITEM VueActionViewInvert, , PERM_READ
+			END
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			MENUITEM VueActionViewMultiContent, Previous/Next/Number, PERM_READ
+			MENUITEM EcadActionFollowLink, Ascend/Descend, PERM_READ
+			MENUITEM EcadActionGoToNet, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewViews, , PERM_READ
+			MENUITEM VueActionViewLayers, , PERM_READ
+			MENUITEM EcadActionViewPCBViews, , PERM_READ
+			MENUITEM EcadActionViewEntityTypeFilter, , PERM_READ
+			MENUITEM VueActionViewBlocks, , PERM_READ
+			MENUITEM VueActionViewXRefs, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewSpecialViewModes, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewTree, , PERM_READ
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+		    MENUITEM VueActionFileCompare, , PERM_READ
+            MENUITEM VueActionFileOverlays, , PERM_READ
+            MENUITEM EcadActionFileCrossProbe, , PERM_READ
+            SEPARATOR
+			MENUITEM MrkActionAnalysisMeasure, Measure, PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionDesignRuleChecks, , PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionViewEntityBrowser, , PERM_READ
+			MENUITEM EcadActionViewBillOfMaterial, , PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionEntityProperties, , PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+			MENUITEM VueActionOptionsBars, , PERM_NONE
+			MENUITEM VueActionOptionsConfiguration, , PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp,,  PERM_NONE
+		END
+	END
+	TOOLBAR NORTH IDS_MRKMODE_MAIN
+	BEGIN
+	    BUTTON MrkActionFileMarkup, New/Combo, PERM_READ
+		BUTTON MrkActionModifyMarkupLayers, , PERM_READ
+		BUTTON VueActionViewZoom, In/Out/FullRes/FitBoth, PERM_READ
+		BUTTON VueActionViewPage, , PERM_READ
+		BUTTON EcadActionFileCrossProbe, , PERM_READ
+		BUTTON EcadActionViewEntityBrowser, , PERM_READ
+		BUTTON EcadActionViewEntityTypeFilter, PERM_READ
+		BUTTON VueActionViewLayers, , PERM_READ
+		BUTTON EcadActionViewPCBViews, , PERM_READ
+		BUTTON EcadActionViewBillOfMaterial, , PERM_READ
+		BUTTON EcadActionEntityProperties, , PERM_READ
+        BUTTON EcadActionDimUnselected, , PERM_READ
+		BUTTON EcadActionDesignRuleChecks, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MRKMODE_ACCS
+	BEGIN
+	    BUTTON MrkActionFont, , PERM_READ
+	    BUTTON MrkActionModifyLineStyle, , PERM_READ
+		BUTTON MrkActionModifyLineThickness, , PERM_READ
+		BUTTON MrkActionModifyArrowStyle, , PERM_READ
+		BUTTON MrkActionModifyLineColor, , PERM_READ
+		BUTTON MrkActionModifyFillColor, , PERM_READ
+		BUTTON MrkActionModifyFillType, , PERM_READ
+		BUTTON MrkActionModifyRotate, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR WEST IDS_MRKMODE_ENTS
+	BEGIN
+	    BUTTON MrkActionSelect, , PERM_READ
+	    BUTTON MrkActionLine, , PERM_READ
+		BUTTON MrkActionPolyLine, , PERM_READ
+		BUTTON MrkActionPolygon, , PERM_READ
+		BUTTON MrkActionBox, , PERM_READ
+		BUTTON MrkActionFilledBox, , PERM_READ
+		BUTTON MrkActionCircle, , PERM_READ
+		BUTTON MrkActionArc, , PERM_READ
+		BUTTON MrkActionFreeStyle, , PERM_READ
+		BUTTON MrkActionCloud, , PERM_READ
+		BUTTON MrkActionText, , PERM_READ
+		BUTTON MrkActionLeader, , PERM_READ
+		BUTTON MrkActionHighlight, , PERM_READ
+		BUTTON MrkActionNote, , PERM_READ
+		BUTTON MrkActionSymbol, , PERM_READ
+		BUTTON MrkActionAnalysisMeasure, Distance/Area/Angle/Arc/MinDistance, PERM_READ
+	END
+	TABBEDPANETOOLBAR WEST IDS_VIEWMODE_TREE
+	BEGIN
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON EcadActionComponents, , PERM_READ
+		BUTTON EcadActionNets, , PERM_READ
+		BUTTON VueActionBookmarks, , PERM_READ
+		BUTTON MrkActionMarkupTree, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+	    PANE ClbActionJoinSession, , PERM_READ
+	    PANE VueActionFileMarkup, , PERM_READ
+	    PANE VueActionFileProperties, , PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM VueActionViewZoom, ,  PERM_READ
+		SEPARATOR
+		MENUITEM VueActionViewLayers, , PERM_READ
+		MENUITEM EcadActionViewPCBViews, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionFollowLink, Ascend/Descend, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionHyperlink, , PERM_READ
+		MENUITEM VueActionBookmarks, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyOrdering, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionFileMarkup, Exit, PERM_READ
+	END
+	RMB SELECT
+	BEGIN
+		MENUITEM MrkActionMarkupTree, Goto, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionMarkupTree, Edit, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyDelete, Delete, PERM_READ
+	END
+	RMB ENTITYSELECT
+	BEGIN
+		MENUITEM VueActionViewZoom, ,  PERM_READ
+		MENUITEM EcadActionZoomSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionFollowLink, Ascend/Descend, PERM_READ
+		MENUITEM EcadActionGoToNet, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionViewPCBViews, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionShowNetConnectivity, , PERM_READ
+		MENUITEM EcadActionEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionHyperlink, , PERM_READ
+		MENUITEM VueActionBookmarks, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyOrdering, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionFileMarkup, Exit, PERM_READ
+	END
+	RMB ECADENTITY
+	BEGIN
+		MENUITEM EcadActionZoomSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionFollowLink, Descend, PERM_READ
+		MENUITEM EcadActionGoToNet, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionShowNetConnectivity, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionEntityProperties, , PERM_READ
+	END
+	RMB MARKUPNODESELECT
+	BEGIN
+		MENUITEM MrkActionMarkupTree, ShowHide, PERM_READ
+		MENUITEM MrkActionMarkupTree, SetActive, PERM_READ
+	END
+END
+BEGIN UI ECADCOLLABORATION
+	MENUBAR
+	BEGIN
+		POPUP IDS_FILE
+		BEGIN
+		    MENUITEM VueActionFileOpen, , PERM_READ
+		    MENUITEM VueActionFileUpload, , PERM_READ
+		    MENUITEM VueActionFileOpenServer, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionFileMarkup, Open/Save/Save As, PERM_READ
+		    SEPARATOR
+		    MENUITEM VueActionFileProperties, , PERM_READ
+		    SEPARATOR
+		    POPUP IDS_TOOLS
+            BEGIN
+                MENUITEM VueActionToolsDrawingInfo, , PERM_READ
+            END
+            SEPARATOR
+		    MENUITEM VueActionFilePrint, PrintPreview/Print/BatchPrint, PERM_READ|PERM_HEADERS|PERM_WATERMARK
+		    MENUITEM VueActionFileConvert, , PERM_READ
+		END
+		POPUP IDS_EDIT
+		BEGIN
+		    MENUITEM MrkActionUndo, , PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionSelect, , PERM_HIDE
+			MENUITEM EcadActionBrowseTips, , PERM_HIDE
+		    MENUITEM MrkActionClipboard, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionEditSearch, , PERM_READ
+		END
+		POPUP IDS_ENTITIES
+		BEGIN
+			MENUITEM MrkActionLine, , PERM_READ
+			MENUITEM MrkActionPolyLine, , PERM_READ
+			MENUITEM MrkActionPolygon, , PERM_READ
+			MENUITEM MrkActionBox, , PERM_READ
+			MENUITEM MrkActionFilledBox, , PERM_READ
+			MENUITEM MrkActionCircle, , PERM_READ
+			MENUITEM MrkActionArc, , PERM_READ
+			MENUITEM MrkActionFreeStyle, , PERM_READ
+			MENUITEM MrkActionCloud, , PERM_READ
+			MENUITEM MrkActionText, , PERM_READ
+			MENUITEM MrkActionLeader, , PERM_READ
+			MENUITEM MrkActionHighlight, , PERM_READ
+			MENUITEM MrkActionNote, , PERM_READ
+			MENUITEM MrkActionSymbol, , PERM_READ
+		END
+		POPUP IDS_MODIFY
+		BEGIN
+		    MENUITEM MrkActionFileMarkup, Information, PERM_READ
+		    SEPARATOR
+		    POPUP IDS_HYPERLINK
+            BEGIN
+                MENUITEM MrkActionHyperlinkEstablish, , PERM_READ
+                MENUITEM MrkActionHyperlink, , PERM_READ
+            END
+	    	SEPARATOR
+		    MENUITEM MrkActionGroup, , PERM_READ
+		    SEPARATOR
+		    MENUITEM MrkActionModifyDelete, Delete/DeleteAll, PERM_READ
+			SEPARATOR
+		    MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		    MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		    MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		    MENUITEM MrkActionModifyFillType, , PERM_READ
+			MENUITEM MrkActionModifyRotate, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+			SEPARATOR
+			MENUITEM MrkActionModifyHideMarkups, , PERM_READ
+		END
+		POPUP IDS_VIEW
+		BEGIN
+			MENUITEM VueActionViewZoom, , PERM_READ
+			MENUITEM MrkActionViewRotate, , PERM_READ
+			MENUITEM MrkActionViewFlip, , PERM_READ
+			POPUP IDS_VIEW_IMAGE
+			BEGIN
+			    MENUITEM VueActionViewContrast, , PERM_READ
+			    MENUITEM VueActionViewAntiAlias, , PERM_READ
+			    MENUITEM VueActionViewInvert, , PERM_READ
+			END
+			SEPARATOR
+			MENUITEM VueActionViewPage, , PERM_READ
+			MENUITEM VueActionViewMultiContent, Previous/Next/Number, PERM_READ
+			MENUITEM EcadActionFollowLink, Ascend/Descend, PERM_READ
+			MENUITEM EcadActionGoToNet, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewViews, , PERM_READ
+			MENUITEM VueActionViewLayers, , PERM_READ
+			MENUITEM EcadActionViewPCBViews, , PERM_READ
+			MENUITEM EcadActionViewEntityTypeFilter, , PERM_READ
+			MENUITEM VueActionViewBlocks, , PERM_READ
+			MENUITEM VueActionViewXRefs, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewSpecialViewModes, , PERM_READ
+			SEPARATOR
+			MENUITEM VueActionViewTree, , PERM_READ
+		END
+		POPUP IDS_ANALYSIS
+		BEGIN
+		    MENUITEM VueActionFileOverlays, , PERM_READ
+            MENUITEM EcadActionFileCrossProbe, , PERM_READ
+            SEPARATOR
+			MENUITEM MrkActionAnalysisMeasure, Measure, PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionDesignRuleChecks, , PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionViewEntityBrowser, , PERM_READ
+			MENUITEM EcadActionViewBillOfMaterial, , PERM_READ
+			SEPARATOR
+			MENUITEM EcadActionEntityProperties, , PERM_READ
+		END
+
+		POPUP IDS_COLLABORATION
+		BEGIN
+ 		    MENUITEM ClbActionRequestControl, , PERM_READ
+		    MENUITEM ClbActionGrantControl, , PERM_READ
+		    MENUITEM ClbActionPointer, , PERM_READ
+		    SEPARATOR
+		    MENUITEM ClbActionAssignHost, , PERM_READ
+			MENUITEM ClbActionInviteUsers, , PERM_READ
+		    SEPARATOR
+			MENUITEM ClbActionLockView, , PERM_READ
+			MENUITEM ClbActionRemoteEventTracker, , PERM_READ
+			SEPARATOR
+			MENUITEM ClbActionChat, , PERM_READ
+			SEPARATOR
+			MENUITEM ClbActionSessionInfo, , PERM_READ
+			SEPARATOR
+			MENUITEM ClbActionLeaveSession, , PERM_READ
+		END
+		POPUP IDS_OPTIONS
+		BEGIN
+			MENUITEM VueActionOptionsBars, , PERM_NONE
+			MENUITEM VueActionOptionsConfiguration, , PERM_READ
+		END
+		POPUP IDS_HELP
+		BEGIN
+			MENUITEM VueActionHelp,,  PERM_NONE
+		END
+	END
+	TOOLBAR NORTH IDS_MRKMODE_MAIN
+	BEGIN
+		BUTTON MrkActionModifyMarkupLayers, , PERM_READ
+		BUTTON VueActionViewZoom, In/Out/FullRes/FitBoth, PERM_READ
+		BUTTON VueActionViewPage, , PERM_READ
+		BUTTON EcadActionFileCrossProbe, , PERM_READ
+		BUTTON EcadActionViewEntityBrowser, , PERM_READ
+		BUTTON EcadActionViewEntityTypeFilter, PERM_READ
+		BUTTON VueActionViewLayers, , PERM_READ
+		BUTTON EcadActionViewPCBViews, , PERM_READ
+		BUTTON EcadActionViewBillOfMaterial, , PERM_READ
+		BUTTON EcadActionEntityProperties, , PERM_READ
+        BUTTON EcadActionDimUnselected, , PERM_READ
+		BUTTON EcadActionDesignRuleChecks, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MRKMODE_ACCS
+	BEGIN
+	    BUTTON MrkActionFont, , PERM_READ
+	    BUTTON MrkActionModifyLineStyle, , PERM_READ
+		BUTTON MrkActionModifyLineThickness, , PERM_READ
+		BUTTON MrkActionModifyArrowStyle, , PERM_READ
+		BUTTON MrkActionModifyLineColor, , PERM_READ
+		BUTTON MrkActionModifyFillColor, , PERM_READ
+		BUTTON MrkActionModifyFillType, , PERM_READ
+		BUTTON MrkActionModifyRotate, , PERM_READ
+	END
+	TOOLBAR NORTH IDS_MULTICONTENT
+	BEGIN
+		BUTTON VueActionViewMultiContent, First/Previous/Next/Last, PERM_READ
+	END
+	TOOLBAR WEST IDS_MRKMODE_ENTS
+	BEGIN
+	    BUTTON MrkActionSelect, , PERM_READ
+	    BUTTON MrkActionLine, , PERM_READ
+		BUTTON MrkActionPolyLine, , PERM_READ
+		BUTTON MrkActionPolygon, , PERM_READ
+		BUTTON MrkActionBox, , PERM_READ
+		BUTTON MrkActionFilledBox, , PERM_READ
+		BUTTON MrkActionCircle, , PERM_READ
+		BUTTON MrkActionArc, , PERM_READ
+		BUTTON MrkActionFreeStyle, , PERM_READ
+		BUTTON MrkActionCloud, , PERM_READ
+		BUTTON MrkActionText, , PERM_READ
+		BUTTON MrkActionLeader, , PERM_READ
+		BUTTON MrkActionHighlight, , PERM_READ
+		BUTTON MrkActionNote, , PERM_READ
+		BUTTON MrkActionSymbol, , PERM_READ
+		BUTTON MrkActionAnalysisMeasure, Distance/Area/Angle/Arc/MinDistance, PERM_READ
+	END
+	TABBEDPANETOOLBAR WEST IDS_VIEWMODE_TREE
+	BEGIN
+		BUTTON VueActionViewTree, , PERM_READ
+		BUTTON EcadActionComponents, , PERM_READ
+		BUTTON EcadActionNets, , PERM_READ
+		BUTTON VueActionBookmarks, , PERM_READ
+		BUTTON MrkActionMarkupTree, , PERM_READ
+		BUTTON ClbActionShowUsers, , PERM_READ
+	END
+	STATUSBAR SOUTH
+	BEGIN
+	    PANE VueActionFileMarkup, , PERM_READ
+	    PANE VueActionFileProperties, , PERM_READ
+		PANE VueActionClientState, , PERM_READ
+	END
+	CLBSTATUSBAR SOUTH
+	BEGIN
+	    PANE ClbActionPointer, , PERM_READ
+	    PANE ClbActionLockView, , PERM_READ
+	    PANE ClbActionChat, , PERM_READ
+	END
+	RMB
+	BEGIN
+		MENUITEM VueActionViewZoom, ,  PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionViewPCBViews, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionFollowLink, Ascend/Descend, PERM_READ
+		MENUITEM EcadActionGoToNet, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionHyperlink, , PERM_READ
+		MENUITEM VueActionBookmarks, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyOrdering, , PERM_READ
+		SEPARATOR
+	  MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM ClbActionLeaveSession, , PERM_READ
+	END
+	RMB SELECT
+	BEGIN
+		MENUITEM MrkActionMarkupTree, Goto, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionMarkupTree, Edit, PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyDelete, Delete, PERM_READ
+	END
+	RMB CLBUSERS
+	BEGIN
+		MENUITEM ClbActionShowUsers, , PERM_READ
+	END
+	RMB ENTITYSELECT
+	BEGIN
+		MENUITEM VueActionViewZoom, ,  PERM_READ
+		MENUITEM EcadActionZoomSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionFollowLink, Ascend/Descend, PERM_READ
+		MENUITEM EcadActionGoToNet, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionViewPCBViews, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionShowNetConnectivity, , PERM_READ
+		MENUITEM EcadActionEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionHyperlink, , PERM_READ
+		MENUITEM VueActionBookmarks, , PERM_READ
+    	SEPARATOR
+		MENUITEM MrkActionModifyLineStyle, , PERM_READ
+		MENUITEM MrkActionModifyLineThickness, , PERM_READ
+		MENUITEM MrkActionModifyArrowStyle, , PERM_READ
+		MENUITEM MrkActionModifyFillType, , PERM_READ
+		MENUITEM MrkActionModifyEntityColor, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyOrdering, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyMarkupLayers, , PERM_READ
+		SEPARATOR
+		MENUITEM MrkActionModifyEntityProperties, , PERM_READ
+		SEPARATOR
+		MENUITEM ClbActionLeaveSession, , PERM_READ
+	END
+	RMB ECADENTITY
+	BEGIN
+		MENUITEM EcadActionZoomSelected, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionFollowLink, Descend, PERM_READ
+		MENUITEM EcadActionGoToNet, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionShowNetConnectivity, , PERM_READ
+		SEPARATOR
+		MENUITEM EcadActionEntityProperties, , PERM_READ
+	END
+END

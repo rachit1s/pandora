@@ -1,0 +1,935 @@
+<project name="tbits" default="build" basedir=".">
+	<target name="define-build-number">
+		<property file="version.properties"/>
+		<buildnumber/>
+		<echo message="Version: ${major.version}, Build: ${build.number}"/>
+	</target>
+
+	<!-- help -->
+	<target name="help">
+		<echo message="Available targets are: "/>
+		<echo message="define            - defines common variables"/>
+		<echo message="prepare-build     - create the dist locations"/>
+		<echo message="compile           - compiles the code to a dist location."/>
+		<echo message="build             - builds and copies the file to dist.[default]"/>
+		<echo message="clean             - clean the dist."/>
+		<echo message="start-tomcat      - Starts tomcat."/>
+		<echo message="stop-tomcat       - Stops tomcat."/>
+		<echo message="tr                - Stops and then starts tomcat."/>
+		<echo message="start             - Starts tomcat and scheduler."/>
+		<echo message="stop              - Stop tomcat and scheduler."/>
+		<echo message="restart           - Restarts tomcat and scheduler."/>
+		<echo message="start-sch         - Start scheduler."/>
+		<echo message="stop-sch          - Stop scheduler."/>
+		<echo message="prepare-installer - prepares the installer. It just prepares the"/>
+		<echo message="                    directory sturcture for installler not the installer.jar."/>
+		<echo message="create-installer  - creates the installer."/>
+		<echo message="test-cron-exp     - Can be helpful in testing cron expressions quickly."/>
+		<echo message="help              - Prints this help."/>
+		<echo message="?                 - Prints this help."/>
+		<echo message="NOTE: you can pass an argument 'systype' by using ant -Dsystype=request or ant -Dsystype=kms." />
+		<echo message="		 This will turn the system into kms, request tracking or whatever. Currently, it maintains different"/>
+		<echo message="		 tbits_schema.sql, tbits_data.sql, tbits-help.htm, captions.properties with a suffix  '_' followed by system type. By default it is request" />
+	</target>
+
+	<taskdef name="hotswap" classpath="src/lib/hotswap.jar" classname="dak.ant.taskdefs.Hotswap"/>
+
+	<target name="?" depends="help" />
+
+
+
+	<!-- define -->
+	<target name="define" depends="define-build-number">
+		<property environment="env"/>
+		<property name="src.home" value="src"/>
+		<property name="lib.dir" value="${src.home}/lib"/>
+		<property name="src.bin" value="${src.home}/bin"/>
+		<property name="src.etc" value="${src.home}/etc"/>
+		<property name="dist.home" value="dist"/>
+		<property name="build.home" value="${dist.home}/build"/>
+		<property name="attachment.dir" value="${build.home}/attachments"/>
+		<property name="index.dir" value="${build.home}/index"/>
+		<property name="log.dir" value="${build.home}/logs"/>
+		<property name="tmp.dir" value="${build.home}/tmp"/>
+		<property name="webapps.dir" value="${build.home}/webapps" />
+		<property name="web-inf.dir" value="${webapps.dir}/WEB-INF"/>
+		<property name="classes.dir" value="${web-inf.dir}/classes" />
+		<property name="dist.build.bin" value="${build.home}/bin"/>
+		<property name="installer.home" value="dist"/>
+		<property name="installer.build.home" value="${installer.home}/build"/>
+
+		<condition property="systype" value="${systype}" else="request">
+			<isset property="systype" />
+		</condition>
+		<condition property="captionsfile" value="captions_${systype}.properties.sql" else="captions_properties.sql">
+			<isset property="systype" />
+		</condition>
+		<condition property="dbschemafile" value="tbits_schema_${systype}.sql" else="tbits_schema.sql">
+			<isset property="systype" />
+		</condition>
+		<condition property="dbdatafile" value="tbits_data_${systype}.sql" else="tbits_data.sql">
+			<isset property="systype" />
+		</condition>
+		<condition property="helpfile" value="tbits-help_${systype}.htm" else="tbits-help.htm">
+			<isset property="systype" />
+		</condition>
+
+		<property name="yui-compressor.jar" location="${lib.dir}/yuicompressor-2.3.4.jar" />
+		<property name="yui-compressor-ant-task.jar" location="${lib.dir}/yui-compressor-ant-task-0.3.jar" />
+
+		<path id="task.classpath">
+			<pathelement location="${yui-compressor.jar}" />
+			<pathelement location="${yui-compressor-ant-task.jar}" />
+		</path>
+
+		<taskdef name="yui-compressor" classname="net.noha.tools.ant.yuicompressor.tasks.YuiCompressorTask">
+			<classpath refid="task.classpath"/>
+		</taskdef>
+
+	</target>
+	<typedef resource="net/ggtools/grand/antlib.xml" classpath="antlibs/grand-1.8.jar"/>
+	<target name="generate-graph" depends="define" description="Generates the graph of the build file">
+		<grand output="${dist.home}/build-graph.dot" buildfile="build.xml" />
+		<exec executable="dot" >
+		    <arg line="-Tpng -o ${dist.home}/build-graph.png ${dist.home}/build-graph.dot"/>
+		</exec>
+		<echo message="Generated the graph of build file in ${dist.home}/build-graph.png" />
+		<delete file="dist/build-graph.dot"/>
+	</target>
+	
+	
+	<target name="hotswap" depends="define">
+	  <tstamp>
+	    <format property="class.tstamp" pattern="MM/dd/yyyy kk:mm:ss" />
+	  </tstamp>
+
+	<path id="all.classpath">
+			<fileset dir="${lib.dir}" includes="**/*.jar" />
+			<fileset dir="${src.home}/tomcat/server/lib" includes="**/*.jar"/>
+		        <fileset dir="${src.home}/birt-runtime/ReportEngine/lib" includes="**/*.jar" />
+			<pathelement location="${classes.dir}" />
+	</path>
+	  <javac destdir="${build.home}/plugins" srcdir="${pluginpath}/${pluginname}" 
+		source="1.5" target="1.5"
+		>
+		<classpath refid="all.classpath" />
+	  </javac>
+	<copy todir="${build.home}/plugins/${pluginname}" >
+		<fileset dir="${pluginpath}/${pluginname}" excludes="**/*.java" />
+	</copy>	
+	  <hotswap verbose="true" port="5050">
+	    <fileset dir="${build.home}/plugins" includes="**/*.class">
+	      <date datetime="${class.tstamp}" pattern="MM/dd/yyyy kk:mm:ss" when="after" granularity="0"/>
+	    </fileset>
+	  </hotswap>
+	</target>
+	
+	<target name="test-yuic" depends="define">
+		<yui-compressor 
+			warn="false" 
+			munge="true"
+			jssuffix=".js" 
+			preserveallsemicolons="false" 
+			fromdir="${webapps.dir}/web/scripts" 
+			todir="/home/sourabh/projects/min">
+		</yui-compressor>
+	</target>
+	<target name="clean-build-min" depends="define">
+		<delete>
+			<fileset dir="${build.home}/etc">
+				<exclude name="web.xml" />
+				<exclude name="captions*.properties" />
+			</fileset>
+			<fileset dir="${dist.home}/tomcat/bin">
+				<include name="startup.bat" />
+				<include name="startup.sh" />
+				<include name="setclasspath.bat" />
+				<include name="setclasspath.sh" />
+				<include name="shutdown.sh" />
+				<include name="shutdown.bat" />
+			</fileset>
+			<fileset dir="${dist.home}/tomcat/conf">
+				<!--include name="web.xml" /-->
+				<include name="server.xml" />
+			</fileset>
+			<fileset dir="${dist.home}/build/webapps/WEB-INF">
+				<include name="web.xml" />
+			</fileset>
+			<fileset dir="${dist.home}/tomcat/bin">
+				<include name="setenv.sh" />
+				<include name="setenv.bat" />
+				<include name="service.bat" />
+			</fileset>
+			<fileset dir="${build.home}/bin">
+				<include name="tbits-start.bat" />
+				<include name="tbits-stop.bat" />
+				<include name="scheduler.bat" />
+				<include name="migratejobs2db.bat" />
+				<include name="migrateProperties.bat" />
+				<include name="setenvwin.bat" />
+				<include name="tbitscmd.bat" />
+				<include name="backup.bat" />
+				<include name="scheduler.sh"/>
+				<include name="tbitscmd.sh"/>
+			</fileset>
+			<!--fileset dir="${build.home}/bin/db/">
+			    <include name="tbits_schema.sql"/>
+				<include name="tbits_data.sql"/>
+			</fileset-->
+		</delete>
+	</target>
+
+	<target name="clean-installer-min" depends="define">
+		<delete>
+			<fileset dir="${installer.build.home}/etc">
+				<exclude name="web.xml" />
+				<exclude name="captions*.properties" />
+			</fileset>
+			<fileset dir="${installer.home}/tomcat/bin">
+				<include name="startup.bat" />
+				<include name="startup.sh" />
+				<include name="shutdown.sh" />
+				<include name="shutdown.bat" />
+			</fileset>
+			<fileset dir="${installer.home}/tomcat/conf">
+				<!--include name="web.xml" /-->
+				<include name="server.xml" />
+			</fileset>
+			<fileset dir="${installer.home}/build/webapps/WEB-INF">
+				<include name="web.xml" />
+			</fileset>
+			<fileset dir="${installer.home}/tomcat/bin">
+				<include name="setenv.sh" />
+				<include name="setenv.bat" />
+				<include name="service.bat" />
+			</fileset>
+			<fileset dir="${installer.build.home}/bin">
+				<include name="tbits-start.bat" />
+				<include name="tbits-stop.bat" />
+				<include name="scheduler.bat" />
+				<include name="migratejobs2db.bat" />
+				<include name="setenvwin.bat" />
+				<include name="tbitscmd.bat" />
+				<include name="backup.bat" />
+				<include name="scheduler.sh"/>
+				<include name="migrateProperties.bat" />
+				<include name="tbitscmd.sh"/>
+			</fileset>
+			<fileset dir="${installer.build.home}/bin/db/">
+				<include name="tbits_schema.sql"/>
+				<include name="tbits_data.sql"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<!-- subs-define-build - definitions for property to installer variables substitution -->
+	<target name="subs-define-build" depends="define">
+		<property file="build.properties" />
+	</target>
+
+	<!-- location-subs-win-build -->
+	<target name="location-subs-win-build" depends="subs-define-build">
+		<property file="build-win.properties" />
+
+		<!-- copy captions separately -->
+		<!--copy file="${src.etc}/${captionsfile}" tofile="${build.home}/etc/captions.properties" /-->
+		<copy todir="${build.home}/etc">
+
+			<fileset dir="${src.etc}">
+				<!-- excludesfile name="indexer.ts"/-->
+				<exclude name="web.xml" />
+				<exclude name="captions*.properties" />
+			</fileset>
+			<filterchain>
+				<expandproperties/>
+			</filterchain>
+		</copy>
+		<copy file="${src.home}/external/server.xml" todir="${dist.home}/tomcat/conf">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+		<copy todir="${dist.home}/tomcat/bin">
+			<fileset dir="${src.home}/tomcat/bin">
+				<include name="startup.bat" />
+				<include name="startup.sh" />
+				<include name="setclasspath.bat" />
+				<include name="setclasspath.sh" />
+				<include name="shutdown.sh" />
+				<include name="shutdown.bat" />
+			</fileset>
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+		<!--copy file="${src.home}/external/web.xml" todir="${dist.home}/tomcat/conf">
+            <filterchain>
+                <expandproperties />
+            </filterchain>
+        </copy-->
+
+		<copy file="${src.home}/etc/web.xml" todir="${dist.home}/build/webapps/WEB-INF">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+
+		<copy todir="${dist.home}/tomcat/bin">
+			<fileset dir="${src.home}/external">
+				<include name="setenv.sh" />
+				<include name="setenv.bat" />
+				<include name="service.bat" />
+			</fileset>
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+		<copy todir="${build.home}/bin">
+			<fileset dir="${src.bin}">
+				<include name="tbits-start.bat" />
+				<include name="tbits-stop.bat" />
+				<include name="scheduler.bat" />
+				<include name="migratejobs2db.bat" />
+				<include name="migrateProperties.bat" />
+				<include name="setenvwin.bat" />
+				<include name="tbitscmd.bat" />
+				<include name="backup.bat" />
+				<include name="tbitscmd.sh"/>
+			</fileset>
+	
+		</copy>
+		<chmod perm="755">
+			<fileset dir="${src.bin}">
+				<include name="tbitscmd.sh"/>
+			</fileset>
+		</chmod>
+
+		<chmod perm="755">
+			<fileset dir="${dist.home}/tomcat/bin">
+				<include name="startup.sh" />
+				<include name="setclasspath.sh" />
+				<include name="shutdown.sh" />
+				<include name="catalina.sh"/>
+				<include name="setenv.sh" />
+			</fileset>
+		</chmod>
+	</target>
+
+	<!-- subs-define-installer - definitions for property to installer variables substitution -->
+	<target name="subs-define-installer" depends="define">
+		<property file="installer.properties" />
+	</target>
+
+	<!-- location-subs-win-installer -->
+	<target name="location-subs-win-installer" depends="subs-define-installer">
+		<property file="installer-win.properties" />
+		<!--copy file="${src.etc}/${captionsfile}" tofile="${installer.build.home}/etc/captions.properties" /-->
+		<copy todir="${installer.build.home}/etc">
+			<fileset dir="${src.etc}">
+				<exclude name="web.xml" />
+				<exclude name="captions*.properties" />
+			</fileset>
+			<filterchain>
+				<expandproperties/>
+			</filterchain>
+		</copy>
+
+		<copy file="${src.home}/external/server.xml" todir="${installer.home}/tomcat/conf">
+			<filterchain>
+				<expandproperties/>
+			</filterchain>
+		</copy>
+		<copy todir="${installer.home}/tomcat/bin">
+			<fileset dir="${src.home}/tomcat/bin">
+				<include name="startup.bat" />
+				<include name="startup.sh" />
+				<include name="shutdown.sh" />
+				<include name="setclasspath.bat" />
+				<include name="setclasspath.sh" />
+				<include name="shutdown.bat" />
+			</fileset>
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+		<!--copy file="${src.home}/external/web.xml" todir="${installer.home}/tomcat/conf">
+            <filterchain>
+                <expandproperties />
+            </filterchain>
+        </copy-->
+
+		<copy file="${src.home}/etc/web.xml" todir="${installer.build.home}/webapps/WEB-INF">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+
+		<copy todir="${installer.home}/tomcat/bin">
+			<fileset dir="${src.home}/external">
+				<include name="setenv.sh" />
+				<include name="setenv.bat" />
+				<include name="service.bat" />
+			</fileset>
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+		<copy todir="${installer.build.home}/bin">
+			<fileset dir="${src.bin}">
+				<include name="tbits-start.bat" />
+				<include name="tbits-stop.bat" />
+				<include name="scheduler.bat" />
+				<include name="migratejobs2db.bat" />
+				<include name="migrateProperties.bat" />
+				<include name="setenvwin.bat" />
+				<include name="tbitscmd.bat" />
+				<include name="tbitscmd.sh"/>
+			</fileset>
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+		<mkdir dir="${installer.build.home}/plugins"/>
+		<copy todir="${installer.build.home}/plugins">
+			<fileset dir="${src.home}/plugins" />
+		</copy>
+	</target>
+
+	<!-- define-libs - defines a collection of libraries. -->
+	<target name="define-libs" depends="define" >
+		<fileset dir="${src.home}/lib" id="jars">
+
+		</fileset>
+	</target>
+
+	<!-- prepare-build -->
+	<target name="prepare-build" depends="location-subs-win-build, define-libs">
+		<mkdir dir="${index.dir}" />
+		<mkdir dir="${attachment.dir}"/>
+		<mkdir dir="${build.home}"/>
+		<mkdir dir="${log.dir}" />
+		<mkdir dir="${tmp.dir}" />
+		<mkdir dir="${dist.home}/tmp" />
+		<chmod dir="${index.dir}" perm="700" />
+		<chmod dir="${attachment.dir}" perm="700" />
+		<mkdir dir="${build.home}/etc" />
+		<mkdir dir="${dist.home}/Backup"/>
+		<mkdir dir="${build.home}/plugins" />
+		<touch file="${log.dir}/PoolController.log" />
+		<chmod file="${log.dir}/PoolController.log" perm="ugo+rwx" />
+		<copy todir="${build.home}/db" >
+			<fileset dir="${src.home}/db/">
+			</fileset>
+			
+		</copy>
+		<!-- copy captions separately -->
+		<copy todir="${build.home}/bin" >
+		    <fileset dir="${src.bin}">
+			</fileset>
+		</copy>
+    	
+		<!--<copy file="${src.bin}/db/${dbschemafile}" tofile="${build.home}/bin/db/tbits_schema.sql">
+        	<filterchain>
+        		 <expandproperties/>
+        	</filterchain>
+        </copy>
+		<copy file="${src.bin}/db/${dbdatafile}" tofile="${build.home}/bin/db/tbits_data.sql" >
+        	<filterchain>
+        		 <expandproperties/>
+        	</filterchain>
+        </copy-->
+		<chmod perm="ugo+x">
+			<fileset dir="${build.home}/bin" />
+		</chmod>
+
+		<mkdir dir="${webapps.dir}" />
+		<copy todir="${webapps.dir}/web">
+			<fileset dir="${src.home}/web">
+				<exclude name="tbits-help*.htm" />
+			</fileset>
+		</copy>
+		<!-- Minify JS-->
+		<yui-compressor 
+                        warn="false" 
+                        munge="false"
+                        jssuffix="-min.js" 
+                        preserveallsemicolons="false" 
+                        todir="${webapps.dir}/web/scripts" 
+                        fromdir="${src.home}/web/scripts" enabled="${yuicenabled}">
+		</yui-compressor>
+		<!-- Minify CSS-->
+		<yui-compressor 
+                        warn="false" 
+                        munge="false"
+                        csssuffix="-min.css" 
+                        preserveallsemicolons="false" 
+                        todir="${webapps.dir}/web/css" 
+                        fromdir="${src.home}/web/css"
+			enabled="${yuicenabled}">
+		</yui-compressor>
+
+		<copy todir="${webapps.dir}/jVue">
+			<fileset dir="${src.home}/jVue">
+			</fileset>
+		</copy>
+		<echo message="help file is: ${src.home}/web/${helpfile}"/>
+		<copy file="${src.home}/web/${helpfile}" tofile="${webapps.dir}/web/tbits-help.htm" />
+		<copy todir="${webapps.dir}/reports">
+			<fileset dir="${src.home}/reports" />
+		</copy>
+		<copy todir="${webapps.dir}/">
+			<fileset dir="${src.home}/scaytsc/" />
+		</copy>
+
+		<!--copy todir="${webapps.dir}/">
+			<fileset dir="${src.home}/scaytsc/spellcheck31" />
+		</copy-->
+		<copy 
+	    	file="${src.home}/web/index.htm"
+		todir="${webapps.dir}"
+		/>
+		
+		<mkdir dir="${web-inf.dir}" />
+		<mkdir dir="${web-inf.dir}/lib" />
+		<copy todir="${web-inf.dir}/lib">
+			<fileset refid="jars" />
+			<fileset dir="${src.home}/birt-runtime/ReportEngine/lib" />
+		</copy>
+
+		<mkdir dir="${classes.dir}" />
+
+		<copy todir="${dist.home}/tomcat" >
+			<fileset dir="${src.home}/tomcat" />
+		</copy>
+
+		<mkdir dir="${build.home}/birt-runtime"/>
+		<copy todir="${build.home}/birt-runtime">
+			<fileset dir="${src.home}/birt-runtime" />
+		</copy>
+
+		<mkdir dir="${build.home}/tbitsreports"/>
+		<copy todir="${build.home}/tbitsreports">
+			<fileset dir="${src.home}/tbitsreports"/>
+		</copy>
+
+		<chmod dir="${build.home}/etc" perm="700" />
+		<copy 
+                file="${src.home}/java/spellcheckBundle.properties" 
+                todir="${web-inf.dir}/classes"
+        />
+		<copy 
+                file="${src.home}/java/mime_readerizers.properties" 
+                todir="${web-inf.dir}/classes"
+        />
+
+		<copy 
+                file="${src.home}/java/spellcheck-english.0" 
+                todir="${web-inf.dir}/classes"
+        />
+		<copy file="${src.etc}/web.xml" todir="${web-inf.dir}" />
+		<copy todir="${web-inf.dir}" >
+			<fileset dir="${src.home}/taglib" />
+		</copy>
+		<copy todir="${build.home}/plugins">
+			<fileset dir="${src.home}/plugins" />
+		</copy>
+		<copy todir="${dist.home}/upgrade">
+			<fileset dir="${src.home}/upgrade" />
+		</copy>
+		<copy file="version.properties" todir="${dist.home}">
+			
+		</copy>
+	</target>
+
+	<!-- clean - cleans all our files. -->
+	<target name="clean" depends="define" description="Cleans up the compilation.">
+		<delete dir="${index.dir}" />
+		<delete dir="${attachment.dir}" />
+		<delete dir="${build.home}" />
+		<delete file="${dist.home}/tomcat/conf/server.xml" />
+		<!--delete file="${dist.home}/tomcat/conf/web.xml" /-->
+		<delete file="${dist.home}/tomcat/bin/setenv.sh" />
+		<delete file="${dist.home}/tomcat/bin/setenv.bat" />
+		<delete file="${dist.home}/tomcat/bin/service.bat" />
+		<delete file="${dist.home}/tomcat/bin/startup.bat" />
+		<delete file="${dist.home}/tomcat/bin/startup.sh" />
+		<delete file="${dist.home}/tomcat/bin/shutdown.sh" />
+		<delete file="${dist.home}/tomcat/bin/shutdown.bat" />
+	</target>
+
+	<!-- clean-installer - cleans all our files. -->
+	<target name="clean-installer" depends="define">
+		<delete dir="${index.dir}" />
+		<delete dir="${attachment.dir}" />
+		<delete dir="${installer.build.home}" />
+		<delete file="${installer.home}/tomcat/conf/server.xml" />
+		<!--delete file="${installer.home}/tomcat/conf/web.xml" /-->
+		<delete file="${installer.home}/tomcat/bin/setenv.sh" />
+		<delete file="${installer.home}/tomcat/bin/setenv.bat" />
+		<delete file="${installer.home}/tomcat/bin/service.bat" />
+		<delete file="${installer.home}/tomcat/bin/startup.bat" />
+		<delete file="${installer.home}/tomcat/bin/startup.sh" />
+		<delete file="${installer.home}/tomcat/bin/shutdown.sh" />
+		<delete file="${installer.home}/tomcat/bin/shutdown.bat" />
+	</target>
+
+	<!-- clean-all - cleans everything except tomcat's full directory structure -->
+	<target name="clean-all" depends="clean, clean-installer">
+		<echo message="Deleting ${dist.home}">
+		</echo>
+		<delete dir="${dist.home}" />
+		<echo message="Deleting ${installer.home}">
+		</echo>
+		<delete dir="${installer.home}" />
+	</target>
+
+	
+	<!-- compile - compiles the classes to $classes.dir -->
+	<target name="compile" depends="prepare-build">
+		<javac 
+            srcdir="${src.home}/java" 
+            destdir="${classes.dir}" 
+            includes="transbit/tbits/**"
+            debug="on"
+            debuglevel="source,lines,vars"
+            optimize="true"
+            failonerror="true"
+            deprecation="yes"
+			fork="true"
+			memoryinitialsize="256m"
+			memorymaximumsize="512m"
+			source="1.5" target="1.5" nowarn="true"
+	    >
+			<classpath>
+				<fileset dir="${src.home}/lib" />
+				<fileset dir="${src.home}/tomcat/lib"/>
+				<fileset dir="${src.home}/birt-runtime/ReportEngine/lib"/>
+				<fileset dir="${src.home}/jVue" />
+			</classpath>
+		</javac>
+		<ant target="javac-jaguarsource" />
+		<!-- Editgrid
+		<javac 
+            srcdir="editGrid/src/java" 
+            destdir="${classes.dir}" 
+            includes="**/*.java"
+            debug="on"
+            debuglevel="source,lines,vars"
+            optimize="true"
+            failonerror="true"
+            deprecation="yes"
+            >
+			<classpath>
+				<fileset dir="${src.home}/lib" />
+				<fileset dir="${src.home}/tomcat/server/lib" />
+				<fileset dir="${src.home}/birt-runtime/ReportEngine/lib"/>
+			</classpath>
+		</javac>
+		-->
+	</target>
+	
+	<target name="jar" depends="compile">
+	    <jar destfile="${dist.home}/tbits.jar"
+	    basedir="${classes.dir}"
+	/>
+  </target>
+
+
+	<target name="create-autovue-jar" depends="compile">
+		<jar basedir="${classes.dir}"
+			destfile="${webapps.dir}/jVue/autovueconnector.jar"
+			includes="**/JvueTbits.class"
+		/>
+	</target>
+	
+	<!--=====================================================================-->
+	<!-- Generate the Java Documentation for the Classes in the Application  -->
+	<!--=====================================================================-->
+	<target name="javadoc-tbits" depends="define">
+		<javadoc
+                    author="true"
+                    bottom="Copyright: 2006-2010 tBits Global. All Rights Reserved."
+                    destdir="${dist.home}/doc/api"
+                    doctitle="tBits 6.1"
+                    packagenames="transbit.tbits.**,"
+                    private="false"
+                    sourcepath="${src.home}/java"
+                    use="true"
+                    version="true"
+                    windowtitle="tBits 6.1 API"     
+					maxmemory="512m"
+            >
+			<classpath>
+				<fileset dir="${src.home}/lib" />
+				<fileset dir="${src.home}/tomcat/server/lib" />
+				<fileset dir="${src.home}/birt-runtime/ReportEngine/lib" />
+			</classpath>
+		</javadoc>
+	</target>
+
+	<target name="javadoc" depends="javadoc-tbits, build, build-jaguar" >
+	</target>
+	<!-- Remove the java classes. User for java-rebuild -->
+	<target name="java-clean" depends="define">
+		<delete dir="${web-inf.dir}/classes" />
+	</target>
+
+	<!--Quickly deletes all java classes and compiles it again -->
+	<target name="java-rebuild" depends="java-clean,compile">
+
+	</target>
+	<target name="enable-yuic">
+		<condition property="yuicenabled" value="${yuicenabled}" else="true">
+                        <isset property="yuicenabled" />
+                </condition>
+		<echo message="yui comppresssion enabled: ${yuicenabled}"/>
+	</target>
+	<!-- prepare-installer - prepares the installer.-->
+	<target name="prepare-installer" depends="enable-yuic,location-subs-win-installer,dist">
+		<copy todir="${installer.home}" >
+			<fileset dir="installerfiles" />
+		</copy>
+		<copy todir="${installer.home}" >
+			<fileset dir="${dist.home}">
+				<exclude name="tmp/*" />
+				<exclude name="logs/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<taskdef name="izpack" classpath="IzPack/lib/standalone-compiler.jar"
+         classname="com.izforge.izpack.ant.IzPackTask"/>
+	<!-- create-installer - creates the installer. -->
+	<target name="just-create-installer" depends="enable-yuic, prepare-installer">
+		<izpack 
+			input="${installer.home}/install.xml"
+			output="${installer.home}/installer-${major.version}-${svn.info.lastRev}-${systype}.jar"
+			installerType="standard"
+			basedir="${installer.home}"
+			inheritAll="true"
+        />
+	</target>
+	
+	<!-- The task is for testing installer quickly. But before it you must run the ant just-create-installer once.-->
+	<!-- And you should copy the files from installerfiles/ to dist/ everytime you make changes-->
+	<!-- cp -r installerfiles/ dist/ && ant test-installer && java -DTRACE=true dist/installer.jar -->
+   <target name="test-installer" depends="define-build-number,find_revision">
+   		<izpack 
+	  		input="dist/install.xml"
+			output="dist/installer.jar"
+			installerType="standard"
+			basedir="dist"
+			inheritAll="true"
+        />
+   </target>
+	
+	<target name="svnupdate">
+		<exec executable="svn" failonerror="true">
+			<arg value="update"/>
+		</exec>
+	</target>
+	<target name="svntag" depends="define">
+		<exec executable="svn" failonerror="true">
+			<arg value="copy"/>
+			<arg value="http://symphron/svn/MyNewRepository/trunk/tbits"/>
+			<arg value="http://symphron/svn/MyNewRepository/tags/${major.version}"/>
+			<arg value="-m"/>
+			<arg value="Tagging from ant ${major.version}"/>
+		</exec>
+	</target>
+
+	<target name="release" depends="just-create-installer" description="creats installer with appropriate name and copies it to ../tbits-releases">
+		<echo message="creating ../tbits-releases/${svn.info.lastRev}"/>
+		<mkdir dir="../tbits-releases/${svn.info.lastRev}"/>
+		<copy file="${installer.home}/installer-${major.version}-${svn.info.lastRev}-${systype}.jar" todir="../tbits-releases/${svn.info.lastRev}"/>
+	</target>
+
+	
+	<target name="disable-yuic">
+		<condition property="yuicenabled" value="${yuicenabled}" else="false">
+                        <isset property="yuicenabled" />
+                </condition>
+	</target>
+	<!-- start-tomcat - starts tomcat -->
+	<target name="start-tomcat" depends="disable-yuic,build">
+		<property name="CATALINA_HOME" location="${dist.home}/tomcat" />
+		<echo message="CATALINE_HOME is ${CATALINA_HOME}"/>
+		<exec executable="${dist.home}/tomcat/bin/catalina.bat" OsFamily="Windows">
+			<arg value="start"/>
+			<env key="CATALINA_HOME" value="${CATALINA_HOME}" />
+			<env key="CATALINA_BASE" value="${CATALINA_HOME}" />
+			<env key="TOMCAT_HOME" value="${CATALINA_HOME}" />
+		</exec>
+		<chmod file="${dist.home}/tomcat/bin/catalina.sh" perm="ugo+rx"/>
+		<exec executable="${dist.home}/tomcat/bin/catalina.sh" os="Mac OS X">
+			<arg value="start"/>
+			<env key="CATALINA_HOME" value="${CATALINA_HOME}" />
+			<env key="CATALINA_BASE" value="${CATALINA_HOME}" />
+			<env key="TOMCAT_HOME" value="${CATALINA_HOME}" />
+		</exec>
+		<exec executable="${dist.home}/tomcat/bin/catalina.sh" os="Linux">
+			<arg value="start"/>
+			<env key="CATALINA_HOME" value="${CATALINA_HOME}" />
+			<env key="CATALINA_BASE" value="${CATALINA_HOME}" />
+			<env key="TOMCAT_HOME" value="${CATALINA_HOME}" />
+		</exec>
+<exec executable="say" os="Mac OS X">
+			<arg value="tBits started."/>
+		</exec>
+	</target>
+	<target name="debug-tomcat" depends="disable-yuic,build">
+		<property name="CATALINA_HOME" location="${dist.home}/tomcat" />
+		<echo message="CATALINE_HOME is ${CATALINA_HOME}"/>
+		<exec executable="${dist.home}/tomcat/bin/startup.bat" OsFamily="Windows">
+			<arg value="jpda"/>
+			<arg value="start"/>
+			<env key="JPDA_TRANSPORT" value="dt_socket" />
+			<env key="JPDA_ADDRESS" value="5050" />
+			<env key="CATALINA_HOME" value="${CATALINA_HOME}" />
+			<env key="CATALINA_BASE" value="${CATALINA_HOME}" />
+			<env key="TOMCAT_HOME" value="${CATALINA_HOME}" />
+		</exec>
+		<chmod file="${dist.home}/tomcat/bin/startup.sh" perm="ugo+rx"/>
+		<exec executable="${dist.home}/tomcat/bin/startup.sh" os="Mac OS X">
+			<arg value="jpda"/>
+			<arg value="start"/>
+			<env key="JPDA_TRANSPORT" value="dt_socket" />
+			<env key="JPDA_ADDRESS" value="5050" />
+			<env key="CATALINA_HOME" value="${CATALINA_HOME}" />
+			<env key="CATALINA_BASE" value="${CATALINA_HOME}" />
+			<env key="TOMCAT_HOME" value="${CATALINA_HOME}" />
+		</exec>
+		<exec executable="${dist.home}/tomcat/bin/startup.sh" os="Linux">
+			<arg value="jpda"/>
+			<arg value="start"/>
+			<env key="JPDA_TRANSPORT" value="dt_socket" />
+			<env key="JPDA_ADDRESS" value="5050" />
+			<env key="CATALINA_HOME" value="${CATALINA_HOME}" />
+			<env key="CATALINA_BASE" value="${CATALINA_HOME}" />
+			<env key="TOMCAT_HOME" value="${CATALINA_HOME}" />
+		</exec>
+		<exec executable="say" os="Mac OS X">
+			<arg value="tBits started."/>
+		</exec>
+	</target>
+	
+	<target name="dist" depends="clean-all,enable-yuic,build,build-jaguar,svn-rev" description="Cleans up everything and rebuilds everything">
+	</target>
+	
+	<!-- stop-tomcat - stops tomcat -->
+	<target name="stop-tomcat" depends="define" >
+		<property name="CATALINA_HOME" location="${dist.home}/tomcat" />
+		<exec executable="${dist.home}/tomcat/bin/shutdown.bat" os="Windows">
+			<env key="CATALINA_HOME" value="${CATALINA_HOME}" />
+			<env key="CATALINA_BASE" value="${CATALINA_HOME}" />
+			<env key="TOMCAT_HOME" value="${CATALINA_HOME}" />
+		</exec>
+		<exec executable="${dist.home}/tomcat/bin/shutdown.sh" os="Mac OS X">
+			<env key="CATALINA_HOME" value="${CATALINA_HOME}" />
+			<env key="CATALINA_BASE" value="${CATALINA_HOME}" />
+			<env key="TOMCAT_HOME" value="${CATALINA_HOME}" />
+		</exec>
+		<exec executable="say" os="Mac OS X">
+			<arg value="tBits stopped."/>
+		</exec>
+	</target>
+
+
+	<!-- tr - restart tomcat. Shoould be preferred. -->
+	<target name="tr" depends="stop-tomcat, start-tomcat" />
+
+	<!-- ================================= 
+          target: name              
+         ================================= -->
+	<target name="test-cron-exp" depends="build" description="Tests Cron Expressions">
+		<echo message="RecieveAllMails" />
+		<java classname="transbit.tbits.scheduler.CronExpressionTester" 
+		classpath="${classes.dir}">
+		<arg value="0 0 9 ? 7/1 5"/>
+	</java>
+
+	<echo message="IndexerDaemon" />
+	<java classname="transbit.tbits.scheduler.CronExpressionTester" 
+		classpath="${classes.dir}">
+		<arg value="0 0/1 * ? * *"/>
+	</java>
+
+	<!--echo message="IndexOptimizer" />
+	<java classname="transbit.tbits.scheduler.CronExpressionTester" 
+		classpath="${classes.dir}">
+		<arg value="0 0 9 ? * *"/>
+	</java-->
+		<!--echo message="Test Exp" />
+	<java classname="transbit.tbits.scheduler.CronExpressionTester" 
+		classpath="${classes.dir}">
+		<arg value="0 3 03 ? */6 THU#3"/>
+	</java-->
+		<!--echo message="DailyEODReport" />
+	<java classname="transbit.tbits.scheduler.CronExpressionTester" 
+		classpath="${classes.dir}">
+		<arg value="0 0/20 6 ? * *"/>
+	</java-->
+
+		<!--echo message="Ageing Report" />
+	<java classname="transbit.tbits.scheduler.CronExpressionTester" 
+		classpath="${classes.dir}">
+		<arg value="0 0 8 ? * *"/>
+	</java-->
+		<echo message="Scheduled Updates" />
+	<java classname="transbit.tbits.scheduler.CronExpressionTester" 
+		classpath="${classes.dir}">
+		<arg value="0 0 9 ? * MON"/>
+	</java>
+		<echo message="Severity based escalation" />
+		<java classname="transbit.tbits.scheduler.CronExpressionTester" 
+		classpath="${classes.dir}">
+			<arg value="0 0/1 * ? * * 2010"/>
+		</java>
+	</target>
+
+	<!-- build - builds the project -->
+	<target name="build" depends="compile, create-autovue-jar">
+	</target>
+	
+	<target name="javac-jaguarsource" description="runs the target javac of dist/jaguarsource. Compiles the java files in dist/jaguarsource to build/webapps/WEB-INF/classes as .class files.">
+		<ant dir="jaguar" />
+		<ant dir="dist/jaguarsource" target="javac" />
+	</target>
+
+	<target name="build-jaguar" depends="build" description="Builds Jaguar GWT + Server">
+		<ant dir="jaguar"/>
+		<ant dir="dist/jaguarsource"/>	
+	</target>
+	<target name="start-jaguar" depends="build-jaguar,start-tomcat">
+		
+	</target>
+
+	<!-- Ant releated -->
+	<target name="find_revision" description="Sets property 'svn.info.lastRev' to head svn revision">
+		<path id="svnant.libs.path">
+			<fileset dir="antlibs">
+				<include name="svnant.jar"/>
+				<include name="svnClientAdapter.jar"/>
+			</fileset>
+		</path>
+
+		<!-- Load SvnAnt -->
+		<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="svnant.libs.path" />    
+
+		<!-- find head revision number, amongst other things. -->
+		<!-- Replace svn_username and svn_password with values appropriate to your system -->
+		<!-- <svn username="svn_username" password="svn_password" javahl="false">-->
+		<svn javahl="false">
+			<info target="." />
+		</svn>
+		<!-- Display svn revision number -->
+		<echo>Revision found: ${svn.info.lastRev}</echo>
+	</target>
+	<target name="svn-rev" depends="define,find_revision">
+		<copy file="src/svn-revision.txt" todir="${dist.home}">
+			<filterchain>
+				<expandproperties/>
+			</filterchain>
+		</copy>
+	</target>
+</project>

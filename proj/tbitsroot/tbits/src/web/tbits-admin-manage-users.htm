@@ -1,0 +1,23 @@
+<TABLE id="Table6" cellSpacing="3" cellPadding="0" width="100%">
+    <tr>
+        <td class="sx" style="display:<%=assignee_display%>">
+            Select&nbsp;<SPAN class="l cb" onclick="javascript:onSelectAllUsers()">All</SPAN>&nbsp;&nbsp;<SPAN class="l cb" onclick="javascript:onUnSelectAllUsers()">None</SPAN>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <TR>
+        <TD class="sx b" noWrap>Name
+        </TD>
+        <TD class="sx b">Email (<SPAN class="l cb" onclick="javascript:viewEmailOptionCalendar()" nowrap align="right">Calendar definitions</SPAN>)
+        </TD>
+        <TD class="sx b" style="display:<%=assignee_display%>">Assignee
+        </TD>
+        <TD class="sx b" style="display:<%=assignee_display%>">Volunteer
+        </TD>
+    </TR>
+    <TR>
+        <TD class="bos" colSpan="4" height="2"></TD>
+    </TR>
+    <%=ba_categories_prop%>
+</TABLE>

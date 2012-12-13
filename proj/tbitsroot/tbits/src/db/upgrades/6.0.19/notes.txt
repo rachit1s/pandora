@@ -1,0 +1,19 @@
+This release includes SMS integration.
+Things that have been changed:
+1. Java classes (mostly in transbit.tbits.sms pakage)
+2. etc/tbits.properties
+3. Database
+	* Added SMS_id field with 0 permissions to all roles.
+	* Create BA stp is changed to add SMS_id
+	* Add BA user stp is changed to add rules for each user in post_process_rules
+	* added three sms formats in msg_format table
+	
+Steps To upgrade tBits 6.0.18:
+1. Overwrite the code by copying the "transbit" folder available in this folder to <InstallDir>\build\webapps\WEB-INF\classes\ . This will overwrite the files.
+2. Modify the tbits.properties available in <InstallDir>\build\etc\tbits.properties such the folowing keys should have the values as described below.
+transbit.tbits.sms.enabled = false
+transbit.tbits.smsgatewayurl = http://api.znisms.com/post/message.asp?userid=****&pwd=****&messageid=$MESSAGE$&senderid=sandeepgiri&sendto=$CELLNO$&flash=no
+transbit.tbits.responsepattern = ^Message Sent..Success:.+
+
+3. Run 6.0.19-6.0.18-1.sql followed by 6.0.19-6.0.18-2.sql using your microsoft SQL server.
+

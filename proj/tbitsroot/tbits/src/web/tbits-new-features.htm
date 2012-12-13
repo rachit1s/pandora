@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+        <meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+        <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+        <link rel="stylesheet" href="/web/css/tbits.css" />
+        <title>tBits New Features</title>
+        <style>
+            body
+            {
+                background-color: #F4F4EA;
+            }
+            body, td, input, textarea, select
+            {
+                font-family: tahoma, arial, verdana, trebuchet ms, sans-serif;
+            }
+            p, ul, li, table
+            {
+                font-size: 13px;
+            }
+            img
+            {
+                width: 16px;
+                height: 16px;
+            }
+            a, a:hover, a:Visited
+            {
+                color: blue;
+            }
+            h1, h2, h3, h4, h5,h6
+            {
+                font-family: sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+		<!-- main-navigator -->
+		<div class="bn bbn">
+			<table cellpadding="0" cellspacing="0" width="100%" height="25" ID="Table1">
+				<tbody>
+					<tr valign="bottom">
+						<td algin="left">
+						  <div class="m">
+							<span class="cw l u" onclick="window.location = '/web/tbits-help.htm';" id="">TBits 6.0 Help</span>&nbsp;&nbsp;&nbsp; 
+							&nbsp;&nbsp;&nbsp;
+						  </div>
+						</td>
+						<td align="right">
+						  <div class="m">
+						  </div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+        <div class="bhs" style="padding: 15px;">
+            <h3>New Features in TBits V6.0</h3>
+            <p>There are many new features, but here are some of the highlights:</p>
+            <h2>Searching</h2>
+            <ul style="list-style-type:none ">
+                <li>
+                    <b><a href="/web/tbits-help.htm#SearchShortcuts">Search Shortcuts</a>:</b>Search 
+                    Shortcuts in Version 6.0 provide a few improvements over the former saved 
+                    searches. For example, you can save a search shortcut as a <em>public</em> shortcut, 
+                    so it can be used by other users of the business area as well.
+                </li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#SearchAllBAs">Searching All Business Areas</a>:</b> 
+                    There is a new tab for searching all business areas in the current TBits 
+                    database at once. The interface is similar to the other search panels.</li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#QueryLanguage">DQL</a>:</b> There is a new TBits 
+                    Query Language, DQL, which lets you build flexible queries. The Advanced Search 
+                    tab includes a query builder.
+                </li>
+            </ul>
+            <h2>Managing Requests
+            </h2>
+            <ul style="list-style-type:none ">
+                <li>
+                    <b><a href="/web/tbits-help.htm#TrackingUnreadRequests">Tracking Read/Unread Status of 
+                            Requests</a>:</b> The TBits web interface now keeps track of which 
+                    requests have updates and requests that you have not yet read. On the Search 
+                    Results page, bold text is the indicator, with a double-arrow icon denoting a 
+                    new request. On the Request Details page, unread updates are outlined in a 
+                    different color.</li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#DueDate">Due Date Improvements</a>:</b> Prior to 
+                    this version, most groups have ignored the due date field because there was no 
+                    notification mechanism for overdue requests and because every request had to 
+                    have a due date. In Version 6.0, overdue items are shown with indicators on the 
+                    Search Results page and on the Request Details page. Additionally, the due 
+                    dates of a business area can be configured to be mandatory, optional (with or 
+                    without a default due date), or disabled.</li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#Autocomplete">Autocomplete Improvements</a>:</b> There 
+                    are improvements in autocomplete for the fields which take email ids, namely, <strong>
+                        Assignee</strong>, <strong>CC</strong>, <strong>Logger</strong>, and <strong>Subscriber</strong>. 
+                    Autocomplete matching is now based on the first name, the last name, or the 
+                    email address.
+                </li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#PrimaryAssignee">Primary Assignee</a>:</b> As 
+                    before, requests can have multiple assignees. It is now possible to designate 
+                    one of multiple assignees as <em>primary</em> by putting a * before the user 
+                    ID. This can help groups assign ultimate responsibility to a single person.</li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#TransferringRequests">Transferring Requests</a>:</b>
+                    It is common for TBits requests to be logged in the wrong business area. Now 
+                    the Request Details page includes a simple option <strong>Transfer Request</strong>.
+                </li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#LinkedRequests">Linked Requests</a>:</b> TBits 
+                    now supports reciprocal links between similar requests, whether or not they are 
+                    in the same business area. In previous versions, there was only the concept of 
+                    a parent/subrequest relationship between two requests in the same business 
+                    area. Now a request can be linked to another request in any business area. The 
+                    relationship is transitive: that is, if request A is related to request B, and 
+                    request B is related to request C, then request A is also related to request C.</li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#Drafts">Drafts</a>:</b> You can save drafts of 
+                    request updates in progress and reload them at a later time. You can also 
+                    configure TBits to autosave drafts of your updates at fixed time intervals 
+                    using the <strong>Options</strong> page.
+                </li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#SimultaneousUpdates">Conflict Resolution For Simultaneous 
+                            Request Updates</a>:</b> Until now, if two people tried to update a 
+                    request on the web at the same time (e.g. to change the category or subject), 
+                    the second person would end up overwriting the first person's changes. Now the 
+                    second person gets a warning about the conflicts and is offered a resolution 
+                    method to avoid losing the first person's changes.</li>
+            </ul>
+            <h2>Email</h2>
+            <ul style="list-style-type:none ">
+                <li>
+                    <b><a href="/web/tbits-help.htm#EmailAttachments">Improved Handling of Attached Email 
+                            Messages</a>:</b> In previous versions, email attachments were 
+                    converted to plain text format and consequently the formatting was lost. In 
+                    Version 6.0, an email message can be attached to a request retaining the 
+                    original formatting.</li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#EmailUpdateCommands">Email Update Commands or EUCs</a>:</b>
+                    EUCs allow business area analysts to update request fields (e.g. Status, 
+                    Assignee, Due Date, etc.) through email replies by using a special syntax.</li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#EmailWrapping">Email Appends No Longer Wrap Text</a>:</b>
+                    In previous versions, text submitted in email replies was wrapped at about 76 
+                    columns. Now it is no longer wrapped, so an email reply to a request has the 
+                    same look as a web-submitted update to a request.</li>
+                <li>
+                    <b><a href="/web/tbits-help.htm#NotificationRules">Enhanced Email Notification Options</a>:</b>
+                    The administrator for a business area can now configure the email notification 
+                    settings for each list type field separately. There can be an email 
+                    notification setting for each Category, Severity, Request Type, and Status in 
+                    the business area. For example, you can set it up so that someone gets mail for 
+                    all requests with Critical Severity. Additionally, there is the ability to 
+                    define calendars (e.g. &quot;New York business hours&quot;) to allow different 
+                    notification rules during the day versus off-hours.</li>
+            </ul>
+        </div>
+    </body>
+</html>

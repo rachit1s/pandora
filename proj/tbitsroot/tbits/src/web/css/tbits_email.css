@@ -1,0 +1,440 @@
+a
+{
+    text-decoration: none;
+}
+
+A.tt
+{
+    z-index: 24;
+    position: relative;
+}
+A.tt:hover
+{
+    z-index: 25;
+    background-color: Transparent;
+}
+A.tt SPAN
+{
+    display: none;
+}
+A.tt:hover SPAN
+{
+    background-color: #e6ecff;
+    border: #003399 1px solid;
+    display: block;
+    color: #000066;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    font-weight: normal;
+    font-size: small;
+}
+
+.nd
+{
+    text-decoration: none;
+}
+
+/* 
+	class styles
+*/
+
+/* bold */
+.b
+{
+    font-weight: bold;
+}
+
+/* underline */
+.u
+{
+    text-decoration: underline;
+}
+.u:hover
+{
+    text-decoration: underline;
+}
+.u:visited
+{
+    text-decoration: underline;
+}
+
+/* word wrap */
+.ww
+{
+    word-wrap: break-word;
+}
+
+/* small-font */
+.s
+{
+    font-size: 70%;
+}
+
+/* xs-small-font */
+.xs
+{
+    font-size: 80%;
+}
+
+/* small-xtra-font */
+.sx
+{
+    font-size: 80%;
+}
+
+/* xsx-small-font */
+.sxs
+{
+    font-size: 87%;
+}
+
+/* small-format-font */
+.sf
+{
+    font-size: 75%;
+}
+
+/* xtra-large */
+.xl
+{
+    font-size: larger;
+}
+
+/* format-font */
+.ff
+{
+    font-family: courier new;
+}
+
+/* font-verdana */
+.fv
+{
+    font-family: verdana;
+}
+
+/* tahoma-font */
+.ft
+{
+    font-family: tahoma;
+}
+
+/* align left */
+.al
+{
+    text-align: left;
+}
+
+/* align right */
+.ar
+{
+    text-align: right;
+}
+
+/* align center */
+.ac
+{
+    text-align: center;
+}
+
+/* align top */
+.at
+{
+    vertical-align: top;
+}
+
+/* align middle */
+.am
+{
+    vertical-align: middle;
+}
+
+/* align bottom */
+.ab
+{
+    vertical-align: bottom;
+}
+
+
+/* link */
+.l
+{
+    cursor: pointer;
+    cursor: hand;
+}
+.disabled
+{
+    cursor: text;
+}
+
+
+/* color-white */
+.cw
+{
+    color: #000000;
+}
+
+.cw:hover
+{
+    color: #ffffff;
+}
+
+.cw:visited
+{
+    color: #ffffff;
+}
+/* color-blue */
+.cb
+{
+    color: #0000cc;
+}
+
+/* color-red */
+.cr
+{
+    color: #ff0000;
+}
+.cr:hover
+{
+    color: #ff0000;
+}
+.cr:visited
+{
+    color: #ff0000;
+}
+
+/* color-green */
+.cg
+{
+    color: #00ff00;
+}
+
+
+/* color-black */
+.cbk
+{
+    color: #000000;
+}
+
+/* color-navigation 
+color-default: --#E1D8C0 --
+color-sys: --#96312B--
+*/
+.cn
+{
+    color: #E1D8C0 ;
+}
+
+/* color-sub-navigation */
+.csn
+{
+    color: #e6ffbf;
+}
+
+/* color-header */
+.ch
+{
+    color: #536291;
+}
+
+/* color-action-log */
+.cal
+{
+    color: #4a5782;
+}
+
+/* color-request-history-bar*/
+.crhb
+{
+}
+
+/* background-white */
+.bw
+{
+    background: #ffffff;
+}
+
+/* background-blue */
+.bb
+{
+    background: #0000cc;
+}
+
+/* background exception */
+.bex
+{
+    background: #f23d3d;
+}
+
+/* background-old */
+.bo
+{
+    background: #e6e7cd;
+}
+
+/* background-navigation */
+.bn
+{
+    background: #BDCEE6 ;
+}
+
+/* background-sub-navigation */
+.bsn
+{
+    background: #e6ffbf;
+}
+
+/* background-header */
+.bh
+{
+    background: #BDCEE6;
+}
+
+/* background-header-section */
+.bhs
+{
+    background: #E6F4FD;
+}
+
+/* background-header-border */
+.bhb
+{
+    background: #bdcce5;
+}
+
+/* background-details-new */
+.bdn
+{
+    background: #fff2bf;
+}
+
+/* background-details-read */
+.bdr
+{
+    background: #ffffff;
+}
+
+/* background-details-first */
+.bdf
+{
+    background: #E1D8C0 ;
+}
+
+/* background-options-section */
+.bos
+{
+    background: #bdcce5;
+}
+
+/* margin */
+.m
+{
+    margin: 0.5ex 1ex 0.5ex 1ex;
+}
+
+/* modified-email-header */
+.h
+{
+    margin: 0.5ex 1ex 0.5ex 0ex;
+    border: 0.1ex solid #bdcce5;
+}
+
+.hb
+{
+    border: 0.2ex solid #bdcce5;
+}
+
+
+/* header-section */
+.hs
+{
+    border-top: 0.1ex solid #bdcce5;
+}
+
+/* header-section-padding */
+.hsp
+{
+    padding: 0.5ex;
+}
+
+/* header-section-border-bottom */
+.hsbb
+{
+    border-bottom: 0.1ex solid #bdcce5;
+}
+
+/* modified-email-details-margin */
+.dm
+{
+    margin: 0.5ex 1ex 0.5ex 0ex;
+}
+
+/* modified-email-details-margin */
+.adm
+{
+    margin: 0ex 1ex 0ex 0ex;
+}
+
+/* details vertical margin */
+.dvm
+{
+    margin: 1.5ex 1ex 2ex 1ex;
+}
+
+/* details-content-margin */
+.dcm
+{
+    margin: 1.5ex 1ex 1ex 1ex;
+}
+
+/* details-padding */
+.dp
+{
+    padding: 0.5ex 1ex 0.5ex 0.5ex;
+}
+
+/* details-new-border */
+.dnb
+{
+    border-left: 0.6ex solid #b38f00;
+    border-top: 0.1ex solid #b38f00;
+    border-right: 0.1ex solid #b38f00;
+    border-bottom: 0.1ex solid #b38f00;
+}
+
+/* details-read-border */
+.drb
+{
+    border-left: 0.6ex solid #D9D9D9;
+    border-top: 0.1ex solid #D9D9D9;
+    border-right: 0.1ex solid #D9D9D9;
+    border-bottom: 0.1ex solid #D9D9D9;
+}
+
+/* details-first-border */
+.dfb
+{
+    border-left: 0.6ex solid #E1D8C0 ;
+    border-top: 0.1ex solid #E1D8C0 ;
+    border-right: 0.1ex solid #E1D8C0 ;
+    border-bottom: 0.1ex solid #E1D8C0 ;
+}
+
+/* exception border */
+.exb
+{
+    border: 0.1ex solid #ff0000;
+}
+
+/* add-request-header-margin */
+.arhm
+{
+    margin: 1ex;
+}
+
+/* letter-spacing-btn */
+
+.lsb
+{
+    letter-spacing: .3ex;
+}

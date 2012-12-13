@@ -1,0 +1,769 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+        <title>tBits [<%=sysPrefix%>#]: Search<%=shortcutTitle%></title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/fonts/fonts-min.css">
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/assets/skins/sam/skin.css">
+
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/css/<%=cssFile%>">
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/css/dialogpanel-min.css">
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/css/dashboard-style-min.css">
+
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/assets/datatablegrouper.css"/>
+
+<!-- YUI js -->
+<script type="text/javascript" src='<%=YUISearchJSs%>'></script>
+
+<!-- tBits js -->
+<script type="text/javascript" src='<%=tBitsSearchJSs%>'></script>
+
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/paginator/paginator-min.js"></script>
+
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/groupDatatable/groupeddatatable.js"></script>
+	<style type="text/css">
+        /*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+        body {
+            margin:0;
+        	padding:0;
+        }
+	</style>
+	<!--begin custom header content for this example-->
+	<style type="text/css">
+
+    /*
+        Set the "zoom" property to "normal" since it is set to "1" by the 
+        ".example-container .bd" rule in yui.css and this causes a Menu
+        instance's width to expand to 100% of the browser viewport.
+    */
+    
+    div.yuimenu .bd {
+    
+        zoom: normal;
+    
+    }
+
+    #categorybutton button {
+    
+        /* 
+            Suppress the focus outline since Safari will outline even the 
+            text that is clipped by the application of the "overflow" property
+            in the follow style rule.
+        */
+
+        outline: none;
+    
+    }
+
+    #categorybutton button em {
+
+        font-style: normal;
+        display: block;
+        text-align: left;
+        white-space: nowrap;
+
+        /*  Restrict the width of the label to 10em. */
+
+        width: 10em;
+
+        /* Hide the overflow if the text label exceeds 10em in width. */
+
+        overflow: hidden;
+
+        /* 
+            IE, Safari and Opera support the ability to add ellipsis when the text 
+            label exceeds 10em in width.
+        */
+
+        text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
+
+    }
+
+	#transmittalpanel.bd{
+		overflow-y:scroll; 
+	}
+
+	.yuimenuitemlabel-hassubmenu{
+		font-weight:bold;
+	}
+</style>
+<!--end custom header content for this example-->
+
+	
+	<script language="javascript">
+		YAHOO.namespace("transbit.tbits");
+		YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+		var searchTabs = new YAHOO.widget.TabView('searchTabView');
+	</script>
+	<script type="text/javascript">
+    	   YAHOO.util.Event.onDOMReady(initApplication);
+    	   function initApplication()
+    	   {
+        	   try
+        	   {
+				initPanel();
+        	   }
+        	   catch(e)
+        	   {
+            	   //console.log(e);
+        	   }
+        	   try
+        	   {
+					initTabView();
+        	   }
+        	   catch(e)
+        	   {
+            	   //console.log(e);
+        	   }
+
+        	   try
+        	   {
+            	   initDashBoard("dashBoardBlock");
+        	   }
+        	   catch(e)
+        	   {
+            	   //console.log(e);
+        	   }
+
+        	   try
+        	   {
+        		   initUserReports();
+        	   }
+        	   catch(e)
+        	   {
+            	   //console.log(e);
+        	   }
+
+        	   try
+        	   {
+        		   initTransmittalPage();
+        	   }
+        	   catch(e)
+        	   {
+            	   //console.log(e);
+        	   }
+    	   }
+
+     	   function initDashBoard(divId)
+     	   {
+     		  getInfoServer(divId, '<%=nearestPath%>');
+     	   }	       	   
+    	   function showImportDataPanel()
+    	   {
+    	   	  showPanel(null, "<%=nearestPath%>importdatawizard?ba=<%=sysPrefix%>");    	   
+    	   }  	
+    	   function initUserReports()
+    	   {
+
+    			var userReportsData = getUserReportTableData("<%=nearestPath%>reportstable?reportView=user&sysId=" + "<%=sys_id%>");
+    			createUserReportsTable("<%=nearestPath%>", <%=current_user_id%>, userReportsData);
+    	   }
+    	   function onActiveTabChange(e)
+		   {
+    		   var newIndex = YAHOO.transbit.tbits.searchTabs.getTabIndex(e.newValue);
+			   onChangeView(newIndex);			   
+			   if(newIndex == MYREPORTS_VIEW || newIndex == DASHBOARD_VIEW)
+    		   {  
+			   		document.getElementById("myReportsBlock").style.display = 'block'; 
+			   		document.getElementById("searchResultsHolder").innerHTML = "";
+					document.getElementById("configureLine").style.display = 'none';			   			   
+				    return false;
+    		   }			  
+		   }
+
+    	   function beforeActiveTabChange(e)
+    	   {
+    		   var newIndex = YAHOO.transbit.tbits.searchTabs.getTabIndex(e.newValue);
+			   if(newIndex == MYREPORTS_VIEW)
+			   {
+			   		var elem = document.getElementById ("repIFrame");
+			   		if (elem== true)
+						elem.style.display='none';
+			   }
+			   else if(newIndex == NEW_REQUEST_TAB)
+    		   {
+    			   window.open('<%=nearestPath%>add-request/<%=sysPrefix%>');
+        		   return false;
+    		   }
+    		   else
+        	   		return true;
+    	   }
+		   
+    	   function initTabView()
+		   {
+		    //alert("Tabview Initializing");
+		    YAHOO.namespace("transbit.tbits");		   
+		    
+		    YAHOO.transbit.tbits.searchTabs = searchTabs;
+		    
+		    searchTabs.addListener('activeTabChange', onActiveTabChange);
+		    searchTabs.addListener('beforeActiveTabChange', beforeActiveTabChange);
+		    
+		    searchTabs.set('activeIndex', getIntValue("sv"));
+
+			onBodyLoad();
+		   }
+		
+    	YAHOO.namespace("transbit.tbits");
+    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+        function onBAIframeBodyLoad(e)
+        {
+           if(isIE == true)
+           return;
+           var event = (!document.all) ? e : window.event;
+           var content = window.frames["hiddenBAIFrame"].document.body.innerHTML;
+            //alert(content);
+             if(content != "")
+             baToolTipId = domTT_activate(this, event,'caption','caption','content', content, 'type','velcro','statusText','Business Areas',
+							   'closeAction','remove'); 
+        }
+	 </script>
+    </head>
+    <body class="bw yui-skin-sam" onUnload="onBodyUnload()" onkeydown="onKeyDownBody(event);">
+    	<div id="contextPath" style="display: none"><%=nearestPath%></div>
+    	
+        <div id="frmDiv" style="height: 0px">
+            <script language="javascript">
+                if (document.all)
+                {
+                    document.getElementById("frmDiv").innerHTML = 
+                        "<table id='frmTable' name='frmTable' class='itbl'  style='display:none'>" + 
+                        "    <tr>" + 
+                        "        <td>" + 
+                        "            <iframe id='topIFrame' name='topIFrame' class='itop' allowtransparency='true' src='<%=nearestPath%>web/tbits-search-topframe.htm'>" + 
+                        "            </iframe>" + 
+                        "        </td>" + 
+                        "    </tr>" + 
+                        "    <tr>" + 
+                        "        <td>" + 
+                        "            <iframe id='bottomIFrame' name='bottomIFrame' class='ibot' src='<%=nearestPath%>search-util?loading=true' allowtransparency='true' frameborder='no' style='display: block' scrolling='no'>" + 
+                        "            </iframe>" + 
+                        "        </td>" + 
+                        "    </tr>" + 
+                        "</table>";
+                    
+                }
+                else
+                {
+                    document.getElementById("frmDiv").innerHTML = 
+                        "<div class='itbl' id='frmTable' name='frmTable' style='display:none'>" + 
+                        "    <iframe id='topIFrame' name='topIFrame' class='itop' allowtransparency='true'></iframe>" + 
+                        "    <br>" + 
+                        "    <iframe id='bottomIFrame' name='bottomIFrame' class='ibot' src='<%=nearestPath%>search-util?loading=true' allowtransparency='true' frameborder='no' style='display: block' scrolling='no'>" + 
+                        "    </iframe>" + 
+                        "</div>";
+                }
+                
+                function copyDQL()
+                {
+	                closeToolTip();
+	                notInToolTip = undefined;
+	                var currentView = getIntValue("sv");
+	                if (currentView == NORMAL_VIEW)
+    	                return document.getElementById("normal_tsDQL").innerHTML;
+                        else if (currentView == ADVANCED_VIEW)
+    	                return document.getElementById("adv_tsDQL").innerHTML;
+                }
+                
+                var primaryDescTable = eval(<%=primaryDescTable%>);
+                // Load the data needed by advanced search panel.
+                <%=searchBuilderData%>
+            </script>
+        </div>
+    <form class="bh stsep" method="get" action="<%=nearestPath%>search/<%=sysPrefix%>" id="searchForm" name="searchForm" onKeyUp="onKeyDownForm(event);" onSubmit="return false;">
+            <input type="hidden" name="sv" value="<%=sv%>" ID="sv"/> <input type="hidden" name="sysPrefix" value="<%=sysPrefix%>" ID="sysPrefix"/>
+            <input type="hidden" name="allAreasLoaded" value="<%=allAreasLoaded%>" ID="allAreasLoaded"/>
+            <input type="hidden" name="singleIEWindow" value="<%=singleIEWindow%>" ID="singleIEWindow"/>
+            <input type="hidden" name="refreshRate" value="<%=refreshRate%>" id="refreshRate" />
+            <input type="hidden" name="parseTime" value="" id="parseTime" /> <input type="hidden" name="totalTime" value="" id="totalTime" />
+            <input type="hidden" name="nearestPath" value="<%=nearestPath%>" id="nearestPath" />
+            <input type="hidden" name="iframeWord" value="Searching" id="iframeWord" /> <input type="hidden" name="shortcutName" value="<%=shortcutName%>" id="shortcutName" />
+            <input type="hidden" name="isHyd" id="isHyd" value="<%=instanceBoldHyd%>" /> <input type="hidden" name="isNyc" id="isNyc" value="<%=instanceBoldNyc%>" />
+            <input type="hidden" name="userLogin" id="userLogin" value="<%=userLogin%>" /> 
+            <input type="hidden" name="log_defClause" id="log_defClause" value="<%=log_defClause%>" />
+          <input type="hidden" name="log_defValue" id="log_defValue" value="<%=log_defValue%>" />
+            <input type="hidden" name="log_defFromValue" id="log_defFromValue" value="" /> <input type="hidden" name="log_defToValue" id="log_defToValue" value="" />
+            <input type="hidden" name="upd_defClause" id="upd_defClause" value="<%=upd_defClause%>" />
+            <input type="hidden" name="upd_defValue" id="upd_defValue" value="<%=upd_defValue%>" />
+            <input type="hidden" name="upd_defFromValue" id="upd_defFromValue" value="" /> <input type="hidden" name="upd_defToValue" id="upd_defToValue" value="" />
+            <input type="hidden" name="due_defClause" id="due_defClause" value="<%=due_defClause%>" />
+            <input type="hidden" name="due_defValue" id="due_defValue" value="<%=due_defValue%>" />
+            <input type="hidden" name="due_defFromValue" id="due_defFromValue" value="" /> <input type="hidden" name="due_defToValue" id="due_defToValue" value="" />
+            <!-- main-navigator -->
+            <div class="bbn" style="background-image:url(<%=nearestPath%>web/images/header-sec.gif); background-repeat:repeat-x">
+                <table cellpadding="0" cellspacing="0"  valign="bottom" height="42" width="100%" ID="Table2"  >
+
+                    <tbody>
+                        <tr style="white-space: nowrap">
+						    <td height="42"><img src="<%=nearestPath%>web/images/header-first.gif"/></td>
+                            <td align="right">
+                                <div align="left" class="yui-skin-sam"><span class="sxs cw u b l head2" 
+                                onclick="domTT_activate(this, event,'caption', '<%=sysName%>','content', getBADetails(), 'type','velcro','closeAction','remove');"
+                                onmouseout="setMouseOutTimer()">
+                                </span>
+                                  <!--select class="sx" size="1" ID="sys" NAME="sys" onChange="onChangeBusinessArea()">
+                                      <%=baList%>
+                                  </select-->
+								  <!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+									<script type="text/javascript">
+										var baMenuTree =  <%=baJsonArray%>;
+										var baMenuList = <%=baMenuList%>;
+										var sysPrefixLabel = "<%=sysPrefixLabel%>";
+										
+										YAHOO.util.Event.onAvailable("sysPrefixesContainer", function(){
+											//Creates BAMenuTree and subscribes to onclick and onchange events. Used for search
+											// and add-request pages to navigates from one BA to another.
+											createBAMenuButtonAndSubscribeToEvents ("sysPrefixesContainer", baMenuTree, baMenuList, sysPrefixLabel, "search");				
+										});
+									</script>
+									<div id="sysPrefixesContainer"></div>
+                              </div>
+                            </td>
+                            <td align="right" >
+                                <div class="cb sxs">
+									<span class="lc sx b cw">Welcome <%=userLogin%></span><span class="l sx b cw" style="display:<%=display_logout%>"> | <a href="<%=nearestPath%>logout">Logout</a></span><br>
+									<span>
+										<span class="l sx cb b" id='userDraftsInfo' name='userDraftsInfo'>
+	                                      <%=userDraftsInfo%>
+	                                    </span>
+										<span class="sx b"><%=captions.main.all.request_number%></span>
+	                                     <input type="text" ID="requestId" NAME="requestId" value="" size="6">
+	                                     <a><button onClick="startSearching('Searching');">Go</button></a> 
+							  		</span>
+									
+									<a class="l sx b cw" href="<%=nearestPath%>jaguar" target="_blank" >&nbsp;Jaguar</a> |
+<span class="l sx b cw" onClick="openOptions()" >&nbsp;Settings</span> |
+									<SPAN class="l sx b cw" oncontextmenu="return false;" id="importdatacontrol" onClick="javascript:showImportDataPanel()">Import Data</span>										
+                                   <%=adminBlock%>
+                              |<span class=" sx b l cw" onClick="window.open('<%=nearestPath%>web/tbits-help.htm')">&nbsp;Help&nbsp;</span><span class=" sx b l cw"></span>                              </div>
+                          </td>
+                        </tr>
+                    </tbody>
+              </table>
+            </div><!-- main navigator -->
+            <div style="display:none" id="BAToolTipDiv"></div>
+            <!-- search header -->
+            <!-- main search -->
+  	
+			<div id="searchTabView" class="yui-navset" style="margin-top:5px;margin-left:1px;margin-right:2px;">
+				<ul class="yui-nav">
+					<li class="selected" id="normalTitle">
+						<a href="#normalBlock">
+							<em>Search<!--img src="<%=nearestPath%>web/images/search.gif" align="left" class="tab-icon" ><span>Search&nbsp;&nbsp;</span--></em>
+						</a>
+					</li>
+					<li id="advancedTitle">
+						<a href="#advancedBlock">
+							<em>Advanced Search<!--img src="<%=nearestPath%>web/images/advancesearch_icon.gif" align="left" class="tab-icon" ><span>Advanced Search&nbsp;&nbsp;</span--></em>
+						</a>
+					</li>
+					<li id="allAreasTitle">
+						<a href="#allAreasBlock">
+							<em>All Domain Search<!--img src="<%=nearestPath%>web/images/allbasearch.gif" align="left" class="tab-icon" ><span>All
+								      Domain Search&nbsp;&nbsp;</span--></em>
+						</a>
+					</li>
+					<li id="myRequestsTitle">
+						<a href="#myRequestsBlock">
+							<em><%=captions.all.my_requests%><!--img src="<%=nearestPath%>web/images/myrequest.gif" align="left" class="tab-icon" ><span> <%=captions.all.my_requests%></span--></em>
+						</a>
+					</li>
+					<li id="myReportsTitle">
+						<a href="#myReportsBlock">
+							<em><%=captions.all.my_reports%></em>
+						</a>
+					</li>
+					<li id="dashBoardTitle">
+						<a href="#dashBoardBlock">
+							<em>Dashboard</em>
+						</a>
+					</li>
+					<li id="addRequestsTitle">
+						<a href="javascript:onClick('<%=nearestPath%>add-request/<%=sysPrefix%>');">
+							<em><%=captions.all.new_request%> <img src="<%=nearestPath%>web/images/new-win.gif" align="top"></em>
+						</a>
+					</li>					
+				</ul> 
+				<div class="yui-content">
+					 <!-- normal search -->
+					<div class="hsp" id="normalBlock">
+                    <table cellpadding="0" cellspacing="0" width="100%" ID="Table5">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <!--
+                                    <style>
+                                    TABLE.test TD
+                                    {
+                                    border: 1px solid darkgray;
+                                    }
+                                    </style>
+                                    -->
+                                    <table cellpadding="0" cellspacing="2" width="100%" ID="Table6" class="test">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <table cellpadding="0" cellspacing="2" width="100%" ID="Table7">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td nowrap>
+                                                                <span class="s b">Search                                                                    </span></td>
+                                                                <td width="100%">
+                                                                    <input class="sx" type="text" style="width: 98%" ID="normalDesc" NAME="normalDesc" value="<%=normalDesc%>">
+                                                                </td>
+                                                                <td>
+                                                                    <span class="s b">&nbsp;&nbsp;&nbsp;in&nbsp;</span>
+                                                                </td>
+                                                                <td>
+                                                                    <SELECT class="sx" size="1" ID="filter" NAME="filter">
+                                                                        <%=textFilters%>
+                                                                    </SELECT>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <td rowspan="8">
+                                                    <div style="width: 100%; height: 100%;"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="s b" nowrap><%=category_id_label%></td>
+                                                <td class="s b" nowrap><%=request_type_id_label%></td>
+                                                <td class="s b" nowrap><%=status_id_label%></td>
+                                                <td class="s b" nowrap><%=severity_id_label%></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="s b" nowrap><%=logger_ids_label%></td>
+                                                <td>
+                                                    <input class="sx wickEnabled" style="width: 200px" type="text" ID="logger_ids" NAME="logger_ids" value="<%=logger_ids%>"/>
+                                                    <!--<textarea style="height:18px; width: 200px;" id="logger_ids" name="logger_ids"><%=logger_ids%></textarea> -->
+                                                </td>
+                                                <td rowspan="4">
+                                                    <SELECT class="sx" multiple size="6" name="category_id" ID="category_id">
+                                                        <%=category_id_list%>
+                                                    </SELECT>
+                                                </td>
+                                                <td rowspan="4"><select class="sx" multiple size="6" name="request_type_id" id="request_type_id">
+                                                  <%=request_type_id_list%>
+                                                </select>
+</td>
+                                                <td rowspan="4">
+                                                    <select class="sx" multiple size="6" name="status_id" id="status_id">
+                                                      <%=status_id_list%>
+                                                    </select>
+                                              </td>
+                                                <td rowspan="4"><select class="sx" multiple size="6" name="severity_id" id="severity_id">
+                                                  <%=severity_id_list%>
+                                                </select>
+</td>
+												
+                                            </tr>
+                                            <tr>
+                                                <td class="s b" nowrap><%=assignee_ids_label%></td>
+                                                <td>
+                                                    <input class="sx wickEnabled" style="width: 200px"  type="text" ID="assignee_ids" NAME="assignee_ids" value="<%=assignee_ids%>" />
+                                                    <!--<textarea style="height:18px; width: 200px;" id="assignee_ids" name="assignee_ids"><%=assignee_ids%></textarea>-->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="s b" nowrap><%=subscriber_ids_label%></td>
+                                                <td>
+                                                    <input class="sx wickEnabled" style="width: 200px" type="text" ID="subscriber_ids" NAME="subscriber_ids" value="<%=subscriber_ids%>" />
+                                                    <!--<textarea style="height:18px; width: 200px;" id="subscriber_ids" name="subscriber_ids"><%=subscriber_ids%></textarea>-->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td nowrap>
+                                                    <table cellpadding="0" cellspacing="0" ID="Table8">
+                                                        <tr>
+                                                            <td class="s b" nowrap>(</td>
+                                                            <td class="s b" nowrap><input type="checkbox" name="cbLast" id="cbLast" <%=cbLast_checked%> style="margin-left: -2px;"></td>
+                                                            <td class="s b" nowrap>Last)Modified By</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td>
+                                                    <input class="sx wickEnabled" style="width: 200px" type="text" ID="user_id" NAME="user_id" value="<%=user_id%>" />
+                                                    <!--<textarea style="height:18px; width: 200px;" id="user_id" name="user_id"><%=user_id%></textarea>-->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td nowrap class="sx cb l" onClick="onClickMore('trDates');">More...</td>
+                                                <td colspan="5" class="s" id="querySection" align="right">
+                                                    <span id="readUnreadLabel" onMouseOver="domTT_activate(this, event, 'content', document.getElementById('readUnreadHelp').innerHTML, 'direction', 'southwest');">
+                                                    <b>Read/Unread</b></span>&nbsp;
+                                                    <select id="readFilter" name="readFilter">
+                                                        <%=readFilter%>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr id="trDates" name="trDates" style="<%=dateDivDisplay%>;">
+                                                <td colspan="6" nowrap>
+                                                    <table cellpadding="0" cellspacing="0" ID="Table12">
+                                                        <tr>
+                                                            <td valign="middle">
+                                                                <span class="s b am nw"><%=submitted_label%></span>
+                                                            </td>
+                                                            <td valign="middle">
+                                                                <SELECT class="sx" id="log_clauseList" name="log_clauseList" style="WIDTH: 160px" onChange="onChangeNormalClauseList(event, 'logged_datetime', 'log_clauseList', 'log_dataSection', 'log_');">
+                                                                </SELECT>
+                                                            </td>
+                                                            <td valign="middle" style="height: 24px;">
+                                                                <div id="log_dataSection" name="log_dataSection"></div>
+                                                            </td>
+                                                            <td rowspan="3" width="10px">&nbsp;</td>
+                                                            <td rowspan="3" valign="top">
+                                                                <!--span class="s b" style="margin-bottom: 2px">
+                                                                    <%=office_id_label%>
+                                                                </span>
+                                                                <br>
+                                                                <select class="sx" id="office_id" name="office_id" multiple size="3">
+                                                                    <%=office_id_list%>
+                                                                </select-->
+                                                           
+                                                            
+															</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="middle">
+                                                                <span class="s b am nw"><%=last_modified_label%>&nbsp;</span>
+                                                            </td>
+                                                            <td valign="middle">
+                                                                <SELECT class="sx" id="upd_clauseList" name="upd_clauseList" style="WIDTH: 160px" onChange="onChangeNormalClauseList(event, 'lastupdated_datetime', 'upd_clauseList', 'upd_dataSection', 'upd_');">
+                                                                </SELECT>
+                                                            </td>
+                                                            <td valign="middle" style="height: 24px;">
+                                                                <div id="upd_dataSection" name="upd_dataSection"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="middle">
+                                                                <span class="s b am nw"><%=due_date_label%>&nbsp;&nbsp;</span>
+                                                            </td>
+                                                            <td valign="middle">
+                                                                <SELECT class="sx" id="due_clauseList" name="due_clauseList" style="WIDTH: 160px" onChange="onChangeNormalClauseList(event, 'lastupdated_datetime', 'due_clauseList', 'due_dataSection', 'due_');">
+                                                                </SELECT>
+                                                            </td>
+                                                            <td valign="middle" style="height: 24px;">
+                                                                <div id="due_dataSection" name="due_dataSection"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="1" nowrap>
+                                                    <span class="l cb sx" onClick="onClickSaveSearch()">Save Search...</span>
+                                                </td>
+                                                <td colspan="5" align="right" nowrap>
+                                                    <span id="nCopyURL" name="nCopyURL" class="cb sx" style="display:none"><span id="nTsCopyURL" name="nTsCopyURL" class="l sxs" onMouseOver="this.T_STICKY = true; this.T_TEMP = 0; this.T_BORDERWIDTH=0;return escape(copyDQL()); "
+                                                    onmouseout="setMouseOutTimer()"></span>&nbsp;|&nbsp;</span> <span id="copyURL" name="copyURL" class="l cb sx" onClick="copySearchURLToCB()">
+                                                    Copy Search URL</span> <input class="cw b bn sxs lsb" type="button" width="100px" height="20px" value="Search"
+                                                    onclick="startSearching('Searching');" ID="nSearch" NAME="nSearch" /> <input type="button" id="Button2" name="sReset" value="Reset" class="sx lsb" 
+                                                    onclick='window.location = "<%=nearestPath%>search/<%=sysPrefix%>";'/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td width="100%">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+				 <!-- advanced search -->
+                <div  class="hsp" id="advancedBlock">
+                    <!--
+                    <style>
+                    table.tbl TD
+                    {
+                    border: 1px solid red;
+                    }
+                    </style>
+                    -->
+                    <TABLE cellpadding="2" cellspacing="0" border="0" width="100%" class="tbl" ID="Table9">
+                        <colgroup>
+                            <col width="1%" />
+                            <col width="5%" />
+                            <col width="5%" />
+                            <col width="85%" align="left" />
+                            <col width="5%" />
+                        </colgroup>
+                        <TR>
+                            <TD class="sx b" valign="center" style="margin: 0px 5px 0px 0px;">Field:</TD>
+                            <TD valign="top" style="margin: 0px 10px 0px 0px;">
+                                <SELECT class="sx" name="fieldList" onChange="onChangeFieldList(event);" ID="fieldList"
+                                    style="width: 150px">
+                                </SELECT>
+                            </TD>
+                            <TD valign="top">
+                                <SELECT class="sx" id="clauseList" name="clauseList" style="WIDTH: 160px" onChange="onChangeClauseList(event);">
+                                </SELECT>
+                            </TD>
+                            <TD rowspan="3" valign="top" id="dataSection" name="dataSection"></TD>
+                            <td><INPUT type="button" value="Add to query" NAME="addQuery" id="addQuery" onClick="onClickAddQuery();" /></td>
+                        </TR>
+                        <tr>
+                            <td colspan="3" nowrap="false">
+                                <span class="sx b">Descriptors: </span><span class="sx" id="spnDescList" name="spnDescList">
+                                </span>
+                            </td>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <TD valign="top" colspan="3">
+                                <INPUT type="button" value=" And " ID="Button6" NAME="btnAnd" onClick="addToQuery('AND ');">
+                                <INPUT type="button" value=" Or " ID="Button7" NAME="btnOr" onClick="addToQuery('OR');">
+                                <INPUT type="button" value=" Not " ID="Button8" NAME="btnNot" onClick="addToQuery('NOT');">
+                                <INPUT type="button" value=" ( " ID="Button9" NAME="btnOpen" onClick="addToQuery('(');">
+                                <INPUT type="button" value=" ) " ID="Button10" NAME="btnClose" onClick="addToQuery(')');">
+                            </TD>
+                            <td style="text-align: right">&nbsp;</td>
+                        </tr>
+                        <TR>
+                            <TD colspan="5">
+                                <TEXTAREA class="sx" id="advancedQuery" name="advancedQuery" style="WIDTH: 100%" rows="3"
+                                onkeydown="return onKeyDownAdvQuery(event);"><%=advancedQuery%></TEXTAREA>
+                            </TD>
+                        </TR>
+                        <tr style="height: 20px;">
+                            <td colspan="2" style="white-space: nowrap">
+                                <span class="l cb sx" onClick="onClickSaveSearch()">Save Search...</span>
+                            </td>
+                            <td colspan="3" align="right">
+                                <span id="aCopyURL" name="aCopyURL" class="cb sx" style="display:none"><span id="aTsCopyURL" name="aTsCopyURL" class="l sxs" onMouseOver="this.T_STICKY = true; this.T_TEMP = 0; this.T_BORDERWIDTH=0;return escape(copyDQL()); "
+                                onmouseout="setMouseOutTimer()"></span>&nbsp;|&nbsp;</span> <span class="l cb sx" onClick="copySearchURLToCB()">
+                                Copy Search URL</span> <input class="cw b bn sxs lsb" type="button" width="100px" height="20px" value="Search"
+                                onclick="startSearching('Searching');" ID="aaSearch" NAME="aSearch" /> <input type="button" id="Button4" name="sReset" value="Reset" class="sx lsb" 
+                                onclick='window.location = "<%=nearestPath%>search/<%=sysPrefix%>";'/>
+                            </td>
+                        </tr>
+                    </TABLE>
+                </div>
+				                        
+                <!-- All Areas search -->
+                <div class="hsp" id="allAreasBlock" >
+                    <%=allAreasHtml%>
+                </div>
+
+				<!-- MyRequests Block -->
+                <div class="hsp" id="myRequestsBlock">
+                    <table cellpadding="0" cellspacing="0" width="995" ID="Table10">
+                        <tbody>
+                            <tr>
+                                <td width="80%" align="left">
+                                    <span class="sx">Display <%=captions.all.requests%> where <b>
+                                        <%=userLogin%>
+                                    </b>is </span><input id="chboxLogger" type="checkbox" value="1" <%=loggerChecked%> NAME="chboxLogger"><span style="cursor:default" class="sx" onClick="toggleCheckBox('chboxLogger')"><%=captions.myrequests.logger%></span>
+                                    <input id="chboxAssignee" type="checkbox" value="2" <%=assigneeChecked%> NAME="chboxAssignee"><span style="cursor:default" class="sx" onClick="toggleCheckBox('chboxAssignee')"><%=captions.myrequests.assignee%></span>
+                                    <input id="chboxSubscriber" type="checkbox" value="4" <%=subscriberChecked%> NAME="chboxSubscriber"><span style="cursor:default" class="sx" onClick="toggleCheckBox('chboxSubscriber')"><%=captions.myrequests.subscriber%></span>
+                                    <input id="chboxPrimaryAssignee" type="checkbox" value="8" <%=primaryAssigneeChecked%> NAME="chboxPrimaryAssignee"><span style="cursor:default" class="sx" onClick="toggleCheckBox('chboxPrimaryAssignee')">Primary 
+                                    <%=captions.myrequests.assignee%></span> &nbsp;&nbsp; 
+									<input type="button" class="sx bn cw b lsb" value="Refresh" id="refreshMyRequests" name="refreshMyRequests"
+                                    onclick="startSearching('Loading');"> &nbsp;&nbsp;
+									<input type="button" class="sx" onClick="onFilterStatus()" value="Status Filter..." />
+                                </td>
+                                <td width="20%" align="right">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+				<div class="hsp" id="myReportsBlock" style="display: <%=myRequestsDisplay%>">	
+					<div id="userTable" style="width:100%"></div>
+				</div>
+				<div class="hsp" id="dashBoardBlock">	
+
+				</div>
+			</div>
+		</div>
+            
+            <!-- search view header -->
+            <div style="margin: 0ex 1ex 0ex 1ex">
+                <table cellpadding="0" cellspacing="0" width="990" ID="Table11">
+                    <tbody>
+                        <tr valign="bottom" height="25px" style="vertical-align: middle;">
+                            <td align="left" style="white-space: nowrap">
+                                <div id="configureLine" name="configureLine" style="display:<%=configureLine%>">
+                                    <div id="saved_searches">
+                                      <div class="hd"></div> 
+	                                    <div class="bd"></div> 
+	                                    <div class="ft"></div>
+                                    </div>
+                                    <span class="l sx cb" onClick="showShortcutList(event)">Saved Searches</span>&nbsp;|
+                                    <span class="l sx cb" onClick="onClickConfigure()">Configure Result Columns...</span>
+                                </div>
+                            </td>
+                            <td align="right">
+                                <span class="sx" id="timeSplit" name="timeSplit"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </form>
+	<TABLE CELLSPACING="0" WIDTH="100%" CELLPADDING="0" BORDER="0" class="results">
+        <TR style="display: <%=rcDisplay%>" class="bhs">
+            <TH align="right">
+                <div style="display: <%=groupActionDisplay%>; text-align: right;">
+                  <div align="left">
+                    <%=searchFooterSlot%>                  
+		  </div>				
+               </div>
+            </TH>
+        </TR>
+		</TABLE>
+        <!-- search-results -->
+        <div id="searchResultsHolder">
+          <%=searchResultsHolder%>
+        </div>
+        <div style="display: none;" id="searchShortcuts"><%=searchShortcuts%></div>
+        <div style="display: none;" id="userDrafts"><%=userDrafts%></div>
+        <div style="display: none;" id="queryString"></div>
+        <div style="display: none;" id="normal_tsDQL" name="normal_tsDQL"></div>
+        <div style="display: none;" id="adv_tsDQL" name="adv_tsDQL"></div>
+        <div style="display: none" id="baHelp"></div>
+        <div style="display:none" id="readUnreadHelp"></div>
+        <iframe scrolling="no" frameborder="0" style="position: ABSOLUTE; filter: alpha{opacity=0};display: none; visibility: hidden;"
+        src="about:blank" name="draftsIFrame" id="draftsIFrame"></iframe>
+        <iframe id='hiddenBAIFrame' name='hiddenBAIFrame' style="display:none" onload="onBAIframeBodyLoad(event);">
+        </iframe>
+        	<table width="100%" class = "bhs results" align="center"> 
+		<tr>
+			<td align="center"> Copyright &#169; 2010 <a href="http://www.tbitsglobal.com" target="blank">tBits Global Inc.</a> All Rights Reserved. Email : 
+			<a href="mailto:info@tbitsglobal.com">info@tbitsglobal.com</a>
+			</td>
+		</tr>
+	</table>
+	<div class="yui-skin-sam">
+	    <div id="resizablepanel">
+	        <div class="hd">Import Data from CSV file</div>
+	        <div class="bd">
+	            <iframe id="importdatapage" width="100%" height="100%" scrolling="no" frameborder="no"></iframe>
+	        </div>
+	        <div class="ft"></div>
+	    </div>
+	</div>
+	<div class="yui-skin-sam">
+		<div  id="transmittalpanel">
+			<div class="hd">Transmittal window</div>
+			<div class="bd">
+				<iframe name="transmittalPage" id="transmittalPage" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0" style="width:100%;height:100%"></iframe>
+			</div>
+			<div class="ft"></div>		
+		</div>
+	</div>
+	
+    </body>
+</html>

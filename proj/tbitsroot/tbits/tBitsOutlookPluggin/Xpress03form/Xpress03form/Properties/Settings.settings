@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Xpress03form.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="tempFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">temp.xml</Value>
+    </Setting>
+    <Setting Name="localXml" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BAXMLInfo.xml</Value>
+    </Setting>
+    <Setting Name="serverConnectionCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="connectToServer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="servletName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">outlookconfig</Value>
+    </Setting>
+    <Setting Name="dueDateCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="checkDueDate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="loginRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.+=([^=]+)$</Value>
+    </Setting>
+    <Setting Name="tBtisUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://ibm</Value>
+    </Setting>
+    <Setting Name="log4netConfig" Type="System.String" Scope="User">
+      <Value Profile="(Default)">tBitsLogger.config</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

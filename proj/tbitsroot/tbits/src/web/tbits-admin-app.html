@@ -1,0 +1,87 @@
+<html><head><title><%=title%></title>
+
+    
+        
+        <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema"/>
+        <link href="<%=nearestPath%>web/css/<%=cssFile%>" media="screen" type="text/css" rel="stylesheet"/>
+        <script src="<%=nearestPath%>web/scripts/admin.js" language="javascript"></script>
+        <script src="<%=nearestPath%>web/scripts/messages.js" language="javascript"></script>
+        <script src="<%=nearestPath%>web/scripts/common.js" language="javascript"></script>
+        <script src="<%=nearestPath%>web/scripts/tt.js" language="javascript"></script>
+        <script src="<%=nearestPath%>web/scripts/ac.js" language="javascript"></script>
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+	<script language="javascript">
+
+		YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+        </script>
+	<body onLoad="onLoadBody();"> <!-- main-navigator -->
+        <form method="post" id="AppForm" name="AppForm" action="<%=target%>">
+            <input type="hidden" value="<%=nearestPath%>" id="nearestPath" name="nearestPath"/>
+            <div style="margin: 0ex 1ex 0.5ex;" class="hb bhs"><!-- properties -->
+                <div class="hsp">
+                    <table width="95%" cellspacing="3" cellpadding="0" id="Table3">
+                        <tbody><tr>
+                            <td valign="top">
+                                <table width="95%" cellspacing="0" cellpadding="0" id="Table4">
+                                    <tbody><tr>
+                                         
+                                        <td width="2" class="bos">
+											
+										</td>
+                                        <td valign="top">
+											<div name="divReplacement" id="divReplacement"><div style="margin: 0.5ex 1ex;" id="message"> Update Application Properties </div>
+<div id="user_update_form" style="margin: 0ex 1ex 0.5ex;" class="hb bhs">
+<input type="hidden" id="page_name" value="details" name="page_name"/>
+<input type="hidden" value="50001" id="selected_user_id" name="selected_user_id"/>
+											<table width="95%" cellspacing="3" cellpadding="0" class="bhs" name="user_details">
+											<tbody>
+											<%=appProperties%>
+											<tr>
+											  <td class="sx">  <input type="submit" name="action" value="save-app-props" id="save-app-props" class="cw b bn sxs lsb"/></td>
+											  <td align="left"><input type="button" onClick="javascript:onRevertLastSavedSettings()" name="Revert" value="Revert to Last Saved Value" id="Revert" class="sx"/></td>
+											  </tr>
+											</tbody></table>
+</div></div>
+										  
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="2" colspan="3" class="bos"/>
+                        </tr>
+                    </tbody></table>
+                </div>
+                <div class="arhm"> </div>
+            </div>
+            <div width="100" name="allTypeFields" id="allTypeFields" style="display: none;">
+                
+<table cellspacing="0" cellpadding="0" border="0" style="width: 100%;" class="shortcuts">
+	<tbody name="fieldTypeList" id="fieldTypeList">
+		<tr id="category_id">
+			<td><span onClick="openManagePage('category_id')" class="l cb">Category</span></td>
+			
+		</tr>
+		<tr id="office_id">
+			<td><span onClick="openManagePage('office_id')" class="l cb">Office</span></td>
+			
+		</tr>
+		<tr id="severity_id">
+			<td><span onClick="openManagePage('severity_id')" class="l cb">Priority</span></td>
+			
+		</tr>
+		<tr id="request_type_id">
+			<td><span onClick="openManagePage('request_type_id')" class="l cb">Request Type</span></td>
+			
+		</tr>
+		<tr id="status_id">
+			<td><span onClick="openManagePage('status_id')" class="l cb">Status</span></td>
+			
+		</tr>
+	</tbody>
+</table>
+            </div>
+        </form>
+    </body></html>

@@ -1,0 +1,13 @@
+<processing>
+  <!--logfiledir>$INSTALL_PATH</logfiledir-->
+  <job name="Start tBits Server">
+    <os family="windows" />
+    <executefile name="$INSTALL_PATH/build/bin/tbits-start.bat">
+    </executefile>
+  </job>
+  <job name="Open Wesite">
+    <os family="windows" />
+    <executefile name="$INSTALL_PATH/tbits.url">
+    </executefile>
+  </job>
+</processing>

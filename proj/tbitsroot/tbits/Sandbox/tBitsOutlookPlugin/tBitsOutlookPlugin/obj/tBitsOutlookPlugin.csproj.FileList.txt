@@ -1,0 +1,12 @@
+.\bin\Debug\tBitsOutlookPlugin.dll
+.\bin\Debug\tBitsOutlookPlugin.pdb
+.\bin\Debug\tBitsOutlookPlugin.dll.manifest
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\tBitsOutlookPlugin.csproj.ResolveComReference.cache
+obj\Debug\tBitsOutlookPlugin.DatePicker.resources
+obj\Debug\tBitsOutlookPlugin.Properties.Resources.resources
+obj\Debug\tBitsOutlookPlugin.csproj.GenerateResource.Cache
+obj\Debug\tBitsOutlookPlugin.dll
+obj\Debug\tBitsOutlookPlugin.pdb
+bin\Debug\tBitsOutlookPlugin.XML
+.\bin\Debug\tBitsOutlookPlugin.XML

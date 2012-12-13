@@ -1,0 +1,7 @@
+Author:Utkarsh
+Name:com.tbitsglobal.hse
+Description: HSE Module
+Version: 1.0
+Depends: 
+Activator:
+

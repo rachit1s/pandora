@@ -1,0 +1,13 @@
+Index: jaguar/.project
+*** /dev/null
+--- /dev/null
+***************
+*** 43,48
+- 			<location>/home/syeda/worktbits1/tbitsroot/gwtplugins/common</location>
+- 		</link>
+- 		<link>
+- 			<name>con</name>
+- 			<type>2</type>
+- 			<location>/home/syeda/worktbits1/tbitsroot/gwtplugins/common</location>
+--- 53 -----
++ 			<location>/Users/sandeepgiri/projects/tbitsroot/gwtplugins/common</location>

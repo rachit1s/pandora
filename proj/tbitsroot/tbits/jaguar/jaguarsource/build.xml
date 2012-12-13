@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="Jaguar" default="build" basedir=".">
+	<!-- Configure path to GWT SDK -->
+	<target name="define">
+		<property name="dist.home.jaguar" value=".."></property>
+		<property name="webapps.dir.jaguar" value="${dist.home.jaguar}/build/webapps" />
+		<property name="classes.dir.jaguar" value="${webapps.dir.jaguar}/WEB-INF/classes" />
+		<property name="lib.dir.jaguar" value="${webapps.dir.jaguar}/WEB-INF/lib" />
+		<property name="tbits.home" value="../build"/>
+		<property name="tbits.dir" value="../../" />
+		<property name="jaguar.dir.jaguar" value="jaguar" />
+		<property name="plugins.dir.jaguar" value="plugins" />
+		<path id="classic.plugins" >
+			<pathelement  location="${dist.home.jaguar}/build/plugins" />
+		</path>
+		<path id="project.class.path">
+			<pathelement location="${classes.dir.jaguar}"/>
+			<fileset dir="${lib.dir.jaguar}" includes="**/*.jar"/>
+		</path>
+	</target>
+
+	<target name="build" depends="clean-war,gwtc,resources,copy-war">
+	</target>
+
+	<target name="debug-jaguar" depends="resources, devmode-jaguar">
+		
+	</target>
+
+	<target name="resources" depends="define">
+		<mkdir dir="war/jaguar"/>
+	</target>
+
+	<target name="javac" depends="define" description="Compile java source">
+		<javac srcdir="${jaguar.dir.jaguar}" includes="**/*.java" encoding="utf-8"
+		destdir="${classes.dir.jaguar}"
+		source="1.5" target="1.5" nowarn="true"
+		debug="true" debuglevel="lines,vars,source">
+			<classpath refid="project.class.path"/>
+		</javac>
+		<javac srcdir="${plugins.dir.jaguar}" includes="**/*.java" encoding="utf-8"
+		destdir="${classes.dir.jaguar}"
+		source="1.5" target="1.5" nowarn="true"
+		debug="true" debuglevel="lines,vars,source">
+			<classpath refid="project.class.path"/>
+			<classpath refid="classic.plugins" />
+		</javac>
+	</target>
+
+	<target name="javadoc" depends="define" description="Creates the javadoc">
+		<javadoc 
+                author="true"
+                bottom="Copyright: 2006-2010 tBits Global. All Rights Reserved."
+                destdir="${dist.home.jaguar}/doc/jaguar"
+                doctitle="tBits Jaguar 6.1"
+                packagenames="**,"
+                private="false"
+                sourcepath="${jaguar.dir.jaguar}"
+                use="true"
+                version="true"
+                windowtitle="tBits 6.1 Jaguar UI"     
+		maxmemory="512m"
+        	>
+			<classpath refid="project.class.path"/>
+		</javadoc>
+	</target>
+	<target name="calculate-plugins" depends="javac">
+		<java failonerror="true" fork="true" classname="compiler.Compiler">
+			<classpath>
+				<pathelement location="${classes.dir.jaguar}"/>
+			</classpath>
+			<jvmarg value="-Xmx512M"/>
+			<arg value="${plugins.dir.jaguar}"/>
+			<arg value="tbits"/>
+			<arg value="${jaguar.dir.jaguar}/com/tbitsGlobal/jaguar"/>
+		</java>
+		<java failonerror="true" fork="true" classname="compiler.Compiler">
+			<classpath>
+				<pathelement location="${classes.dir.jaguar}"/>
+			</classpath>
+			<jvmarg value="-Xmx512M"/>
+			<arg value="${plugins.dir.jaguar}"/>
+			<arg value="admin"/>
+			<arg value="${jaguar.dir.jaguar}/com/tbitsGlobal/admin"/>
+		</java>
+	</target>
+
+	<target name="gwtc" depends="calculate-plugins" description="GWT compile to JavaScript">
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+			<classpath>
+				<pathelement location="${jaguar.dir.jaguar}" />
+				<pathelement location="${plugins.dir.jaguar}" />
+				<path refid="project.class.path" />
+			</classpath>
+			<jvmarg value="-Xmx1024M" />
+			<!--<arg value="-compileReport"/>-->
+			<!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+			<arg value="com.tbitsGlobal.jaguar.Jaguar" />
+		</java>
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+			<classpath>
+				<pathelement location="${jaguar.dir.jaguar}" />
+				<pathelement location="${plugins.dir.jaguar}" />
+				<path refid="project.class.path" />
+			</classpath>
+			<jvmarg value="-Xmx1024M" />
+			<arg value="com.tbitsGlobal.admin.Admin" />
+		</java>
+	</target>
+
+	<target name="devmode-jaguar" description="Run development mode" depends="copy-war, calculate-plugins">
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.DevMode">
+			
+			<classpath>
+				<pathelement location="${jaguar.dir.jaguar}" />
+				<pathelement location="${plugins.dir.jaguar}" />
+				<path refid="project.class.path" />
+			</classpath>
+			
+			<jvmarg value="-Xmx1024M" />
+			<jvmarg value="-Xdebug" />
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000" />
+			<jvmarg value="-Dapp.name=tbits" />
+			<jvmarg value="-Dtbits.home=${tbits.home}" />
+			<arg value="-startupUrl" />
+			<arg value="/jaguar" />
+			<!--arg value="-noserver" /-->
+			<!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+			<arg value="-war" />
+			<arg value="${webapps.dir.jaguar}" />
+			<arg value="-logLevel" />
+			<arg value="DEBUG" />
+			<arg value="com.tbitsGlobal.jaguar.Jaguar" />
+		</java>
+	</target>
+
+
+	<target name="soyc" depends="define">
+		<java failonerror="true" fork="true" dir="extra/jaguar/soycReport" classname="com.google.gwt.soyc.SoycDashboard">
+			<classpath>
+				<path refid="project.class.path"/>
+			</classpath>
+			<jvmarg value="-Xmx1024M"/>
+			<arg value="-resources"/>
+			<arg value="${lib.dir.jaguar}/gwt-soyc-vis.jar"/>
+			<arg value="stories0.xml.gz"/>
+			<arg value="dependencies0.xml.gz"/>
+			<arg value="splitPoints0.xml.gz"/>
+		</java>
+	</target>
+
+	<target name="clean-war">
+		<delete dir="war" failonerror="false" />
+	</target>
+
+	<target name='copy-war' depends="define">
+		<mkdir dir="${webapps.dir.jaguar}/jaguar"/>
+		<mkdir dir="${webapps.dir.jaguar}/adm"/>
+		<mkdir dir="${webapps.dir.jaguar}/tmp"/>
+
+		<copy todir="${webapps.dir.jaguar}/jaguar">
+			<fileset dir="war/jaguar" />
+		</copy>
+		<copy todir="${webapps.dir.jaguar}/adm">
+			<fileset dir="war/adm" />
+		</copy>
+	</target>
+</project>

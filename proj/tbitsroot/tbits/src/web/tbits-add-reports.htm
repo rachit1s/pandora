@@ -1,0 +1,483 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>  
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<title>Add tBits Report</title>
+
+<style type="text/css">
+	/*margin and padding on body element
+	  can introduce errors in determining
+	  element position and are not recommended;
+	  we turn them off as a foundation for YUI
+	  CSS treatments. */
+	body {
+		margin:0;
+		padding:0;
+	}
+</style>
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/fonts/fonts-min.css">
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/logger/assets/skins/sam/logger.css">
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/treeview/assets/skins/sam/treeview.css">
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/button/assets/skins/sam/button.css">
+<link rel="stylesheet" type="text/css" href="<%=nearestPath%>web/yui/build/autocomplete/assets/skins/sam/autocomplete.css">
+
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yuiloader/yuiloader-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/event.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/event/event-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/dom/dom-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/logger/logger-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/element/element-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/button/button-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/treeview/treeview-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/animation/animation-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/datasource/datasource-min.js"></script> 
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/autocomplete/autocomplete-min.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/connection.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/yui/build/utilities/utilities.js"></script>
+<script type="text/javascript" src="<%=nearestPath%>web/scripts/json2.js"></script>
+
+<style type="text/css">
+	.ygtvcheck0 { background: url(<%=nearestPath%>web/images/yui-images/check/check0.gif) 0 0 no-repeat; width:16px; cursor:pointer }
+	.ygtvcheck1 { background: url(<%=nearestPath%>web/images/yui-images/check/check1.gif) 0 0 no-repeat; width:16px; cursor:pointer }
+	.ygtvcheck2 { background: url(<%=nearestPath%>web/images/yui-images/check/check2.gif) 0 0 no-repeat; width:16px; cursor:pointer }
+</style>
+
+<style type="text/css">
+	#treeDiv1 { background: #fff }
+</style>
+
+<style type="text/css">
+	/* custom styles for multiple stacked instances */
+	#userautocomplete1, #userautocomplete2 {
+		width:200px;  /*set width here */
+		padding-bottom:2em;
+	}
+	#userautocomplete1, #userautocomplete2 {
+		/*z-index:9000;  z-index needed on top instance for ie & sf absolute inside relative issue */
+	}
+	/*
+	#userinput1, #userinput2 {
+		_position:absolute; /* abs pos needed for ie quirks
+	} */
+</style>
+
+<script type="text/javascript" src="<%=nearestPath%>web/scripts/tasknode.js"></script>
+<script type="text/javascript">
+	var ba = <%=baRoleMap%>;
+	var userList =  <%=usersList%>;
+	var selectedBARoles = <%=selectedBARoles%>;	
+</script>
+<script type="text/javascript">
+	//src="<%=nearestPath%>web/yui/assets/js/TaskTree.js"
+	var tree;
+	var nodes = [];
+	var nodeIndex;
+					
+	function treeInit() {						
+		buildRandomTaskNodeTree();
+	}
+
+	//handler for expanding all nodes
+		YAHOO.util.Event.on("expand", "click", function(e) {
+			tree.expandAll();
+			YAHOO.util.Event.preventDefault(e);
+		});
+		
+		//handler for collapsing all nodes
+		YAHOO.util.Event.on("collapse", "click", function(e) {
+			tree.collapseAll();
+			YAHOO.util.Event.preventDefault(e);
+		});
+
+		//handler for checking all nodes
+		YAHOO.util.Event.on("checkClick", "click", function(e) {
+			checkAll();
+			YAHOO.util.Event.preventDefault(e);
+		});
+		
+		//handler for unchecking all nodes
+		YAHOO.util.Event.on("uncheck", "click", function(e) {
+			uncheckAll();
+			YAHOO.util.Event.preventDefault(e);
+		});
+									
+	YAHOO.util.Event.on("getchecked", "click", function(e) {				
+		YAHOO.util.Event.preventDefault(e);
+	});
+									
+	//Function  creates the tree and 
+	//builds between 3 and 7 children of the root node:
+	function buildRandomTaskNodeTree() {								
+		//instantiate the tree:
+		tree = new YAHOO.widget.TreeView("treeDiv1");
+		for (var i = 0; i < ba.length ; i++){
+			var isSelected = false;								
+			if (ba[i].roles != null){		
+				var bizArea = ba[i].baName;
+				selectedRoles = selectedBARoles[bizArea];
+				var tmpNode = new YAHOO.widget.TaskNode (bizArea, tree.getRoot(), false);
+				buildRandomTaskBranch(tmpNode, ba[i].roles.split(","), selectedRoles);
+			}
+		}											
+	//The tree is not created in the DOM until this method is called:
+	tree.draw();
+	}
+									
+	//var callback = null;
+									
+	function buildRandomTaskBranch (node, rolesList, selectedRoles) {
+		var selected = false;
+		for (var i = 0; i < rolesList.length; i++) {
+			if ((selectedRoles !== "undefined") && (selectedRoles != null)){				
+				for (var k=0; k<selectedRoles.length; k++){
+					if (selectedRoles[k] == rolesList[i]){
+						selected = true; 
+						break;
+					}
+					else
+						continue;	
+				}
+			}
+			var tmpNode = new YAHOO.widget.TaskNode(rolesList[i], node, false, selected);
+			selected = false;
+		}
+	}
+									
+	function onCheckClick(node) {
+		/*YAHOO.log(node.label + " check was clicked, new state: " + 
+		node.checkState, "info", "example");*/
+	}
+									
+	function checkAll() {
+		var topNodes = tree.getRoot().children;
+		for(var i=0; i<topNodes.length; ++i) {
+			topNodes[i].check();
+		}
+	}
+									
+	function uncheckAll() {
+		var topNodes = tree.getRoot().children;
+		for(var i=0; i<topNodes.length; ++i) {
+			topNodes[i].uncheck();
+		}
+	}
+									
+	function onLabelClick(node) {
+	   new YAHOO.widget.TaskNode("new", node, false);
+	   node.refresh();
+	   return false;
+	}
+																
+	// Gets the labels of all of the fully checked nodes
+	// Could be updated to only return checked leaf nodes by evaluating
+	// the children collection first.
+	function getCheckedNodes(nodes) {
+		nodes = nodes||tree.getRoot().children;
+		checkedNodes = [];
+			
+		for(var i=0, l=nodes.length; i<l; i=i+1) {			
+			var n = nodes[i];
+			
+			if (n.checkState > 0) { // if we were interested in the nodes that have some but not all children checked
+			//if (n.checkState === 2) {	//if interested in the nodes that have all children checked			
+				checkedNodes.push(n.label); // just using label for simplicity				
+			}
+									
+			if (n.hasChildren()) {		
+				checkedNodes = checkedNodes.concat(getCheckedNodes(n.children));				
+			}			
+		}									
+		return checkedNodes;
+	}
+					
+	YAHOO.util.Event.onDOMReady(treeInit);
+	
+	function getBARoleMap(){
+		var baRoles = getCheckedNodes (""); 
+		var baRolesMap = [];
+		for (var i=0; i<baRoles.length; i++){						
+			if (isBA(baRoles[i])){
+				var newObj = new Object();
+				newObj.ba = baRoles[i];
+				newObj.roles = getRoles (baRoles[i], baRoles, i);				
+				baRolesMap.push(newObj);
+			}
+		}
+		return baRolesMap;
+	}
+		
+	function getRoles (sysPrefix, baRoles, index){
+		var rList = [];	
+		index = index + 1;	//should start after the current index
+		for (var j=index; j < baRoles.length; j++){	
+			if (isBA (baRoles[j])){
+				return rList;							
+			}
+			else{
+				//rList = (rList == "")? baRoles[j] : rList + "," + baRoles[j];
+				rList.push (baRoles[j]);	
+			}
+		}			
+		return rList;
+	}	
+	
+	function isBA (name){
+		for (var i=0 ; i<ba.length; i++){
+			if (ba[i].baName == name)
+				return true;
+		}
+		return false;
+	}	
+	
+	function optionsList (elemId){
+		var list = [];
+		var selectEl = document.getElementById (elemId);
+		if (selectEl.options.length > 0)	
+			for (var i=0; i<selectEl.options.length; i++){
+				var temp = selectEl.options[i].value; 
+				if ((temp != null) || (temp != "") || (temp != " "))
+					list.push (temp);
+			}
+		return list; 
+	}	
+</script>	
+
+<script type="text/javascript">
+	function addUser(textCtrlId, selectCtrlId){	
+		var textCtrl = document.getElementById (textCtrlId);
+		var userLogin = textCtrl.value;
+		if (!isExistsInAnyUserList (userLogin)){
+			if (userLogin != ""){
+				var elem = document.createElement('Option');
+				elem.value = userLogin;	
+				elem.setAttribute('id',textCtrl.value);
+				elem.innerHTML = textCtrl.value;				
+				var selectCtrl= document.getElementById(selectCtrlId)
+				selectCtrl.appendChild(elem);					
+			}
+		}	
+		else{
+			alert ("User: " + "\"" + userLogin + "\" already exists in include/exclude list");
+		}			
+		textCtrl.value = "";
+	}	
+	
+	function isExistsInAnyUserList (loginName){
+		return (isExists (loginName, "includeUsers") || isExists (loginName, "excludeUsers"));
+	}
+	
+	function isExists (loginName, ctrlId){
+		var selectEl = document.getElementById (ctrlId);		
+		if (selectEl.options.length > 0){	
+			for (var i=0; i < selectEl.options.length; i++){
+				if (selectEl.options[i].value == loginName)
+					return true;
+				else 
+					continue;
+ 			} 
+		}
+		else{
+			return false;
+		}
+	}
+	
+	function removeUser(selectCtrlId){
+		var selectCtrl = document.getElementById (selectCtrlId);
+		var optionElem = selectCtrl.options[selectCtrl.options.selectedIndex];
+		selectCtrl.removeChild (optionElem);
+	}
+	
+	function onIsPrivate(ctrlId){
+		toggleElement(ctrlId);
+		var isChecked = document.getElementById("is_private");
+		isChecked.value = (isChecked.value == "") ? "on" : "";		
+	}
+	
+	function toggleElement (ctrlId){
+		var ctrl = document.getElementById(ctrlId);
+		if (ctrl.style.display == 'none')
+			ctrl.style.display = 'block'; 
+		else 
+			ctrl.style.display = 'none';
+	}
+	
+	function revertToOldFile(){
+		document.getElementById("isChangedId").value=false;
+		toggleBrowse();
+	}
+	
+	function toggleBrowse(){
+		var fileDiv = document.getElementById("file_name_div");
+		var browseDiv = document.getElementById("browse_div");
+		var revertDiv = document.getElementById("revert");
+		if (fileDiv.style.display == 'inline'){
+			fileDiv.style.display = 'none';
+			browseDiv.style.display = 'inline';	
+			revertDiv.style.display = 'inline';
+			return;
+		}
+		if (fileDiv.style.display == 'none'){
+			fileDiv.style.display = 'inline';
+			browseDiv.style.display = 'none';	
+			revertDiv.style.display = 'none';
+			return;
+		}
+	}
+	
+	function setChanged(){	
+		if (document.getElementById("requestTypeId").value == "edit"){	
+			document.getElementById("isChangedId").value=true;
+		}		
+	}
+	
+	function setAction(){
+		var x = document.getElementById("selectedBARoleMap");
+		var tempBARoleMap = getBARoleMap();
+		var tempIncludeUsers = optionsList("includeUsers");
+		var tempExcludeUsers = optionsList("excludeUsers");
+		
+		if ((tempBARoleMap.length<1) && (tempIncludeUsers<1) && (tempExcludeUsers<1))
+			document.getElementById("is_private_id").value = "";
+			
+		x.value = JSON.stringify(tempBARoleMap); 
+		document.getElementById("includeUsersList").value = JSON.stringify(tempIncludeUsers);
+		document.getElementById("excludeUsersList").value = JSON.stringify(tempExcludeUsers);
+		document.addReportForm.action = "<%=nearestPath%>addreport";
+		document.addReportForm.submit();
+	}	
+</script>
+</head>
+
+<body style="background-color:#FFFFFF; width:100%">
+	
+	<DIV  class ="bbn"  style="width:100%;"><br>
+	</DIV> <!-- panel header -->
+			
+	<div style="background-color:#E6F4FD; margin: 0ex 1ex 0.5ex;border:0.2ex solid #CBCBCB;">
+		<p class="style2" style="font-weight:bold">Upload a report...</p>		
+		<form id="addReportFormId"  name = "addReportForm" enctype="multipart/form-data" method="post" style="width:inherit"> 
+			  <input type="hidden" id= "selectedBARoleMap" name="selectedBARoles" value="">
+			  <input type="hidden" id="includeUsersList" name="includeList" value="">
+			  <input type="hidden" id="excludeUsersList" name="excludeList" value="">
+			  <input type="hidden" id="isChangedId" name="isChanged" value="false">	
+			  <input type="hidden" name="requestType" value="<%=requestType%>" ID="requestTypeId">
+			  <input type="hidden" id="reportId" name="reportId" value="<%=report_id%>">
+			  		
+			  <div>
+				Report Name:<br />
+				<input type="text" name="report-name" value="<%=report_name%>" size="40">
+			  </div>
+			  <div>
+				Description:<br>
+				<input type="text" name="report-description" value="<%=description%>" size="40">
+			  </div>
+			  <div id="file_name_div" style="display:<%=file_name_display%>">
+			  	Current report file name: <span style="font-weight:bold"><%=file_name%></span>
+				<input type="button" name="change_file" value="Replace" onClick="javascript:toggleBrowse()">
+			  </div>
+			  <div id="browse_div" style="display:<%=browse_display%>">			
+				Please specify a file:<br>
+				<input type="file" name="report-file" onChange="javascript:setChanged()" size="40"/>
+				<input type="button" name="revert_file" id="revert" value="Revert" onClick="javascript:revertToOldFile()" style=" display:<%=revert_display%>;height:75%">							
+			  </div>
+			  
+			  <div>
+			    <span>Enable</span>
+				<input id ="is_enable" name="is_enable" type="checkbox" <%=is_enable%>/>
+			  </div>
+			  
+			  <div>
+				  <span>is_private</span>
+				  <input id="is_private_id" name="is_private"  type="checkbox" <%=is_private_checked%> onClick = "javascript:toggleElement('roleUserSelection')"/>
+			  </div>
+			  <br>
+			  <div id= "roleUserSelection" style="margin: 0ex 1ex 0.5ex;border:0.2ex;display:<%=display_selection%>">
+				<table id=selectionTable style="width:100%; border:0.2ex solid #CBCBCB;">
+					<tr>
+						<th style="width:40%">Business Area-Roles</th> 
+						<th style="width:30%">Include Users</th>
+						<th style="width:30%">Exclude Users</th>
+					</tr>
+					<tr>
+						<td style="vertical-align:top;">
+							<div class="promo" style="width:100%; border:thin inset">																	
+							<div class="example-container module">
+								<div id="example-canvas" class="bd">										
+									<div id="treeDiv1" style="height:200px;overflow:auto;"></div>																
+								</div>									
+							</div>			
+						</div>	
+						</td>
+						<td style="vertical-align:top;">			
+							<select multiple name="inUserSelection" id="includeUsers" style="width:100%;height:200px;">
+							<%=includeList%>
+							</select>							
+						</td>
+						<td style="vertical-align:top">
+							<select multiple name="exUserSelection" id="excludeUsers" style="width:100%;height:200px">
+							<%=excludeList%>
+							</select>
+						</td>					
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<div class=" yui-skin-sam">
+								<p style="font-weight:bold">Add/Remove user</p>
+								<div id="userautocomplete1">
+									<input id="userinput1" name="user-input1" type="text">
+									<div id="usercontainer1"></div>
+								</div>	
+							</div>
+							<input id="add1" type="button" name="adduser1" value="Add" onClick="javascript:addUser('userinput1', 'includeUsers')">	
+							<input id="remove1" type="button" name="removeUser1" value="Remove" onClick="javascript:removeUser('includeUsers');">
+						</td>
+						<td>
+							<div class=" yui-skin-sam">
+								<p style="font-weight:bold">Add/Remove user</p>
+								<div id="userautocomplete2">
+									<input id="userinput2"  name="user-input2" type="text">
+									<div id="usercontainer2"></div>
+								</div>
+							</div>
+							<input id="add2" type="button" name="adduser2" value="Add" onClick="javascript:addUser('userinput2', 'excludeUsers')">	
+							<input id="remove2" type="button"  name="removeUser2" value="Remove" onClick="javascript:removeUser('excludeUsers');">
+						</td>
+					  </tr>
+				</table>				
+			  </div>
+			  <br>			  
+			  <div>
+				<input id="saveReport" name="Save" type="button" value="Save" onClick="javascript:setAction()" />
+			  </div>	
+		</form>			 
+	</div>	
+	<script type="text/javascript">
+		var usersList = <%=usersList%>;		
+		YAHOO.example.ACJSArray1 = autoCompleteFunction ('userinput1', 'usercontainer1');
+		YAHOO.example.ACJSArray2 = autoCompleteFunction ('userinput2', 'usercontainer2');		
+		
+		function autoCompleteFunction (userinput, usercontainer){
+			// Instantiate second JS Array DataSource
+			this.oACDS = new YAHOO.widget.DS_JSArray(usersList);
+										
+			// Instantiate first AutoComplete
+			this.oAutoComp = new YAHOO.widget.AutoComplete(userinput,usercontainer, this.oACDS);
+			this.oAutoComp.prehighlightClassName = "yui-ac-prehighlight";
+			this.oAutoComp.typeAhead = true;
+			this.oAutoComp.useShadow = true;
+			this.oAutoComp.minQueryLength = 0;
+			this.oAutoComp.textboxFocusEvent.subscribe(function(){
+				var sInputValue = YAHOO.util.Dom.get(userinput).value;
+				if(sInputValue.length === 0) {
+					var oSelf = this;
+					setTimeout(function(){oSelf.sendQuery(sInputValue);},0);
+				}
+			});								
+		}
+	</script>	
+</body>
+</html>

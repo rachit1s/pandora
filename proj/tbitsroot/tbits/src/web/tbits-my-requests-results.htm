@@ -1,0 +1,40 @@
+<tr>
+    <td width="100%" style="padding-bottom: 20px;">
+        <INPUT type='hidden' name='<%=sessionIdName%>' id='<%=sessionIdName%>' value='<%=sessionIdKey%>' />
+        <INPUT type='hidden' name='mr_sortPrefix' id="mr_sortPrefix" /> <INPUT type='hidden' name='mr_sortField' id="mr_sortField" />
+        <INPUT type='hidden' name='mr_sortOrder' id="mr_sortOrder" />
+        <div name="<%=rowId%>" id="<%=rowId%>" style="display: inline;">
+            <TABLE class="results bw" cellspacing="0" cellpadding="0" width="100%" border="0" name="<%=resultsTableName%>" id="<%=resultsTableName%>" >
+                <%=colGroup%>
+                <TR class ="bhs">
+                    <TD width='100%' colspan='<%=colSpan%>'>
+                        <TABLE class='mrheader' width='100%' cellspacing="0" cellpadding="0" style="display: inline;">
+                            <colgroup>
+                                <col style="border:none;" width="99%">
+                                    <col style="border:none;" width="1%">
+                            </colgroup>
+                            <TR class="bhs">
+                                <TD width='90%' align='left' class="bhs">
+                                    <%=displayName%>
+                                    [
+                                    <%=emailLink%>
+                                    ] -
+                                    <%=resultComment%>
+                                </TD>
+                                <td nowrap>
+                                    <span class="cb l" id="<%=sysPrefix%>_collapseSpan" onclick="collapseMyRequestsBA('<%=sysPrefix%>');">
+                                        <%=collapseText%>
+                                    </span>
+                                    &nbsp;|&nbsp;
+                                    <span class="cb l" id="<%=sysPrefix%>_export" onclick="emr('<%=sysPrefix%>');">Export to Excel</span>
+                                </td>
+                            </TR>
+                        </TABLE>
+                    </TD>
+                </TR>
+                <%=header%>
+                <%=results%>
+            </TABLE>
+        </div>
+    </td>
+</tr>

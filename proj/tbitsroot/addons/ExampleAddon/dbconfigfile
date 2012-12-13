@@ -1,0 +1,15 @@
+#this is a comment the below empty line will also be ignored.
+                
+1.0:script_file:db_scripts/create_tables.sql
+1.0:class_file:example.configurators.FillTable
+
+# this part is for upgrade 1.2. First delete all the data 
+1.2:class_file:example.configurators.DeleteData
+# then add the column
+1.2:script_file:db_scripts/add_column.sql
+# then fill the data again.
+1.2:class_file:example.configurators.FillTable2
+# I don't need surname column -- removing it.
+2.2:script_file:db_scripts/remove_column.sql
+2.3:script_file:db_scripts/add_sys_id_request_id_action_id_column.sql
+2.4:script_file:db_scripts/change_name_size.sql

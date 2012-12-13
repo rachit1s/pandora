@@ -1,0 +1,118 @@
+today I faced the following error in running javac from commandline but it works fine in eclipse
+
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/events/EventManager.java:257: incompatible types; inferred type argument(s) transbit.tbits.events.Event,java.lang.Object do not conform to bounds of type variable(s) T,P
+    [javac] found   : <T,P>void
+    [javac] required: void
+    [javac] 				disableRegistry(der,con);
+    [javac] 				               ^
+    [javac] /home/nitiraj/work/tbitsroot/tbits/src/java/transbit/tbits/events/EventManager.java:261: incompatible types; inferred type argument(s) transbit.tbits.events.Event,java.lang.Object do not conform to bounds of type variable(s) T,P
+    [javac] found   : <T,P>void
+    [javac] required: void
+    [javac] 				enableRegistry(der,con);
+    [javac] 				              ^
+
+where the method snippets are
+
+[code]
+
+/**
+	 * @param der
+	 * @param con
+	 * @throws EventException 
+	 * @throws ClassNotFoundException 
+	 * @throws EventAlreadyRegisteredException : this should be handled separately from EventException.
+	 */
+	private <T extends Event, P extends EventHandler<T>> void enableRegistry(EventRegistry der, Connection con) throws  ClassNotFoundException, EventException, EventAlreadyRegisteredException 
+	{
+		synchronized(managedHandlers)
+		{
+			ClassLoader cl = managedHandlers.get(der);
+			if( null == cl )
+				throw new EventException("The managed event was not registered with the system. first register it to do any action on it. EventRegistry : " + der );
+
+			Class<T> eventClass = (Class<T>) cl.loadClass(der.getEventClass());
+			Class<P> eventHandlerClass = (Class<P>) cl.loadClass(der.getEventHandlerClass());
+			
+			register(eventHandlerClass, eventClass);
+		}
+	}
+
+
+	/**
+	 * @param der
+	 * @param con
+	 * @throws EventException 
+	 * @throws ClassNotFoundException 
+	 */
+	private <T extends Event, P extends EventHandler<T>> void disableRegistry(EventRegistry der, Connection con) throws EventException, ClassNotFoundException 
+	{
+		synchronized(managedHandlers)
+		{
+			ClassLoader cl = managedHandlers.get(der);
+			if( null == cl )
+				throw new EventException("The managed event was not registered with the system. first register it to do any action on it. EventRegistry : " + der );
+
+			Class<T> eventClass = (Class<T>) cl.loadClass(der.getEventClass());
+			Class<P> eventHandlerClass = (Class<P>) cl.loadClass(der.getEventHandlerClass());
+			
+			unregister(eventHandlerClass, eventClass);
+		}
+	}
+
+
+[/code]
+
+But it does not give error in the methods where formal type parameters are used in the parameters of the method example in following method
+
+[code]
+/**
+	 * This method unregisters the UnManaged EventHandlers from EventManager. This method ignores if the provided handler or eventClass is null 
+	 * or if the handler was not at all registered. So this can be used to clean up states of events if something wrong happens.
+	 * @param handler
+	 * @param eventClass
+	 */
+	public <T extends Event, P extends EventHandler<T>> void unRegisterUnManagedHandler( Class<P> handler, Class<T> eventClass )
+	{
+		
+		if( null == handler || null == eventClass)
+		{
+			LOG.log(Level.WARNING,"The handler or event provided was null. This request will be ignored.");
+			return ;
+		}
+		
+		unregister(handler, eventClass);
+	}
+[/code]
+
+Also the eclipse Indigo compiler  does not give error. Only my sun javac compiler gives error.
+So I searched for it and found a matching problem here.
+
+http://stackoverflow.com/questions/3000177/compilers-behave-differently-with-a-null-parameter-of-a-generic-method
+
+The problem is that I have to use a method which successfully takes and requires the type boundedness inside these method
+
+[code]
+private <T extends Event, P extends EventHandler<T>> void unregister( Class<P> handler, Class<T> eventClass )
+	{
+		synchronized(eventHandlers)
+		{	
+			List<Class<? extends EventHandler<? extends Event>>> currentHandlers = eventHandlers.get(eventClass);
+			if(null == currentHandlers)
+				currentHandlers = new ArrayList<Class<? extends EventHandler<? extends Event>>>();
+			
+			if( currentHandlers.remove(handler) == false )
+			{
+				LOG.log(Level.WARNING, "The given handler was not registered for the given event. This request will be ignored. handler : "+ handler + ", event : " + eventClass);
+				return;
+			}
+			
+			eventHandlers.put(eventClass, currentHandlers);
+			LOG.info("Successfully unRegistered : " + handler + " for event " + eventClass);
+		}
+	}
+
+[/code]
+
+
+I have also added a thread in stackoverflow http://stackoverflow.com/questions/9859789/java-generics-compiles-in-eclipse-and-not-from-commandline
+

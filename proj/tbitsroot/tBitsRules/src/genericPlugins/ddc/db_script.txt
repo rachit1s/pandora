@@ -1,0 +1,12 @@
+ create table firm_property (  id BIGINT identity,  fromAgencyEmailAddress varchar(256),  dtnExpected BIT,  expectedDTNFileName varchar(256),  dtnLetterIdentificationString varchar(256),  fromFieldAlgoId BIGINT,  toFieldAlgoId BIGINT,  dtnNumberAlgoId BIGINT,  ownerDocumentNumberAlgoId BIGINT,  contractorDocumentNumberAlgoId BIGINT,  vendorDocumentNumberAlgoId BIGINT,  revisionAlgoId BIGINT,  submissionOrDecisionCodeAlgoId BIGINT,  dtnDateTimeInDTNNoteAlgoId BIGINT,  projectCodeAlgoId BIGINT,  submissionCodeAlgoId BIGINT,  expectedTypeOfTransaction varchar(256),  baPrefix varchar(256),  primaryKeyForSearch varchar(256),  primaryRecordSearchFieldId INT,  ownerDocumentNumberFieldID INT,  contractorDocumentNumberFieldID INT,  vendorDocumentNumberFieldID INT,  revisionFieldID INT,  receivedFileUpdateFieldID INT,  decisionFieldID INT,  dtnDateTimeAsPerTBits varchar(256),  dtnDateTimeToBeUsedInTransaction varchar(256),  dtnProcessId BIGINT,  dtnKeywordSetId BIGINT  ) 
+
+CREATE TABLE dbo.search_algo
+(id bigint IDENTITY (1,1) NOT NULL,
+search_type varchar(25) NOT NULL,
+search_all BIT NOT NULL,
+pattern varchar(255),
+first_keyword varchar(255),
+second_keyword varchar(255),
+PRIMARY KEY (id))
+
+

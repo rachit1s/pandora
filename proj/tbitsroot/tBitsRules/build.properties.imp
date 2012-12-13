@@ -1,0 +1,3 @@
+included.dirs.pattern=src/imp/,src/genericPlugins
+tbits.home=../tbits/dist/build
+plugin.output.dir=${tbits.home}/plugins/

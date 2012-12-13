@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+        <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+        <script type="text/javascript" src="<%=nearestPath%>web/yui/build/yahoo/yahoo-min.js"></script>
+	<script language="javascript">
+		YAHOO.namespace("transbit.tbits");
+	    	YAHOO.transbit.tbits.contextPath = "<%=nearestPath%>";
+        </script>
+        <link rel="stylesheet" href="<%=nearestPath%>web/css/<%=cssFile%>" />
+        <title>Status Filter</title>
+        <style>
+        </style>
+    </head>
+    <body class="dialog" align="center" onkeydown="return onKeyDownBody(event)">
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                <tr>
+                    <td valign="top" width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="100%" class="sx">Business Area:</td>
+                            </tr>
+                            <tr>
+                                <td width="100%">
+                                    <select class="sx" style=" WIDTH: 100%;" name="businessArea" id="businessArea" tabindex="1"
+                                        size="12" onchange="return onChangeBusinessArea()">
+                                        <%=baList%>
+                                    </select><span id="spnDummy" name="spnDummy"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td valign="top" width="50%">
+                        <table width="100%">
+                            <tr style="display:none">
+                                <td height="6"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="sx">Show <%=captions.all.requests%> with status:</span></td>
+                            </tr>
+                            <tr>
+                                <td width="100%">
+                                    <div id="statusCtrl" name="statusCtrl">
+                                        <select class="sx" style=" WIDTH: 100%" tabIndex="2" multiple size="12" name="status" ID="status"
+                                onchange="onChangeStatus()">
+                                            <%=statuses%>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="15"></td>
+                </tr>
+                <tr>
+                    <td height="30" align="right" colspan="2" style="padding-right: 5px;">
+                        <input class="sx" type="submit" tabIndex="2" value="Save" name="save" style="width:64px"
+                            ID="submit" onclick="onSave(false)"> <input class="sx" type="submit" tabIndex="3" value="Save &amp; Close" name="save" style="width:120px"
+                            ID="Submit1" onclick="onSave(true)"> <input class="sx" type="button" tabIndex="3" value="Cancel" name="cancel" style="width:63px"
+                            ID="cancel" onclick="onCancel()">
+                    </td>
+                </tr>
+                <tr>
+                    <td height="10"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <span id="spnMessage" class="sx"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+    <script language="javascript" src="<%=nearestPath%>web/scripts/common.js"></script>
+    <script language="javascript">
+        var object = window.dialogArguments;
+        var saved = false;
+        
+        var currentPrefix = document.getElementById("businessArea").value;
+        var statusChanged = false;
+        
+        function onChangeStatus()
+        {
+            statusChanged = true;
+        }
+        
+        function onChangeBusinessArea()
+        {
+            if (statusChanged == true)
+            {
+                var result = confirm("Changes made to the form are not saved. Continue?");
+                if (result == false)
+                {
+                    document.getElementById("businessArea").value = currentPrefix;
+                    return false;
+                }
+            }
+            var sysPrefix = document.getElementById("businessArea").value;
+    var url = "<%=nearestPath%>configure-my-requests/" + sysPrefix + "?sysPrefix=" + sysPrefix + "&action=statusInfo&now=" + getCurrentTime();
+            var output = executeHttpRequest("GET", url);
+            if (output != "")
+            {
+                document.getElementById("spnMessage").innerHTML = "";
+                var obj = null;
+                try
+                {
+                    obj = eval("(" + output + ")");
+                }
+                catch (e)
+                {
+                    alert(e["description"]);
+                    //Exception should ideally be reported to the server.
+                    return;
+                }
+                var statusList = obj["statusList"];
+                var statusHtml = "";
+                for (var i=0; i < statusList.length; i++)
+                {
+                    statusHtml = statusHtml + "\n<OPTION value='" + statusList[i]["name"] + "'";
+                    if (trim(statusList[i]["isSelected"]) == "true")
+                        statusHtml = statusHtml + " SELECTED ";
+                    statusHtml = statusHtml + ">" + statusList[i]["displayName"] + "</OPTION>";
+                }
+                statusHtml = 
+                    "<select style=\" WIDTH: 100%\" multiple=\"true\" tabIndex=\"2\" class=\"sx\" size=\"12\" name=\"status\" ID=\"status\">" + 
+                    statusHtml + 
+                    "</select>";
+                document.getElementById("statusCtrl").innerHTML = trim(statusHtml);
+                
+            }
+            currentPrefix = sysPrefix;
+            statusChanged = false;
+            return true;
+        }
+    
+        function onKeyDownBody(e)
+        {
+            var event = (document.all) ? window.event : e;
+            var keyCode = (document.all) ? event.keyCode : e.which;
+            if (keyCode == 13) // Enter Key.
+            {
+                onSave();
+            }
+            else if (keyCode == 27) // Esc Key
+            {
+                onCancel();
+            }
+            return;
+        }
+        
+        function onSave(close)
+        {
+            var sysPrefix = document.getElementById("businessArea").value;
+            var status = document.getElementById("status");
+            var length = status.options.length;
+            var statusList = "";
+            var flag = 1;
+            for (var i=0; i <length; i++)
+            {
+                var value = trim(status.options[i].value);
+                
+                if (value == "") continue;
+                
+                if (status.options[i].selected == true)
+                {
+                    if (flag == 0) statusList = statusList + ",";
+                    else flag = 0;
+                    statusList = statusList + value;
+                }
+            }
+            
+            var url = "<%=nearestPath%>configure-my-requests/" + sysPrefix + 
+                      "?sysPrefix=" + sysPrefix + 
+                      "&statusList=" + statusList + 
+                      "&show=true" +  + 
+                      "&now=" + getCurrentTime();
+                      
+            var output = executeHttpRequest("POST", url, false);
+            if (output.indexOf("true") >= 0)
+            {
+                if (object != null) 
+                {
+                    saved = "true";
+                }
+                
+                if (close == true)
+                {
+                    if (object) object.saved = saved;
+                    window.close();
+                }
+                else
+                {
+                    document.getElementById("spnMessage").innerHTML = "Changes have been saved successfully.";
+                }
+                return;
+            }
+            else
+            {
+                alert("The configuration could not be saved because of a database error.\n\n" + output);
+                if (object) object.saved = "false";
+                return;
+            }
+        }
+        
+        function onCancel()
+        {
+            window.close();
+            if (object) object.saved = "false";
+            return true;
+        }
+        
+        function toggleCheckBox(chbox)
+        {
+            var ctrl = document.getElementById(chbox);
+            if (ctrl != null)
+            {
+                if (ctrl.checked == true) ctrl.checked = false;
+                else ctrl.checked = true;
+            }
+        }
+        
+    </script>
+</html>

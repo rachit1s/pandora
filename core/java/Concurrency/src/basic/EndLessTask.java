@@ -10,7 +10,7 @@ public class EndLessTask implements Runnable{
 	@Override
 	public void run(){
 		while(true)
-		try+ {
+		try{
 			Thread.sleep(100000000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -19,6 +19,7 @@ public class EndLessTask implements Runnable{
 	}
 	
 	public static void main(String[] args) {
+		
 		try {
 			Thread.currentThread().sleep(100);
 		} catch (InterruptedException e) {

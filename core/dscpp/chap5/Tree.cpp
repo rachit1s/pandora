@@ -1,9 +1,16 @@
+#ifndef TREE_CPP
+#define TREE_CPP
+
+#include <iostream>
 #include<queue>
 #include<stack>
 #include<list>
 using namespace std;
 template<typename T>
 class Tree;
+
+template<typename T>
+void deleteTree(Tree<T>* tree);
 
 template<typename T>
 void nonRecPreorder(const Tree<T>* tree);
@@ -91,9 +98,17 @@ class Tree
       this->visited = false;
     }
 
+    Tree(T& data)
+    {
+      this->setRightTree(NULL);
+      this->setLeftTree(NULL);
+      this->data = data;
+      this->visited = false;
+    }
+
     ~Tree()
     {
-      cout << "deleting " << this->getData() << endl;
+      // cout << "deleting " << this->getData() << endl;
     }
 
     Tree * getRightTree() const
@@ -136,6 +151,7 @@ class Tree
       return visited;
     }
 
+
 // All these function do not need to be friend function.
     friend void inorder<>(const Tree<T>* tree);
     friend void inorder<>(const Tree<T>* tree, void(*visit)(const T& data));
@@ -161,7 +177,7 @@ class Tree
     friend void postorder<>(const Tree<T>* tree);
     friend void postorder<>(const Tree<T>* tree, void(*visit)(const T& data));
 
-
+    friend void deleteTree<>(Tree<T>* tree);
 
     /*
        This algorithm uses a bool visited in the tree node and uses list. There is a better performance
@@ -512,6 +528,21 @@ void preorder(const Tree<T>* tree, void(*visit)(const T& data))
   }
 }
 
+/*
+this is variation of post order.
+this could have been done using post-order if the visit fuction had taken the
+tree node i.e Tree<T>* instead of data
+*/
+template<typename T>
+void deleteTree(Tree<T>* tree)
+{
+  if( NULL != tree ) 
+  {
+    deleteTree(tree->getLeftTree());
+    deleteTree(tree->getRightTree());
+    delete tree;
+  }
+}
 
 template<typename T>
 void postorder(const Tree<T>* tree)
@@ -554,3 +585,54 @@ void levelorder(const Tree<T>* tree, void(*visit)(const T& data))
         nodeQueue.push(const_cast<Tree<T>*>(curr->getRightTree()));
   }
 }
+
+// construct an integer tree from input. where -1 value denotes NULL sub-tree
+Tree<int>* inputTree(int& noOfNodes)
+{
+  noOfNodes = 0 ;
+  int data;
+  cout << "Enter value of root : ";
+  cin >> data;
+  if(cin.eof() || -1 == data)
+    return NULL;
+  
+  Tree<int>* root = new Tree<int>(data);
+  queue<Tree<int>*> values ;
+  values.push(root);
+  noOfNodes++;
+  
+  while(!values.empty())
+  {
+    Tree<int>* top = values.front();
+    values.pop();
+    cout << "Enter Left Child of " << top->getData() << " (-1 for null) : " ;
+    cin >> data;
+    if( -1 != data )
+    {
+      noOfNodes++;
+      Tree<int>* left = new Tree<int>(data);
+      top->setLeftTree(left);
+      values.push(left);
+    } 
+
+    cout << "Enter Right Child of " << top->getData() << " (-1 for null) : " ;
+    cin >> data;
+    if( -1 != data )
+    {
+      noOfNodes++;
+      Tree<int>* right = new Tree<int>(data);
+      top->setRightTree(right);
+      values.push(right);
+    }      
+  }
+
+  return root;
+}
+
+Tree<int>* inputTree()
+{
+  int noOfNodes;
+  return inputTree(noOfNodes);
+}
+
+#endif

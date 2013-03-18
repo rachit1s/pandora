@@ -1,7 +1,0 @@
-Author:Lokesh S
-Name:com.tbitsGlobal.transmittal
-Description: Transmittal plugin for GWT
-Version: 1.0
-Depends: 
-Activator:
-

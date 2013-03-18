@@ -1,3 +1,0 @@
-DROP PROCEDURE dbo.stp_roleperm_getPermissionsBySystemIdAndUserIdForAddRequest;
-GO
-

@@ -1,6 +1,0 @@
-This upgrade invloves following things:
-1. Properties are now stored in DB
-2. TVN related files.
-3. Quartz Jobs
-4. Captions are stored in DB and are per BA based
-5. Log4java properties are also stored in DB

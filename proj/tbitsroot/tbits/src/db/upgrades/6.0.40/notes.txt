@@ -1,6 +1,0 @@
-This version includes the following updates:
-
-1. Exports/imports rules.	
-2. Import wizard which asks for BA name and email id along with sysPrefix. 
-3. Loads only minified version of JS. Also moves JS to bottom.
-4. Links fixed in export to excel

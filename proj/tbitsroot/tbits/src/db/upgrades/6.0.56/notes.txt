@@ -1,4 +1,0 @@
-This has added a version column in business_areas. and Alter the request_insert query. Along with that it includes the upgrades for the business_area table which fills the version information basedon versions table.
-
-
-Also has added stored procedures for CRUD operations of display-groups along with the addition of sys_id column into display-groups table.

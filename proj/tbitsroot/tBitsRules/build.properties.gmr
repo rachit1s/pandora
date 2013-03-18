@@ -1,4 +1,0 @@
-#Wed Jan 06 19:27:26 GMT+05:30 2010
-included.dirs.pattern=src/gmr/,src/genericPlugins
-tbits.home=../tbits/dist/build
-plugin.output.dir=${tbits.home}/plugins/

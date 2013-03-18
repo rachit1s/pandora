@@ -1,7 +1,0 @@
-Author:sourabh
-Name:com.tbitsglobal.browserequests
-Description: browser requests module	
-Version: 1.0
-Depends: 
-Activator:
-

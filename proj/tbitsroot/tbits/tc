@@ -1,1 +1,0 @@
-tail --retry --lines=1000 --follow=name dist/tomcat/logs/catalina.out

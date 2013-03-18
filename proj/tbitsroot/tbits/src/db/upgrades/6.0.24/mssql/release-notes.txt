@@ -1,8 +1,0 @@
-The following enhancements:
-1. New Birt Engine
-2. Auto Adding assignees
-3. Sending welcome mail
-4. Setting Send_SMS 'SET' property
-5. Changed the default variables.
-6. Putting the current version info in DB
-7. Added 'my todo list' report

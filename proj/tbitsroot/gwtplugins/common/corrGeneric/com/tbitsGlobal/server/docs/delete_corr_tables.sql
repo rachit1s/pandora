@@ -1,9 +1,0 @@
-drop table corr_onbehalf_map
-drop table corr_user_map
-drop table corr_field_name_map
-drop table corr_ba_field_map
-drop table corr_properties
-drop table corr_protocol_options
-drop table corr_report_map
-drop table corr_report_name_map
-drop table corr_report_params_map

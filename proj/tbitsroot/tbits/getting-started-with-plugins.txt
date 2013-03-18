@@ -1,2 +1,0 @@
-This documents gets you started on how to write rules for tBits.
-

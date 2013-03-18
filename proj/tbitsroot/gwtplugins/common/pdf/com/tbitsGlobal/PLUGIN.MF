@@ -1,4 +1,0 @@
-Author:Lokesh S
-Name:com.tbitsglobal.pdftbits
-Description: This plugins if configured for a business area, provides the option "Generate pdf" in view-request form, to generate pdf of the current request using a template configured.
-Version: 1.0

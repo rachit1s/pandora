@@ -1,8 +1,0 @@
-Index: build.properties
-*** /dev/null
---- /dev/null
-***************
-*** 29
-- INSTALL_PATH=/home/syeda/worktbits1/tbitsroot/tbits/dist
---- 29 -----
-+ INSTALL_PATH=/Users/sandeepgiri/projects/tbitsroot/tbits/dist

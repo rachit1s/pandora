@@ -1,2 +1,0 @@
-1. Changed the column name to 'text_content_type' in stp_actions_ex stored procedure.
-2. Altered the name column's size from 50 to 200.

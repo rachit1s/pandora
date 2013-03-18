@@ -1,4 +1,0 @@
-#Wed Jan 06 19:27:26 GMT+05:30 2010
-plugin.output.dir=../tbits/src/plugins/
-included.dirs.pattern=src/userTypeFieldPlugins,src/lntPunchList,src/lntFcnDcn,src/lntCorr,src/lntDTN,src/lntEscalation,src/lntTbits,src/lntdcr,src/lntCCC,src/mom,src/common,src/corrGeneric
-tbits.home=../tbits/dist/build

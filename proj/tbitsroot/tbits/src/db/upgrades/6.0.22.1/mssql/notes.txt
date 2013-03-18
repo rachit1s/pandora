@@ -1,6 +1,0 @@
-The version 22 was shipped with very old database creation scripts.
-Please run these upgrade script to bring it to harmony. 
-
-If you are upgrading and you havent used 21st for creating db. You do not need to run these scripts.
-
-PS: If this happens again the author shall jump out of the window.

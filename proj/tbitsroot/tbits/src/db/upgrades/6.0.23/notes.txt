@@ -1,5 +1,0 @@
-* Can add multiple BA accounts.
-* Lotus Reply with history doesnt add junk
-* User can change the volunteer assignment back to none.
-* DB creation scripts were fixed.
-* The default page is my-reqests.

@@ -1,6 +1,0 @@
-revision=7216 
-repositoryRootUrl=svn://symphron.mytbits.com 
-last_commit_by_author=nitiraj.r 
-commitedDate=3/30/12 6:42 PM 
-committedRevision=7216 
-url=svn://symphron.mytbits.com/trunk/tbitsroot/addons/ExampleAddon

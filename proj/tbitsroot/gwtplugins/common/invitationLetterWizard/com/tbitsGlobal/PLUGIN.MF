@@ -1,7 +1,0 @@
-Author:Sourabh
-Name:com.tbitsglobal.invitationLetterWizard
-Description: Invitation Letter Module
-Version: 1.0
-Depends: 
-Activator:
-

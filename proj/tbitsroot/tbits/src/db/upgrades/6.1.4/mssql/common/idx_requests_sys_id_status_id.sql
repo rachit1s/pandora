@@ -1,5 +1,0 @@
-CREATE NONCLUSTERED INDEX [status+sys_id] ON [dbo].[requests] 
-(
-	[sys_id] ASC,
-	[status_id] ASC
-)WITH (PAD_INDEX  = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]

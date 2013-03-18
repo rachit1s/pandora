@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<AppGenerate resource="BalanceIDResolver" isDeterministic="true">
-    <Input requestField="balance_id" resourceAttr="balance_id" />
-    <Output requestField="investor_name" resourceAttr="investor" />
-    <Output requestField="investor_legal_name" resourceAttr="investment" />
-    <Error throw="true" message="" />
-</AppGenerate>
-

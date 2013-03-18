@@ -1,1 +1,0 @@
-kill -9 `ps | grep java |  awk '{print $1}'`

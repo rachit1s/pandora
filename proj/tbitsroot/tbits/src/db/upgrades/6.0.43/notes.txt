@@ -1,3 +1,0 @@
-1. transmittal_templates - Query to create transmittal template table
-2. stp_tr_template_lookupBySystemIdAndTemplateName - Stored procedure to retrieve template information.
-3. Plugin mechanism for transmittals 

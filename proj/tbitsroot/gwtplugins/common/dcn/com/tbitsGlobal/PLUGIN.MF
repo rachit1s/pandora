@@ -1,4 +1,0 @@
-Author:Lokesh S
-Name:com.tbitsglobal.dcntbits
-Description: This plugin implements the Change Note module(DCN/FCN/TechQuery).
-Version: 1.0

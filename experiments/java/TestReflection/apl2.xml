@@ -1,0 +1,52 @@
+<message id="TRer4-60" to="xmppuser10@localhost/Smack"
+	from="int-node0-1365143531405-1-1365143533082@conference.localhost/INT-node0-1365143531405-1">
+	<thread>9cs8m3</thread>
+	<properties xmlns="http://www.jivesoftware.com/xmlns/xmpp/properties">
+		<property>
+			<name>INTERACTION_ID</name>
+			<value type="string">INT-node0-1365143531405-1</value>
+		</property>
+		<property>
+			<name>COBROWSE_PRESENTER</name>
+			<value type="string">VSS-node0-1365143531277-1</value>
+		</property>
+		<property>
+			<name>COBROWSE_PARTICIPANT_ID</name>
+			<value type="string">VSS-node0-1365143531277-1</value>
+		</property>
+		<property>
+			<name>TYPE</name>
+			<value type="string">COBROWSE_NOTIFICATION</value>
+		</property>
+		<property>
+			<name>COBROWSE_ACTION</name>
+			<value type="string">CobrowseInvitationTimedout</value>
+		</property>
+	</properties>
+</message>
+<message id="TRer4-60" to="xmppuser10@localhost/Smack"
+	from="int-node0-1365143531405-1-1365143533082@conference.localhost/INT-node0-1365143531405-1">
+	<thread>9cs8m3</thread>
+	<properties xmlns="http://www.jivesoftware.com/xmlns/xmpp/properties">
+		<property>
+			<name>INTERACTION_ID</name>
+			<value type="string">INT-node0-1365143531405-1</value>
+		</property>
+		<property>
+			<name>COBROWSE_PRESENTER</name>
+			<value type="string">VSS-node0-1365143531277-1</value>
+		</property>
+		<property>
+			<name>COBROWSE_PARTICIPANT_ID</name>
+			<value type="string">VSS-node0-1365143531277-1</value>
+		</property>
+		<property>
+			<name>TYPE</name>
+			<value type="string">COBROWSE_NOTIFICATION</value>
+		</property>
+		<property>
+			<name>COBROWSE_ACTION</name>
+			<value type="string">CobrowseInvitationTimedout</value>
+		</property>
+	</properties>
+</message>

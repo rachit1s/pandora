@@ -1,0 +1,16 @@
+{
+	"manifest_version":2,
+	"name":"WindowInfo",
+	"description":"gives the information about windows opened",
+	"version":"0.1",
+	"browser_action":{
+		"default_icon":"icon.png",
+		"default_title":"WindowInfo",
+		"default_popup":"popup.html"
+	},
+
+	"background":{
+		"scripts":["backgroundEventPage.js"],
+		"persistent":false
+	}
+}

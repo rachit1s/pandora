@@ -397,7 +397,7 @@
 				<groupId>org.apache.solr</groupId>
 				<artifactId>solr-core</artifactId>
 				<type>jar</type>
-				<version>4.0</version>
+				<version>8.8.2</version>
 			</dependency>
 			<dependency>
 				<groupId>org.datanucleus</groupId>
